@@ -4,4 +4,5 @@ export const outfit = Outfit({
   weight: ['300', '500'],
   subsets: ['latin'],
   display: 'swap',
+  variable: '--font-outfit',
 });

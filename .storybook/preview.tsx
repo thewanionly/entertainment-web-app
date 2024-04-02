@@ -1,5 +1,6 @@
 import type { Preview } from '@storybook/react';
 
+import { outfit } from '@/lib/fonts';
 import '@/styles/globals.css';
 
 const preview: Preview = {
@@ -11,6 +12,13 @@ const preview: Preview = {
       },
     },
   },
+  decorators: [
+    (Story) => (
+      <div id="storybook-decorator" className={outfit.variable}>
+        <Story />
+      </div>
+    ),
+  ],
 };
 
 export default preview;
