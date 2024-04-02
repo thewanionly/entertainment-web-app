@@ -1,8 +1,7 @@
 import type { Metadata } from 'next';
 
 import { outfit } from '@/lib/fonts';
-
-import './globals.css';
+import '@/styles/globals.css';
 
 export const metadata: Metadata = {
   title: 'Entertainment Web App',
