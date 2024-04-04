@@ -1,1 +1,10 @@
-export * from './Icon';
+export { default as BookMarkEmpty } from 'public/icons/icon-bookmark-empty.svg';
+export { default as BookMarkFull } from 'public/icons/icon-bookmark-full.svg';
+export { default as CategoryMovie } from 'public/icons/icon-category-movie.svg';
+export { default as CategoryTV } from 'public/icons/icon-category-tv.svg';
+export { default as NavBookmark } from 'public/icons/icon-nav-bookmark.svg';
+export { default as NavHome } from 'public/icons/icon-nav-home.svg';
+export { default as NavMovies } from 'public/icons/icon-nav-movies.svg';
+export { default as NavTVSeries } from 'public/icons/icon-nav-tv-series.svg';
+export { default as Play } from 'public/icons/icon-play.svg';
+export { default as Search } from 'public/icons/icon-search.svg';
