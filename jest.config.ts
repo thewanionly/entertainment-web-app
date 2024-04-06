@@ -102,6 +102,8 @@ const config: Config = {
     // You have to specify the complete path to preview.tsx for it ot be taken into account as a module
     // Source: https://github.com/vercel/next.js/issues/47866#issuecomment-1607426842
     '\\.storybook/preview': '<rootDir>/.storybook/preview.tsx',
+    // Use matcher below to solve svg issue (Ref: https://github.com/vercel/next.js/discussions/42535#discussioncomment-4828013)
+    '^.+\\.(svg)$': '<rootDir>/src/tests/mocks/svg.ts',
   },
 
   // An array of regexp pattern strings, matched against all module paths before considered 'visible' to the module loader
