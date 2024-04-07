@@ -1,6 +1,6 @@
 import Logo from 'public/logo.svg';
 
-import { NavBookmark, NavHome, NavMovies, NavTVSeries } from '@/components/Icon';
+import { NavBookmark, NavHome, NavMovies, NavTVSeries } from '@/components/app-specific/Icon';
 
 export default function Home() {
   return (
