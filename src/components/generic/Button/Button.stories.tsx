@@ -18,6 +18,22 @@ export default meta;
  */
 type Story = StoryObj<typeof Button>;
 
-export const Primary: Story = {
-  render: () => <Button label="Primary" />,
+export const Default: Story = {
+  render: () => <Button variant="default">Default</Button>,
+};
+
+export const Secondary: Story = {
+  render: () => <Button variant="secondary">Secondary</Button>,
+};
+
+export const Outline: Story = {
+  render: () => <Button variant="outline">Outline</Button>,
+};
+
+export const Ghost: Story = {
+  render: () => <Button variant="ghost">Ghost</Button>,
+};
+
+export const Link: Story = {
+  render: () => <Button variant="link">Link</Button>,
 };
