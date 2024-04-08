@@ -12,6 +12,7 @@ const config = {
       'semi-dark-blue': '#161D2F',
       'greyish-blue': '#5A698F',
       white: '#FFFFFF',
+      grey: '#979797',
     },
     container: {
       center: true,
