@@ -7,7 +7,7 @@ import * as Icons from '@/components/app-specific/Icon';
  * Reference: https://storybook.js.org/docs/writing-stories#default-export
  */
 const meta: Meta<typeof Icons> = {
-  title: 'Components/Icon',
+  title: 'Design System/Icon',
 };
 
 export default meta;

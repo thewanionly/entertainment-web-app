@@ -12,6 +12,7 @@ import { IconButton as IconButtonComponent } from './IconButton';
  * Reference: https://storybook.js.org/docs/writing-stories#default-export
  */
 const meta: Meta<typeof Button> = {
+  title: 'Generic Components/Button',
   component: Button,
 };
 
