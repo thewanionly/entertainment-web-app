@@ -14,6 +14,45 @@ const config = {
       white: '#FFFFFF',
       grey: '#979797',
     },
+    fontSize: {
+      'body-s': [
+        '0.8125rem', // 13px
+        {
+          fontWeight: '300',
+        },
+      ],
+      'body-m': [
+        '0.9375rem', // 15px
+        {
+          fontWeight: '300',
+        },
+      ],
+      'heading-xs': [
+        '1.125rem', // 18px
+        {
+          fontWeight: '500',
+        },
+      ],
+      'heading-s': [
+        '1.5rem', // 24px
+        {
+          fontWeight: '500',
+        },
+      ],
+      'heading-m': [
+        '1.5rem', // 24px
+        {
+          fontWeight: '300',
+        },
+      ],
+      'heading-l': [
+        '2rem', // 32px
+        {
+          letterSpacing: '-0.5px',
+          fontWeight: '300',
+        },
+      ],
+    },
     container: {
       center: true,
       padding: '2rem',
