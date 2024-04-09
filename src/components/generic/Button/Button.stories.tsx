@@ -5,6 +5,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { NavBookmark, NavHome, Play } from '@/components/app-specific/Icon';
 
 import { Button } from './Button';
+import { IconButton as IconButtonComponent } from './IconButton';
 
 /**
  * The default export defines how Storybook lists our stories in the preview
@@ -44,9 +45,9 @@ export const Link: Story = {
 
 export const IconButton: Story = {
   render: () => (
-    <Button variant="ghost">
+    <IconButtonComponent label="Home Navigation">
       <NavHome />
-    </Button>
+    </IconButtonComponent>
   ),
 };
 
