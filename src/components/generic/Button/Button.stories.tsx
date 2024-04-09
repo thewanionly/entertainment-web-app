@@ -54,7 +54,7 @@ export const IconButton: Story = {
 export const IconAndLabel: Story = {
   render: () => (
     <Button>
-      <NavBookmark className="flex h-7 w-6 items-center" viewBox="0 0 28 28" />
+      <NavBookmark className="mr-3 h-4 w-4 " />
       Bookmark
     </Button>
   ),
@@ -74,7 +74,7 @@ export const Custom: Story = {
       variant="secondary"
       className="h-12 rounded-full bg-grey/25 text-lg text-white hover:bg-grey/50"
     >
-      <Play className="mr-5 h-7 w-7" viewBox="0 0 30 30" />
+      <Play className="mr-5 h-7 w-7" />
       <span className="mr-2">Play</span>
     </Button>
   ),
