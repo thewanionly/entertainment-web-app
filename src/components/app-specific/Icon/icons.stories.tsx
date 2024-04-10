@@ -21,15 +21,15 @@ type Story = StoryObj<typeof AllIcons>;
 export const Icons: Story = {
   render: () => (
     <>
-      <h1 className="mb-12 text-center text-white">List of Icons</h1>
-      <div className="flex flex-wrap items-center justify-center gap-10">
+      <h1 className="mb-14 text-heading-m text-white">Icons</h1>
+      <ul className="flex flex-wrap gap-10">
         {Object.entries(AllIcons).map(([name, IconComponent]) => (
-          <div key={name} className="text-green flex flex-col items-center">
+          <li key={name} className="text-green flex min-w-[100px] flex-col items-center">
             <IconComponent className="mb-3 h-8 w-8 text-white" title={name} />
             <span className="text-xs text-grey">{name}</span>
-          </div>
+          </li>
         ))}
-      </div>
+      </ul>
     </>
   ),
 };
