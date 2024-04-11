@@ -25,7 +25,7 @@ export const Icons: Story = {
       <ul className="flex flex-wrap gap-10">
         {Object.entries(AllIcons).map(([name, IconComponent]) => (
           <li key={name} className="text-green flex min-w-[100px] flex-col items-center">
-            <IconComponent className="mb-3 h-8 w-8 text-white" title={name} />
+            <IconComponent className="mb-3 h-8 w-8 text-white" />
             <span className="text-xs text-grey">{name}</span>
           </li>
         ))}
