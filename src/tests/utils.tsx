@@ -23,6 +23,8 @@ const customRender = (
 
 export * from '@testing-library/react';
 
+export * from '@testing-library/user-event';
+
 export { composeStory, composeStories } from '@storybook/react';
 
 export { customRender as render };
