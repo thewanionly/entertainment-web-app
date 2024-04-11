@@ -1,8 +1,10 @@
-import { composeStories, render, screen, userEvent } from '@/tests/utils';
+import { composeStories, composeStory, render, screen, userEvent } from '@/tests/utils';
 
 import * as ButtonStories from './Button.stories';
+import Meta, { IconButton as IconButtonStory } from './IconButton.stories';
 
 const { Default, Secondary, Outline, AsChild, Disabled } = composeStories(ButtonStories);
+const IconButton = composeStory(IconButtonStory, Meta);
 
 describe('Button', () => {
   it('renders a button element by default', () => {
@@ -29,6 +31,15 @@ describe('Button', () => {
     expect(btnElement).toBeDisabled();
   });
 
+  it('displays an icon within the button', () => {
+    render(<IconButton />);
+
+    const btnElement = screen.getByRole('button');
+    const icon = btnElement.querySelector('svg');
+
+    expect(icon).toBeInTheDocument();
+  });
+
   it('renders an anchor element instead of button when `asChild` is true and child is an anchor element', () => {
     render(<AsChild />);
 
@@ -47,5 +58,15 @@ describe('Button', () => {
     await userEvent.click(btnElement);
 
     expect(onClickHandler).toHaveBeenCalled();
+  });
+
+  it('does not call the function passed in the `onClick` prop when a disabled button is clicked', async () => {
+    const onClickHandler = jest.fn();
+    render(<Disabled onClick={onClickHandler} />);
+
+    const btnElement = screen.getByRole('button');
+    await userEvent.click(btnElement);
+
+    expect(onClickHandler).not.toHaveBeenCalled();
   });
 });
