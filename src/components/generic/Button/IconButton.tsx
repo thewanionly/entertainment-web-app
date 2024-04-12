@@ -3,20 +3,23 @@ import * as React from 'react';
 import { Button } from './Button';
 
 export interface IconButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  label?: string;
+  asChild?: boolean;
 }
 
 const IconButton = React.forwardRef<HTMLButtonElement, IconButtonProps>(
-  ({ className, children, label, ...props }, ref) => {
+  ({ className, children, ...props }, ref) => {
     return (
       <Button className={className} ref={ref} variant="ghost" {...props}>
         {children}
-        {label && <span className="sr-only">{label}</span>}
       </Button>
     );
   }
 );
 
+const IconButtonSrLabel = ({ label }: { label: string }) => (
+  <span className="sr-only">{label}</span>
+);
+
 IconButton.displayName = 'IconButton';
 
-export { IconButton };
+export { IconButton, IconButtonSrLabel };

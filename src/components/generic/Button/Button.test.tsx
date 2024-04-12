@@ -1,10 +1,10 @@
-import { composeStories, composeStory, render, screen, userEvent } from '@/tests/utils';
+import { composeStories, render, screen, userEvent } from '@/tests/utils';
 
 import * as ButtonStories from './Button.stories';
-import Meta, { IconButton as IconButtonStory } from './IconButton.stories';
+import * as IconButtonStories from './IconButton.stories';
 
 const { Default, Secondary, Outline, AsChild, Disabled } = composeStories(ButtonStories);
-const IconButton = composeStory(IconButtonStory, Meta);
+const { IconButton, IconLink } = composeStories(IconButtonStories);
 
 describe('Button', () => {
   it('renders a button element by default', () => {
@@ -48,6 +48,15 @@ describe('Button', () => {
 
     expect(btnElement).not.toBeInTheDocument();
     expect(anchorElement).toBeInTheDocument();
+  });
+
+  it('displays an icon within the anchor element', () => {
+    render(<IconLink />);
+
+    const anchorElement = screen.getByRole('link');
+    const icon = anchorElement.querySelector('svg');
+
+    expect(icon).toBeInTheDocument();
   });
 
   it('calls the function passed in the `onClick` prop when button is clicked', async () => {
