@@ -64,6 +64,9 @@ const config = {
       fontFamily: {
         outfit: ['var(--font-outfit)', ...fontFamily.sans],
       },
+      screens: {
+        xs: { max: '320px' },
+      },
       keyframes: {
         'accordion-down': {
           from: { height: '0' },

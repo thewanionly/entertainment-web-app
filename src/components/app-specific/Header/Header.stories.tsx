@@ -9,6 +9,10 @@ import { Header } from './Header';
 const meta: Meta<typeof Header> = {
   title: 'App Specific Components/Header',
   component: Header,
+  parameters: {
+    layout: 'fullscreen',
+    controls: { exclude: ['className'] },
+  },
 };
 
 export default meta;
@@ -20,5 +24,13 @@ export default meta;
 type Story = StoryObj<typeof Header>;
 
 export const Horizontal: Story = {
-  args: {},
+  args: {
+    orientation: 'horizontal',
+  },
+};
+
+export const Vertical: Story = {
+  args: {
+    orientation: 'vertical',
+  },
 };
