@@ -22,7 +22,12 @@ type HeaderProps = {
 type NavLinkProps = NavLinkType & { active: boolean };
 
 const NavLink = ({ url, label, icon, active = false }: NavLinkProps) => {
-  const NavIcon = AllIcons[icon];
+  const NavIcon = AllIcons[icon as keyof typeof AllIcons];
+
+  if (!NavIcon) {
+    console.error(`There's no icon with the name of "${icon}". Please double check the icon name.`);
+    return null;
+  }
 
   return (
     <IconButton
@@ -30,7 +35,7 @@ const NavLink = ({ url, label, icon, active = false }: NavLinkProps) => {
       asChild
     >
       <Link href={url}>
-        <NavIcon className="h-4 w-4" />
+        {NavIcon && <NavIcon className="h-4 w-4" />}
         <IconButtonSrLabel label={label} />
       </Link>
     </IconButton>

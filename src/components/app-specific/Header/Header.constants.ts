@@ -1,5 +1,4 @@
 // TODO: move these in a CMS and place this under Header.mocks.ts
-import { IconName } from '../Icon/iconMap';
 
 // logo
 export const HEADER_LOGO_ALT_TEXT = `Entertainment Web App's Logo`;
@@ -10,7 +9,7 @@ export const HEADER_LOGO_IMG_PATH = '/logo.svg';
 export type NavLinkType = {
   url: string;
   label: string;
-  icon: IconName;
+  icon: string;
 };
 
 export const NAV_LINKS: NavLinkType[] = [

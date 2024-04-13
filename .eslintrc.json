@@ -10,7 +10,7 @@
   ],
   "plugins": ["react-hooks", "prettier"],
   "rules": {
-    "no-console": 2,
+    "no-console": ["error", { "allow": ["warn", "error"] }],
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "warn",
     "prettier/prettier": "warn"
