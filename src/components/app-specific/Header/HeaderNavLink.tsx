@@ -35,6 +35,7 @@ export const HeaderNavLink = ({
     <IconButton
       className={cn(
         'hover:bg-transparent group flex h-4 p-0 text-greyish-blue hover:text-red',
+        'rounded-none focus-visible:outline-offset-4',
         getVerticalClasses(orientation, 'iconButton'),
         active && 'text-white',
         className
