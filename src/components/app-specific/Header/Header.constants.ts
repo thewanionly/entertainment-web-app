@@ -48,8 +48,8 @@ export const verticalClasses = {
     md: 'md:h-[25.6px] md:w-8',
   },
   navList: {
-    default: 'flex-col gap-10',
-    md: 'md:flex-col md:gap-10',
+    default: 'flex-col gap-10 items-start',
+    md: 'md:flex-col md:gap-10 md:items-start',
   },
   iconButton: {
     default: 'h-5',

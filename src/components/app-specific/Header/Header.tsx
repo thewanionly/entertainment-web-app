@@ -9,7 +9,7 @@ import { cn } from '@/utils/styles';
 import { HEADER_LOGO_ALT_TEXT, HEADER_LOGO_IMG_PATH, NAV_LINKS } from './Header.constants';
 import { HeaderOrientation } from './Header.types';
 import { getVerticalClasses } from './Header.utils';
-import { HeaderNavLink } from './HeaderNavLink';
+import { HeaderNavigation } from './HeaderNavigation';
 
 type HeaderProps = {
   className?: string;
@@ -39,21 +39,16 @@ export const Header = ({ className = '', orientation }: HeaderProps) => {
         </div>
       </Link>
 
-      {/* Navigation links */}
       {NAV_LINKS.length > 0 && (
-        <nav>
-          <ul className={cn('flex gap-6 xs:gap-4', getVerticalClasses(orientation, 'navList'))}>
-            {NAV_LINKS.map((navLink) => (
-              <li key={navLink.label}>
-                <HeaderNavLink
-                  {...navLink}
-                  active={pathname === navLink.url}
-                  orientation={orientation}
-                />
-              </li>
-            ))}
-          </ul>
-        </nav>
+        <HeaderNavigation orientation={orientation}>
+          {NAV_LINKS.map((navLink) => (
+            <HeaderNavigation.Item
+              key={navLink.label}
+              active={pathname === navLink.url}
+              {...navLink}
+            />
+          ))}
+        </HeaderNavigation>
       )}
 
       {/* TODO: Avatar */}
