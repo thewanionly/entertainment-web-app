@@ -46,7 +46,7 @@ export const HeaderNavLink = ({
         {NavIcon && (
           <NavIcon className={cn('h-4 w-4', getVerticalClasses(orientation, 'navIcon'))} />
         )}
-        <IconButtonSrLabel label={label} />
+        <IconButtonSrLabel label={active ? `${label} is the active link` : label} />
       </Link>
     </IconButton>
   );
