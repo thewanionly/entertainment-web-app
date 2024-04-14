@@ -97,13 +97,19 @@ export const AsChild: Story = {
 };
 
 export const Custom: Story = {
-  render: () => (
+  render: ({ variant }) => (
     <Button
-      variant="secondary"
+      variant={variant}
       className="text-lg h-12 rounded-full bg-grey/25 text-white hover:bg-grey/50"
     >
       <Play className="mr-5 h-7 w-7" />
       <span className="mr-2">Play</span>
     </Button>
   ),
+  args: {
+    variant: 'secondary',
+  },
+  parameters: {
+    controls: { exclude: ['variant', 'asChild'] },
+  },
 };
