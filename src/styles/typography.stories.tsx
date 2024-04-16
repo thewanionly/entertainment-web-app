@@ -23,7 +23,7 @@ export const Typography: Story = {
       <ul className="flex flex-col gap-10">
         <li>
           <p className="text-base mb-2 text-grey">
-            <span className="font-medium">body-s</span> | Body (S) - Outfit Light (300) - 13px
+            <span className="font-medium">text-body-s</span> | Body (S) - Outfit Light (300) - 13px
           </p>
           <p className="text-body-s text-white">
             Sed pretium, ligula sollicitudin laoreet viverra, tortor libero sodales leo, eget
