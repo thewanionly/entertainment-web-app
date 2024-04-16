@@ -11,7 +11,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
     return (
       <div
         className={cn(
-          'peer flex items-center gap-4 border-b-[1px] border-greyish-blue p-4',
+          'peer flex items-center gap-4 border-b-[1px] border-greyish-blue p-4 text-body-m',
           'focus-within:border-white',
           error && 'border-red focus-within:border-red',
           disabled && 'cursor-not-allowed opacity-50',
@@ -21,7 +21,8 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
         <input
           type={type}
           className={cn(
-            'flex w-full flex-1 bg-transparent text-body-m text-white caret-red ring-offset-white',
+            'leading-none',
+            'flex w-full flex-1 bg-transparent text-white caret-red ring-offset-white',
             'focus:outline-none',
             'placeholder:text-white/50',
             'disabled:cursor-not-allowed disabled:opacity-50',
