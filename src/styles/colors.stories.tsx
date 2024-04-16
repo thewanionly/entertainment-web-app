@@ -24,26 +24,32 @@ export const Colors: Story = {
         <li>
           <div className="mb-2 h-[60px] w-[125px] rounded-lg bg-red" />
           <p className="text-center text-white">#FC4747</p>
+          <p className="text-center text-body-m italic text-grey">red</p>
         </li>
         <li>
           <div className="mb-2 h-[60px] w-[125px] rounded-lg bg-dark-blue" />
           <p className="text-center text-white">#10141E</p>
+          <p className="text-center text-body-m italic text-grey">dark-blue</p>
         </li>
         <li>
           <div className="mb-2 h-[60px] w-[125px] rounded-lg bg-greyish-blue" />
           <p className="text-center text-white">#5A698F</p>
+          <p className="text-center text-body-m italic text-grey">greyish-blue</p>
         </li>
         <li>
           <div className="mb-2 h-[60px] w-[125px] rounded-lg bg-semi-dark-blue" />
           <p className="text-center text-white">#161D2F</p>
+          <p className="text-center text-body-m italic text-grey">semi-dark-blue</p>
         </li>
         <li>
           <div className="mb-2 h-[60px] w-[125px] rounded-lg bg-white" />
           <p className="text-center text-white">#FFFFFF</p>
+          <p className="text-center text-body-m italic text-grey">white</p>
         </li>
         <li>
           <div className="mb-2 h-[60px] w-[125px] rounded-lg bg-grey" />
           <p className="text-center text-white">#979797</p>
+          <p className="text-center text-body-m italic text-grey">grey</p>
         </li>
       </ul>
     </>
