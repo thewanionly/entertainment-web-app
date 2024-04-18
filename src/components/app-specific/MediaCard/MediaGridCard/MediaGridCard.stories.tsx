@@ -24,5 +24,8 @@ export const Default: Story = {
     imgSrc: '/images/earths-untouched/small.jpg',
     imgAlt: '4 people with their backs turned having fun in a sunset seemingly on a mountain',
     title: `Earth's Untouched`,
+    year: '2017',
+    category: 'movie',
+    rating: '18+',
   },
 };

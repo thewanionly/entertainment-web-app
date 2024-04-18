@@ -13,12 +13,12 @@ export const MediaSliderCard = ({
   className = '',
   imgSrc,
   imgAlt,
-  title,
+  // title,
 }: MediaSliderCardProps) => {
   return (
     <MediaCard className={cn('relative', className)}>
       <MediaCard.Image className="h-[230px] w-[470px]" src={imgSrc} alt={imgAlt} />
-      <MediaCard.Details className="absolute bottom-[16px] left-[16px]" title={title} />
+      {/* <MediaCard.Details className="absolute bottom-[16px] left-[16px]" title={title} /> */}
     </MediaCard>
   );
 };

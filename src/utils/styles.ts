@@ -5,6 +5,17 @@ import { extendTailwindMerge } from 'tailwind-merge';
 const twMerge = extendTailwindMerge({
   // use the `extend` key in case you want to extend instead of override
   override: {
+    theme: {
+      colors: [
+        'red',
+        'dark-blue',
+        'semi-dark-blue',
+        'greyish-blue',
+        'white',
+        'grey',
+        'transparent',
+      ],
+    },
     classGroups: {
       'font-size': [
         { text: ['body-s', 'body-m', 'heading-xs', 'heading-s', 'heading-m', 'heading-l'] },
