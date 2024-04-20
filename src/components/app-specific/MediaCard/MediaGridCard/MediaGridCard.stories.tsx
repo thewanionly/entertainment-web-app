@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
+import { Media, MediaCategory } from '../MediaCard.types';
 import { MediaGridCard } from './MediaGridCard';
 
 /**
@@ -19,13 +20,26 @@ export default meta;
  */
 type Story = StoryObj<typeof MediaGridCard>;
 
+const mockMediaData: Media = {
+  imgSrc: '/images/earths-untouched/small.jpg',
+  imgAlt: '4 people with their backs turned having fun in a sunset seemingly on a mountain',
+  title: `Earth's Untouched`,
+  year: '2017',
+  category: MediaCategory.Movie,
+  rating: '18+',
+  isBookmarked: false,
+  isTrending: false,
+};
+
 export const Default: Story = {
   args: {
-    imgSrc: '/images/earths-untouched/small.jpg',
-    imgAlt: '4 people with their backs turned having fun in a sunset seemingly on a mountain',
-    title: `Earth's Untouched`,
-    year: '2017',
-    category: 'movie',
-    rating: '18+',
+    ...mockMediaData,
+  },
+};
+
+export const Bookmarked: Story = {
+  args: {
+    ...mockMediaData,
+    isBookmarked: true,
   },
 };

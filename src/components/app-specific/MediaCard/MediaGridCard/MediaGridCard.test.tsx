@@ -1,4 +1,4 @@
-import { composeStories, render, screen } from '@/tests/utils';
+import { composeStories, render, screen, within } from '@/tests/utils';
 
 import * as MediaGridCard from './MediaGridCard.stories';
 
@@ -33,7 +33,7 @@ describe('MediaGridCard', () => {
     render(<Default />);
 
     const categoryEl = screen.getByText(Default.args.category as string);
-    const categoryIcon = screen.getByTitle(Default.args.category as string);
+    const categoryIcon = within(categoryEl).getByTitle(Default.args.category as string);
 
     expect(categoryEl).toBeInTheDocument();
     expect(categoryIcon).toBeInTheDocument();
@@ -45,5 +45,15 @@ describe('MediaGridCard', () => {
     const ratingEl = screen.getByText(Default.args.rating as string);
 
     expect(ratingEl).toBeInTheDocument();
+  });
+
+  it(`displays bookmark icon button`, () => {
+    render(<Default />);
+
+    const bookmarkBtn = screen.getByRole('button', { name: 'Add to bookmarked medias' });
+    const bookmarkIcon = within(bookmarkBtn).getByTitle(/bookmark/);
+
+    expect(bookmarkBtn).toBeInTheDocument();
+    expect(bookmarkIcon).toBeInTheDocument();
   });
 });
