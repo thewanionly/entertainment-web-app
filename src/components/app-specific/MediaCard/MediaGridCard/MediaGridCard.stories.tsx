@@ -21,7 +21,7 @@ export default meta;
 type Story = StoryObj<typeof MediaGridCard>;
 
 const mockMediaData: Media = {
-  imgSrc: '/images/earths-untouched/small.jpg',
+  imgSrc: '/images/the-great-lands/small.jpg',
   imgAlt: '4 people with their backs turned having fun in a sunset seemingly on a mountain',
   title: `Earth's Untouched`,
   year: '2017',
@@ -56,5 +56,12 @@ export const HoveredBookmarked: Story = {
     ...mockMediaData,
     isBookmarked: true,
     hoverBookmark: true,
+  },
+};
+
+export const HoveredCard: Story = {
+  args: {
+    ...mockMediaData,
+    hoverCard: true,
   },
 };

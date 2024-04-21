@@ -7,10 +7,12 @@ import {
   BookMarkFull,
   CategoryMovie,
   CategoryTV,
+  Play,
 } from '@/components/app-specific/Icon';
-import { IconButton, IconButtonSrLabel } from '@/components/generic/Button';
+import { Button, IconButton, IconButtonSrLabel } from '@/components/generic/Button';
 import { cn } from '@/utils/styles';
 
+import { MediaCardContextProvider, useMediaCard } from './MediaCard.context';
 import { MediaCategory } from './MediaCard.types';
 
 type MediaCardProps = {
@@ -18,6 +20,7 @@ type MediaCardProps = {
   children: ReactNode;
   isBookmarked?: boolean;
   hoverBookmark?: boolean; // only for storybook
+  hoverCard?: boolean; // only for storybook
 };
 
 type MediaCardImageProps = {
@@ -55,23 +58,50 @@ export const MediaCard = ({
   children,
   isBookmarked = false,
   hoverBookmark = false,
+  hoverCard = false,
 }: MediaCardProps) => {
   return (
-    <div className={cn('relative', className)}>
-      {children}
-      <MediaCardBookMarkIcon
-        className={cn('absolute right-2 top-2', hoverBookmark && bookmarkHoverClassName.default)}
-        isActive={isBookmarked}
-      />
+    <div data-testid="media-card" className={cn('group relative', className)}>
+      <MediaCardContextProvider value={{ hoverCard, isBookmarked, hoverBookmark }}>
+        {children}
+      </MediaCardContextProvider>
     </div>
   );
 };
 
-const MediaCardImage = ({ className = '', src, alt, title }: MediaCardImageProps) => (
-  <div className={cn('relative h-5 w-[25px]', className)}>
-    <Image className="rounded-lg" src={src} alt={alt} title={title} fill />
-  </div>
-);
+const MediaCardImage = ({ className = '', src, alt, title }: MediaCardImageProps) => {
+  const { hoverCard, hoverBookmark, isBookmarked } = useMediaCard();
+
+  return (
+    <div className={cn('relative grid h-5 w-[25px]', className)}>
+      <MediaCardBookMarkIcon
+        className={cn(
+          'col-start-1 row-start-1 mr-2 mt-2 justify-self-end',
+          'peer z-20',
+          hoverBookmark && bookmarkHoverClassName.default
+        )}
+        isActive={isBookmarked}
+      />
+      <MediaPlayButton
+        className={cn(
+          'col-start-1 row-start-1 place-self-center',
+          'invisible z-20 group-hover:visible peer-hover:invisible',
+          hoverCard && 'visible'
+        )}
+      />
+      <Image className="rounded-lg" src={src} alt={alt} title={title} fill />
+      <div
+        className={cn(
+          'col-start-1 row-start-1',
+          'z-10',
+          'h-full w-full bg-black/50',
+          'invisible group-hover:visible peer-hover:invisible',
+          hoverCard && 'visible'
+        )}
+      />
+    </div>
+  );
+};
 
 const MediaCardDetails = ({
   className = '',
@@ -124,6 +154,19 @@ const MediaCardBookMarkIcon = ({
     </IconButton>
   );
 };
+
+const MediaPlayButton = ({ className = '' }: { className?: string }) => (
+  <Button
+    variant="secondary"
+    className={cn(
+      'h-min gap-[19px] rounded-full bg-white/25 p-[9px] text-heading-xs text-white hover:bg-white/50 hover:text-dark-blue',
+      className
+    )}
+  >
+    <Play className="h-[30px] w-[30px]" />
+    <span className="mr-[15px]">Play</span>
+  </Button>
+);
 
 MediaCard.Image = MediaCardImage;
 MediaCard.Details = MediaCardDetails;

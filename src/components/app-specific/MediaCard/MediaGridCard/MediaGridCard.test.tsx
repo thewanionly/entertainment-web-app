@@ -1,4 +1,4 @@
-import { composeStories, render, screen, within } from '@/tests/utils';
+import { composeStories, render, screen, userEvent, within } from '@/tests/utils';
 
 import * as MediaGridCard from './MediaGridCard.stories';
 
@@ -55,5 +55,16 @@ describe('MediaGridCard', () => {
 
     expect(bookmarkBtn).toBeInTheDocument();
     expect(bookmarkIcon).toBeInTheDocument();
+  });
+
+  it(`displays play button when hovered`, async () => {
+    render(<Default />);
+
+    const mediaCard = screen.getByTestId('media-card');
+
+    await userEvent.hover(mediaCard);
+
+    const playBtn = screen.getByRole('button', { name: /play/i });
+    expect(playBtn).toBeInTheDocument();
   });
 });
