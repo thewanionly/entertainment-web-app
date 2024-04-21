@@ -94,7 +94,7 @@ const MediaCardImage = ({ className = '', src, alt, title }: MediaCardImageProps
         className={cn(
           'col-start-1 row-start-1',
           'z-10',
-          'h-full w-full bg-black/50',
+          'h-full w-full rounded-lg bg-black/50',
           'invisible group-hover:visible peer-hover:invisible',
           hoverCard && 'visible'
         )}
