@@ -141,6 +141,7 @@ const MediaCardBookMarkIcon = ({
       className={cn(
         'h-8 w-8 rounded-full bg-dark-blue/50 p-0 text-white hover:bg-dark-blue/50',
         bookmarkHoverClassName.hover,
+        'motion-safe:transition-colors',
         className
       )}
       title={label}
@@ -160,6 +161,7 @@ const MediaPlayButton = ({ className = '' }: { className?: string }) => (
     variant="secondary"
     className={cn(
       'h-min gap-[19px] rounded-full bg-white/25 p-[9px] text-heading-xs text-white hover:bg-white/50 hover:text-dark-blue',
+      'motion-safe:transition-colors',
       className
     )}
   >
