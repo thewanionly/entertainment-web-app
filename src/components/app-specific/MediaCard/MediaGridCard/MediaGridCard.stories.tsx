@@ -37,9 +37,24 @@ export const Default: Story = {
   },
 };
 
+export const HoveredBookmark: Story = {
+  args: {
+    ...mockMediaData,
+    hoverBookmark: true,
+  },
+};
+
 export const Bookmarked: Story = {
   args: {
     ...mockMediaData,
     isBookmarked: true,
+  },
+};
+
+export const HoveredBookmarked: Story = {
+  args: {
+    ...mockMediaData,
+    isBookmarked: true,
+    hoverBookmark: true,
   },
 };

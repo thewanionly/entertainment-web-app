@@ -17,6 +17,7 @@ type MediaCardProps = {
   className?: string;
   children: ReactNode;
   isBookmarked?: boolean;
+  hoverBookmark?: boolean; // only for storybook
 };
 
 type MediaCardImageProps = {
@@ -44,16 +45,22 @@ const MEDIA_CATEGORY_ICON = {
   tv_series: CategoryTV,
 };
 
-export const MediaCard = ({ className = '', children, isBookmarked = false }: MediaCardProps) => {
+const bookmarkHoverClassName = {
+  default: 'bg-white text-dark-blue',
+  hover: 'hover:bg-white hover:text-dark-blue',
+};
+
+export const MediaCard = ({
+  className = '',
+  children,
+  isBookmarked = false,
+  hoverBookmark = false,
+}: MediaCardProps) => {
   return (
     <div className={cn('relative', className)}>
       {children}
       <MediaCardBookMarkIcon
-        className={cn(
-          'absolute right-2 top-2',
-          'h-8 w-8 rounded-full bg-dark-blue/50 p-0 text-white hover:bg-dark-blue/50',
-          'hover:bg-white hover:text-dark-blue'
-        )}
+        className={cn('absolute right-2 top-2', hoverBookmark && bookmarkHoverClassName.default)}
         isActive={isBookmarked}
       />
     </div>
@@ -99,7 +106,15 @@ const MediaCardBookMarkIcon = ({
   const label = isActive ? 'Remove from bookmarked medias' : 'Add to bookmarked medias';
 
   return (
-    <IconButton className={className} title={label}>
+    <IconButton
+      id="bookmark-icon-btn"
+      className={cn(
+        'h-8 w-8 rounded-full bg-dark-blue/50 p-0 text-white hover:bg-dark-blue/50',
+        bookmarkHoverClassName.hover,
+        className
+      )}
+      title={label}
+    >
       {isActive ? (
         <BookMarkFull className="h-[14px] w-[12px]" title="bookmark full" />
       ) : (
