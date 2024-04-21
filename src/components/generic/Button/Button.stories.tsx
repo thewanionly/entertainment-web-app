@@ -100,10 +100,12 @@ export const Custom: Story = {
   render: ({ variant }) => (
     <Button
       variant={variant}
-      className="text-lg h-12 rounded-full bg-grey/25 text-white hover:bg-grey/50"
+      className={
+        'h-min gap-[19px] rounded-full bg-white/25 p-[9px] text-heading-xs text-white hover:bg-white/50 hover:text-dark-blue'
+      }
     >
-      <Play className="mr-5 h-7 w-7" />
-      <span className="mr-2">Play</span>
+      <Play className="h-[30px] w-[30px]" />
+      <span className="mr-[15px]">Play</span>
     </Button>
   ),
   args: {
