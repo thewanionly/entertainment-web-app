@@ -13,6 +13,7 @@ const config = {
       'greyish-blue': '#5A698F',
       white: '#FFFFFF',
       grey: '#979797',
+      black: '#000000',
       transparent: 'transparent',
     },
     fontSize: {
