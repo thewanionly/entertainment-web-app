@@ -73,10 +73,17 @@ const MediaCardImage = ({ className = '', src, alt, title }: MediaCardImageProps
   const { hoverCard, hoverBookmark, isBookmarked } = useMediaCard();
 
   return (
-    <div className={cn('relative grid h-5 w-[25px]', className)}>
+    <div
+      className={cn(
+        'relative grid h-[110px] w-[164px] ',
+        'md:h-[140px] md:w-[220px]',
+        'xl:h-[174px] xl:w-[280px]',
+        className
+      )}
+    >
       <MediaCardBookMarkIcon
         className={cn(
-          'col-start-1 row-start-1 mr-2 mt-2 justify-self-end',
+          'col-start-1 row-start-1 mr-2 mt-2 justify-self-end md:mr-4 md:mt-4',
           'peer z-20',
           hoverBookmark && bookmarkHoverClassName.default
         )}
@@ -103,6 +110,10 @@ const MediaCardImage = ({ className = '', src, alt, title }: MediaCardImageProps
   );
 };
 
+const DotSeparator = () => (
+  <span className={cn('h-0.5 w-0.5 rounded-full bg-white/50', 'md:h-[3px] md:w-[3px]')} />
+);
+
 const MediaCardDetails = ({
   className = '',
   title,
@@ -113,18 +124,23 @@ const MediaCardDetails = ({
   const CategoryIcon = MEDIA_CATEGORY_ICON[category];
 
   return (
-    <div className={cn('flex flex-col gap-1', className)}>
-      <div className="flex items-center gap-[7.5px]">
-        <span className="text-[11px] font-light text-white/75">{year}</span>
-        <span className="h-0.5 w-0.5 rounded-full bg-white/50" />
-        <span className="flex items-center gap-1 text-[11px] font-light capitalize text-white/75">
-          <CategoryIcon className="w-2.5" title={category} />
+    <div className={cn('flex flex-col gap-1 md:gap-[5px]', className)}>
+      <div
+        className={cn(
+          'flex items-center gap-[7.5px] text-[11px] font-light text-white/75',
+          'md:gap-2 md:text-body-s'
+        )}
+      >
+        <span>{year}</span>
+        <DotSeparator />
+        <span className="flex items-center gap-1 capitalize md:gap-1.5">
+          <CategoryIcon className="w-2.5 md:w-3" title={category} />
           {category}
         </span>
-        <span className="h-0.5 w-0.5 rounded-full bg-white/50" />
-        <span className="text-[11px] font-light text-white/75">{rating}</span>
+        <DotSeparator />
+        <span>{rating}</span>
       </div>
-      <p className="text-[14px] font-medium text-white">{title}</p>
+      <p className={cn('text-[14px] font-medium text-white', 'md:text-heading-xs')}>{title}</p>
     </div>
   );
 };

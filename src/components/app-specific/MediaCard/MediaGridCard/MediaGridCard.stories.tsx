@@ -21,7 +21,7 @@ export default meta;
 type Story = StoryObj<typeof MediaGridCard>;
 
 const mockMediaData: Media = {
-  imgSrc: '/images/the-great-lands/small.jpg',
+  imgSrc: '/images/earths-untouched/large.jpg',
   imgAlt: '4 people with their backs turned having fun in a sunset seemingly on a mountain',
   title: `Earth's Untouched`,
   year: '2017',

@@ -28,7 +28,7 @@ export const MediaGridCard = ({
       hoverBookmark={hoverBookmark}
       hoverCard={hoverCard}
     >
-      <MediaCard.Image className="h-[110px] w-[164px]" src={imgSrc} alt={imgAlt} />
+      <MediaCard.Image src={imgSrc} alt={imgAlt} />
       <MediaCard.Details title={title} year={year} category={category} rating={rating} />
     </MediaCard>
   );
