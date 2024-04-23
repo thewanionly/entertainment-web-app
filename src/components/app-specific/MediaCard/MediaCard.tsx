@@ -1,6 +1,8 @@
-import { ReactNode } from 'react';
+import { ReactNode, useState } from 'react';
 
 import Image from 'next/image';
+
+import { AnimatePresence, motion } from 'framer-motion';
 
 import {
   BookMarkEmpty,
@@ -9,7 +11,7 @@ import {
   CategoryTV,
   Play,
 } from '@/components/app-specific/Icon';
-import { Button, IconButton, IconButtonSrLabel } from '@/components/generic/Button';
+import { Button, ButtonProps, IconButton, IconButtonSrLabel } from '@/components/generic/Button';
 import { cn } from '@/utils/styles';
 
 import { MediaCardContextProvider, useMediaCard } from './MediaCard.context';
@@ -61,7 +63,7 @@ export const MediaCard = ({
   hoverCard = false,
 }: MediaCardProps) => {
   return (
-    <div data-testid="media-card" className={cn('group relative', className)}>
+    <div data-testid="media-card" className={cn('relative', className)}>
       <MediaCardContextProvider value={{ hoverCard, isBookmarked, hoverBookmark }}>
         {children}
       </MediaCardContextProvider>
@@ -71,15 +73,19 @@ export const MediaCard = ({
 
 const MediaCardImage = ({ className = '', src, alt, title }: MediaCardImageProps) => {
   const { hoverCard, hoverBookmark, isBookmarked } = useMediaCard();
+  const [showPlayBtn, setShowPlayBtn] = useState(hoverCard);
 
   return (
     <div
+      data-testid="media-card-image"
       className={cn(
-        'relative grid h-[110px] w-[164px] ',
+        'group relative grid h-[110px] w-[164px] ',
         'md:h-[140px] md:w-[220px]',
         'xl:h-[174px] xl:w-[280px]',
         className
       )}
+      onMouseEnter={() => setShowPlayBtn(true)}
+      onMouseLeave={() => setShowPlayBtn(false)}
     >
       <MediaCardBookMarkIcon
         className={cn(
@@ -88,22 +94,29 @@ const MediaCardImage = ({ className = '', src, alt, title }: MediaCardImageProps
           hoverBookmark && bookmarkHoverClassName.default
         )}
         isActive={isBookmarked}
+        onMouseEnter={() => setShowPlayBtn(false)}
+        onMouseLeave={() => setShowPlayBtn(true)}
       />
-      <MediaPlayButton
-        className={cn(
-          'col-start-1 row-start-1 place-self-center',
-          'invisible z-20 group-hover:visible peer-hover:invisible',
-          hoverCard && 'visible'
+      <AnimatePresence>
+        {showPlayBtn && (
+          <motion.div
+            className={cn('col-start-1 row-start-1 place-self-center', 'z-20 ')}
+            initial={!hoverCard && { opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+          >
+            <MediaPlayButton />
+          </motion.div>
         )}
-      />
+      </AnimatePresence>
       <Image className="rounded-lg" src={src} alt={alt} title={title} fill />
       <div
         className={cn(
           'col-start-1 row-start-1',
           'z-10',
           'h-full w-full rounded-lg bg-black/50',
-          'invisible group-hover:visible peer-hover:invisible',
-          hoverCard && 'visible'
+          'opacity-0 group-hover:opacity-100 peer-hover:opacity-0 motion-safe:transition-opacity',
+          hoverCard && 'opacity-100'
         )}
       />
     </div>
@@ -148,7 +161,8 @@ const MediaCardDetails = ({
 const MediaCardBookMarkIcon = ({
   className = '',
   isActive = false,
-}: MediaCardBookMarkIconProps) => {
+  ...props
+}: MediaCardBookMarkIconProps & ButtonProps) => {
   const label = isActive ? 'Remove from bookmarked medias' : 'Add to bookmarked medias';
 
   return (
@@ -161,6 +175,7 @@ const MediaCardBookMarkIcon = ({
         className
       )}
       title={label}
+      {...props}
     >
       {isActive ? (
         <BookMarkFull className="h-[14px] w-[12px]" title="bookmark full" />

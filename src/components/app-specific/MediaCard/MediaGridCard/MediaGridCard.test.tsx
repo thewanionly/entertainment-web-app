@@ -60,11 +60,12 @@ describe('MediaGridCard', () => {
   it(`displays play button when hovered`, async () => {
     render(<Default />);
 
-    const mediaCard = screen.getByTestId('media-card');
+    const mediaCard = screen.getByTestId('media-card-image');
+
+    expect(screen.queryByRole('button', { name: /play/i })).not.toBeInTheDocument();
 
     await userEvent.hover(mediaCard);
 
-    const playBtn = screen.getByRole('button', { name: /play/i });
-    expect(playBtn).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /play/i })).toBeInTheDocument();
   });
 });
