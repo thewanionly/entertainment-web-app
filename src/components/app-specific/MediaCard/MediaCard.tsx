@@ -1,4 +1,4 @@
-import { ReactNode, useState } from 'react';
+import { ReactNode, useState, forwardRef } from 'react';
 
 import Image from 'next/image';
 
@@ -99,14 +99,12 @@ const MediaCardImage = ({ className = '', src, alt, title }: MediaCardImageProps
       />
       <AnimatePresence>
         {showPlayBtn && (
-          <motion.div
+          <MotionMediayPlayButton
             className={cn('col-start-1 row-start-1 place-self-center', 'z-20 ')}
             initial={!hoverCard && { opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-          >
-            <MediaPlayButton />
-          </motion.div>
+          />
         )}
       </AnimatePresence>
       <Image className="rounded-lg" src={src} alt={alt} title={title} fill />
@@ -187,19 +185,26 @@ const MediaCardBookMarkIcon = ({
   );
 };
 
-const MediaPlayButton = ({ className = '' }: { className?: string }) => (
-  <Button
-    variant="secondary"
-    className={cn(
-      'h-min gap-[19px] rounded-full bg-white/25 p-[9px] text-heading-xs text-white hover:bg-white/50 hover:text-dark-blue',
-      'motion-safe:transition-colors',
-      className
-    )}
-  >
-    <Play className="h-[30px] w-[30px]" />
-    <span className="mr-[15px]">Play</span>
-  </Button>
+const MediaPlayButton = forwardRef<HTMLButtonElement, { className?: string }>(
+  function MediaPlayButton({ className = '' }, ref) {
+    return (
+      <Button
+        variant="secondary"
+        className={cn(
+          'h-min gap-[19px] rounded-full bg-white/25 p-[9px] text-heading-xs text-white hover:bg-white/50 hover:text-dark-blue',
+          'motion-safe:transition-colors',
+          className
+        )}
+        ref={ref}
+      >
+        <Play className="h-[30px] w-[30px]" />
+        <span className="mr-[15px]">Play</span>
+      </Button>
+    );
+  }
 );
+
+const MotionMediayPlayButton = motion(MediaPlayButton);
 
 MediaCard.Image = MediaCardImage;
 MediaCard.Details = MediaCardDetails;
