@@ -101,7 +101,7 @@ const MediaCardImage = ({ className = '', src, alt, title }: MediaCardImageProps
         {showPlayBtn && (
           <MotionMediayPlayButton
             className={cn('col-start-1 row-start-1 place-self-center', 'z-20 ')}
-            initial={!hoverCard && { opacity: 0 }}
+            initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
           />
