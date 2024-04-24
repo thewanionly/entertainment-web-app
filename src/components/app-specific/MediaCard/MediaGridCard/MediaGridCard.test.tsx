@@ -1,4 +1,4 @@
-import { composeStories, render, screen, userEvent, within } from '@/tests/utils';
+import { composeStories, render, screen, userEvent, waitFor, within } from '@/tests/utils';
 
 import * as MediaGridCard from './MediaGridCard.stories';
 
@@ -57,7 +57,7 @@ describe('MediaGridCard', () => {
     expect(bookmarkIcon).toBeInTheDocument();
   });
 
-  it(`displays play button when hovered`, async () => {
+  it(`displays play button when image is hovered`, async () => {
     render(<Default />);
 
     const mediaCard = screen.getByTestId('media-card-image');
@@ -67,5 +67,22 @@ describe('MediaGridCard', () => {
     await userEvent.hover(mediaCard);
 
     expect(screen.getByRole('button', { name: /play/i })).toBeInTheDocument();
+  });
+
+  it(`hides play button when bookmark icon button is hovered`, async () => {
+    render(<Default />);
+
+    // hover image to display play button
+    const mediaCard = screen.getByTestId('media-card-image');
+    await userEvent.hover(mediaCard);
+    expect(screen.getByRole('button', { name: /play/i })).toBeInTheDocument();
+
+    // hover bookmark icon button to hide play button
+    const bookmarkBtn = screen.getByRole('button', { name: 'Add to bookmarked medias' });
+    await userEvent.hover(bookmarkBtn);
+    await waitFor(() =>
+      // need to wrap with waitFor due to AnimatePresence
+      expect(screen.queryByRole('button', { name: /play/i })).not.toBeInTheDocument()
+    );
   });
 });
