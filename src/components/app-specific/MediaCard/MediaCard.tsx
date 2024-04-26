@@ -28,7 +28,6 @@ type MediaCardProps = {
 type MediaCardImageProps = {
   src: string;
   alt: string;
-  title?: string;
   className?: string;
 };
 
@@ -71,7 +70,7 @@ export const MediaCard = ({
   );
 };
 
-const MediaCardImage = ({ className = '', src, alt, title }: MediaCardImageProps) => {
+const MediaCardImage = ({ className = '', src, alt }: MediaCardImageProps) => {
   const { hoverCard, hoverBookmark, isBookmarked } = useMediaCard();
   const [showPlayBtn, setShowPlayBtn] = useState(hoverCard);
 
@@ -79,6 +78,7 @@ const MediaCardImage = ({ className = '', src, alt, title }: MediaCardImageProps
     <div
       data-testid="media-card-image"
       className={cn(
+        'rounded-lg',
         'group relative grid h-[110px] w-[164px] ',
         'md:h-[140px] md:w-[220px]',
         'xl:h-[174px] xl:w-[280px]',
@@ -107,7 +107,13 @@ const MediaCardImage = ({ className = '', src, alt, title }: MediaCardImageProps
           />
         )}
       </AnimatePresence>
-      <Image className="rounded-lg" src={src} alt={alt} title={title} fill />
+      <Image
+        className="rounded-lg object-cover"
+        src={src}
+        alt={alt}
+        sizes="(min-width: 1280px) 20vw, (min-width: 768px) 30vw, 48vw"
+        fill
+      />
       <div
         className={cn(
           'col-start-1 row-start-1',
