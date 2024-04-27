@@ -3,7 +3,7 @@ import { cn } from '@/utils/styles';
 import { MediaCard } from '../MediaCard';
 import { Media } from '../MediaCard.types';
 
-type MediaGridCardProps = Media & {
+type MediaGridCardProps = Omit<Media, 'isTrending'> & {
   className?: string;
   hoverBookmark?: boolean; // only for storybook
   hoverCard?: boolean; // only for storybook

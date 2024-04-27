@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { Media, MediaCategory } from '../MediaCard.types';
+import { MediaCategory } from '../MediaCard.types';
 import { MediaGridCard } from './MediaGridCard';
 
 /**
@@ -10,6 +10,22 @@ import { MediaGridCard } from './MediaGridCard';
 const meta: Meta<typeof MediaGridCard> = {
   title: 'App Specific Components/MediaGridCard',
   component: MediaGridCard,
+  argTypes: {
+    category: {
+      options: ['movie', 'tv_series'],
+      control: {
+        type: 'inline-radio',
+        labels: {
+          movie: 'Movie',
+          tv_series: 'TV Series',
+        },
+      },
+      defaultValue: 'movie',
+    },
+  },
+  parameters: {
+    controls: { exclude: ['className', 'hoverBookmark', 'hoverCard'] },
+  },
 };
 
 export default meta;
@@ -20,7 +36,7 @@ export default meta;
  */
 type Story = StoryObj<typeof MediaGridCard>;
 
-const mockMediaData: Media = {
+const mockMediaData = {
   imgSrc: '/images/earths-untouched/large.jpg',
   imgAlt: '4 people with their backs turned having fun in a sunset seemingly on a mountain',
   title: `Earth's Untouched`,
@@ -28,7 +44,6 @@ const mockMediaData: Media = {
   category: MediaCategory.Movie,
   rating: '18+',
   isBookmarked: false,
-  isTrending: false,
 };
 
 export const Default: Story = {
