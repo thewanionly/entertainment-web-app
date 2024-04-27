@@ -50,11 +50,9 @@ describe('MediaGridCard', () => {
   it(`displays bookmark icon button`, () => {
     render(<Default />);
 
-    const bookmarkBtn = screen.getByRole('button', { name: 'Add to bookmarked medias' });
-    const bookmarkIcon = within(bookmarkBtn).getByTitle(/bookmark/);
+    const bookmarkBtn = screen.getByRole('button', { name: /bookmark/i });
 
     expect(bookmarkBtn).toBeInTheDocument();
-    expect(bookmarkIcon).toBeInTheDocument();
   });
 
   it(`displays play button when image is hovered`, async () => {
@@ -78,7 +76,7 @@ describe('MediaGridCard', () => {
     expect(screen.getByRole('button', { name: /play/i })).toBeInTheDocument();
 
     // hover bookmark icon button to hide play button
-    const bookmarkBtn = screen.getByRole('button', { name: 'Add to bookmarked medias' });
+    const bookmarkBtn = screen.getByRole('button', { name: /bookmark/i });
     await userEvent.hover(bookmarkBtn);
     await waitFor(() =>
       // need to wrap with waitFor due to AnimatePresence

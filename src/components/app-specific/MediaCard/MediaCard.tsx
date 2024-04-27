@@ -167,7 +167,8 @@ const MediaCardBookMarkIcon = ({
   isActive = false,
   ...props
 }: MediaCardBookMarkIconProps & ButtonProps) => {
-  const label = isActive ? 'Remove from bookmarked medias' : 'Add to bookmarked medias';
+  const label = isActive ? 'Remove from bookmarks' : 'Add to bookmarks';
+  const BookMarkIcon = isActive ? BookMarkFull : BookMarkEmpty;
 
   return (
     <IconButton
@@ -181,11 +182,7 @@ const MediaCardBookMarkIcon = ({
       title={label}
       {...props}
     >
-      {isActive ? (
-        <BookMarkFull className="h-[14px] w-[12px]" title="bookmark full" />
-      ) : (
-        <BookMarkEmpty className="h-[14px] w-[12px]" title="bookmark empty" />
-      )}
+      <BookMarkIcon className="h-[14px] w-[12px]" />
       <IconButtonSrLabel label={label} />
     </IconButton>
   );
