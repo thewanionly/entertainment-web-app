@@ -44,9 +44,15 @@ type MediaCardBookMarkIconProps = {
   isActive?: boolean;
 };
 
-const MEDIA_CATEGORY_ICON = {
-  movie: CategoryMovie,
-  tv_series: CategoryTV,
+const MEDIA_CATEGORY_MAP = {
+  movie: {
+    icon: CategoryMovie,
+    label: 'Movie',
+  },
+  tv_series: {
+    icon: CategoryTV,
+    label: 'TV Series',
+  },
 };
 
 const bookmarkHoverClassName = {
@@ -138,7 +144,7 @@ const MediaCardDetails = ({
   category,
   rating,
 }: MediaCardDetailsProps) => {
-  const CategoryIcon = MEDIA_CATEGORY_ICON[category];
+  const { icon: CategoryIcon, label: categoryName } = MEDIA_CATEGORY_MAP[category];
 
   return (
     <div className={cn('flex flex-col gap-1 md:gap-[5px]', className)}>
@@ -151,8 +157,8 @@ const MediaCardDetails = ({
         <span>{year}</span>
         <DotSeparator />
         <span className="flex items-center gap-1 capitalize md:gap-1.5">
-          <CategoryIcon className="w-2.5 md:w-3" title={category} />
-          {category}
+          <CategoryIcon className="w-2.5 md:w-3" title={categoryName} />
+          {categoryName}
         </span>
         <DotSeparator />
         <span>{rating}</span>

@@ -32,8 +32,9 @@ describe('MediaGridCard', () => {
   it(`displays media type`, () => {
     render(<Default />);
 
-    const categoryEl = screen.getByText(Default.args.category as string);
-    const categoryIcon = within(categoryEl).getByTitle(Default.args.category as string);
+    const category = new RegExp(Default.args.category as string, 'i');
+    const categoryEl = screen.getByText(category);
+    const categoryIcon = within(categoryEl).getByTitle(category);
 
     expect(categoryEl).toBeInTheDocument();
     expect(categoryIcon).toBeInTheDocument();
