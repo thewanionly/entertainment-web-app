@@ -7,7 +7,7 @@ import { MediaGridCard } from './MediaGridCard';
  * The default export defines how Storybook lists our stories in the preview
  * Reference: https://storybook.js.org/docs/writing-stories#default-export
  */
-const meta: Meta<typeof MediaGridCard> = {
+const meta = {
   title: 'App Specific Components/MediaGridCard',
   component: MediaGridCard,
   argTypes: {
@@ -26,7 +26,7 @@ const meta: Meta<typeof MediaGridCard> = {
   parameters: {
     controls: { exclude: ['className', 'hoverBookmark', 'hoverCard'] },
   },
-};
+} satisfies Meta<typeof MediaGridCard>;
 
 export default meta;
 
@@ -34,7 +34,7 @@ export default meta;
  * The named export defines the component's stories
  * Reference: https://storybook.js.org/docs/writing-stories#defining-stories
  */
-type Story = StoryObj<typeof MediaGridCard>;
+type Story = StoryObj<typeof meta>;
 
 const mockMediaData = {
   imgSrc: '/images/earths-untouched/large.jpg',
@@ -46,41 +46,41 @@ const mockMediaData = {
   isBookmarked: false,
 };
 
-export const Default: Story = {
+export const Default = {
   args: {
     ...mockMediaData,
   },
-};
+} satisfies Story;
 
-export const HoveredCard: Story = {
+export const HoveredCard = {
   args: {
     ...mockMediaData,
     hoverCard: true,
   },
   name: 'Hovered (with Play button)',
-};
+} satisfies Story;
 
-export const BookmarkHovered: Story = {
+export const BookmarkHovered = {
   args: {
     ...mockMediaData,
     hoverBookmark: true,
   },
   name: 'Bookmark - Idle Hovered',
-};
+} satisfies Story;
 
-export const BookmarkActive: Story = {
+export const BookmarkActive = {
   args: {
     ...mockMediaData,
     isBookmarked: true,
   },
   name: 'Bookmark - Active',
-};
+} satisfies Story;
 
-export const BookmarkActiveHovered: Story = {
+export const BookmarkActiveHovered = {
   args: {
     ...mockMediaData,
     isBookmarked: true,
     hoverBookmark: true,
   },
   name: 'Bookmark - Active Hovered',
-};
+} satisfies Story;
