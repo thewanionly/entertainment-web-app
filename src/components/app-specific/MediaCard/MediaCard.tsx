@@ -120,13 +120,26 @@ const MediaCardImage = ({ className = '', src, alt }: MediaCardImageProps) => {
       <AnimatePresence>
         {showPlayBtn && isHoverable && (
           <MotionMediayPlayButton
-            className={cn('col-start-1 row-start-1 place-self-center', 'z-20 ')}
+            className={cn('col-start-1 row-start-1 place-self-center', 'z-20')}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
           />
         )}
       </AnimatePresence>
+      {!isHoverable && (
+        <IconButton
+          className={cn(
+            'col-start-1 row-start-1 mb-2 ml-2 self-end justify-self-start',
+            'z-20 h-5 w-5 rounded-full bg-black/25 p-0 text-white shadow-md shadow-black/50',
+            'hover:bg-black/60 hover:text-white/80'
+          )}
+          title="Play"
+        >
+          <Play className="h-5 w-5" />
+          <IconButtonSrLabel label="Play" />
+        </IconButton>
+      )}
       <Image
         className="rounded-lg object-cover"
         src={src}
