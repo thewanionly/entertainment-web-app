@@ -1,10 +1,10 @@
 import { composeStories, render, screen } from '@/tests/utils';
 
-import * as MediaSliderCard from './MediaSliderCard.stories';
+import * as MediaCarouselCard from './MediaCarouselCard.stories';
 
-const { Default } = composeStories(MediaSliderCard);
+const { Default } = composeStories(MediaCarouselCard);
 
-describe('MediaSliderCard', () => {
+describe('MediaCarouselCard', () => {
   it('displays media thumbnail image', () => {
     render(<Default />);
 
