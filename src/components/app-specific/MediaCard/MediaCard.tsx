@@ -99,7 +99,7 @@ const MediaCardImage = ({ className = '', src, alt }: MediaCardImageProps) => {
       data-testid="media-card-image"
       className={cn(
         'rounded-lg',
-        'group relative grid h-[110px] w-[164px] ',
+        'group relative grid h-[110px] w-[164px]',
         'md:h-[140px] md:w-[220px]',
         'xl:h-[174px] xl:w-[280px]',
         className
@@ -236,14 +236,15 @@ const MediaPlayButton = forwardRef<HTMLButtonElement, { className?: string }>(
       <Button
         variant="secondary"
         className={cn(
-          'h-min gap-[19px] rounded-full bg-white/25 p-[9px] text-heading-xs text-white hover:bg-white/50 hover:text-dark-blue',
+          'h-min gap-[15px] rounded-full p-[7px] text-body-m md:gap-[19px] md:p-[9px] md:text-heading-xs',
+          'bg-white/25 text-white hover:bg-white/50 hover:text-dark-blue',
           'motion-safe:transition-colors',
           className
         )}
         ref={ref}
       >
-        <Play className="h-[30px] w-[30px]" />
-        <span className="mr-[15px]">Play</span>
+        <Play className="h-[25px] w-[25px] md:h-[30px] md:w-[30px]" />
+        <span className="mr-[12px] md:mr-[15px]">Play</span>
       </Button>
     );
   }
