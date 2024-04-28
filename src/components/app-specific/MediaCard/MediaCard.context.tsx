@@ -4,6 +4,7 @@ type MediaCardContextType = {
   hoverCard?: boolean;
   hoverBookmark?: boolean;
   isBookmarked?: boolean;
+  isHoverable?: boolean;
 };
 
 const MediaCardContext = createContext<MediaCardContextType | null>(null);

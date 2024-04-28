@@ -12,6 +12,7 @@ import {
   Play,
 } from '@/components/app-specific/Icon';
 import { Button, ButtonProps, IconButton, IconButtonSrLabel } from '@/components/generic/Button';
+import { useMediaQuery } from '@/hooks/useMediaQuery';
 import { cn } from '@/utils/styles';
 
 import { MediaCardContextProvider, useMediaCard } from './MediaCard.context';
@@ -23,6 +24,7 @@ type MediaCardProps = {
   isBookmarked?: boolean;
   hoverBookmark?: boolean; // only for storybook
   hoverCard?: boolean; // only for storybook
+  isHoverable?: boolean; // only for storybook and testing purposes
 };
 
 type MediaCardImageProps = {
@@ -66,10 +68,11 @@ export const MediaCard = ({
   isBookmarked = false,
   hoverBookmark = false,
   hoverCard = false,
+  isHoverable,
 }: MediaCardProps) => {
   return (
     <div data-testid="media-card" className={cn('relative', className)}>
-      <MediaCardContextProvider value={{ hoverCard, isBookmarked, hoverBookmark }}>
+      <MediaCardContextProvider value={{ hoverCard, isBookmarked, hoverBookmark, isHoverable }}>
         {children}
       </MediaCardContextProvider>
     </div>
@@ -77,8 +80,19 @@ export const MediaCard = ({
 };
 
 const MediaCardImage = ({ className = '', src, alt }: MediaCardImageProps) => {
-  const { hoverCard, hoverBookmark, isBookmarked } = useMediaCard();
+  const {
+    hoverCard,
+    hoverBookmark,
+    isBookmarked,
+    isHoverable: initialIsHoverable,
+  } = useMediaCard();
   const [showPlayBtn, setShowPlayBtn] = useState(hoverCard);
+
+  let isHoverable = useMediaQuery('(hover: hover)');
+
+  if (initialIsHoverable !== undefined) {
+    isHoverable = initialIsHoverable;
+  }
 
   return (
     <div
@@ -104,7 +118,7 @@ const MediaCardImage = ({ className = '', src, alt }: MediaCardImageProps) => {
         onMouseLeave={() => setShowPlayBtn(true)}
       />
       <AnimatePresence>
-        {showPlayBtn && (
+        {showPlayBtn && isHoverable && (
           <MotionMediayPlayButton
             className={cn('col-start-1 row-start-1 place-self-center', 'z-20 ')}
             initial={{ opacity: 0 }}
@@ -125,7 +139,8 @@ const MediaCardImage = ({ className = '', src, alt }: MediaCardImageProps) => {
           'col-start-1 row-start-1',
           'z-10',
           'h-full w-full rounded-lg bg-black/50',
-          'opacity-0 group-hover:opacity-100 peer-hover:opacity-0 motion-safe:transition-opacity',
+          'opacity-0 motion-safe:transition-opacity',
+          '[@media(hover:hover)]:group-hover:opacity-100 [@media(hover:hover)]:peer-hover:opacity-0',
           hoverCard && 'opacity-100'
         )}
       />

@@ -56,6 +56,7 @@ export const HoveredCard = {
   args: {
     ...mockMediaData,
     hoverCard: true,
+    isHoverable: true,
   },
   name: 'Hovered (with Play button)',
 } satisfies Story;

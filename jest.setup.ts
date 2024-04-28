@@ -10,8 +10,22 @@ import globalStorybookConfig from './.storybook/preview';
 setProjectAnnotations(globalStorybookConfig);
 
 // next/image mock
-
 jest.mock('next/image', () => ({
   __esModule: true,
   default: MockedImage,
 }));
+
+// window.matchMedia mock
+Object.defineProperty(window, 'matchMedia', {
+  writable: true,
+  value: jest.fn().mockImplementation((query) => ({
+    matches: false,
+    media: query,
+    onchange: null,
+    addListener: jest.fn(), // Deprecated
+    removeListener: jest.fn(), // Deprecated
+    addEventListener: jest.fn(),
+    removeEventListener: jest.fn(),
+    dispatchEvent: jest.fn(),
+  })),
+});
