@@ -46,20 +46,11 @@ const mockMediaData = {
   isBookmarked: false,
 };
 
-export const Default = {
+export const Default: Story = {
   args: {
     ...mockMediaData,
   },
-} satisfies Story;
-
-export const HoveredCard = {
-  args: {
-    ...mockMediaData,
-    hoverCard: true,
-    isHoverable: true,
-  },
-  name: 'Hovered (with Play button)',
-} satisfies Story;
+};
 
 export const BookmarkHovered = {
   args: {
@@ -84,4 +75,21 @@ export const BookmarkActiveHovered = {
     hoverBookmark: true,
   },
   name: 'Bookmark - Active Hovered',
+} satisfies Story;
+
+export const NonTouchDeviceHovered = {
+  args: {
+    ...mockMediaData,
+    hoverCard: true,
+    isHoverable: true,
+  },
+  name: 'Play Button - Non-touch device (show when hovered)',
+} satisfies Story;
+
+export const TouchDeviceHovered = {
+  args: {
+    ...mockMediaData,
+    isHoverable: false,
+  },
+  name: 'Play Button - Touch device (persistent)',
 } satisfies Story;

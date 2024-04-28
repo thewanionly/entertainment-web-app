@@ -117,6 +117,8 @@ const MediaCardImage = ({ className = '', src, alt }: MediaCardImageProps) => {
         onMouseEnter={() => setShowPlayBtn(false)}
         onMouseLeave={() => setShowPlayBtn(true)}
       />
+
+      {/* Play button for non-touch device where hover is possible */}
       <AnimatePresence>
         {showPlayBtn && isHoverable && (
           <MotionMediayPlayButton
@@ -127,19 +129,22 @@ const MediaCardImage = ({ className = '', src, alt }: MediaCardImageProps) => {
           />
         )}
       </AnimatePresence>
+
+      {/* Play button for touch device where hover is NOT possible */}
       {!isHoverable && (
         <IconButton
           className={cn(
-            'col-start-1 row-start-1 mb-2 ml-2 self-end justify-self-start',
-            'z-20 h-5 w-5 rounded-full bg-black/25 p-0 text-white shadow-md shadow-black/50',
+            'col-start-1 row-start-1 mb-3.5 ml-3.5 self-end justify-self-start',
+            'z-20 h-6 w-6 rounded-full bg-black/25 p-0 text-white shadow-md shadow-black/50',
             'hover:bg-black/60 hover:text-white/80'
           )}
           title="Play"
         >
-          <Play className="h-5 w-5" />
+          <Play className="h-6 w-6" />
           <IconButtonSrLabel label="Play" />
         </IconButton>
       )}
+
       <Image
         className="rounded-lg object-cover"
         src={src}
@@ -147,16 +152,19 @@ const MediaCardImage = ({ className = '', src, alt }: MediaCardImageProps) => {
         sizes="(min-width: 1280px) 20vw, (min-width: 768px) 30vw, 48vw"
         fill
       />
-      <div
-        className={cn(
-          'col-start-1 row-start-1',
-          'z-10',
-          'h-full w-full rounded-lg bg-black/50',
-          'opacity-0 motion-safe:transition-opacity',
-          '[@media(hover:hover)]:group-hover:opacity-100 [@media(hover:hover)]:peer-hover:opacity-0',
-          hoverCard && 'opacity-100'
-        )}
-      />
+
+      {isHoverable && (
+        <div
+          className={cn(
+            'col-start-1 row-start-1',
+            'z-10',
+            'h-full w-full rounded-lg bg-black/50',
+            'opacity-0 motion-safe:transition-opacity',
+            '[@media(hover:hover)]:group-hover:opacity-100 [@media(hover:hover)]:peer-hover:opacity-0',
+            hoverCard && 'opacity-100'
+          )}
+        />
+      )}
     </div>
   );
 };

@@ -2,7 +2,7 @@ import { composeStories, render, screen, userEvent, waitFor, within } from '@/te
 
 import * as MediaGridCard from './MediaGridCard.stories';
 
-const { Default, HoveredCard } = composeStories(MediaGridCard);
+const { Default } = composeStories(MediaGridCard);
 
 describe('MediaGridCard', () => {
   it('displays media thumbnail image', () => {
@@ -56,8 +56,8 @@ describe('MediaGridCard', () => {
     expect(bookmarkBtn).toBeInTheDocument();
   });
 
-  xit(`displays play button when image is hovered`, async () => {
-    render(<HoveredCard />);
+  it(`displays play button when image is hovered`, async () => {
+    render(<Default isHoverable />);
 
     const mediaCard = screen.getByTestId('media-card-image');
 
@@ -68,8 +68,8 @@ describe('MediaGridCard', () => {
     expect(screen.getByRole('button', { name: /play/i })).toBeInTheDocument();
   });
 
-  xit(`hides play button when bookmark icon button is hovered`, async () => {
-    render(<HoveredCard />);
+  it(`hides play button when bookmark icon button is hovered`, async () => {
+    render(<Default isHoverable />);
 
     // hover image to display play button
     const mediaCard = screen.getByTestId('media-card-image');
