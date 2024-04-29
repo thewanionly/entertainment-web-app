@@ -1,6 +1,6 @@
 import { cn } from '@/utils/styles';
 
-import { MediaCard } from '../MediaCard';
+import { MediaCard, MediaCardImage } from '../MediaCard';
 
 type MediaCarouselCardProps = {
   className?: string;
@@ -17,7 +17,17 @@ export const MediaCarouselCard = ({
 }: MediaCarouselCardProps) => {
   return (
     <MediaCard className={cn('relative', className)}>
-      <MediaCard.Image className="h-[230px] w-[470px]" src={imgSrc} alt={imgAlt} />
+      <MediaCardImage
+        className={cn(
+          'h-[140px] w-[240px]',
+          'md:h-[230px] md:w-[470px]',
+          'xl:h-[230px] xl:w-[470px]'
+        )}
+        src={imgSrc}
+        alt={imgAlt}
+        sizes="(min-width: 1280px) 33vw, (min-width: 768px) 61vw, 64vw"
+      />
+
       {/* <MediaCard.Details className="absolute bottom-[16px] left-[16px]" title={title} /> */}
     </MediaCard>
   );

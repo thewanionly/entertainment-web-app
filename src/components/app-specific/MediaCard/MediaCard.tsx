@@ -1,6 +1,6 @@
 import { ReactNode, useState, forwardRef } from 'react';
 
-import Image from 'next/image';
+import Image, { ImageProps } from 'next/image';
 
 import { AnimatePresence, motion } from 'framer-motion';
 
@@ -27,7 +27,7 @@ type MediaCardProps = {
   isHoverable?: boolean; // only for storybook and testing purposes
 };
 
-type MediaCardImageProps = {
+type MediaCardImageAreaProps = {
   src: string;
   alt: string;
   className?: string;
@@ -79,7 +79,25 @@ export const MediaCard = ({
   );
 };
 
-const MediaCardImage = ({ className = '', src, alt }: MediaCardImageProps) => {
+type MediaCardImageProps = ImageProps & {
+  className?: string;
+  imgClassName?: string;
+};
+
+export const MediaCardImage = ({
+  className = '',
+  imgClassName = '',
+  alt,
+  ...props
+}: MediaCardImageProps) => {
+  return (
+    <div className={cn('relative h-full w-full', className)}>
+      <Image className={cn('rounded-lg object-cover', imgClassName)} alt={alt} fill {...props} />
+    </div>
+  );
+};
+
+const MediaCardImageArea = ({ className = '', src, alt }: MediaCardImageAreaProps) => {
   const {
     hoverCard,
     hoverBookmark,
@@ -107,7 +125,7 @@ const MediaCardImage = ({ className = '', src, alt }: MediaCardImageProps) => {
       onMouseEnter={() => setShowPlayBtn(true)}
       onMouseLeave={() => setShowPlayBtn(false)}
     >
-      <MediaCardBookMarkIcon
+      <MediaCardBookMarkIconButton
         className={cn(
           'col-start-1 row-start-1 mr-2 mt-2 justify-self-end md:mr-4 md:mt-4',
           'peer z-20',
@@ -145,12 +163,11 @@ const MediaCardImage = ({ className = '', src, alt }: MediaCardImageProps) => {
         </IconButton>
       )}
 
-      <Image
-        className="rounded-lg object-cover"
+      <MediaCardImage
+        className="col-start-1 row-start-1"
         src={src}
         alt={alt}
-        sizes="(min-width: 1280px) 20vw, (min-width: 768px) 30vw, 48vw"
-        fill
+        sizes="(min-width: 1280px) 20vw, (min-width: 768px) 28vw, 44vw"
       />
 
       {isHoverable && (
@@ -204,7 +221,7 @@ const MediaCardDetails = ({
   );
 };
 
-const MediaCardBookMarkIcon = ({
+const MediaCardBookMarkIconButton = ({
   className = '',
   isActive = false,
   ...props
@@ -252,5 +269,5 @@ const MediaPlayButton = forwardRef<HTMLButtonElement, { className?: string }>(
 
 const MotionMediayPlayButton = motion(MediaPlayButton);
 
-MediaCard.Image = MediaCardImage;
+MediaCard.Image = MediaCardImageArea;
 MediaCard.Details = MediaCardDetails;

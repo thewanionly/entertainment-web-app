@@ -21,8 +21,8 @@ type Story = StoryObj<typeof MediaCarouselCard>;
 
 export const Default: Story = {
   args: {
-    imgSrc: '/images/earths-untouched/large.jpg',
-    imgAlt: '4 people with their backs turned having fun in a sunset seemingly on a mountain',
-    title: `Earth's Untouched`,
+    imgSrc: '/images/beyond-earth/trending/large.jpg',
+    imgAlt: 'A man wearing cold jacket standing in a rock with waters and cliff around',
+    title: `Beyond Earth`,
   },
 };

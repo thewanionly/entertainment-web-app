@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 
-import { Header } from '@/components/app-specific/Header';
+// import { Header } from '@/components/app-specific/Header';
 import { outfit } from '@/lib/fonts';
 import '@/styles/globals.css';
 
@@ -18,7 +18,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={outfit.variable}>
       <body>
-        <Header />
+        {/* <Header /> */}
         {children}
       </body>
     </html>
