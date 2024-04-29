@@ -1,4 +1,4 @@
-import { ReactNode, useState, forwardRef } from 'react';
+import { ReactNode, forwardRef } from 'react';
 
 import Image, { ImageProps } from 'next/image';
 
@@ -39,11 +39,6 @@ type MediaCardDetailsProps = {
   year: string;
   category: MediaCategory;
   rating: string;
-};
-
-type MediaCardBookMarkIconProps = {
-  className?: string;
-  isActive?: boolean;
 };
 
 const MEDIA_CATEGORY_MAP = {
@@ -100,11 +95,10 @@ export const MediaCardImage = ({
 const MediaCardImageArea = ({ className = '', src, alt }: MediaCardImageAreaProps) => {
   const {
     hoverCard,
-    hoverBookmark,
-    isBookmarked,
     isHoverable: initialIsHoverable,
+    showPlayBtn,
+    setShowPlayBtn,
   } = useMediaCard();
-  const [showPlayBtn, setShowPlayBtn] = useState(hoverCard);
 
   let isHoverable = useMediaQuery('(hover: hover)');
 
@@ -128,12 +122,8 @@ const MediaCardImageArea = ({ className = '', src, alt }: MediaCardImageAreaProp
       <MediaCardBookMarkIconButton
         className={cn(
           'col-start-1 row-start-1 mr-2 mt-2 justify-self-end md:mr-4 md:mt-4',
-          'peer z-20',
-          hoverBookmark && bookmarkHoverClassName.default
+          'peer z-20'
         )}
-        isActive={isBookmarked}
-        onMouseEnter={() => setShowPlayBtn(false)}
-        onMouseLeave={() => setShowPlayBtn(true)}
       />
 
       {/* Play button for non-touch device where hover is possible */}
@@ -221,24 +211,32 @@ const MediaCardDetails = ({
   );
 };
 
-const MediaCardBookMarkIconButton = ({
+type MediaCardBookMarkIconProps = {
+  className?: string;
+};
+
+export const MediaCardBookMarkIconButton = ({
   className = '',
-  isActive = false,
   ...props
 }: MediaCardBookMarkIconProps & ButtonProps) => {
-  const label = isActive ? 'Remove from bookmarks' : 'Add to bookmarks';
-  const BookMarkIcon = isActive ? BookMarkFull : BookMarkEmpty;
+  const { hoverBookmark, isBookmarked, setShowPlayBtn } = useMediaCard();
+
+  const label = isBookmarked ? 'Remove from bookmarks' : 'Add to bookmarks';
+  const BookMarkIcon = isBookmarked ? BookMarkFull : BookMarkEmpty;
 
   return (
     <IconButton
       id="bookmark-icon-btn"
       className={cn(
         'h-8 w-8 rounded-full bg-dark-blue/50 p-0 text-white hover:bg-dark-blue/50',
+        hoverBookmark && bookmarkHoverClassName.default,
         bookmarkHoverClassName.hover,
         'motion-safe:transition-colors',
         className
       )}
       title={label}
+      onMouseEnter={() => setShowPlayBtn(false)}
+      onMouseLeave={() => setShowPlayBtn(true)}
       {...props}
     >
       <BookMarkIcon className="h-[14px] w-[12px]" />
