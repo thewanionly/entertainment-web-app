@@ -6,12 +6,13 @@ import {
   MediaCardImageArea,
   MediaCardPlayButton,
 } from '../MediaCard';
+import { Media } from '../MediaCard.types';
 
-type MediaCarouselCardProps = {
+type MediaCarouselCardProps = Omit<Media, 'isTrending'> & {
   className?: string;
-  imgSrc: string;
-  imgAlt: string;
-  title: string;
+  hoverBookmark?: boolean; // only for storybook
+  hoverCard?: boolean; // only for storybook
+  isHoverable?: boolean; // only for storybook and testing purposes
 };
 
 export const MediaCarouselCard = ({
@@ -19,9 +20,18 @@ export const MediaCarouselCard = ({
   imgSrc,
   imgAlt,
   // title,
+  isBookmarked,
+  hoverBookmark = false,
+  hoverCard = false,
+  isHoverable,
 }: MediaCarouselCardProps) => {
   return (
-    <MediaCard>
+    <MediaCard
+      isBookmarked={isBookmarked}
+      hoverBookmark={hoverBookmark}
+      hoverCard={hoverCard}
+      isHoverable={isHoverable}
+    >
       <MediaCardImageArea
         className={cn(
           'relative grid',
