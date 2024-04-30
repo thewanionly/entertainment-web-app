@@ -53,7 +53,7 @@ export const MediaCarouselCard = ({
           )}
         />
 
-        <MediaCardPlayButton />
+        <MediaCardPlayButton touchClassName="mb-0 mt-3 ml-4 self-start md:ml-6 md:mt-5" />
 
         {/* <MediaCard.Details className="absolute bottom-[16px] left-[16px]" title={title} /> */}
       </MediaCardImageArea>
