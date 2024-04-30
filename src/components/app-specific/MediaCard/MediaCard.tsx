@@ -147,8 +147,6 @@ type MediaCardImageForGrid = {
 };
 
 const MediaCardImageForGrid = ({ className, src, alt }: MediaCardImageForGrid) => {
-  const { isHoverable, showPlayBtn } = useMediaCard();
-
   return (
     <MediaCardImageArea
       className={className}
@@ -164,33 +162,7 @@ const MediaCardImageForGrid = ({ className, src, alt }: MediaCardImageForGrid) =
           'peer z-20'
         )}
       />
-
-      {/* Play button for non-touch device where hover is possible */}
-      <AnimatePresence>
-        {showPlayBtn && isHoverable && (
-          <MotionMediayPlayButton
-            className={cn('col-start-1 row-start-1 place-self-center', 'z-20')}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-          />
-        )}
-      </AnimatePresence>
-
-      {/* Play button for touch device where hover is NOT possible */}
-      {!isHoverable && (
-        <IconButton
-          className={cn(
-            'col-start-1 row-start-1 mb-3.5 ml-3.5 self-end justify-self-start',
-            'z-20 h-6 w-6 rounded-full bg-black/25 p-0 text-white shadow-md shadow-black/50',
-            'hover:bg-black/60 hover:text-white/80'
-          )}
-          title="Play"
-        >
-          <Play className="h-6 w-6" />
-          <IconButtonSrLabel label="Play" />
-        </IconButton>
-      )}
+      <MediaCardPlayButton />
     </MediaCardImageArea>
   );
 };
@@ -232,9 +204,11 @@ export const MediaCardBookMarkIconButton = ({
 };
 
 /** Play button */
-
-const MediaPlayButton = forwardRef<HTMLButtonElement, { className?: string }>(
-  function MediaPlayButton({ className = '' }, ref) {
+const MediaCardPlayButtonHovered = motion(
+  forwardRef<HTMLButtonElement, { className?: string }>(function MediaPlayButtonHovered(
+    { className = '' },
+    ref
+  ) {
     return (
       <Button
         variant="secondary"
@@ -250,10 +224,45 @@ const MediaPlayButton = forwardRef<HTMLButtonElement, { className?: string }>(
         <span className="mr-[12px] md:mr-[15px]">Play</span>
       </Button>
     );
-  }
+  })
 );
 
-const MotionMediayPlayButton = motion(MediaPlayButton);
+const MediaCardPlayButtonTouch = () => (
+  <IconButton
+    className={cn(
+      'col-start-1 row-start-1 mb-3.5 ml-3.5 self-end justify-self-start',
+      'z-20 h-6 w-6 rounded-full bg-black/25 p-0 text-white shadow-md shadow-black/50',
+      'hover:bg-black/60 hover:text-white/80'
+    )}
+    title="Play"
+  >
+    <Play className="h-6 w-6" />
+    <IconButtonSrLabel label="Play" />
+  </IconButton>
+);
+
+export const MediaCardPlayButton = () => {
+  const { isHoverable, showPlayBtn } = useMediaCard();
+
+  return (
+    <>
+      {/* Play button for non-touch device where hover is possible */}
+      <AnimatePresence>
+        {showPlayBtn && isHoverable && (
+          <MediaCardPlayButtonHovered
+            className={cn('col-start-1 row-start-1 place-self-center', 'z-20')}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+          />
+        )}
+      </AnimatePresence>
+
+      {/* Play button for touch device where hover is NOT possible */}
+      {!isHoverable && <MediaCardPlayButtonTouch />}
+    </>
+  );
+};
 
 /** Card details */
 const DotSeparator = () => (

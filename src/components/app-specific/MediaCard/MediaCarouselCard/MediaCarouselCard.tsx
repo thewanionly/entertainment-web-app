@@ -1,6 +1,11 @@
 import { cn } from '@/utils/styles';
 
-import { MediaCard, MediaCardBookMarkIconButton, MediaCardImageArea } from '../MediaCard';
+import {
+  MediaCard,
+  MediaCardBookMarkIconButton,
+  MediaCardImageArea,
+  MediaCardPlayButton,
+} from '../MediaCard';
 
 type MediaCarouselCardProps = {
   className?: string;
@@ -37,6 +42,8 @@ export const MediaCarouselCard = ({
             'peer z-20'
           )}
         />
+
+        <MediaCardPlayButton />
 
         {/* <MediaCard.Details className="absolute bottom-[16px] left-[16px]" title={title} /> */}
       </MediaCardImageArea>
