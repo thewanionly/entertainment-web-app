@@ -1,5 +1,7 @@
 import { ReactNode, createContext, useContext, useState } from 'react';
 
+import { useMediaQuery } from '@/hooks/useMediaQuery';
+
 type MediaCardContextType = {
   hoverCard?: boolean;
   hoverBookmark?: boolean;
@@ -18,9 +20,14 @@ type MediaCardContextProviderProps = {
 
 export const MediaCardContextProvider = ({ value, children }: MediaCardContextProviderProps) => {
   const [showPlayBtn, setShowPlayBtn] = useState(value.hoverCard ?? false);
+  let isHoverable = useMediaQuery('(hover: hover)');
+
+  if (value.isHoverable !== undefined) {
+    isHoverable = value.isHoverable;
+  }
 
   return (
-    <MediaCardContext.Provider value={{ ...value, showPlayBtn, setShowPlayBtn }}>
+    <MediaCardContext.Provider value={{ ...value, isHoverable, showPlayBtn, setShowPlayBtn }}>
       {children}
     </MediaCardContext.Provider>
   );

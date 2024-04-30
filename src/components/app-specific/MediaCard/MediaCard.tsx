@@ -12,7 +12,6 @@ import {
   Play,
 } from '@/components/app-specific/Icon';
 import { Button, ButtonProps, IconButton, IconButtonSrLabel } from '@/components/generic/Button';
-import { useMediaQuery } from '@/hooks/useMediaQuery';
 import { cn } from '@/utils/styles';
 
 import { MediaCardContextProvider, useMediaCard } from './MediaCard.context';
@@ -25,12 +24,6 @@ type MediaCardProps = {
   hoverBookmark?: boolean; // only for storybook
   hoverCard?: boolean; // only for storybook
   isHoverable?: boolean; // only for storybook and testing purposes
-};
-
-type MediaCardImageAreaProps = {
-  src: string;
-  alt: string;
-  className?: string;
 };
 
 type MediaCardDetailsProps = {
@@ -74,12 +67,13 @@ export const MediaCard = ({
   );
 };
 
+/** Image */
 type MediaCardImageProps = ImageProps & {
   className?: string;
   imgClassName?: string;
 };
 
-export const MediaCardImage = ({
+const MediaCardImage = ({
   className = '',
   imgClassName = '',
   alt,
@@ -92,19 +86,39 @@ export const MediaCardImage = ({
   );
 };
 
-const MediaCardImageArea = ({ className = '', src, alt }: MediaCardImageAreaProps) => {
-  const {
-    hoverCard,
-    isHoverable: initialIsHoverable,
-    showPlayBtn,
-    setShowPlayBtn,
-  } = useMediaCard();
+/** Image overlay */
+const MediaCardImageOverlay = () => {
+  const { hoverCard, isHoverable } = useMediaCard();
 
-  let isHoverable = useMediaQuery('(hover: hover)');
+  return (
+    isHoverable && (
+      <div
+        className={cn(
+          'col-start-1 row-start-1',
+          'z-10',
+          'h-full w-full rounded-lg bg-black/50',
+          'opacity-0 motion-safe:transition-opacity',
+          '[@media(hover:hover)]:group-hover:opacity-100 [@media(hover:hover)]:peer-hover:opacity-0',
+          hoverCard && 'opacity-100'
+        )}
+      />
+    )
+  );
+};
 
-  if (initialIsHoverable !== undefined) {
-    isHoverable = initialIsHoverable;
-  }
+/** Image area */
+type MediaCardImageAreaProps = {
+  className?: string;
+  children: ReactNode;
+  imgProps: ImageProps;
+};
+
+export const MediaCardImageArea = ({
+  className = '',
+  children,
+  imgProps,
+}: MediaCardImageAreaProps) => {
+  const { setShowPlayBtn } = useMediaCard();
 
   return (
     <div
@@ -118,6 +132,31 @@ const MediaCardImageArea = ({ className = '', src, alt }: MediaCardImageAreaProp
       )}
       onMouseEnter={() => setShowPlayBtn(true)}
       onMouseLeave={() => setShowPlayBtn(false)}
+    >
+      {children}
+      <MediaCardImage className="col-start-1 row-start-1" {...imgProps} />
+      <MediaCardImageOverlay />
+    </div>
+  );
+};
+
+type MediaCardImageForGrid = {
+  src: string;
+  alt: string;
+  className?: string;
+};
+
+const MediaCardImageForGrid = ({ className, src, alt }: MediaCardImageForGrid) => {
+  const { isHoverable, showPlayBtn } = useMediaCard();
+
+  return (
+    <MediaCardImageArea
+      className={className}
+      imgProps={{
+        src: src,
+        alt: alt,
+        sizes: '(min-width: 1280px) 20vw, (min-width: 768px) 28vw, 44vw',
+      }}
     >
       <MediaCardBookMarkIconButton
         className={cn(
@@ -152,64 +191,11 @@ const MediaCardImageArea = ({ className = '', src, alt }: MediaCardImageAreaProp
           <IconButtonSrLabel label="Play" />
         </IconButton>
       )}
-
-      <MediaCardImage
-        className="col-start-1 row-start-1"
-        src={src}
-        alt={alt}
-        sizes="(min-width: 1280px) 20vw, (min-width: 768px) 28vw, 44vw"
-      />
-
-      {isHoverable && (
-        <div
-          className={cn(
-            'col-start-1 row-start-1',
-            'z-10',
-            'h-full w-full rounded-lg bg-black/50',
-            'opacity-0 motion-safe:transition-opacity',
-            '[@media(hover:hover)]:group-hover:opacity-100 [@media(hover:hover)]:peer-hover:opacity-0',
-            hoverCard && 'opacity-100'
-          )}
-        />
-      )}
-    </div>
+    </MediaCardImageArea>
   );
 };
 
-const DotSeparator = () => (
-  <span className={cn('h-0.5 w-0.5 rounded-full bg-white/50', 'md:h-[3px] md:w-[3px]')} />
-);
-
-const MediaCardDetails = ({
-  className = '',
-  title,
-  year,
-  category,
-  rating,
-}: MediaCardDetailsProps) => {
-  const { icon: CategoryIcon, label: categoryName } = MEDIA_CATEGORY_MAP[category];
-
-  return (
-    <div className={cn('flex flex-col gap-1 md:gap-[5px]', className)}>
-      <div
-        className={cn(
-          'flex items-center gap-[7.5px] text-[11px] font-light text-white/75',
-          'md:gap-2 md:text-body-s'
-        )}
-      >
-        <span>{year}</span>
-        <DotSeparator />
-        <span className="flex items-center gap-1 capitalize md:gap-1.5">
-          <CategoryIcon className="w-2.5 md:w-3" title={categoryName} />
-          {categoryName}
-        </span>
-        <DotSeparator />
-        <span>{rating}</span>
-      </div>
-      <p className={cn('text-[14px] font-medium text-white', 'md:text-heading-xs')}>{title}</p>
-    </div>
-  );
-};
+/** Bookmark Icon Button */
 
 type MediaCardBookMarkIconProps = {
   className?: string;
@@ -245,6 +231,8 @@ export const MediaCardBookMarkIconButton = ({
   );
 };
 
+/** Play button */
+
 const MediaPlayButton = forwardRef<HTMLButtonElement, { className?: string }>(
   function MediaPlayButton({ className = '' }, ref) {
     return (
@@ -267,5 +255,41 @@ const MediaPlayButton = forwardRef<HTMLButtonElement, { className?: string }>(
 
 const MotionMediayPlayButton = motion(MediaPlayButton);
 
-MediaCard.Image = MediaCardImageArea;
+/** Card details */
+const DotSeparator = () => (
+  <span className={cn('h-0.5 w-0.5 rounded-full bg-white/50', 'md:h-[3px] md:w-[3px]')} />
+);
+
+const MediaCardDetails = ({
+  className = '',
+  title,
+  year,
+  category,
+  rating,
+}: MediaCardDetailsProps) => {
+  const { icon: CategoryIcon, label: categoryName } = MEDIA_CATEGORY_MAP[category];
+
+  return (
+    <div className={cn('flex flex-col gap-1 md:gap-[5px]', className)}>
+      <div
+        className={cn(
+          'flex items-center gap-[7.5px] text-[11px] font-light text-white/75',
+          'md:gap-2 md:text-body-s'
+        )}
+      >
+        <span>{year}</span>
+        <DotSeparator />
+        <span className="flex items-center gap-1 capitalize md:gap-1.5">
+          <CategoryIcon className="w-2.5 md:w-3" title={categoryName} />
+          {categoryName}
+        </span>
+        <DotSeparator />
+        <span>{rating}</span>
+      </div>
+      <p className={cn('text-[14px] font-medium text-white', 'md:text-heading-xs')}>{title}</p>
+    </div>
+  );
+};
+
+MediaCard.Image = MediaCardImageForGrid;
 MediaCard.Details = MediaCardDetails;
