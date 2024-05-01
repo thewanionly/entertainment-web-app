@@ -207,14 +207,10 @@ const MediaCardPlayButtonTouch = ({ className }: { className?: string }) => (
 );
 
 type MediaCardPlayButtonProps = {
-  hoveredClassName?: string;
-  touchClassName?: string;
+  className?: string;
 };
 
-export const MediaCardPlayButton = ({
-  hoveredClassName,
-  touchClassName,
-}: MediaCardPlayButtonProps) => {
+export const MediaCardPlayButton = ({ className }: MediaCardPlayButtonProps) => {
   const { isHoverable, showPlayBtn } = useMediaCard();
 
   return (
@@ -223,7 +219,11 @@ export const MediaCardPlayButton = ({
       <AnimatePresence>
         {showPlayBtn && isHoverable && (
           <MediaCardPlayButtonHovered
-            className={cn('z-20 col-start-1 row-start-1 place-self-center', hoveredClassName)}
+            className={cn(
+              'play-button-hovered',
+              'z-20 col-start-1 row-start-1 place-self-center',
+              className
+            )}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -232,7 +232,7 @@ export const MediaCardPlayButton = ({
       </AnimatePresence>
 
       {/* Play button for touch device where hover is NOT possible */}
-      {!isHoverable && <MediaCardPlayButtonTouch className={touchClassName} />}
+      {!isHoverable && <MediaCardPlayButtonTouch className={cn('play-button-touch', className)} />}
     </>
   );
 };
