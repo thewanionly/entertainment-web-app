@@ -66,7 +66,9 @@ export const MediaCarouselCard = ({
             '[&_.category-container]:gap-1.5',
             '[&_.category-icon]:w-3',
             '[&_.title]:text-body-m [&_.title]:font-medium [&_.title]:md:text-heading-s',
-            'z-30 col-start-1 row-start-1 mb-4 ml-4 self-end justify-self-start md:mb-6 md:ml-6 md:gap-[3px]'
+            'z-20 col-start-1 row-start-1 self-end justify-self-start md:gap-[3px]',
+            'm-0 w-full rounded-b-lg p-4 md:p-6',
+            'bg-gradient-to-b from-black/0 to-black/75'
           )}
           title={title}
           year={year}

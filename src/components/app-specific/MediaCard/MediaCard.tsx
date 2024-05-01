@@ -266,7 +266,7 @@ export const MediaCardDetails = ({
       <div
         className={cn(
           'upper-details-container',
-          'flex items-center gap-[7.5px] text-[11px] font-light text-white/75',
+          'flex items-center gap-[7.5px] text-[11px] font-light leading-normal text-white/75',
           'md:gap-2 md:text-body-s'
         )}
       >
@@ -279,7 +279,12 @@ export const MediaCardDetails = ({
         <DotSeparator />
         <span>{rating}</span>
       </div>
-      <p className={cn('title', 'text-[14px] font-medium text-white md:text-heading-xs')}>
+      <p
+        className={cn(
+          'title',
+          'text-[14px] font-medium leading-normal text-white md:text-heading-xs'
+        )}
+      >
         {title}
       </p>
     </div>
