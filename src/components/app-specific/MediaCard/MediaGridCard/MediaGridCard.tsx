@@ -1,6 +1,12 @@
 import { cn } from '@/utils/styles';
 
-import { MediaCard } from '../MediaCard';
+import {
+  MediaCard,
+  MediaCardBookMarkIconButton,
+  MediaCardDetails,
+  MediaCardImageArea,
+  MediaCardPlayButton,
+} from '../MediaCard';
 import { Media } from '../MediaCard.types';
 
 type MediaGridCardProps = Omit<Media, 'isTrending'> & {
@@ -31,8 +37,22 @@ export const MediaGridCard = ({
       hoverCard={hoverCard}
       isHoverable={isHoverable}
     >
-      <MediaCard.Image src={imgSrc} alt={imgAlt} />
-      <MediaCard.Details title={title} year={year} category={category} rating={rating} />
+      <MediaCardImageArea
+        imgProps={{
+          src: imgSrc,
+          alt: imgAlt,
+          sizes: '(min-width: 1280px) 20vw, (min-width: 768px) 28vw, 44vw',
+        }}
+      >
+        <MediaCardBookMarkIconButton
+          className={cn(
+            'col-start-1 row-start-1 mr-2 mt-2 justify-self-end md:mr-4 md:mt-4',
+            'peer z-20'
+          )}
+        />
+        <MediaCardPlayButton />
+      </MediaCardImageArea>
+      <MediaCardDetails title={title} year={year} category={category} rating={rating} />
     </MediaCard>
   );
 };

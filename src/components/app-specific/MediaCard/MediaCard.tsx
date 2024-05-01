@@ -140,35 +140,7 @@ export const MediaCardImageArea = ({
   );
 };
 
-type MediaCardImageForGrid = {
-  src: string;
-  alt: string;
-  className?: string;
-};
-
-const MediaCardImageForGrid = ({ className, src, alt }: MediaCardImageForGrid) => {
-  return (
-    <MediaCardImageArea
-      className={className}
-      imgProps={{
-        src: src,
-        alt: alt,
-        sizes: '(min-width: 1280px) 20vw, (min-width: 768px) 28vw, 44vw',
-      }}
-    >
-      <MediaCardBookMarkIconButton
-        className={cn(
-          'col-start-1 row-start-1 mr-2 mt-2 justify-self-end md:mr-4 md:mt-4',
-          'peer z-20'
-        )}
-      />
-      <MediaCardPlayButton />
-    </MediaCardImageArea>
-  );
-};
-
 /** Bookmark Icon Button */
-
 type MediaCardBookMarkIconProps = {
   className?: string;
 };
@@ -278,7 +250,7 @@ const DotSeparator = () => (
   <span className={cn('h-0.5 w-0.5 rounded-full bg-white/50', 'md:h-[3px] md:w-[3px]')} />
 );
 
-const MediaCardDetails = ({
+export const MediaCardDetails = ({
   className = '',
   title,
   year,
@@ -308,6 +280,3 @@ const MediaCardDetails = ({
     </div>
   );
 };
-
-MediaCard.Image = MediaCardImageForGrid;
-MediaCard.Details = MediaCardDetails;
