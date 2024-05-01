@@ -26,14 +26,6 @@ type MediaCardProps = {
   isHoverable?: boolean; // only for storybook and testing purposes
 };
 
-type MediaCardDetailsProps = {
-  className?: string;
-  title: ReactNode;
-  year: string;
-  category: MediaCategory;
-  rating: string;
-};
-
 const MEDIA_CATEGORY_MAP = {
   movie: {
     icon: CategoryMovie,
@@ -247,8 +239,18 @@ export const MediaCardPlayButton = ({
 
 /** Card details */
 const DotSeparator = () => (
-  <span className={cn('h-0.5 w-0.5 rounded-full bg-white/50', 'md:h-[3px] md:w-[3px]')} />
+  <span
+    className={cn('dot-separator', 'h-0.5 w-0.5 rounded-full bg-white/50', 'md:h-[3px] md:w-[3px]')}
+  />
 );
+
+type MediaCardDetailsProps = {
+  className?: string;
+  title: string;
+  year: string;
+  category: MediaCategory;
+  rating: string;
+};
 
 export const MediaCardDetails = ({
   className = '',
@@ -263,20 +265,23 @@ export const MediaCardDetails = ({
     <div className={cn('flex flex-col gap-1 md:gap-[5px]', className)}>
       <div
         className={cn(
+          'upper-details-container',
           'flex items-center gap-[7.5px] text-[11px] font-light text-white/75',
           'md:gap-2 md:text-body-s'
         )}
       >
         <span>{year}</span>
         <DotSeparator />
-        <span className="flex items-center gap-1 capitalize md:gap-1.5">
-          <CategoryIcon className="w-2.5 md:w-3" title={categoryName} />
+        <span className={cn('category-container', 'flex items-center gap-1 capitalize md:gap-1.5')}>
+          <CategoryIcon className={cn('category-icon', 'w-2.5 md:w-3')} title={categoryName} />
           {categoryName}
         </span>
         <DotSeparator />
         <span>{rating}</span>
       </div>
-      <p className={cn('text-[14px] font-medium text-white', 'md:text-heading-xs')}>{title}</p>
+      <p className={cn('title', 'text-[14px] font-medium text-white md:text-heading-xs')}>
+        {title}
+      </p>
     </div>
   );
 };
