@@ -61,7 +61,8 @@ export const MediaCarouselCard = ({
           className={cn(
             '[&.play-button-touch]:mb-[22px] [&.play-button-touch]:mr-3 [&.play-button-touch]:justify-self-end',
             '[&.play-button-touch]:md:mb-[30px] [&.play-button-touch]:md:mr-7',
-            '[&.play-button-touch]:z-30'
+            '[&.play-button-touch]:z-30',
+            '[&.play-button-hovered]:-mt-6 [&.play-button-hovered]:md:mt-0'
           )}
         />
 
