@@ -50,7 +50,12 @@ export const MediaGridCard = ({
             'peer z-20'
           )}
         />
-        <MediaCardPlayButton />
+        <MediaCardPlayButton
+          className={cn(
+            '[&.play-button-touch]:mb-3 [&.play-button-touch]:mr-3 [&.play-button-touch]:justify-self-end',
+            '[&.play-button-touch]:md:mb-5 [&.play-button-touch]:md:mr-5'
+          )}
+        />
       </MediaCardImageArea>
       <MediaCardDetails title={title} year={year} category={category} rating={rating} />
     </MediaCard>

@@ -59,8 +59,9 @@ export const MediaCarouselCard = ({
 
         <MediaCardPlayButton
           className={cn(
-            '[&.play-button-touch]:mb-0 [&.play-button-touch]:ml-4 [&.play-button-touch]:mt-3 [&.play-button-touch]:self-start',
-            '[&.play-button-touch]:mb-0 [&.play-button-touch]:md:ml-6 [&.play-button-touch]:md:mt-5'
+            '[&.play-button-touch]:mb-[22px] [&.play-button-touch]:mr-3 [&.play-button-touch]:justify-self-end',
+            '[&.play-button-touch]:md:mb-[30px] [&.play-button-touch]:md:mr-7',
+            '[&.play-button-touch]:z-30'
           )}
         />
 
