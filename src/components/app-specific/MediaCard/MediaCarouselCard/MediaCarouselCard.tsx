@@ -38,7 +38,7 @@ export const MediaCarouselCard = ({
     >
       <MediaCardImageArea
         className={cn(
-          'relative grid',
+          'grid grid-cols-1',
           'h-[140px] w-[240px]',
           'md:h-[230px] md:w-[470px]',
           'xl:h-[230px] xl:w-[470px]',
@@ -60,7 +60,7 @@ export const MediaCarouselCard = ({
         <MediaCardPlayButton
           className={cn(
             '[&.play-button-touch]:mb-[22px] [&.play-button-touch]:mr-3 [&.play-button-touch]:justify-self-end',
-            '[&.play-button-touch]:md:mb-[30px] [&.play-button-touch]:md:mr-7',
+            '[&.play-button-touch]:md:mb-[38px] [&.play-button-touch]:md:mr-7',
             '[&.play-button-touch]:z-30',
             '[&.play-button-hovered]:-mt-6 [&.play-button-hovered]:md:mt-0'
           )}
@@ -69,10 +69,12 @@ export const MediaCarouselCard = ({
         <MediaCardDetails
           className={cn(
             '[&_.upper-details-container]:gap-2 [&_.upper-details-container]:text-[12px] [&_.upper-details-container]:md:text-body-m',
+            '[&_.upper-details-container]:w-[calc(100%_-_1.75rem)] [&_.upper-details-container]:md:w-[calc(100%_-_2rem)]',
             '[&_.dot-separator]:h-[3px] [&_.dot-separator]:w-[3px]',
             '[&_.category-container]:gap-1.5',
             '[&_.category-icon]:w-3',
             '[&_.title]:text-body-m [&_.title]:font-medium [&_.title]:md:text-heading-s',
+            '[&_.title]:w-[calc(100%_-_1.75rem)] [&_.title]:md:w-[calc(100%_-_2rem)]',
             'z-20 col-start-1 row-start-1 self-end justify-self-start md:gap-[3px]',
             'm-0 w-full rounded-b-lg p-4 md:p-6',
             'bg-gradient-to-b from-black/0 to-black/75'

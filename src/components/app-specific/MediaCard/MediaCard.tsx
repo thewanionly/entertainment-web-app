@@ -277,12 +277,12 @@ export const MediaCardDetails = ({
           {categoryName}
         </span>
         <DotSeparator />
-        <span>{rating}</span>
+        <span className="truncate">{rating}</span>
       </div>
       <p
         className={cn(
           'title',
-          'text-[14px] font-medium leading-[normal] text-white md:text-heading-xs'
+          'truncate text-[14px] font-medium leading-[normal] text-white md:text-heading-xs'
         )}
       >
         {title}

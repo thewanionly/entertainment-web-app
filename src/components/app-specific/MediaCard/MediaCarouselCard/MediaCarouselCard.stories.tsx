@@ -36,6 +36,14 @@ export const Default: Story = {
   },
 };
 
+export const LongTexts = {
+  args: {
+    ...mockMediaData,
+    title: 'Beyond Earth lorem ipsum dolor sit amet lorem ipsum dolor sit amet',
+    rating: 'PGloremipsumdolorsitametloremipsumdolorsitamet',
+  },
+} satisfies Story;
+
 export const NonTouchDeviceHovered = {
   args: {
     ...mockMediaData,
@@ -51,4 +59,14 @@ export const TouchDeviceHovered = {
     isHoverable: false,
   },
   name: 'Play Button - Touch device (persistent)',
+} satisfies Story;
+
+export const TouchDeviceHoveredLongTexts = {
+  args: {
+    ...mockMediaData,
+    title: 'Beyond Earth lorem ipsum dolor sit amet lorem ipsum dolor sit amet',
+    rating: 'PGloremipsumdolorsitametloremipsumdolorsitamet',
+    isHoverable: false,
+  },
+  name: 'Play Button - Touch device (persistent) - Long texts',
 } satisfies Story;
