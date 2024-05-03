@@ -31,13 +31,14 @@ export const MediaGridCard = ({
 }: MediaGridCardProps) => {
   return (
     <MediaCard
-      className={cn('inline-flex flex-col gap-2', className)}
+      className={cn('inline-flex flex-col gap-2', 'w-[164px] md:w-[220px] xl:w-[280px]', className)}
       isBookmarked={isBookmarked}
       hoverBookmark={hoverBookmark}
       hoverCard={hoverCard}
       isHoverable={isHoverable}
     >
       <MediaCardImageArea
+        className={cn('h-[110px] md:h-[140px] xl:h-[174px]')}
         imgProps={{
           src: imgSrc,
           alt: imgAlt,

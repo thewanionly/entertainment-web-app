@@ -51,7 +51,7 @@ export const MediaCard = ({
   isHoverable,
 }: MediaCardProps) => {
   return (
-    <div data-testid="media-card" className={cn('relative', className)}>
+    <div data-testid="media-card" className={cn('relative h-full w-full', className)}>
       <MediaCardContextProvider value={{ hoverCard, isBookmarked, hoverBookmark, isHoverable }}>
         {children}
       </MediaCardContextProvider>
@@ -115,13 +115,7 @@ export const MediaCardImageArea = ({
   return (
     <div
       data-testid="media-card-image"
-      className={cn(
-        'rounded-lg',
-        'group relative grid h-[110px] w-[164px]',
-        'md:h-[140px] md:w-[220px]',
-        'xl:h-[174px] xl:w-[280px]',
-        className
-      )}
+      className={cn('rounded-lg', 'group relative grid h-full w-full', className)}
       onMouseEnter={() => setShowPlayBtn(true)}
       onMouseLeave={() => setShowPlayBtn(false)}
     >

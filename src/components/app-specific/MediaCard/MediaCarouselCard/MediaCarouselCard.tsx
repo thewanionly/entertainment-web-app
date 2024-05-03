@@ -31,19 +31,19 @@ export const MediaCarouselCard = ({
 }: MediaCarouselCardProps) => {
   return (
     <MediaCard
+      className={cn(
+        'h-[140px] w-[240px]',
+        'md:h-[230px] md:w-[470px]',
+        'xl:h-[230px] xl:w-[470px]',
+        className
+      )}
       isBookmarked={isBookmarked}
       hoverBookmark={hoverBookmark}
       hoverCard={hoverCard}
       isHoverable={isHoverable}
     >
       <MediaCardImageArea
-        className={cn(
-          'grid grid-cols-1',
-          'h-[140px] w-[240px]',
-          'md:h-[230px] md:w-[470px]',
-          'xl:h-[230px] xl:w-[470px]',
-          className
-        )}
+        className={cn('grid grid-cols-1')}
         imgProps={{
           src: imgSrc,
           alt: imgAlt,
