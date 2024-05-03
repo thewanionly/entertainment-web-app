@@ -44,6 +44,31 @@ export const LongTexts = {
   },
 } satisfies Story;
 
+export const BookmarkHovered = {
+  args: {
+    ...mockMediaData,
+    hoverBookmark: true,
+  },
+  name: 'Bookmark - Idle Hovered',
+} satisfies Story;
+
+export const BookmarkActive = {
+  args: {
+    ...mockMediaData,
+    isBookmarked: true,
+  },
+  name: 'Bookmark - Active',
+} satisfies Story;
+
+export const BookmarkActiveHovered = {
+  args: {
+    ...mockMediaData,
+    isBookmarked: true,
+    hoverBookmark: true,
+  },
+  name: 'Bookmark - Active Hovered',
+} satisfies Story;
+
 export const NonTouchDeviceHovered = {
   args: {
     ...mockMediaData,
