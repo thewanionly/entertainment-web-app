@@ -2,7 +2,7 @@ import { composeStories, render, screen, userEvent, waitFor, within } from '@/te
 
 import * as MediaGridCard from './MediaGridCard.stories';
 
-const { Default } = composeStories(MediaGridCard);
+const { Default, TouchDevice } = composeStories(MediaGridCard);
 
 describe('MediaGridCard', () => {
   it('displays media thumbnail image', () => {
@@ -83,5 +83,13 @@ describe('MediaGridCard', () => {
       // need to wrap with waitFor due to AnimatePresence
       expect(screen.queryByRole('button', { name: /play/i })).not.toBeInTheDocument()
     );
+  });
+
+  it('shows a persistent play button on touch devices', () => {
+    render(<TouchDevice />);
+
+    const playBtn = screen.getByRole('button', { name: /play/i });
+
+    expect(playBtn).toBeInTheDocument();
   });
 });

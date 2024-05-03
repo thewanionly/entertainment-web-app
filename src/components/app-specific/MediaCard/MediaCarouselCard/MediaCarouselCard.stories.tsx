@@ -78,7 +78,7 @@ export const NonTouchDeviceHovered = {
   name: 'Play Button - Non-touch device (show when hovered)',
 } satisfies Story;
 
-export const TouchDeviceHovered = {
+export const TouchDevice = {
   args: {
     ...mockMediaData,
     isHoverable: false,
@@ -86,7 +86,7 @@ export const TouchDeviceHovered = {
   name: 'Play Button - Touch device (persistent)',
 } satisfies Story;
 
-export const TouchDeviceHoveredLongTexts = {
+export const TouchDeviceLongTexts = {
   args: {
     ...mockMediaData,
     title: 'Beyond Earth lorem ipsum dolor sit amet lorem ipsum dolor sit amet',
