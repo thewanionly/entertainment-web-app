@@ -127,14 +127,14 @@ export const MediaCardImageArea = ({
 };
 
 /** Bookmark Icon Button */
-type MediaCardBookMarkIconProps = {
+type MediaCardBookmarkButtonProps = {
   className?: string;
 };
 
-export const MediaCardBookMarkIconButton = ({
+export const MediaCardBookmarkButton = ({
   className = '',
   ...props
-}: MediaCardBookMarkIconProps & ButtonProps) => {
+}: MediaCardBookmarkButtonProps & ButtonProps) => {
   const { hoverBookmark, isBookmarked, setShowPlayBtn } = useMediaCard();
 
   const label = isBookmarked ? 'Remove from bookmarks' : 'Add to bookmarks';
@@ -144,6 +144,7 @@ export const MediaCardBookMarkIconButton = ({
     <IconButton
       id="bookmark-icon-btn"
       className={cn(
+        'bookmark-button',
         'h-8 w-8 rounded-full bg-dark-blue/50 p-0 text-white hover:bg-dark-blue/50',
         hoverBookmark && bookmarkHoverClassName.default,
         bookmarkHoverClassName.hover,

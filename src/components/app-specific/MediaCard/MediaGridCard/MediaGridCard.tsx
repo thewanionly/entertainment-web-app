@@ -2,7 +2,7 @@ import { cn } from '@/utils/styles';
 
 import {
   MediaCard,
-  MediaCardBookMarkIconButton,
+  MediaCardBookmarkButton,
   MediaCardDetails,
   MediaCardImageArea,
   MediaCardPlayButton,
@@ -45,7 +45,7 @@ export const MediaGridCard = ({
           sizes: '(min-width: 1280px) 20vw, (min-width: 768px) 28vw, 44vw',
         }}
       >
-        <MediaCardBookMarkIconButton
+        <MediaCardBookmarkButton
           className={cn(
             'col-start-1 row-start-1 mr-2 mt-2 justify-self-end md:mr-4 md:mt-4',
             'peer z-20'

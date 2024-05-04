@@ -2,7 +2,7 @@ import { cn } from '@/utils/styles';
 
 import {
   MediaCard,
-  MediaCardBookMarkIconButton,
+  MediaCardBookmarkButton,
   MediaCardDetails,
   MediaCardImageArea,
   MediaCardPlayButton,
@@ -50,13 +50,12 @@ export const MediaCarouselCard = ({
           sizes: '(min-width: 1280px) 33vw, (min-width: 768px) 61vw, 64vw',
         }}
       >
-        <MediaCardBookMarkIconButton
+        <MediaCardBookmarkButton
           className={cn(
             'col-start-1 row-start-1 mr-2 mt-2 justify-self-end md:mr-6 md:mt-4',
             'peer z-20'
           )}
         />
-
         <MediaCardPlayButton
           className={cn(
             '[&.play-button-touch]:mb-[22px] [&.play-button-touch]:mr-3 [&.play-button-touch]:justify-self-end',
@@ -65,7 +64,6 @@ export const MediaCarouselCard = ({
             '[&.play-button-hovered]:-mt-6 [&.play-button-hovered]:md:mt-0'
           )}
         />
-
         <MediaCardDetails
           className={cn(
             '[&_.upper-details-container]:gap-2 [&_.upper-details-container]:text-[12px] [&_.upper-details-container]:md:text-body-m',
