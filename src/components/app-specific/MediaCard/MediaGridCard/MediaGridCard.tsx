@@ -45,18 +45,8 @@ export const MediaGridCard = ({
           sizes: '(min-width: 1280px) 20vw, (min-width: 768px) 28vw, 44vw',
         }}
       >
-        <MediaCardBookmarkButton
-          className={cn(
-            'col-start-1 row-start-1 mr-2 mt-2 justify-self-end md:mr-4 md:mt-4',
-            'peer z-20'
-          )}
-        />
-        <MediaCardPlayButton
-          className={cn(
-            '[&.play-button-touch]:mb-3 [&.play-button-touch]:mr-3 [&.play-button-touch]:justify-self-end',
-            '[&.play-button-touch]:md:mb-5 [&.play-button-touch]:md:mr-5'
-          )}
-        />
+        <MediaCardBookmarkButton />
+        <MediaCardPlayButton />
       </MediaCardImageArea>
       <MediaCardDetails title={title} year={year} category={category} rating={rating} />
     </MediaCard>

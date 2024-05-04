@@ -127,6 +127,7 @@ export const MediaCardBookmarkButton = ({
       id="bookmark-icon-btn"
       className={cn(
         'bookmark-button',
+        'peer z-20 col-start-1 row-start-1 mr-2 mt-2 justify-self-end md:mr-4 md:mt-4',
         'h-8 w-8 rounded-full bg-dark-blue/50 p-0 text-white hover:bg-dark-blue/50',
         hoverBookmark && bookmarkHoverClassName.default,
         bookmarkHoverClassName.hover,
@@ -154,6 +155,8 @@ const MediaCardPlayButtonHovered = motion(
       <Button
         variant="secondary"
         className={cn(
+          'play-button-hovered',
+          'z-20 col-start-1 row-start-1 place-self-center',
           'h-min gap-[15px] rounded-full p-[7px] text-body-m md:gap-[19px] md:p-[9px] md:text-heading-xs',
           'bg-white/25 text-white hover:bg-white/50 hover:text-dark-blue',
           'motion-safe:transition-colors',
@@ -171,8 +174,10 @@ const MediaCardPlayButtonHovered = motion(
 const MediaCardPlayButtonTouch = ({ className }: { className?: string }) => (
   <IconButton
     className={cn(
+      'play-button-touch',
       'col-start-1 row-start-1 mb-3.5 ml-3.5 self-end justify-self-start',
       'z-20 h-6 w-6 rounded-full bg-black/25 p-0 text-white shadow-md shadow-black/50',
+      'mb-3 mr-3 justify-self-end md:mb-5 md:mr-5',
       'hover:bg-black/60 hover:text-white/80',
       className
     )}
@@ -196,11 +201,7 @@ export const MediaCardPlayButton = ({ className }: MediaCardPlayButtonProps) => 
       <AnimatePresence>
         {showPlayBtn && isHoverable && (
           <MediaCardPlayButtonHovered
-            className={cn(
-              'play-button-hovered',
-              'z-20 col-start-1 row-start-1 place-self-center',
-              className
-            )}
+            className={className}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -209,7 +210,7 @@ export const MediaCardPlayButton = ({ className }: MediaCardPlayButtonProps) => 
       </AnimatePresence>
 
       {/* Play button for touch device where hover is NOT possible */}
-      {!isHoverable && <MediaCardPlayButtonTouch className={cn('play-button-touch', className)} />}
+      {!isHoverable && <MediaCardPlayButtonTouch className={className} />}
     </>
   );
 };
