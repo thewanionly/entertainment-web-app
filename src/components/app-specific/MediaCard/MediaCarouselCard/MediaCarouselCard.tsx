@@ -3,7 +3,7 @@ import { cn } from '@/utils/styles';
 import {
   MediaCard,
   MediaCardBookmarkButton,
-  MediaCardImageArea,
+  MediaCardHoverableArea,
   MediaCardPlayButton,
 } from '../MediaCard';
 import { Media } from '../MediaCard.types';
@@ -42,7 +42,7 @@ export const MediaCarouselCard = ({
       hoverCard={hoverCard}
       isHoverable={isHoverable}
     >
-      <MediaCardImageArea
+      <MediaCardHoverableArea
         className={cn('grid grid-cols-1')}
         imgProps={{
           src: imgSrc,
@@ -77,7 +77,7 @@ export const MediaCarouselCard = ({
           category={category}
           rating={rating}
         />
-      </MediaCardImageArea>
+      </MediaCardHoverableArea>
     </MediaCard>
   );
 };

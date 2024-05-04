@@ -81,17 +81,17 @@ const MediaCardImageOverlay = () => {
 };
 
 /** Image area */
-type MediaCardImageAreaProps = {
+type MediaCardHoverableAreaProps = {
   className?: string;
   children: ReactNode;
   imgProps: ImageProps;
 };
 
-export const MediaCardImageArea = ({
+export const MediaCardHoverableArea = ({
   className = '',
   children,
   imgProps,
-}: MediaCardImageAreaProps) => {
+}: MediaCardHoverableAreaProps) => {
   const { setShowPlayBtn } = useMediaCard();
 
   return (
