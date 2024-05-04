@@ -4,18 +4,11 @@ import Image, { ImageProps } from 'next/image';
 
 import { AnimatePresence, motion } from 'framer-motion';
 
-import {
-  BookMarkEmpty,
-  BookMarkFull,
-  CategoryMovie,
-  CategoryTV,
-  Play,
-} from '@/components/app-specific/Icon';
+import { BookMarkEmpty, BookMarkFull, Play } from '@/components/app-specific/Icon';
 import { Button, ButtonProps, IconButton, IconButtonSrLabel } from '@/components/generic/Button';
 import { cn } from '@/utils/styles';
 
 import { MediaCardContextProvider, useMediaCard } from './MediaCard.context';
-import { MediaCategory } from './MediaCard.types';
 
 type MediaCardProps = {
   className?: string;
@@ -24,17 +17,6 @@ type MediaCardProps = {
   hoverBookmark?: boolean; // only for storybook
   hoverCard?: boolean; // only for storybook
   isHoverable?: boolean; // only for storybook and testing purposes
-};
-
-const MEDIA_CATEGORY_MAP = {
-  movie: {
-    icon: CategoryMovie,
-    label: 'Movie',
-  },
-  tv_series: {
-    icon: CategoryTV,
-    label: 'TV Series',
-  },
 };
 
 const bookmarkHoverClassName = {
@@ -229,63 +211,5 @@ export const MediaCardPlayButton = ({ className }: MediaCardPlayButtonProps) => 
       {/* Play button for touch device where hover is NOT possible */}
       {!isHoverable && <MediaCardPlayButtonTouch className={cn('play-button-touch', className)} />}
     </>
-  );
-};
-
-/** Card details */
-const DotSeparator = () => (
-  <span
-    className={cn(
-      'dot-separator',
-      'h-0.5 w-0.5 flex-shrink-0 rounded-full bg-white/50',
-      'md:h-[3px] md:w-[3px]'
-    )}
-  />
-);
-
-type MediaCardDetailsProps = {
-  className?: string;
-  title: string;
-  year: string;
-  category: MediaCategory;
-  rating: string;
-};
-
-export const MediaCardDetails = ({
-  className = '',
-  title,
-  year,
-  category,
-  rating,
-}: MediaCardDetailsProps) => {
-  const { icon: CategoryIcon, label: categoryName } = MEDIA_CATEGORY_MAP[category];
-
-  return (
-    <div className={cn('flex flex-col gap-1 md:gap-[5px]', className)}>
-      <div
-        className={cn(
-          'upper-details-container',
-          'flex items-center gap-[7.5px] text-[11px] font-light leading-[normal] text-white/75',
-          'md:gap-2 md:text-body-s'
-        )}
-      >
-        <span>{year}</span>
-        <DotSeparator />
-        <span className={cn('category-container', 'flex items-center gap-1 capitalize md:gap-1.5')}>
-          <CategoryIcon className={cn('category-icon', 'w-2.5 md:w-3')} title={categoryName} />
-          {categoryName}
-        </span>
-        <DotSeparator />
-        <span className="truncate">{rating}</span>
-      </div>
-      <p
-        className={cn(
-          'title',
-          'truncate text-[14px] font-medium leading-[normal] text-white md:text-heading-xs'
-        )}
-      >
-        {title}
-      </p>
-    </div>
   );
 };

@@ -3,11 +3,11 @@ import { cn } from '@/utils/styles';
 import {
   MediaCard,
   MediaCardBookmarkButton,
-  MediaCardDetails,
   MediaCardImageArea,
   MediaCardPlayButton,
 } from '../MediaCard';
 import { Media } from '../MediaCard.types';
+import { MediaCardDetails } from '../MediaCardDetails';
 
 type MediaCarouselCardProps = Omit<Media, 'isTrending'> & {
   className?: string;
