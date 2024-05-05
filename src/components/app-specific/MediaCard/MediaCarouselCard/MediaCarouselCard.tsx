@@ -1,11 +1,12 @@
 import { cn } from '@/utils/styles';
 
-import { MediaCard, MediaCardPlayButton } from '../MediaCard';
+import { MediaCard } from '../MediaCard';
 import { Media } from '../MediaCard.types';
 import { MediaCardBookmarkButton } from '../MediaCardBookmarkButton';
 import { MediaCardDetails } from '../MediaCardDetails';
 import { MediaCardHoverableArea } from '../MediaCardHoverableArea';
 import { MediaCardImage } from '../MediaCardImage';
+import { MediaCardPlayButton } from '../MediaCardPlayButton';
 
 type MediaCarouselCardProps = Omit<Media, 'isTrending'> & {
   className?: string;
