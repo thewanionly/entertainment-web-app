@@ -2,8 +2,8 @@ import { ReactNode, forwardRef } from 'react';
 
 import { AnimatePresence, motion } from 'framer-motion';
 
-import { BookMarkEmpty, BookMarkFull, Play } from '@/components/app-specific/Icon';
-import { Button, ButtonProps, IconButton, IconButtonSrLabel } from '@/components/generic/Button';
+import { Play } from '@/components/app-specific/Icon';
+import { Button, IconButton, IconButtonSrLabel } from '@/components/generic/Button';
 import { cn } from '@/utils/styles';
 
 import { MediaCardContextProvider, useMediaCard } from './MediaCard.context';
@@ -15,11 +15,6 @@ type MediaCardProps = {
   hoverBookmark?: boolean; // only for storybook
   hoverCard?: boolean; // only for storybook
   isHoverable?: boolean; // only for storybook and testing purposes
-};
-
-const bookmarkHoverClassName = {
-  default: 'bg-white text-dark-blue',
-  hover: 'hover:bg-white hover:text-dark-blue',
 };
 
 export const MediaCard = ({
@@ -36,43 +31,6 @@ export const MediaCard = ({
         {children}
       </MediaCardContextProvider>
     </div>
-  );
-};
-
-/** Bookmark Icon Button */
-type MediaCardBookmarkButtonProps = {
-  className?: string;
-};
-
-export const MediaCardBookmarkButton = ({
-  className = '',
-  ...props
-}: MediaCardBookmarkButtonProps & ButtonProps) => {
-  const { hoverBookmark, isBookmarked, setShowPlayBtn } = useMediaCard();
-
-  const label = isBookmarked ? 'Remove from bookmarks' : 'Add to bookmarks';
-  const BookMarkIcon = isBookmarked ? BookMarkFull : BookMarkEmpty;
-
-  return (
-    <IconButton
-      id="bookmark-icon-btn"
-      className={cn(
-        'bookmark-button',
-        'peer z-20 col-start-1 row-start-1 mr-2 mt-2 justify-self-end md:mr-4 md:mt-4',
-        'h-8 w-8 rounded-full bg-dark-blue/50 p-0 text-white hover:bg-dark-blue/50',
-        hoverBookmark && bookmarkHoverClassName.default,
-        bookmarkHoverClassName.hover,
-        'motion-safe:transition-colors',
-        className
-      )}
-      title={label}
-      onMouseEnter={() => setShowPlayBtn(false)}
-      onMouseLeave={() => setShowPlayBtn(true)}
-      {...props}
-    >
-      <BookMarkIcon className="h-[14px] w-[12px]" />
-      <IconButtonSrLabel label={label} />
-    </IconButton>
   );
 };
 
