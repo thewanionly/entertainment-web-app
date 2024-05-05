@@ -8,6 +8,7 @@ import {
 } from '../MediaCard';
 import { Media } from '../MediaCard.types';
 import { MediaCardDetails } from '../MediaCardDetails';
+import { MediaCardImage } from '../MediaCardImage';
 
 type MediaGridCardProps = Omit<Media, 'isTrending'> & {
   className?: string;
@@ -37,14 +38,13 @@ export const MediaGridCard = ({
       hoverCard={hoverCard}
       isHoverable={isHoverable}
     >
-      <MediaCardHoverableArea
-        className={cn('h-[110px] md:h-[140px] xl:h-[174px]')}
-        imgProps={{
-          src: imgSrc,
-          alt: imgAlt,
-          sizes: '(min-width: 1280px) 20vw, (min-width: 768px) 28vw, 44vw',
-        }}
-      >
+      <MediaCardHoverableArea className="h-[110px] md:h-[140px] xl:h-[174px]">
+        <MediaCardImage
+          className="col-start-1 row-start-1"
+          src={imgSrc}
+          alt={imgAlt}
+          sizes="(min-width: 1280px) 20vw, (min-width: 768px) 28vw, 44vw"
+        />
         <MediaCardBookmarkButton />
         <MediaCardPlayButton />
       </MediaCardHoverableArea>

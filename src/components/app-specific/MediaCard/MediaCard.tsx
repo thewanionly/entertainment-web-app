@@ -1,7 +1,5 @@
 import { ReactNode, forwardRef } from 'react';
 
-import Image, { ImageProps } from 'next/image';
-
 import { AnimatePresence, motion } from 'framer-motion';
 
 import { BookMarkEmpty, BookMarkFull, Play } from '@/components/app-specific/Icon';
@@ -41,25 +39,6 @@ export const MediaCard = ({
   );
 };
 
-/** Image */
-type MediaCardImageProps = ImageProps & {
-  className?: string;
-  imgClassName?: string;
-};
-
-const MediaCardImage = ({
-  className = '',
-  imgClassName = '',
-  alt,
-  ...props
-}: MediaCardImageProps) => {
-  return (
-    <div className={cn('relative h-full w-full', className)}>
-      <Image className={cn('rounded-lg object-cover', imgClassName)} alt={alt} fill {...props} />
-    </div>
-  );
-};
-
 /** Image overlay */
 const MediaCardImageOverlay = () => {
   const { hoverCard, isHoverable } = useMediaCard();
@@ -84,13 +63,11 @@ const MediaCardImageOverlay = () => {
 type MediaCardHoverableAreaProps = {
   className?: string;
   children: ReactNode;
-  imgProps: ImageProps;
 };
 
 export const MediaCardHoverableArea = ({
   className = '',
   children,
-  imgProps,
 }: MediaCardHoverableAreaProps) => {
   const { setShowPlayBtn } = useMediaCard();
 
@@ -102,7 +79,6 @@ export const MediaCardHoverableArea = ({
       onMouseLeave={() => setShowPlayBtn(false)}
     >
       {children}
-      <MediaCardImage className="col-start-1 row-start-1" {...imgProps} />
       <MediaCardImageOverlay />
     </div>
   );

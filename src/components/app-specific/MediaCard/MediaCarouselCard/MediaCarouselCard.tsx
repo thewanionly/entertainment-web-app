@@ -8,6 +8,7 @@ import {
 } from '../MediaCard';
 import { Media } from '../MediaCard.types';
 import { MediaCardDetails } from '../MediaCardDetails';
+import { MediaCardImage } from '../MediaCardImage';
 
 type MediaCarouselCardProps = Omit<Media, 'isTrending'> & {
   className?: string;
@@ -42,14 +43,13 @@ export const MediaCarouselCard = ({
       hoverCard={hoverCard}
       isHoverable={isHoverable}
     >
-      <MediaCardHoverableArea
-        className={cn('grid grid-cols-1')}
-        imgProps={{
-          src: imgSrc,
-          alt: imgAlt,
-          sizes: '(min-width: 1280px) 33vw, (min-width: 768px) 61vw, 64vw',
-        }}
-      >
+      <MediaCardHoverableArea className="grid grid-cols-1">
+        <MediaCardImage
+          className="col-start-1 row-start-1"
+          src={imgSrc}
+          alt={imgAlt}
+          sizes="(min-width: 1280px) 33vw, (min-width: 768px) 61vw, 64vw"
+        />
         <MediaCardBookmarkButton className="md:mr-6" />
         <MediaCardPlayButton
           className={cn(
