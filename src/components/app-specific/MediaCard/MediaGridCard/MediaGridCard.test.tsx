@@ -59,7 +59,7 @@ describe('MediaGridCard', () => {
   it(`displays play button when image is hovered`, async () => {
     render(<Default isHoverable />);
 
-    const mediaCard = screen.getByTestId('media-card-image');
+    const mediaCard = screen.getByTestId('media-card-hoverable-area');
 
     expect(screen.queryByRole('button', { name: /play/i })).not.toBeInTheDocument();
 
@@ -72,7 +72,7 @@ describe('MediaGridCard', () => {
     render(<Default isHoverable />);
 
     // hover image to display play button
-    const mediaCard = screen.getByTestId('media-card-image');
+    const mediaCard = screen.getByTestId('media-card-hoverable-area');
     await userEvent.hover(mediaCard);
     expect(screen.getByRole('button', { name: /play/i })).toBeInTheDocument();
 
