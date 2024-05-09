@@ -10,6 +10,22 @@ import { MediaCarouselCard } from './MediaCarouselCard';
 const meta = {
   title: 'App Specific Components/MediaCarouselCard',
   component: MediaCarouselCard,
+  argTypes: {
+    category: {
+      options: ['movie', 'tv_series'],
+      control: {
+        type: 'inline-radio',
+        labels: {
+          movie: 'Movie',
+          tv_series: 'TV Series',
+        },
+      },
+      defaultValue: 'movie',
+    },
+  },
+  parameters: {
+    controls: { exclude: ['className', 'hoverBookmark', 'hoverCard'] },
+  },
 } satisfies Meta<typeof MediaCarouselCard>;
 
 export default meta;
