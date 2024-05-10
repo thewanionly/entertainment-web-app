@@ -36,7 +36,7 @@ export const MediaGridCard = ({
       hoverCard={hoverCard}
       isHoverable={isHoverable}
     >
-      <MediaCardHoverableArea className="h-[110px] md:h-[140px] xl:h-[174px]">
+      <MediaCardHoverableArea className="aspect-[1.49] md:aspect-[1.57] xl:aspect-[1.61]">
         <MediaCardImage
           className="col-start-1 row-start-1"
           src={imgSrc}
