@@ -29,6 +29,9 @@ describe('HeaderNavigation', () => {
     render(<Active />);
 
     const anchorElements = screen.getAllByRole('link');
+    anchorElements[1].addEventListener('click', (e) => {
+      e.preventDefault();
+    });
 
     await userEvent.click(anchorElements[1]);
 
