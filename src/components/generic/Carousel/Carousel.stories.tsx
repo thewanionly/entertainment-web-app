@@ -1,5 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
+import { MediaCarouselCard } from '@/components/app-specific/MediaCard';
+import { MediaCategory } from '@/components/app-specific/MediaCard/MediaCard.types';
+
 import {
   Carousel,
   CarouselContent,
@@ -46,6 +49,37 @@ export const Default: Story = {
                 </div>
               </div>
             </div>
+          </CarouselItem>
+        ))}
+      </CarouselContent>
+      <CarouselPrevious />
+      <CarouselNext />
+    </Carousel>
+  ),
+};
+
+const mockMediaData = {
+  imgSrc: '/images/beyond-earth/trending/large.jpg',
+  imgAlt: 'A man wearing cold jacket standing in a rock with waters and cliff around',
+  title: `Beyond Earth`,
+  year: '2019',
+  category: MediaCategory.Movie,
+  rating: 'PG',
+  isBookmarked: false,
+};
+
+export const MediaCarousel: Story = {
+  render: () => (
+    <Carousel
+      opts={{
+        align: 'start',
+      }}
+      className="w-full"
+    >
+      <CarouselContent>
+        {Array.from({ length: 5 }).map((_, index) => (
+          <CarouselItem key={index} className="basis-[68.27%] md:basis-[64.45%] xl:basis-[39%]">
+            <MediaCarouselCard className="w-full md:w-full xl:w-full" {...mockMediaData} />
           </CarouselItem>
         ))}
       </CarouselContent>

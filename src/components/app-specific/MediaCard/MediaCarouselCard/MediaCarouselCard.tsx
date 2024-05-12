@@ -31,9 +31,9 @@ export const MediaCarouselCard = ({
   return (
     <MediaCard
       className={cn(
-        'h-[140px] w-[240px]',
-        'md:h-[230px] md:w-[470px]',
-        'xl:h-[230px] xl:w-[470px]',
+        'aspect-[1.7143] w-[240px]',
+        'md:aspect-[2.043] md:w-[470px]',
+        'xl:aspect-[2.043] xl:w-[470px]',
         className
       )}
       isBookmarked={isBookmarked}
