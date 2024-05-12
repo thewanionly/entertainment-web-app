@@ -3,13 +3,9 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { MediaCarouselCard } from '@/components/app-specific/MediaCard';
 import { MediaCategory } from '@/components/app-specific/MediaCard/MediaCard.types';
 
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from './Carousel';
+import { Carousel, CarouselContent, CarouselItem } from './Carousel';
+import { CarouselNextButton } from './CarouselNextButton';
+import { CarouselPreviousButton } from './CarouselPreviousButton';
 
 /**
  * The default export defines how Storybook lists our stories in the preview
@@ -52,8 +48,8 @@ export const Default: Story = {
           </CarouselItem>
         ))}
       </CarouselContent>
-      <CarouselPrevious />
-      <CarouselNext />
+      <CarouselPreviousButton />
+      <CarouselNextButton />
     </Carousel>
   ),
 };
@@ -83,8 +79,8 @@ export const MediaCarousel: Story = {
           </CarouselItem>
         ))}
       </CarouselContent>
-      <CarouselPrevious />
-      <CarouselNext />
+      <CarouselPreviousButton />
+      <CarouselNextButton />
     </Carousel>
   ),
 };
