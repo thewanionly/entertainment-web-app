@@ -6,10 +6,10 @@ import useEmblaCarousel from 'embla-carousel-react';
 
 import { cn } from '@/utils/styles';
 
-import { CarouselContext, useCarousel } from './Carousel.context';
+import { CarouselContext } from './Carousel.context';
 import { CarouselProps, CarouselApi } from './Carousel.types';
 
-const Carousel = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement> & CarouselProps>(
+export const Carousel = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement> & CarouselProps>(
   ({ orientation = 'horizontal', opts, setApi, plugins, className, children, ...props }, ref) => {
     const [carouselRef, api] = useEmblaCarousel(
       {
@@ -77,7 +77,7 @@ const Carousel = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement> & Car
       <CarouselContext.Provider
         value={{
           carouselRef,
-          api: api,
+          api,
           opts,
           orientation: orientation || (opts?.axis === 'y' ? 'vertical' : 'horizontal'),
           scrollPrev,
@@ -101,47 +101,3 @@ const Carousel = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement> & Car
   }
 );
 Carousel.displayName = 'Carousel';
-
-const CarouselContent = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
-  ({ className, ...props }, ref) => {
-    const { carouselRef, orientation } = useCarousel();
-
-    return (
-      <div ref={carouselRef} className="overflow-hidden">
-        <div
-          ref={ref}
-          className={cn(
-            'flex',
-            orientation === 'horizontal' ? '-ml-4' : '-mt-4 flex-col',
-            className
-          )}
-          {...props}
-        />
-      </div>
-    );
-  }
-);
-CarouselContent.displayName = 'CarouselContent';
-
-const CarouselItem = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
-  ({ className, ...props }, ref) => {
-    const { orientation } = useCarousel();
-
-    return (
-      <div
-        ref={ref}
-        role="group"
-        aria-roledescription="slide"
-        className={cn(
-          'min-w-0 shrink-0 grow-0 basis-full',
-          orientation === 'horizontal' ? 'pl-4' : 'pt-4',
-          className
-        )}
-        {...props}
-      />
-    );
-  }
-);
-CarouselItem.displayName = 'CarouselItem';
-
-export { Carousel, CarouselContent, CarouselItem };

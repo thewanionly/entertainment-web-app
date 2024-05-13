@@ -3,7 +3,9 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { MediaCarouselCard } from '@/components/app-specific/MediaCard';
 import { MediaCategory } from '@/components/app-specific/MediaCard/MediaCard.types';
 
-import { Carousel, CarouselContent, CarouselItem } from './Carousel';
+import { Carousel } from './Carousel';
+import { CarouselContent } from './CarouselContent';
+import { CarouselItem } from './CarouselItem';
 import { CarouselNextButton } from './CarouselNextButton';
 import { CarouselPreviousButton } from './CarouselPreviousButton';
 
