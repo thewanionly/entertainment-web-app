@@ -29,3 +29,36 @@ Object.defineProperty(window, 'matchMedia', {
     dispatchEvent: jest.fn(),
   })),
 });
+
+// intersection observer mock
+export class IntersectionObserver {
+  root = null;
+  rootMargin = '';
+  thresholds = [];
+
+  disconnect() {
+    return null;
+  }
+
+  observe() {
+    return null;
+  }
+
+  takeRecords() {
+    return [];
+  }
+
+  unobserve() {
+    return null;
+  }
+}
+
+window.IntersectionObserver = IntersectionObserver;
+global.IntersectionObserver = IntersectionObserver;
+
+// resize observer mock
+global.ResizeObserver = jest.fn().mockImplementation(() => ({
+  observe: jest.fn(),
+  unobserve: jest.fn(),
+  disconnect: jest.fn(),
+}));

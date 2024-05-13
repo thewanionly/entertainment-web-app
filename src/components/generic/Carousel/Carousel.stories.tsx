@@ -4,6 +4,7 @@ import { MediaCarouselCard } from '@/components/app-specific/MediaCard';
 import { MediaCategory } from '@/components/app-specific/MediaCard/MediaCard.types';
 
 import { Carousel } from './Carousel';
+import { NUM_OF_CAROUSEL_ITEMS } from './Carousel.constants';
 import { CarouselContent } from './CarouselContent';
 import { CarouselItem } from './CarouselItem';
 import { CarouselNextButton } from './CarouselNextButton';
@@ -38,7 +39,7 @@ export const Default: Story = {
       className="w-full max-w-sm"
     >
       <CarouselContent>
-        {Array.from({ length: 5 }).map((_, index) => (
+        {Array.from({ length: NUM_OF_CAROUSEL_ITEMS }).map((_, index) => (
           <CarouselItem key={index} className="basis-[68.27%] md:basis-[64.45%] xl:basis-[39%]">
             <div className="rounded-lg border border-white/75 p-1 text-white/75">
               <div>
@@ -75,7 +76,7 @@ export const MediaCarousel: Story = {
       className="w-full"
     >
       <CarouselContent>
-        {Array.from({ length: 5 }).map((_, index) => (
+        {Array.from({ length: NUM_OF_CAROUSEL_ITEMS }).map((_, index) => (
           <CarouselItem key={index} className="basis-[68.27%] md:basis-[64.45%] xl:basis-[39%]">
             <MediaCarouselCard className="w-full md:w-full xl:w-full" {...mockMediaData} />
           </CarouselItem>

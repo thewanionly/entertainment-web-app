@@ -18,6 +18,7 @@ export const CarouselItem = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivEle
           orientation === 'horizontal' ? 'pl-4' : 'pt-4',
           className
         )}
+        data-testid="carousel-item"
         {...props}
       />
     );
