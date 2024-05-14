@@ -40,28 +40,29 @@ export const NAV_LINKS: NavLinkType[] = [
 // ref: https://tailwindcss.com/docs/content-configuration#dynamic-class-names
 export const verticalClasses = {
   header: {
-    default: 'flex h-screen w-min flex-col gap-[75px] rounded-[20px] px-8 py-[35px]',
-    md: 'md:flex md:h-screen md:w-min md:flex-col md:gap-[75px] md:rounded-[20px] md:px-8 md:py-[35px]',
+    default:
+      'flex h-[calc(100vh_-_4rem)] w-min flex-col gap-[75px] rounded-[20px] px-8 py-[35px] ml-8 mb-0 mt-8 mr-0 max-h-[60rem] min-h-[28.125rem]',
+    lg: 'lg:flex lg:h-[calc(100vh_-_4rem)] lg:w-min lg:flex-col lg:gap-[75px] lg:rounded-[20px] lg:px-8 lg:py-[35px] lg:ml-8 lg:mb-0 lg:mt-8 lg:mr-0 lg:max-h-[60rem] lg:min-h-[28.125rem]',
   },
   logo: {
     default: 'h-[25.6px] w-8',
-    md: 'md:h-[25.6px] md:w-8',
+    lg: 'lg:h-[25.6px] lg:w-8',
   },
   navList: {
     default: 'flex-col gap-10 items-start',
-    md: 'md:flex-col md:gap-10 md:items-start',
+    lg: 'lg:flex-col lg:gap-10 lg:items-start',
   },
   iconButton: {
     default: 'h-5',
-    md: ' md:h-5',
+    lg: ' lg:h-5',
   },
   navIcon: {
     default: 'h-5 w-5',
-    md: ' md:h-5 md:w-5',
+    lg: ' lg:h-5 lg:w-5',
   },
   avatar: {
     default: 'mt-auto',
-    md: ' md:mt-auto',
+    lg: ' lg:mt-auto',
   },
 };
 

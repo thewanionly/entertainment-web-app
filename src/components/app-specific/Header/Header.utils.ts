@@ -7,7 +7,7 @@ export const getVerticalClasses = (
 ) => {
   if (orientation === 'vertical') return verticalClasses[name].default;
 
-  if (!orientation) return verticalClasses[name].md;
+  if (!orientation) return verticalClasses[name].lg;
 
   return '';
 };

@@ -9,7 +9,7 @@ import { cn } from '@/utils/styles';
 import { HEADER_LOGO_ALT_TEXT, HEADER_LOGO_IMG_PATH, NAV_LINKS } from './Header.constants';
 import { HeaderOrientation } from './Header.types';
 import { getVerticalClasses } from './Header.utils';
-import { HeaderNavigation } from './HeaderNavigation';
+import { HeaderNavigation, HeaderNavigationItem } from './HeaderNavigation';
 
 type HeaderProps = {
   className?: string;
@@ -22,14 +22,20 @@ export const Header = ({ className = '', orientation }: HeaderProps) => {
   return (
     <header
       className={cn(
-        'grid grid-cols-[1fr_auto_1fr] items-center justify-items-start gap-6 bg-semi-dark-blue px-4 py-[18px]',
+        'grid h-14 grid-cols-[1fr_auto_1fr] items-center justify-items-start gap-6 bg-semi-dark-blue px-4',
+        'sm:m-6 sm:h-[4.5rem] sm:rounded-[0.625rem] sm:px-6',
         getVerticalClasses(orientation, 'header'),
         className
       )}
     >
-      {/*  Logo */}
       <Link href="/" className="inline-block">
-        <div className={cn('relative h-5 w-[25px]', getVerticalClasses(orientation, 'logo'))}>
+        <div
+          className={cn(
+            'relative aspect-[1.25] w-[25px]',
+            'sm:w-8',
+            getVerticalClasses(orientation, 'logo')
+          )}
+        >
           <Image
             src={HEADER_LOGO_IMG_PATH}
             alt={HEADER_LOGO_ALT_TEXT}
@@ -40,9 +46,9 @@ export const Header = ({ className = '', orientation }: HeaderProps) => {
       </Link>
 
       {NAV_LINKS.length > 0 && (
-        <HeaderNavigation orientation={orientation}>
+        <HeaderNavigation orientation={orientation} className="sm:gap-8">
           {NAV_LINKS.map((navLink) => (
-            <HeaderNavigation.Item
+            <HeaderNavigationItem
               key={navLink.label}
               active={pathname === navLink.url}
               {...navLink}

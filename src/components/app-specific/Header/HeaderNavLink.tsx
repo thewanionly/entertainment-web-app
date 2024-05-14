@@ -34,8 +34,9 @@ export const HeaderNavLink = ({
   return (
     <IconButton
       className={cn(
-        'hover:bg-transparent group flex h-4 p-0 text-greyish-blue hover:text-red',
+        'group flex aspect-square w-4 p-0 text-greyish-blue hover:bg-transparent hover:text-red',
         'rounded-none focus-visible:outline-offset-4',
+        'sm:w-5',
         getVerticalClasses(orientation, 'iconButton'),
         active && 'text-white',
         className
@@ -45,7 +46,13 @@ export const HeaderNavLink = ({
     >
       <Link href={url}>
         {NavIcon && (
-          <NavIcon className={cn('h-4 w-4', getVerticalClasses(orientation, 'navIcon'))} />
+          <NavIcon
+            className={cn(
+              'aspect-sqaure w-4',
+              'sm:w-5',
+              getVerticalClasses(orientation, 'navIcon')
+            )}
+          />
         )}
         <IconButtonSrLabel label={active ? `${label} is the active link` : label} />
       </Link>

@@ -3,7 +3,7 @@ import { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 
 import { NAV_LINKS } from '../Header.constants';
-import { HeaderNavigation, HeaderNavigationProps } from './HeaderNavigation';
+import { HeaderNavigation, HeaderNavigationItem, HeaderNavigationProps } from './HeaderNavigation';
 
 /**
  * The default export defines how Storybook lists our stories in the preview
@@ -36,7 +36,7 @@ const HeaderNavigationInteractive = ({
   return (
     <HeaderNavigation orientation={orientation}>
       {NAV_LINKS.map((navLink) => (
-        <HeaderNavigation.Item
+        <HeaderNavigationItem
           key={navLink.label}
           active={activeLink === navLink.url}
           onClick={() => setActiveLink(navLink.url)}
