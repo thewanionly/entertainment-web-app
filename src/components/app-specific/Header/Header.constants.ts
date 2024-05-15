@@ -41,8 +41,8 @@ export const NAV_LINKS: NavLinkType[] = [
 export const verticalClasses = {
   header: {
     default:
-      'flex h-[calc(100vh_-_4rem)] w-min flex-col gap-[75px] rounded-[20px] px-8 py-[35px] ml-8 mb-0 mt-8 mr-0 max-h-[60rem] min-h-[28.125rem]',
-    lg: 'lg:flex lg:h-[calc(100vh_-_4rem)] lg:w-min lg:flex-col lg:gap-[75px] lg:rounded-[20px] lg:px-8 lg:py-[35px] lg:ml-8 lg:mb-0 lg:mt-8 lg:mr-0 lg:max-h-[60rem] lg:min-h-[28.125rem]',
+      'flex h-[calc(100vh_-_4rem)] w-min flex-col gap-[75px] rounded-[20px] px-8 py-[35px] mx-0 mb-0 mt-8 max-h-[60rem] min-h-[28.125rem]',
+    lg: 'lg:flex lg:h-[calc(100vh_-_4rem)] lg:w-min lg:flex-col lg:gap-[75px] lg:rounded-[20px] lg:px-8 lg:py-[35px] lg:mx-0 lg:mb-0 lg:mt-8 lg:max-h-[60rem] lg:min-h-[28.125rem]',
   },
   logo: {
     default: 'h-[25.6px] w-8',

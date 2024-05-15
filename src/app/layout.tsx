@@ -17,7 +17,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={outfit.variable}>
-      <body className="bg-dark-blue text-white lg:flex">
+      <body className="max-w-screen-xl bg-dark-blue text-body-s text-white lg:mx-auto lg:flex lg:items-center lg:gap-9 lg:pl-8">
         <Header />
         {children}
       </body>
