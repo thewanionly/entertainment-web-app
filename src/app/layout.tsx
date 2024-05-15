@@ -4,6 +4,8 @@ import { Header } from '@/components/app-specific/Header';
 import { outfit } from '@/lib/fonts';
 import '@/styles/globals.css';
 
+import { SearchSection } from './ui/SearchSection';
+
 export const metadata: Metadata = {
   title: 'Entertainment Web App',
   description:
@@ -17,9 +19,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={outfit.variable}>
-      <body className="max-w-screen-xl bg-dark-blue text-body-s text-white lg:mx-auto lg:flex lg:items-center lg:gap-9 lg:pl-8">
+      <body className="max-w-screen-xl bg-dark-blue text-body-s text-white lg:mx-auto lg:flex lg:pl-8">
         <Header />
-        {children}
+        <div className="lg:min-w-0 lg:flex-initial">
+          <SearchSection />
+          {children}
+        </div>
       </body>
     </html>
   );
