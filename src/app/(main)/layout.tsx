@@ -1,10 +1,9 @@
 import type { Metadata } from 'next';
 
+import { SearchSection } from '@/app/ui/SearchSection';
 import { Header } from '@/components/app-specific/Header';
 import { outfit } from '@/lib/fonts';
 import '@/styles/globals.css';
-
-import { SearchSection } from './ui/SearchSection';
 
 export const metadata: Metadata = {
   title: 'Entertainment Web App',
