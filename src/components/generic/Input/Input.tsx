@@ -1,12 +1,12 @@
-import * as React from 'react';
+import { InputHTMLAttributes, forwardRef } from 'react';
 
 import { cn } from '@/utils/styles';
 
-export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
+export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   error?: string;
 }
 
-const Input = React.forwardRef<HTMLInputElement, InputProps>(
+const Input = forwardRef<HTMLInputElement, InputProps>(
   ({ className, type, error = '', disabled, ...props }, ref) => {
     return (
       <div
@@ -21,7 +21,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
         <input
           type={type}
           className={cn(
-            'leading-none',
+            'truncate leading-none',
             'flex w-full flex-1 bg-transparent text-white caret-red ring-offset-white',
             'focus:outline-none',
             'placeholder:text-white/50',
