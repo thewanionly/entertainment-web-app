@@ -1,0 +1,3 @@
+{
+  "typescript.preferences.autoImportFileExcludePatterns": ["**/src/components/_shadcn-ui/**"]
+}
