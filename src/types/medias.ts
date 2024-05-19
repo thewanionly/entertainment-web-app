@@ -3,9 +3,9 @@
 // necessarily be 1:1 with the API we use
 export interface Media {
   id: number;
-  image_path: string;
+  imagePath: string;
   title: string;
-  media_type: string;
-  release_date: string;
+  mediaType: string;
+  releaseDate: string;
   certification: string;
 }
