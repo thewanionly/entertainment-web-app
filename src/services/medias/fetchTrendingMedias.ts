@@ -1,11 +1,7 @@
-import { Media } from '@/types/medias';
+import { Media as AppMedia } from '@/types/medias';
 
-interface MediasEndpointResponse<T> {
-  page: number;
-  results: T[];
-  total_pages: number;
-  total_results: number;
-}
+import { Media as APIMedia, MediasEndpointResponse } from './medias.types';
+
 const options: RequestInit = {
   method: 'GET',
   headers: {
@@ -14,7 +10,7 @@ const options: RequestInit = {
   },
 };
 
-export const fetchTrendingMedias = async (): Promise<Media[]> => {
+export const fetchTrendingMedias = async (): Promise<AppMedia[]> => {
   try {
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_MEDIAS_BASE_ENDPOINT}/trending/all/day`,
@@ -25,9 +21,23 @@ export const fetchTrendingMedias = async (): Promise<Media[]> => {
       throw new Error('Failed to fetch trending medias data');
     }
 
-    const data = (await response.json()) as MediasEndpointResponse<Media>;
+    // technically "Media" here should include "person" type but since
+    // we are filtering it out in the next line and we don't really use
+    // "person" type in our application, it doesn't makes sense to include
+    // "person" typing in our app
+    const data = (await response.json()) as MediasEndpointResponse<APIMedia>;
 
-    return data.results.filter(({ media_type }) => media_type !== 'person');
+    // filter out "person" media type and transform fields to "AppMedia"
+    return data.results
+      .filter(({ media_type }) => media_type !== 'person')
+      .map((item) => ({
+        id: item.id,
+        imagePath: item.poster_path,
+        title: item.media_type === 'movie' ? item.title : item.name,
+        mediaType: item.media_type,
+        releaseDate: item.media_type === 'movie' ? item.release_date : item.first_air_date,
+        certification: '', // TODO: determine certification (extra API calls, check with the docs)
+      }));
   } catch (error) {
     console.error(error);
     throw error;
