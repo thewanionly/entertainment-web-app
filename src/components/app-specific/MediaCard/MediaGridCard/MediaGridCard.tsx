@@ -30,13 +30,13 @@ export const MediaGridCard = ({
 }: MediaGridCardProps) => {
   return (
     <MediaCard
-      className={cn('inline-flex flex-col gap-2', 'w-[164px] md:w-[220px] xl:w-[280px]', className)}
+      className={cn('inline-flex flex-col gap-2', 'w-[164px] sm:w-[220px] lg:w-[280px]', className)}
       isBookmarked={isBookmarked}
       hoverBookmark={hoverBookmark}
       hoverCard={hoverCard}
       isHoverable={isHoverable}
     >
-      <MediaCardHoverableArea className="aspect-[1.49] md:aspect-[1.57] xl:aspect-[1.61]">
+      <MediaCardHoverableArea className="aspect-[1.49] sm:aspect-[1.57] lg:aspect-[1.61]">
         <MediaCardImage
           className="col-start-1 row-start-1"
           src={imgSrc}

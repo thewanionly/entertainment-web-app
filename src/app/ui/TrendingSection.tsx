@@ -27,10 +27,10 @@ const TrendingCarousel = ({ items }: { items: Media[] }) => (
   >
     <CarouselContent>
       {items.map(({ id, imagePath, title, releaseDate, mediaType }, index) => (
-        <CarouselItem key={index} className="basis-[68.27%] md:basis-[64.45%] xl:basis-[39%]">
+        <CarouselItem key={index} className="basis-[68.27%] sm:basis-[64.45%] lg:basis-[39%]">
           <MediaCarouselCard
             key={id}
-            className="w-full md:w-full xl:w-full"
+            className="w-full sm:w-full lg:w-full"
             imgSrc={`${IMAGE_BASE_URL}w500${imagePath}`}
             imgAlt={title}
             title={title}

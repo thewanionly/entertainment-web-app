@@ -37,9 +37,9 @@ const UpperDetails = ({ year, category, rating }: UpperDetailsProps) => {
     <span key={0}>{year}</span>,
     <span
       key={1}
-      className={cn('category-container', 'flex items-center gap-1 capitalize md:gap-1.5')}
+      className={cn('category-container', 'flex items-center gap-1 capitalize sm:gap-1.5')}
     >
-      <CategoryIcon className={cn('category-icon', 'w-2.5 md:w-3')} title={categoryName} />
+      <CategoryIcon className={cn('category-icon', 'w-2.5 sm:w-3')} title={categoryName} />
       {categoryName}
     </span>,
     rating && (
@@ -54,7 +54,7 @@ const UpperDetails = ({ year, category, rating }: UpperDetailsProps) => {
       className={cn(
         'upper-details-container',
         'flex items-center gap-[7.5px] text-[11px] font-light leading-[normal] text-white/75',
-        'md:gap-2 md:text-body-s'
+        'sm:gap-2 sm:text-body-s'
       )}
     >
       {upperDetailsElements
@@ -67,7 +67,7 @@ const UpperDetails = ({ year, category, rating }: UpperDetailsProps) => {
                 className={cn(
                   'dot-separator',
                   'h-0.5 w-0.5 flex-shrink-0 rounded-full bg-white/50',
-                  'md:h-[3px] md:w-[3px]'
+                  'sm:h-[3px] sm:w-[3px]'
                 )}
               />
             )}
@@ -85,12 +85,12 @@ export const MediaCardDetails = ({
   rating,
 }: MediaCardDetailsProps) => {
   return (
-    <div className={cn('flex flex-col gap-1 md:gap-[5px]', className)}>
+    <div className={cn('flex flex-col gap-1 sm:gap-[5px]', className)}>
       <UpperDetails year={year} category={category} rating={rating} />
       <p
         className={cn(
           'title',
-          'truncate text-[14px] font-medium leading-[normal] text-white md:text-heading-xs'
+          'truncate text-[14px] font-medium leading-[normal] text-white sm:text-heading-xs'
         )}
       >
         {title}

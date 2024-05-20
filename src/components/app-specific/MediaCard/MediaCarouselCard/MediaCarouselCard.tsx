@@ -32,8 +32,8 @@ export const MediaCarouselCard = ({
     <MediaCard
       className={cn(
         'aspect-[1.7143] w-[240px]',
-        'md:aspect-[2.043] md:w-[470px]',
-        'xl:aspect-[2.043] xl:w-[470px]',
+        'sm:aspect-[2.043] sm:w-[470px]',
+        'lg:aspect-[2.043] lg:w-[470px]',
         className
       )}
       isBookmarked={isBookmarked}
@@ -48,26 +48,26 @@ export const MediaCarouselCard = ({
           alt={imgAlt}
           sizes="(min-width: 1280px) 33vw, (min-width: 768px) 61vw, 64vw"
         />
-        <MediaCardBookmarkButton className="md:mr-6" />
+        <MediaCardBookmarkButton className="sm:mr-6" />
         <MediaCardPlayButton
           className={cn(
             '[&.play-button-touch]:mb-[22px]',
-            '[&.play-button-touch]:md:mb-[38px] [&.play-button-touch]:md:mr-7',
+            '[&.play-button-touch]:sm:mb-[38px] [&.play-button-touch]:sm:mr-7',
             '[&.play-button-touch]:z-30',
-            '[&.play-button-hovered]:-mt-6 [&.play-button-hovered]:md:mt-0'
+            '[&.play-button-hovered]:-mt-6 [&.play-button-hovered]:sm:mt-0'
           )}
         />
         <MediaCardDetails
           className={cn(
-            '[&_.upper-details-container]:gap-2 [&_.upper-details-container]:text-[12px] [&_.upper-details-container]:md:text-body-m',
-            '[&_.upper-details-container]:w-[calc(100%_-_1.75rem)] [&_.upper-details-container]:md:w-[calc(100%_-_2rem)]',
+            '[&_.upper-details-container]:gap-2 [&_.upper-details-container]:text-[12px] [&_.upper-details-container]:sm:text-body-m',
+            '[&_.upper-details-container]:w-[calc(100%_-_1.75rem)] [&_.upper-details-container]:sm:w-[calc(100%_-_2rem)]',
             '[&_.dot-separator]:h-[3px] [&_.dot-separator]:w-[3px]',
             '[&_.category-container]:gap-1.5',
             '[&_.category-icon]:w-3',
-            '[&_.title]:text-body-m [&_.title]:font-medium [&_.title]:md:text-heading-s',
-            '[&_.title]:w-[calc(100%_-_1.75rem)] [&_.title]:md:w-[calc(100%_-_2rem)]',
-            'z-20 col-start-1 row-start-1 self-end justify-self-start md:gap-[3px]',
-            'm-0 w-full rounded-b-lg p-4 md:p-6',
+            '[&_.title]:text-body-m [&_.title]:font-medium [&_.title]:sm:text-heading-s',
+            '[&_.title]:w-[calc(100%_-_1.75rem)] [&_.title]:sm:w-[calc(100%_-_2rem)]',
+            'z-20 col-start-1 row-start-1 self-end justify-self-start sm:gap-[3px]',
+            'm-0 w-full rounded-b-lg p-4 sm:p-6',
             'bg-gradient-to-b from-black/0 to-black/75'
           )}
           title={title}

@@ -20,15 +20,15 @@ const MediaCardPlayButtonHovered = motion(
         className={cn(
           'play-button-hovered',
           'z-20 col-start-1 row-start-1 place-self-center',
-          'h-min gap-[15px] rounded-full p-[7px] text-body-m md:gap-[19px] md:p-[9px] md:text-heading-xs',
+          'h-min gap-[15px] rounded-full p-[7px] text-body-m sm:gap-[19px] sm:p-[9px] sm:text-heading-xs',
           'bg-white/25 text-white hover:bg-white/50 hover:text-dark-blue',
           'motion-safe:transition-colors',
           className
         )}
         ref={ref}
       >
-        <Play className="h-[25px] w-[25px] md:h-[30px] md:w-[30px]" />
-        <span className="mr-[12px] md:mr-[15px]">Play</span>
+        <Play className="h-[25px] w-[25px] sm:h-[30px] sm:w-[30px]" />
+        <span className="mr-[12px] sm:mr-[15px]">Play</span>
       </Button>
     );
   })
@@ -41,7 +41,7 @@ const MediaCardPlayButtonTouch = ({ className }: { className?: string }) => (
       'play-button-touch',
       'col-start-1 row-start-1 mb-3.5 ml-3.5 self-end justify-self-start',
       'z-20 h-6 w-6 rounded-full bg-black/25 p-0 text-white shadow-md shadow-black/50',
-      'mb-3 mr-3 justify-self-end md:mb-5 md:mr-5',
+      'mb-3 mr-3 justify-self-end sm:mb-5 sm:mr-5',
       'hover:bg-black/60 hover:text-white/80',
       className
     )}
