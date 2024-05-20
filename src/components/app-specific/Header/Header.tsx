@@ -23,14 +23,14 @@ export const Header = ({ className = '', orientation }: HeaderProps) => {
     <header
       className={cn(
         'bg-semi-dark-blue',
-        'sm:mx-auto sm:mb-8 sm:mt-6 sm:w-11/12 sm:rounded-[0.625rem]',
+        'sm:mx-auto sm:mb-8 sm:mt-6 sm:w-[91.467%] sm:rounded-[0.625rem]',
         getVerticalClasses(orientation, 'header'),
         className
       )}
     >
       <div
         className={cn(
-          'mx-auto w-11/12',
+          'mx-auto w-[91.467%]',
           'grid h-14 grid-cols-[1fr_auto_1fr] items-center justify-items-start gap-6',
           'sm:mx-0 sm:h-[4.5rem] sm:w-full sm:px-6',
           getVerticalClasses(orientation, 'headerContainer')
