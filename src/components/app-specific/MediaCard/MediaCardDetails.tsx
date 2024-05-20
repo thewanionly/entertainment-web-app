@@ -10,7 +10,7 @@ type MediaCardDetailsProps = {
   title: string;
   year: string;
   category: MediaCategory;
-  rating: string;
+  rating?: string;
 };
 
 type UpperDetailsProps = Pick<MediaCardDetailsProps, 'year' | 'category' | 'rating'>;
@@ -21,6 +21,10 @@ const MEDIA_CATEGORY_MAP = {
     label: 'Movie',
   },
   tv_series: {
+    icon: CategoryTV,
+    label: 'TV Series',
+  },
+  tv: {
     icon: CategoryTV,
     label: 'TV Series',
   },
@@ -38,9 +42,11 @@ const UpperDetails = ({ year, category, rating }: UpperDetailsProps) => {
       <CategoryIcon className={cn('category-icon', 'w-2.5 md:w-3')} title={categoryName} />
       {categoryName}
     </span>,
-    <span key={2} className="truncate">
-      {rating}
-    </span>,
+    rating && (
+      <span key={2} className="truncate">
+        {rating}
+      </span>
+    ),
   ];
 
   return (
@@ -51,20 +57,22 @@ const UpperDetails = ({ year, category, rating }: UpperDetailsProps) => {
         'md:gap-2 md:text-body-s'
       )}
     >
-      {upperDetailsElements.map((upperDetailEl, index) => (
-        <Fragment key={upperDetailEl.key}>
-          {upperDetailEl}
-          {index < upperDetailsElements.length - 1 && (
-            <span
-              className={cn(
-                'dot-separator',
-                'h-0.5 w-0.5 flex-shrink-0 rounded-full bg-white/50',
-                'md:h-[3px] md:w-[3px]'
-              )}
-            />
-          )}
-        </Fragment>
-      ))}
+      {upperDetailsElements
+        .filter((upperDetailEl) => upperDetailEl)
+        .map((upperDetailEl, index, elements) => (
+          <Fragment key={(upperDetailEl as JSX.Element).key}>
+            {upperDetailEl}
+            {index < elements.length - 1 && (
+              <span
+                className={cn(
+                  'dot-separator',
+                  'h-0.5 w-0.5 flex-shrink-0 rounded-full bg-white/50',
+                  'md:h-[3px] md:w-[3px]'
+                )}
+              />
+            )}
+          </Fragment>
+        ))}
     </div>
   );
 };

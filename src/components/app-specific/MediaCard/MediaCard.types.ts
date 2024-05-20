@@ -9,7 +9,7 @@ export interface Media {
   title: string;
   year: string;
   category: MediaCategory;
-  rating: string;
+  rating?: string;
   isBookmarked: boolean;
   isTrending: boolean;
 }
