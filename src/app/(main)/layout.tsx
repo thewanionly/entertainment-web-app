@@ -10,10 +10,10 @@ export default function MainLayout({
   return (
     <div className="max-w-screen-xl lg:mx-auto lg:flex lg:pl-8">
       <Header />
-      <div className="lg:min-w-0">
+      <main className="w-screen lg:min-w-0">
         <SearchSection />
         {children}
-      </div>
+      </main>
     </div>
   );
 }
