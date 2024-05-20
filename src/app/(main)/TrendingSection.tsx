@@ -50,7 +50,14 @@ const TrendingCarousel = ({ items }: { items: Media[] }) => (
 export const TrendingSection = ({ className = '', medias }: TrendingSectionProps) => {
   return (
     <section className={cn('ml-auto w-[95.735%] overflow-hidden', className)}>
-      <h2 className="mb-4 text-[1.25rem] font-light">Trending</h2>
+      <h2
+        className={cn(
+          'mb-4 text-[1.25rem] font-light leading-[normal] tracking-[-0.019375rem]',
+          'mb-[1.5625rem] sm:text-heading-l'
+        )}
+      >
+        Trending
+      </h2>
       <TrendingCarousel items={medias} />
     </section>
   );
