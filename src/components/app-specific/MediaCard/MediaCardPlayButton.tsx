@@ -3,6 +3,7 @@ import { forwardRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 import { Button, IconButton, IconButtonSrLabel } from '@/components/generic/Button';
+import { useIsInClient } from '@/hooks/useIsInClient';
 import { cn } from '@/utils/styles';
 
 import { Play } from '../Icon';
@@ -58,6 +59,9 @@ type MediaCardPlayButtonProps = {
 
 export const MediaCardPlayButton = ({ className }: MediaCardPlayButtonProps) => {
   const { isHoverable, showPlayBtn } = useMediaCard();
+  const isInClient = useIsInClient();
+
+  if (!isInClient) return null;
 
   return isHoverable ? (
     <AnimatePresence>

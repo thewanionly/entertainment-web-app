@@ -1,11 +1,15 @@
 import { ReactNode } from 'react';
 
+import { useIsInClient } from '@/hooks/useIsInClient';
 import { cn } from '@/utils/styles';
 
 import { useMediaCard } from './MediaCard.context';
 
 const MediaCardHoverableAreaOverlay = () => {
   const { hoverCard, isHoverable } = useMediaCard();
+  const isInClient = useIsInClient();
+
+  if (!isInClient) return null;
 
   return (
     isHoverable && (
