@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { MediaCategory } from '../MediaCard.types';
+import { MediaType } from '@/types/medias';
+
 import { MediaGridCard } from './MediaGridCard';
 
 /**
@@ -41,7 +42,7 @@ const mockMediaData = {
   imgAlt: '4 people with their backs turned having fun in a sunset seemingly on a mountain',
   title: `Earth's Untouched`,
   year: '2017',
-  category: MediaCategory.Movie,
+  category: MediaType.Movie,
   rating: '18+',
   isBookmarked: false,
 };

@@ -1,15 +1,15 @@
 import { Fragment } from 'react';
 
+import { MediaType } from '@/types/medias';
 import { cn } from '@/utils/styles';
 
 import { CategoryMovie, CategoryTV } from '../Icon';
-import { MediaCategory } from './MediaCard.types';
 
 type MediaCardDetailsProps = {
   className?: string;
   title: string;
   year: string;
-  category: MediaCategory;
+  category: MediaType;
   rating?: string;
 };
 
@@ -19,10 +19,6 @@ const MEDIA_CATEGORY_MAP = {
   movie: {
     icon: CategoryMovie,
     label: 'Movie',
-  },
-  tv_series: {
-    icon: CategoryTV,
-    label: 'TV Series',
   },
   tv: {
     icon: CategoryTV,

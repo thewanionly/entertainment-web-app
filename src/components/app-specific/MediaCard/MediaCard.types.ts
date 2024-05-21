@@ -1,14 +1,11 @@
-export enum MediaCategory {
-  Movie = 'movie',
-  TVSeries = 'tv_series',
-}
+import { MediaType } from '@/types/medias';
 
 export interface Media {
   imgSrc: string;
   imgAlt: string;
   title: string;
   year: string;
-  category: MediaCategory;
+  category: MediaType;
   rating?: string;
   isBookmarked: boolean;
   isTrending: boolean;

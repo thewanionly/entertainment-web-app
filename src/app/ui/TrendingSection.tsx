@@ -1,7 +1,6 @@
 'use client';
 
 import { MediaCarouselCard } from '@/components/app-specific/MediaCard';
-import { MediaCategory } from '@/components/app-specific/MediaCard/MediaCard.types';
 import {
   CarouselPreviousButton,
   CarouselNextButton,
@@ -35,7 +34,7 @@ const TrendingCarousel = ({ items }: { items: Media[] }) => (
             imgAlt={title}
             title={title}
             year={new Date(releaseDate).getFullYear().toString()}
-            category={mediaType as MediaCategory}
+            category={mediaType}
             // rating={adult ? 'PG' : 'G'} TODO:
             isBookmarked={false}
           />

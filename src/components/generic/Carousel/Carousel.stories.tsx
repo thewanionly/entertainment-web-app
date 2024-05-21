@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
 import { MediaCarouselCard } from '@/components/app-specific/MediaCard';
-import { MediaCategory } from '@/components/app-specific/MediaCard/MediaCard.types';
+import { MediaType } from '@/types/medias';
 
 import { Carousel } from './Carousel';
 import { NUM_OF_CAROUSEL_ITEMS } from './Carousel.constants';
@@ -62,7 +62,7 @@ const mockMediaData = {
   imgAlt: 'A man wearing cold jacket standing in a rock with waters and cliff around',
   title: `Beyond Earth`,
   year: '2019',
-  category: MediaCategory.Movie,
+  category: MediaType.Movie,
   rating: 'PG',
   isBookmarked: false,
 };
