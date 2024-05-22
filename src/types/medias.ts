@@ -3,9 +3,10 @@
 // necessarily be 1:1 with the API we use
 
 export enum MediaType {
-  Movie = 'movie',
+  MOVIE = 'movie',
   TV = 'tv',
 }
+
 export interface Media {
   id: number;
   imagePath: string;

@@ -1,14 +1,20 @@
 // Typings for the media API we are using
 // If we decide to change the media API in the future, we change the typings in this file
 
-export interface MediasEndpointResponse<T> {
+export interface MediasApiResponse<T> {
   page: number;
   results: T[]; // could be "Movie" or "TV" or "Media"
   total_pages: number;
   total_results: number;
 }
 
-export interface Movie {
+export enum MediasApiMediaType {
+  MOVIE = 'movie',
+  TV = 'tv',
+  PERSON = 'person',
+}
+
+export interface MediasApiMovie {
   adult: boolean;
   backdrop_path: string;
   // belongs_to_collection?: BelongsToCollection;
@@ -17,7 +23,7 @@ export interface Movie {
   homepage: string;
   id: number;
   imdb_id: string;
-  media_type: string;
+  media_type: MediasApiMediaType;
   original_language: string;
   original_title: string;
   overview: string;
@@ -37,7 +43,7 @@ export interface Movie {
   vote_count: number;
 }
 
-export interface TV {
+export interface MediasApiTV {
   backdrop_path: string;
   // created_by: CreatedBy[];
   episode_run_time: number[];
@@ -72,4 +78,4 @@ export interface TV {
   vote_count: number;
 }
 
-export type Media = Movie & TV;
+export type MediasApiMedia = MediasApiMovie & MediasApiTV;

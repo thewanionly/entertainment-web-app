@@ -42,7 +42,7 @@ const mockMediaData = {
   imgAlt: 'A man wearing cold jacket standing in a rock with waters and cliff around',
   title: `Beyond Earth`,
   year: '2019',
-  category: MediaType.Movie,
+  category: MediaType.MOVIE,
   rating: 'PG',
   isBookmarked: false,
 };

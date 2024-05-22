@@ -42,7 +42,7 @@ const mockMediaData = {
   imgAlt: '4 people with their backs turned having fun in a sunset seemingly on a mountain',
   title: `Earth's Untouched`,
   year: '2017',
-  category: MediaType.Movie,
+  category: MediaType.MOVIE,
   rating: '18+',
   isBookmarked: false,
 };
