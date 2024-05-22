@@ -1,6 +1,6 @@
 'use client';
 
-import { MediaCarouselCard } from '@/components/app-specific/MediaCard';
+import { MediaCarouselCard } from '@/components/app-specific/MediaCard/MediaCarouselCard';
 import {
   CarouselPreviousButton,
   CarouselNextButton,

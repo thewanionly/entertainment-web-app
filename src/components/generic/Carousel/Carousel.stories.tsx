@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { MediaCarouselCard } from '@/components/app-specific/MediaCard';
+import { MediaCarouselCard } from '@/components/app-specific/MediaCard/MediaCarouselCard';
 import { MediaType } from '@/types/medias';
 
 import { Carousel } from './Carousel';
