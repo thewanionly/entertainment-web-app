@@ -1,6 +1,6 @@
 import { MediaType } from '@/types/medias';
 
-export interface Media {
+export interface MediaCardProps {
   imgSrc: string;
   imgAlt: string;
   title: string;
@@ -8,5 +8,8 @@ export interface Media {
   category: MediaType;
   rating?: string;
   isBookmarked: boolean;
-  isTrending: boolean;
+  className?: string;
+  hoverBookmark?: boolean; // only for storybook
+  hoverCard?: boolean; // only for storybook
+  isHoverable?: boolean; // only for storybook and testing purposes
 }

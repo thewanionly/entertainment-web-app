@@ -1,19 +1,12 @@
 import { cn } from '@/utils/styles';
 
 import { MediaCard } from '../MediaCard';
-import { Media } from '../MediaCard.types';
+import { MediaCardProps } from '../MediaCard.types';
 import { MediaCardBookmarkButton } from '../MediaCardBookmarkButton';
 import { MediaCardDetails } from '../MediaCardDetails';
 import { MediaCardHoverableArea } from '../MediaCardHoverableArea';
 import { MediaCardImage } from '../MediaCardImage';
 import { MediaCardPlayButton } from '../MediaCardPlayButton';
-
-type MediaGridCardProps = Omit<Media, 'isTrending'> & {
-  className?: string;
-  hoverBookmark?: boolean; // only for storybook
-  hoverCard?: boolean; // only for storybook
-  isHoverable?: boolean; // only for storybook and testing purposes
-};
 
 export const MediaGridCard = ({
   className = '',
@@ -27,7 +20,7 @@ export const MediaGridCard = ({
   hoverBookmark = false,
   hoverCard = false,
   isHoverable,
-}: MediaGridCardProps) => {
+}: MediaCardProps) => {
   return (
     <MediaCard
       className={cn('inline-flex flex-col gap-2', 'w-[164px] sm:w-[220px] lg:w-[280px]', className)}
