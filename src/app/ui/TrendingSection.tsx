@@ -9,6 +9,7 @@ import {
 import { CarouselContent } from '@/components/generic/Carousel/CarouselContent';
 import { CarouselItem } from '@/components/generic/Carousel/CarouselItem';
 import { IMAGE_BASE_URL } from '@/constants/images';
+import { useMediaQuery } from '@/hooks/useMediaQuery';
 import { Media } from '@/types/medias';
 import { cn } from '@/utils/styles';
 
@@ -17,16 +18,31 @@ type TrendingSectionProps = {
   medias: Media[];
 };
 
-const TrendingCarousel = ({ items }: { items: Media[] }) => (
+type MediaCarouselProps = {
+  items: Media[];
+  slidesToScroll?: number;
+};
+
+const MediaCarousel = ({ items, slidesToScroll }: MediaCarouselProps) => (
   <Carousel
     opts={{
       align: 'start',
+      slidesToScroll,
     }}
     className="w-full"
   >
     <CarouselContent>
-      {items.map(({ id, imagePath, title, releaseDate, mediaType }, index) => (
-        <CarouselItem key={index} className="basis-[68.27%] sm:basis-[64.45%] lg:basis-[39%]">
+      {items.map(({ id, imagePath, title, releaseDate, mediaType }) => (
+        <CarouselItem
+          key={id}
+          className={cn(
+            'xs:basis-full',
+            'min-w-[15rem] max-w-[22rem] basis-[68.27%]',
+            'sm:max-w-[33rem] sm:basis-[64.45%]',
+            'lg:max-w-[29.375rem] lg:basis-[45%]',
+            'xl:basis-[42%]'
+          )}
+        >
           <MediaCarouselCard
             key={id}
             className="w-full sm:w-full lg:w-full"
@@ -46,7 +62,12 @@ const TrendingCarousel = ({ items }: { items: Media[] }) => (
   </Carousel>
 );
 
+const SLIDES_TO_SCROLL_LG = 2;
+const SLIDES_TO_SCROLL_DEFAULT = 1;
+
 export const TrendingSection = ({ className = '', medias }: TrendingSectionProps) => {
+  const lg = useMediaQuery('(min-width: 1024px)');
+
   return (
     <section className={cn('ml-auto w-[95.735%] overflow-hidden', className)}>
       <h2
@@ -57,7 +78,10 @@ export const TrendingSection = ({ className = '', medias }: TrendingSectionProps
       >
         Trending
       </h2>
-      <TrendingCarousel items={medias} />
+      <MediaCarousel
+        items={medias}
+        slidesToScroll={lg ? SLIDES_TO_SCROLL_LG : SLIDES_TO_SCROLL_DEFAULT}
+      />
     </section>
   );
 };
