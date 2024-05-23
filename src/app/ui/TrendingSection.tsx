@@ -36,7 +36,7 @@ const MediaCarousel = ({ items, slidesToScroll }: MediaCarouselProps) => (
         <CarouselItem
           key={id}
           className={cn(
-            'xs:basis-full',
+            'xs:basis-[96%]',
             'min-w-[15rem] max-w-[22rem] basis-[68.27%]',
             'sm:max-w-[33rem] sm:basis-[64.45%]',
             'lg:max-w-[29.375rem] lg:basis-[45%]',
