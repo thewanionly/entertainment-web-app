@@ -31,7 +31,7 @@ const MediaCarousel = ({ items, slidesToScroll }: MediaCarouselProps) => (
     className="w-full"
   >
     <CarouselContent>
-      {items.map(({ id, imagePath, title, releaseDate, mediaType }) => (
+      {items.map(({ id, imagePath, title, releaseDate, mediaType }, index) => (
         <CarouselItem
           key={id}
           className={cn(
@@ -47,6 +47,7 @@ const MediaCarousel = ({ items, slidesToScroll }: MediaCarouselProps) => (
             className="w-full sm:w-full lg:w-full"
             imgSrc={imagePath}
             imgAlt={title}
+            prioritizeImg={index === 0}
             title={title}
             year={new Date(releaseDate).getFullYear().toString()}
             category={mediaType}

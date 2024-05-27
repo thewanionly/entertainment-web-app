@@ -9,6 +9,7 @@ export interface MediaCardProps {
   rating?: string;
   isBookmarked: boolean;
   className?: string;
+  prioritizeImg?: boolean;
   hoverBookmark?: boolean; // only for storybook
   hoverCard?: boolean; // only for storybook
   isHoverable?: boolean; // only for storybook and testing purposes

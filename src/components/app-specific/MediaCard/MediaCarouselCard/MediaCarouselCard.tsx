@@ -12,6 +12,7 @@ export const MediaCarouselCard = ({
   className = '',
   imgSrc,
   imgAlt,
+  prioritizeImg = false,
   title,
   year,
   category,
@@ -40,6 +41,7 @@ export const MediaCarouselCard = ({
           src={imgSrc}
           alt={imgAlt}
           sizes="(min-width: 1280px) 33vw, (min-width: 768px) 61vw, 64vw"
+          priority={prioritizeImg}
         />
         <MediaCardBookmarkButton className="sm:mr-6" />
         <MediaCardPlayButton
