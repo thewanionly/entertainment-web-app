@@ -1,5 +1,6 @@
 import Image, { ImageProps } from 'next/image';
 
+import imageLoader from '@/utils/images';
 import { cn } from '@/utils/styles';
 
 type MediaCardImageProps = ImageProps & {
@@ -9,7 +10,13 @@ type MediaCardImageProps = ImageProps & {
 export const MediaCardImage = ({ className = '', alt, ...props }: MediaCardImageProps) => {
   return (
     <div className={cn('relative h-full w-full', className)}>
-      <Image className={cn('image', 'rounded-lg object-cover')} alt={alt} fill {...props} />
+      <Image
+        className={cn('image', 'rounded-lg object-cover')}
+        loader={imageLoader}
+        alt={alt}
+        fill
+        {...props}
+      />
     </div>
   );
 };

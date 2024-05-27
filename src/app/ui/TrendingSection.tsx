@@ -8,7 +8,6 @@ import {
 } from '@/components/generic/Carousel';
 import { CarouselContent } from '@/components/generic/Carousel/CarouselContent';
 import { CarouselItem } from '@/components/generic/Carousel/CarouselItem';
-import { IMAGE_BASE_URL } from '@/constants/images';
 import { useMediaQuery } from '@/hooks/useMediaQuery';
 import { Media } from '@/types/medias';
 import { cn } from '@/utils/styles';
@@ -46,7 +45,7 @@ const MediaCarousel = ({ items, slidesToScroll }: MediaCarouselProps) => (
           <MediaCarouselCard
             key={id}
             className="w-full sm:w-full lg:w-full"
-            imgSrc={`${IMAGE_BASE_URL}w500${imagePath}`}
+            imgSrc={imagePath}
             imgAlt={title}
             title={title}
             year={new Date(releaseDate).getFullYear().toString()}
