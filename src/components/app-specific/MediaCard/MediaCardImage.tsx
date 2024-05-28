@@ -7,12 +7,12 @@ type MediaCardImageProps = ImageProps & {
   className?: string;
 };
 
-export const MediaCardImage = ({ className = '', alt, ...props }: MediaCardImageProps) => {
+export const MediaCardImage = ({ className = '', alt, loader, ...props }: MediaCardImageProps) => {
   return (
     <div className={cn('relative h-full w-full', className)}>
       <Image
         className={cn('image', 'rounded-lg object-cover')}
-        loader={imageLoader}
+        loader={loader || imageLoader}
         alt={alt}
         fill
         {...props}

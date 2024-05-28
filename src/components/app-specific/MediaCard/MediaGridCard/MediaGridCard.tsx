@@ -12,6 +12,7 @@ export const MediaGridCard = ({
   className = '',
   imgSrc,
   imgAlt,
+  customImgLoader,
   title,
   year,
   mediaType,
@@ -35,6 +36,7 @@ export const MediaGridCard = ({
           src={imgSrc}
           alt={imgAlt}
           sizes="(min-width: 1280px) 20vw, (min-width: 768px) 28vw, 44vw"
+          loader={customImgLoader}
         />
         <MediaCardBookmarkButton />
         <MediaCardPlayButton />

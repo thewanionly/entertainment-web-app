@@ -1,8 +1,11 @@
+import { ImageLoader } from 'next/image';
+
 import { MediaType } from '@/types/medias';
 
 export interface MediaCardProps {
   imgSrc: string;
   imgAlt: string;
+  customImgLoader?: ImageLoader;
   title: string;
   year: string;
   mediaType: MediaType;

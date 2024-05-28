@@ -1,7 +1,10 @@
+import { ImageLoaderProps } from 'next/image';
+
 import type { Meta, StoryObj } from '@storybook/react';
 
 import { MediaType } from '@/types/medias';
 
+import { MediaCardProps } from '../MediaCard.types';
 import { MediaGridCard } from './MediaGridCard';
 
 /**
@@ -37,7 +40,7 @@ export default meta;
  */
 type Story = StoryObj<typeof meta>;
 
-const mockMediaData = {
+const mockMediaData: MediaCardProps = {
   imgSrc: '/images/earths-untouched/large.jpg',
   imgAlt: '4 people with their backs turned having fun in a sunset seemingly on a mountain',
   title: `Earth's Untouched`,
@@ -45,6 +48,7 @@ const mockMediaData = {
   mediaType: MediaType.MOVIE,
   rating: '18+',
   isBookmarked: false,
+  customImgLoader: ({ src }: ImageLoaderProps) => src,
 };
 
 export const Default: Story = {

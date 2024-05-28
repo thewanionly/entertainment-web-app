@@ -1,7 +1,10 @@
+import { ImageLoaderProps } from 'next/image';
+
 import type { Meta, StoryObj } from '@storybook/react';
 
 import { MediaType } from '@/types/medias';
 
+import { MediaCardProps } from '../MediaCard.types';
 import { MediaCarouselCard } from './MediaCarouselCard';
 
 /**
@@ -37,7 +40,7 @@ export default meta;
  */
 type Story = StoryObj<typeof meta>;
 
-const mockMediaData = {
+const mockMediaData: MediaCardProps = {
   imgSrc: '/images/beyond-earth/trending/large.jpg',
   imgAlt: 'A man wearing cold jacket standing in a rock with waters and cliff around',
   title: `Beyond Earth`,
@@ -45,6 +48,7 @@ const mockMediaData = {
   mediaType: MediaType.MOVIE,
   rating: 'PG',
   isBookmarked: false,
+  customImgLoader: ({ src }: ImageLoaderProps) => src,
 };
 
 export const Default: Story = {
