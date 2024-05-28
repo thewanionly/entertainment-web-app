@@ -13,12 +13,12 @@ const meta = {
   component: MediaCarouselCard,
   argTypes: {
     mediaType: {
-      options: ['movie', 'tv_series'],
+      options: ['movie', 'tv'],
       control: {
         type: 'inline-radio',
         labels: {
           movie: 'Movie',
-          tv_series: 'TV Series',
+          tv: 'TV Series',
         },
       },
       defaultValue: 'movie',
