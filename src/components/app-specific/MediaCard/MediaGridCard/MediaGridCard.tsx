@@ -14,7 +14,7 @@ export const MediaGridCard = ({
   imgAlt,
   title,
   year,
-  category,
+  mediaType,
   rating,
   isBookmarked,
   hoverBookmark = false,
@@ -39,7 +39,7 @@ export const MediaGridCard = ({
         <MediaCardBookmarkButton />
         <MediaCardPlayButton />
       </MediaCardHoverableArea>
-      <MediaCardDetails title={title} year={year} category={category} rating={rating} />
+      <MediaCardDetails title={title} year={year} mediaType={mediaType} rating={rating} />
     </MediaCard>
   );
 };

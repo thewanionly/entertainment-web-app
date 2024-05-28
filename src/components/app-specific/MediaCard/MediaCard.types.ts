@@ -5,7 +5,7 @@ export interface MediaCardProps {
   imgAlt: string;
   title: string;
   year: string;
-  category: MediaType;
+  mediaType: MediaType;
   rating?: string;
   isBookmarked: boolean;
   className?: string;

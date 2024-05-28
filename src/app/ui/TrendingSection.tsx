@@ -50,7 +50,7 @@ const MediaCarousel = ({ items, slidesToScroll }: MediaCarouselProps) => (
             prioritizeImg={index === 0}
             title={title}
             year={new Date(releaseDate).getFullYear().toString()}
-            category={mediaType}
+            mediaType={mediaType}
             // rating={adult ? 'PG' : 'G'} TODO:
             isBookmarked={false}
           />

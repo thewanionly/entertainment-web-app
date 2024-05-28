@@ -15,7 +15,7 @@ export const MediaCarouselCard = ({
   prioritizeImg = false,
   title,
   year,
-  category,
+  mediaType,
   rating,
   isBookmarked,
   hoverBookmark = false,
@@ -57,8 +57,8 @@ export const MediaCarouselCard = ({
             '[&_.upper-details-container]:gap-2 [&_.upper-details-container]:text-[12px] [&_.upper-details-container]:sm:text-body-m',
             '[&_.upper-details-container]:w-[calc(100%_-_1.75rem)] [&_.upper-details-container]:sm:w-[calc(100%_-_2rem)]',
             '[&_.dot-separator]:h-[3px] [&_.dot-separator]:w-[3px]',
-            '[&_.category-container]:gap-1.5',
-            '[&_.category-icon]:w-3',
+            '[&_.mediaType-container]:gap-1.5',
+            '[&_.mediaType-icon]:w-3',
             '[&_.title]:text-body-m [&_.title]:font-medium [&_.title]:sm:text-heading-s',
             '[&_.title]:w-[calc(100%_-_1.75rem)] [&_.title]:sm:w-[calc(100%_-_2rem)]',
             'z-20 col-start-1 row-start-1 self-end justify-self-start sm:gap-[3px]',
@@ -67,7 +67,7 @@ export const MediaCarouselCard = ({
           )}
           title={title}
           year={year}
-          category={category}
+          mediaType={mediaType}
           rating={rating}
         />
       </MediaCardHoverableArea>

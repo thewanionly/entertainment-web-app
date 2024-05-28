@@ -12,7 +12,7 @@ const meta = {
   title: 'App Specific Components/MediaGridCard',
   component: MediaGridCard,
   argTypes: {
-    category: {
+    mediaType: {
       options: ['movie', 'tv_series'],
       control: {
         type: 'inline-radio',
@@ -42,7 +42,7 @@ const mockMediaData = {
   imgAlt: '4 people with their backs turned having fun in a sunset seemingly on a mountain',
   title: `Earth's Untouched`,
   year: '2017',
-  category: MediaType.MOVIE,
+  mediaType: MediaType.MOVIE,
   rating: '18+',
   isBookmarked: false,
 };

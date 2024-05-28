@@ -32,12 +32,12 @@ describe('MediaGridCard', () => {
   it(`displays media type`, () => {
     render(<Default />);
 
-    const category = new RegExp(Default.args.category as string, 'i');
-    const categoryEl = screen.getByText(category);
-    const categoryIcon = within(categoryEl).getByTitle(category);
+    const mediaType = new RegExp(Default.args.mediaType as string, 'i');
+    const mediaTypeEl = screen.getByText(mediaType);
+    const mediaTypeIcon = within(mediaTypeEl).getByTitle(mediaType);
 
-    expect(categoryEl).toBeInTheDocument();
-    expect(categoryIcon).toBeInTheDocument();
+    expect(mediaTypeEl).toBeInTheDocument();
+    expect(mediaTypeIcon).toBeInTheDocument();
   });
 
   it(`displays media rating`, () => {

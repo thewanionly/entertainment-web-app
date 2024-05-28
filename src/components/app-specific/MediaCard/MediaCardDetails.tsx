@@ -5,40 +5,40 @@ import { SVGRElement } from 'svgr';
 import { MediaType } from '@/types/medias';
 import { cn } from '@/utils/styles';
 
-import { CategoryMovie, CategoryTV } from '../Icon';
+import { MediaTypeMovie, MediaTypeTV } from '../Icon';
 
 type MediaCardDetailsProps = {
   className?: string;
   title: string;
   year: string;
-  category: MediaType;
+  mediaType: MediaType;
   rating?: string;
 };
 
-type UpperDetailsProps = Pick<MediaCardDetailsProps, 'year' | 'category' | 'rating'>;
+type UpperDetailsProps = Pick<MediaCardDetailsProps, 'year' | 'mediaType' | 'rating'>;
 
 const MEDIA_TYPE_MAP: Record<MediaType, { icon: SVGRElement; label: string }> = {
   movie: {
-    icon: CategoryMovie,
+    icon: MediaTypeMovie,
     label: 'Movie',
   },
   tv: {
-    icon: CategoryTV,
+    icon: MediaTypeTV,
     label: 'TV Series',
   },
 };
 
-const UpperDetails = ({ year, category, rating }: UpperDetailsProps) => {
-  const { icon: CategoryIcon, label: categoryName } = MEDIA_TYPE_MAP[category];
+const UpperDetails = ({ year, mediaType, rating }: UpperDetailsProps) => {
+  const { icon: MediaTypeIcon, label: mediaTypeLabel } = MEDIA_TYPE_MAP[mediaType];
 
   const upperDetailsElements = [
     <span key={0}>{year}</span>,
     <span
       key={1}
-      className={cn('category-container', 'flex items-center gap-1 capitalize sm:gap-1.5')}
+      className={cn('mediaType-container', 'flex items-center gap-1 capitalize sm:gap-1.5')}
     >
-      <CategoryIcon className={cn('category-icon', 'w-2.5 sm:w-3')} title={categoryName} />
-      {categoryName}
+      <MediaTypeIcon className={cn('mediaType-icon', 'w-2.5 sm:w-3')} title={mediaTypeLabel} />
+      {mediaTypeLabel}
     </span>,
     rating && (
       <span key={2} className="truncate">
@@ -79,12 +79,12 @@ export const MediaCardDetails = ({
   className = '',
   title,
   year,
-  category,
+  mediaType,
   rating,
 }: MediaCardDetailsProps) => {
   return (
     <div className={cn('flex flex-col gap-1 sm:gap-[5px]', className)}>
-      <UpperDetails year={year} category={category} rating={rating} />
+      <UpperDetails year={year} mediaType={mediaType} rating={rating} />
       <p
         className={cn(
           'title',

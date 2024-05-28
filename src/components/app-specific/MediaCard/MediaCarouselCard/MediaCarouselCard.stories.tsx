@@ -12,7 +12,7 @@ const meta = {
   title: 'App Specific Components/MediaCarouselCard',
   component: MediaCarouselCard,
   argTypes: {
-    category: {
+    mediaType: {
       options: ['movie', 'tv_series'],
       control: {
         type: 'inline-radio',
@@ -42,7 +42,7 @@ const mockMediaData = {
   imgAlt: 'A man wearing cold jacket standing in a rock with waters and cliff around',
   title: `Beyond Earth`,
   year: '2019',
-  category: MediaType.MOVIE,
+  mediaType: MediaType.MOVIE,
   rating: 'PG',
   isBookmarked: false,
 };
