@@ -12,6 +12,8 @@ import { useMediaQuery } from '@/hooks/useMediaQuery';
 import { Media } from '@/types/medias';
 import { cn } from '@/utils/styles';
 
+import { TRENDING_SECTION_HEADING } from './TrendingSection.constants';
+
 type TrendingSectionProps = {
   className?: string;
   medias: Media[];
@@ -76,7 +78,7 @@ export const TrendingSection = ({ className = '', medias }: TrendingSectionProps
           'mb-[1.5625rem] sm:text-heading-l'
         )}
       >
-        Trending
+        {TRENDING_SECTION_HEADING}
       </h2>
       <MediaCarousel
         items={medias}
