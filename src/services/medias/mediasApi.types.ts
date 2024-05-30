@@ -55,7 +55,7 @@ export interface MediasApiTV {
   languages: string[];
   last_air_date: string;
   // last_episode_to_air: LastEpisodeToAir;
-  media_type: string;
+  media_type: MediasApiMediaType;
   name: string;
   // next_episode_to_air?: NextEpisodeToAir;
   // networks: Network[];
