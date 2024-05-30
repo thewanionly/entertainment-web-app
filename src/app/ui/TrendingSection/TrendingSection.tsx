@@ -45,7 +45,6 @@ const MediaCarousel = ({ items, slidesToScroll }: MediaCarouselProps) => (
           )}
         >
           <MediaCarouselCard
-            key={id}
             className="w-full sm:w-full lg:w-full"
             imgSrc={imagePath}
             imgAlt={title}
