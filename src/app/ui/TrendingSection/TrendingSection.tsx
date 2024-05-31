@@ -1,11 +1,7 @@
 'use client';
 
 import { MediaCarouselCard } from '@/components/app-specific/MediaCard/MediaCarouselCard';
-import {
-  CarouselPreviousButton,
-  CarouselNextButton,
-  Carousel,
-} from '@/components/generic/Carousel';
+import { Carousel } from '@/components/generic/Carousel';
 import { CarouselContent } from '@/components/generic/Carousel/CarouselContent';
 import { CarouselItem } from '@/components/generic/Carousel/CarouselItem';
 import { useMediaQuery } from '@/hooks/useMediaQuery';
@@ -58,8 +54,6 @@ const MediaCarousel = ({ items, slidesToScroll }: MediaCarouselProps) => (
         </CarouselItem>
       ))}
     </CarouselContent>
-    <CarouselPreviousButton />
-    <CarouselNextButton />
   </Carousel>
 );
 
@@ -70,7 +64,7 @@ export const TrendingSection = ({ className = '', medias }: TrendingSectionProps
   const lg = useMediaQuery('(min-width: 1024px)');
 
   return (
-    <section className={cn('ml-auto w-[95.735%] overflow-hidden', className)}>
+    <section className={cn('ml-auto w-[95.735%] overflow-hidden lg:w-full lg:pl-9', className)}>
       <h2
         className={cn(
           'mb-4 text-[1.25rem] font-light leading-[normal] tracking-[-0.019375rem]',
