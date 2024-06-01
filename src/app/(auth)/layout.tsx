@@ -14,7 +14,7 @@ export default function AuthLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <div className="max-w-screen-xl lg:mx-auto">
+    <div className="max-w-limit lg:mx-auto">
       <Link href="/" className="inline-block">
         <div className={cn('relative aspect-[1.25] w-[25px]', 'sm:w-8')}>
           <Image

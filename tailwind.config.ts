@@ -69,6 +69,9 @@ const config = {
       screens: {
         xs: { max: '320px' },
       },
+      maxWidth: {
+        limit: '90rem',
+      },
       keyframes: {
         'accordion-down': {
           from: { height: '0' },
