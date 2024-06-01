@@ -22,8 +22,10 @@ export const Header = ({ className = '', orientation }: HeaderProps) => {
   return (
     <header
       className={cn(
+        'fixed left-0 right-0 z-50',
         'bg-semi-dark-blue',
         'sm:mx-auto sm:mb-8 sm:mt-6 sm:w-[91.467%] sm:rounded-[0.625rem]',
+        'lg:left-auto lg:right-auto',
         getVerticalClasses(orientation, 'header'),
         className
       )}
