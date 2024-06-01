@@ -28,15 +28,16 @@ const MediaCarousel = ({ items, slidesToScroll }: MediaCarouselProps) => (
     }}
     className="w-full"
   >
-    <CarouselContent>
+    <CarouselContent className="-ml-4 sm:-ml-10">
       {items.map(({ id, imagePath, title, releaseDate, mediaType }, index) => (
         <CarouselItem
           key={id}
           className={cn(
+            'pl-4 sm:pl-10',
             'xs:basis-[96%]',
             'min-w-[15rem] max-w-[22rem] basis-[68.27%]',
-            'sm:max-w-[33rem] sm:basis-[64.45%]',
-            'lg:max-w-[29.375rem] lg:basis-[45%]',
+            'sm:max-w-[33rem] sm:basis-[65.788%]',
+            'lg:max-w-[31.875rem] lg:basis-[45%]',
             'xl:basis-[42%]'
           )}
         >
