@@ -13,7 +13,9 @@ type TopRatedSectionProps = {
 
 export const TopRatedSection = ({ className = '', medias }: TopRatedSectionProps) => {
   return (
-    <section className={cn('mx-auto w-[91.467%] overflow-hidden lg:w-full lg:px-9', className)}>
+    <section
+      className={cn('mx-auto w-[91.467%] overflow-hidden lg:w-full lg:px-9 2xl:pr-0', className)}
+    >
       <h2
         className={cn(
           'mb-4 text-[1.25rem] font-light leading-[normal] tracking-[-0.019375rem]',
