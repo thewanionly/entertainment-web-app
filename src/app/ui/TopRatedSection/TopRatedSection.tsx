@@ -2,6 +2,7 @@
 
 import { MediaGridCard } from '@/components/app-specific/MediaCard/MediaGridCard';
 import { Media } from '@/types/medias';
+import { getYear } from '@/utils/dates';
 import { cn } from '@/utils/styles';
 
 import { TOP_RATED_SECTION_HEADING } from './TopRatedSection.constants';
@@ -41,7 +42,7 @@ export const TopRatedSection = ({ className = '', medias }: TopRatedSectionProps
               imgAlt={title}
               prioritizeImg={index === 0}
               title={title}
-              year={new Date(releaseDate).getFullYear().toString()}
+              year={getYear(releaseDate)}
               mediaType={mediaType}
               // rating={adult ? 'PG' : 'G'} TODO:
               isBookmarked={false}

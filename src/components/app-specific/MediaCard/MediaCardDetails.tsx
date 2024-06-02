@@ -10,7 +10,7 @@ import { MediaTypeMovie, MediaTypeTV } from '../Icon';
 type MediaCardDetailsProps = {
   className?: string;
   title: string;
-  year: string;
+  year?: string;
   mediaType: MediaType;
   rating?: string;
 };
@@ -32,7 +32,7 @@ const UpperDetails = ({ year, mediaType, rating }: UpperDetailsProps) => {
   const { icon: MediaTypeIcon, label: mediaTypeLabel } = MEDIA_TYPE_MAP[mediaType];
 
   const upperDetailsElements = [
-    <span key={0}>{year}</span>,
+    year && <span key={0}>{year}</span>,
     <span
       key={1}
       className={cn('mediaType-container', 'flex items-center gap-1 capitalize sm:gap-1.5')}

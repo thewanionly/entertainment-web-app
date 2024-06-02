@@ -6,6 +6,7 @@ import { CarouselContent } from '@/components/generic/Carousel/CarouselContent';
 import { CarouselItem } from '@/components/generic/Carousel/CarouselItem';
 import { useMediaQuery } from '@/hooks/useMediaQuery';
 import { Media } from '@/types/medias';
+import { getYear } from '@/utils/dates';
 import { cn } from '@/utils/styles';
 
 import { TRENDING_SECTION_HEADING } from './TrendingSection.constants';
@@ -47,7 +48,7 @@ const MediaCarousel = ({ items, slidesToScroll }: MediaCarouselProps) => (
             imgAlt={title}
             prioritizeImg={index === 0}
             title={title}
-            year={new Date(releaseDate).getFullYear().toString()}
+            year={getYear(releaseDate)}
             mediaType={mediaType}
             // rating={adult ? 'PG' : 'G'} TODO:
             isBookmarked={false}
