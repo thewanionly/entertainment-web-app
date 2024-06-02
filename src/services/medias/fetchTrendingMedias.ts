@@ -32,7 +32,7 @@ export const fetchTrendingMedias = async (): Promise<Media[]> => {
       .filter(({ media_type }) => media_type !== MediasApiMediaType.PERSON)
       .map((item) => ({
         id: item.id,
-        imagePath: item.backdrop_path,
+        imagePath: item.backdrop_path || item.poster_path || '',
         title: item.media_type === MediasApiMediaType.MOVIE ? item.title : item.name,
         mediaType: item.media_type as unknown as MediaType,
         releaseDate:

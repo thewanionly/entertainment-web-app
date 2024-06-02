@@ -62,7 +62,7 @@ export const fetchTopRatedMedias = async (): Promise<Media[]> => {
       .sort((a, b) => b.vote_average - a.vote_average) // sort both medias by rating (top rated first)
       .map((item) => ({
         id: item.id,
-        imagePath: item.backdrop_path,
+        imagePath: item.backdrop_path || item.poster_path || '',
         title: item.media_type === MediasApiMediaType.MOVIE ? item.title : item.name,
         mediaType: item.media_type as unknown as MediaType,
         releaseDate:
