@@ -15,3 +15,10 @@ export interface Media {
   releaseDate: string;
   certification: string;
 }
+
+export interface MediaResultsInfo {
+  page: number;
+  results: Media[];
+  totalPages: number;
+  totalResults: number;
+}

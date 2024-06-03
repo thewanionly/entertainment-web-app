@@ -21,7 +21,7 @@ export const fetchTrendingMedias = async (): Promise<Media[]> => {
       throw new Error('Failed to fetch trending medias data');
     }
 
-    // technically "Media" here should include "person" type but since
+    // technically "MediasApiMedia" here should include "person" type but since
     // we are filtering it out in the next line and we don't really use
     // "person" type in our application, it doesn't makes sense to include
     // "person" typing in our app
