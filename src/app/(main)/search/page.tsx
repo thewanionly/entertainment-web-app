@@ -1,3 +1,5 @@
+import { redirect } from 'next/navigation';
+
 import { MediaGridCard } from '@/components/app-specific/MediaCard/MediaGridCard';
 import { fetchSearchResults } from '@/services/medias/fetchSearchResults';
 import { getYear } from '@/utils/dates';
@@ -12,6 +14,10 @@ type SearchPageProps = {
 export default async function SearchPage({
   searchParams: { q: searchTerm = '' },
 }: SearchPageProps) {
+  if (!searchTerm) {
+    redirect('/');
+  }
+
   const { results, totalResults } = await fetchSearchResults(searchTerm);
 
   return (
