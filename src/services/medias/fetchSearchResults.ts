@@ -10,10 +10,8 @@ const options: RequestInit = {
   },
 };
 
-export const fetchSearchResults = async (searchTerm: string): Promise<MediaResultsInfo | null> => {
+export const fetchSearchResults = async (searchTerm: string): Promise<MediaResultsInfo> => {
   try {
-    if (!searchTerm) return null;
-
     // TODO: find better way to assign searchparam to API in GET request: https://stackoverflow.com/questions/35038857/setting-query-string-using-fetch-get-request
     const queryParams = new URLSearchParams({
       query: searchTerm,
