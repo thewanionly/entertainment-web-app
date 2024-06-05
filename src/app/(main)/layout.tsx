@@ -1,5 +1,5 @@
-import { Attribution } from '@/app/ui/Attribution';
 import { SearchSection } from '@/app/ui/SearchSection';
+import { Footer } from '@/components/app-specific/Footer';
 import { Header } from '@/components/app-specific/Header';
 import '@/styles/globals.css';
 
@@ -15,9 +15,7 @@ export default function MainLayout({
         <SearchSection />
         {children}
       </main>
-      <footer className="my-12 w-full lg:mb-16 lg:pl-[96px]">
-        <Attribution />
-      </footer>
+      <Footer />
     </div>
   );
 }
