@@ -1,13 +1,13 @@
 'use client';
 
-import { ChangeEvent } from 'react';
+import { FormEvent } from 'react';
 
 import { useRouter, useSearchParams } from 'next/navigation';
 
 import { SearchBar } from '@/components/app-specific/SearchBar';
 import { cn } from '@/utils/styles';
 
-const SEARCH_DEBOUNCE_DELAY = 500;
+const SEARCH_INPUT_NAME = 'search';
 
 export const SearchSection = () => {
   const searchParams = useSearchParams();
@@ -15,35 +15,38 @@ export const SearchSection = () => {
 
   const searchTerm = searchParams.get('q')?.toString();
 
-  let timerId: NodeJS.Timeout | null = null;
+  const handleSearch = (searchValue: string) => {
+    const params = new URLSearchParams(searchParams);
 
-  const handleSearch = (event: ChangeEvent<HTMLInputElement>) => {
-    if (timerId) {
-      clearTimeout(timerId);
+    if (searchValue) {
+      params.set('q', searchValue);
+    } else {
+      params.delete('q');
     }
 
-    timerId = setTimeout(() => {
-      const searchValue = event.target.value;
+    replace(`search?${params.toString()}`);
+  };
 
-      const params = new URLSearchParams(searchParams);
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
 
-      if (searchValue) {
-        params.set('q', searchValue);
-      } else {
-        params.delete('q');
-      }
+    const formData = new FormData(event.target as HTMLFormElement);
+    const inputValue = formData.get(SEARCH_INPUT_NAME) as string;
 
-      replace(`search?${params.toString()}`);
-    }, SEARCH_DEBOUNCE_DELAY);
+    if (!inputValue) return;
+
+    handleSearch(inputValue);
   };
 
   return (
     <section className={cn('mx-auto mt-6 w-[91.467%]', 'lg:mt-16 lg:w-full lg:px-9')}>
-      <SearchBar
-        placeholder="Search for movies or TV series"
-        defaultValue={searchTerm}
-        onChange={handleSearch}
-      />
+      <form onSubmit={handleSubmit}>
+        <SearchBar
+          name={SEARCH_INPUT_NAME}
+          placeholder="Search for movies or TV series"
+          defaultValue={searchTerm}
+        />
+      </form>
     </section>
   );
 };
