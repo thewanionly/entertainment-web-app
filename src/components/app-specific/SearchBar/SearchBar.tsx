@@ -21,6 +21,7 @@ const SearchBar = React.forwardRef<HTMLInputElement, SearchBarProps>(
             'flex-1 border-transparent p-0 pb-3.5 pt-0.5 text-[1rem] font-light focus-within:border-greyish-blue sm:pt-0 sm:text-heading-m'
           }
           disabled={disabled}
+          autoComplete="off"
         />
       </div>
     );
