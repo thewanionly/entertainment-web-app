@@ -12,6 +12,7 @@ const twMerge = extendTailwindMerge({
         'semi-dark-blue',
         'greyish-blue',
         'white',
+        'light-grey',
         'grey',
         'black',
         'transparent',

@@ -12,6 +12,7 @@ const config = {
       'semi-dark-blue': '#161D2F',
       'greyish-blue': '#5A698F',
       white: '#FFFFFF',
+      'light-grey': '#DBDBDB',
       grey: '#979797',
       black: '#000000',
       transparent: 'transparent',
