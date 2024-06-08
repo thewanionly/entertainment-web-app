@@ -1,7 +1,7 @@
 import { MediaResultsInfo } from '@/types/medias';
 
-import { transformMediaResults } from '../_ui/transformMediaResults';
 import { MediasApiMedia, MediasApiMediaType, MediasApiResponse } from './mediasApi.types';
+import { transformMediaResults } from './mediasApi.utils';
 
 const options: RequestInit = {
   method: 'GET',
