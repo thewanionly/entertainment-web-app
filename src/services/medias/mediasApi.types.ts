@@ -78,4 +78,4 @@ export interface MediasApiTV {
   vote_count: number;
 }
 
-export type MediasApiMedia = MediasApiMovie & MediasApiTV;
+export type MediasApiMedia = MediasApiMovie | MediasApiTV;

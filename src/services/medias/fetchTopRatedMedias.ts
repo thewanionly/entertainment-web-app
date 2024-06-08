@@ -17,7 +17,7 @@ const options: RequestInit = {
   },
 };
 
-const fetchTopRatedMovies = async (): Promise<MediasApiMovie[]> => {
+const getTopRatedMovies = async (): Promise<MediasApiMovie[]> => {
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_MEDIAS_BASE_ENDPOINT}/movie/top_rated`,
     options
@@ -35,7 +35,7 @@ const fetchTopRatedMovies = async (): Promise<MediasApiMovie[]> => {
   }));
 };
 
-const fetchTopRatedTv = async (): Promise<MediasApiTV[]> => {
+const getTopRatedTv = async (): Promise<MediasApiTV[]> => {
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_MEDIAS_BASE_ENDPOINT}/tv/top_rated`,
     options
@@ -53,9 +53,31 @@ const fetchTopRatedTv = async (): Promise<MediasApiTV[]> => {
   }));
 };
 
+export const fetchTopRatedTv = async (): Promise<Media[]> => {
+  try {
+    const tv = await getTopRatedTv();
+
+    return transformMediaResults(tv);
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+};
+
+export const fetchTopRatedMovies = async (): Promise<Media[]> => {
+  try {
+    const movies = await getTopRatedMovies();
+
+    return transformMediaResults(movies);
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+};
+
 export const fetchTopRatedMedias = async (): Promise<Media[]> => {
   try {
-    const [movies, tv] = await Promise.all([fetchTopRatedMovies(), fetchTopRatedTv()]);
+    const [movies, tv] = await Promise.all([getTopRatedMovies(), getTopRatedTv()]);
 
     const topRatedMedias = [...movies, ...tv] as MediasApiMedia[];
 
