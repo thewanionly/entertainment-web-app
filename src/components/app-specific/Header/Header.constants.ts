@@ -24,8 +24,8 @@ export const NAV_LINKS: NavLinkType[] = [
     icon: 'NavMovies',
   },
   {
-    url: '/tv-series',
-    label: 'tv-series',
+    url: '/tv',
+    label: 'tv',
     icon: 'NavTVSeries',
   },
   {

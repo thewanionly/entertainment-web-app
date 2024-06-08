@@ -11,7 +11,7 @@ const SEARCH_INPUT_NAME = 'search';
 const SEARCH_PLACEHOLDER: Record<string, string> = {
   default: 'Search for movies or TV series',
   movies: 'Search for movies',
-  'tv-series': 'Search for TV series',
+  tv: 'Search for TV series',
   bookmarks: 'Search for bookmarked shows',
 };
 
