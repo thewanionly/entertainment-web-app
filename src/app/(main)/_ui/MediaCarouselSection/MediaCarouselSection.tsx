@@ -5,17 +5,20 @@ import { useMediaQuery } from '@/hooks/useMediaQuery';
 import { Media } from '@/types/medias';
 import { cn } from '@/utils/styles';
 
-import { TRENDING_SECTION_HEADING } from './TrendingSection.constants';
-
-type TrendingSectionProps = {
+type MediaCarouselSectionProps = {
   className?: string;
+  title: string;
   medias: Media[];
 };
 
 const SLIDES_TO_SCROLL_LG = 2;
 const SLIDES_TO_SCROLL_DEFAULT = 1;
 
-export const TrendingSection = ({ className = '', medias }: TrendingSectionProps) => {
+export const MediaCarouselSection = ({
+  className = '',
+  title,
+  medias,
+}: MediaCarouselSectionProps) => {
   const lg = useMediaQuery('(min-width: 1024px)');
 
   return (
@@ -26,7 +29,7 @@ export const TrendingSection = ({ className = '', medias }: TrendingSectionProps
           'mb-[1.5625rem] sm:text-heading-l'
         )}
       >
-        {TRENDING_SECTION_HEADING}
+        {title}
       </h2>
       <MediaCarousel
         items={medias}

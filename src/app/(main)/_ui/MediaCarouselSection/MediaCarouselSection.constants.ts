@@ -1,8 +1,8 @@
 import { Media, MediaType } from '@/types/medias';
 
-export const TRENDING_SECTION_HEADING = 'Trending';
+export const mockedTitle = 'Trending';
 
-export const mockedTrendingData: Media[] = [
+export const mockedMedias: Media[] = [
   {
     id: 1,
     imagePath: '/the-first-omen.jpg',
