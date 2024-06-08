@@ -1,5 +1,6 @@
-import { Media, MediaType } from '@/types/medias';
+import { Media } from '@/types/medias';
 
+import { transformMediaResults } from '../_ui/transformMediaResults';
 import { MediasApiMedia, MediasApiMediaType, MediasApiResponse } from './mediasApi.types';
 
 const options: RequestInit = {
@@ -28,17 +29,9 @@ export const fetchTrendingMedias = async (): Promise<Media[]> => {
     const data = (await response.json()) as MediasApiResponse<MediasApiMedia>;
 
     // filter out "person" media type and transform fields to "AppMedia"
-    return data.results
-      .filter(({ media_type }) => media_type !== MediasApiMediaType.PERSON)
-      .map((item) => ({
-        id: item.id,
-        imagePath: item.backdrop_path || item.poster_path || '',
-        title: item.media_type === MediasApiMediaType.MOVIE ? item.title : item.name,
-        mediaType: item.media_type as unknown as MediaType,
-        releaseDate:
-          item.media_type === MediasApiMediaType.MOVIE ? item.release_date : item.first_air_date,
-        certification: '', // TODO: determine certification (extra API calls, check with the docs)
-      }));
+    return transformMediaResults(
+      data.results.filter(({ media_type }) => media_type !== MediasApiMediaType.PERSON)
+    );
   } catch (error) {
     console.error(error);
     throw error;

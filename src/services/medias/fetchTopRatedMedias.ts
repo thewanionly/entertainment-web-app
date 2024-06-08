@@ -1,5 +1,6 @@
-import { Media, MediaType } from '@/types/medias';
+import { Media } from '@/types/medias';
 
+import { transformMediaResults } from '../_ui/transformMediaResults';
 import {
   MediasApiMedia,
   MediasApiMediaType,
@@ -58,17 +59,8 @@ export const fetchTopRatedMedias = async (): Promise<Media[]> => {
 
     const topRatedMedias = [...movies, ...tv] as MediasApiMedia[];
 
-    return topRatedMedias
-      .sort((a, b) => b.vote_average - a.vote_average) // sort both medias by rating (top rated first)
-      .map((item) => ({
-        id: item.id,
-        imagePath: item.backdrop_path || item.poster_path || '',
-        title: item.media_type === MediasApiMediaType.MOVIE ? item.title : item.name,
-        mediaType: item.media_type as unknown as MediaType,
-        releaseDate:
-          item.media_type === MediasApiMediaType.MOVIE ? item.release_date : item.first_air_date,
-        certification: '', // TODO: determine certification (extra API calls, check with the docs)
-      }));
+    // sort both medias by rating (top rated first)
+    return transformMediaResults(topRatedMedias.sort((a, b) => b.vote_average - a.vote_average));
   } catch (error) {
     console.error(error);
     throw error;
