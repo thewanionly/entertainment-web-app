@@ -2,8 +2,8 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
 
+import { usePathname } from '@/lib/navigation';
 import { cn } from '@/utils/styles';
 
 import { HEADER_LOGO_ALT_TEXT, HEADER_LOGO_IMG_PATH, NAV_LINKS } from './Header.constants';
@@ -17,7 +17,7 @@ type HeaderProps = {
 };
 
 export const Header = ({ className = '', orientation }: HeaderProps) => {
-  const pathname = usePathname();
+  const { pathname } = usePathname();
 
   return (
     <header

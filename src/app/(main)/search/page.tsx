@@ -1,6 +1,5 @@
-import { redirect } from 'next/navigation';
-
 import { MediaGridCard } from '@/components/app-specific/MediaCard/MediaGridCard';
+import { redirect } from '@/lib/navigation';
 import { fetchSearchResults } from '@/services/medias/fetchSearchResults';
 import { getYear } from '@/utils/dates';
 import { cn } from '@/utils/styles';
