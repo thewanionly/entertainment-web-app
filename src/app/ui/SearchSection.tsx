@@ -2,20 +2,29 @@
 
 import { FormEvent } from 'react';
 
-import { useRouter, useSearchParams } from 'next/navigation';
-
 import { SearchBar } from '@/components/app-specific/SearchBar';
+import { usePathname, useRouter, useSearchParams } from '@/lib/navigation';
 import { cn } from '@/utils/styles';
 
 const SEARCH_INPUT_NAME = 'search';
 
+const SEARCH_PLACEHOLDER: Record<string, string> = {
+  default: 'Search for movies or TV series',
+  movies: 'Search for movies',
+  'tv-series': 'Search for TV series',
+  bookmarks: 'Search for bookmarked shows',
+};
+
 export const SearchSection = () => {
+  const { pathname, topLevelPath } = usePathname();
   const searchParams = useSearchParams();
   const { replace } = useRouter();
 
   const searchTerm = searchParams.get('q')?.toString();
+  const searchPlaceholder = SEARCH_PLACEHOLDER[topLevelPath] ?? SEARCH_PLACEHOLDER.default;
 
   const handleSearch = (searchValue: string) => {
+    const path = pathname == '/' ? '/search' : pathname;
     const params = new URLSearchParams(searchParams);
 
     if (searchValue) {
@@ -24,7 +33,7 @@ export const SearchSection = () => {
       params.delete('q');
     }
 
-    replace(`search?${params.toString()}`);
+    replace(`${path}?${params.toString()}`);
   };
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
@@ -43,7 +52,7 @@ export const SearchSection = () => {
       <form onSubmit={handleSubmit}>
         <SearchBar
           name={SEARCH_INPUT_NAME}
-          placeholder="Search for movies or TV series"
+          placeholder={searchPlaceholder}
           defaultValue={searchTerm}
         />
       </form>
