@@ -1,5 +1,5 @@
-import { TopRatedSection } from '@/app/ui/TopRatedSection';
-import { TrendingSection } from '@/app/ui/TrendingSection';
+import { TopRatedSection } from '@/app/sections/TopRatedSection';
+import { TrendingSection } from '@/app/sections/TrendingSection';
 import { fetchTopRatedMedias } from '@/services/medias/fetchTopRatedMedias';
 import { fetchTrendingMedias } from '@/services/medias/fetchTrendingMedias';
 
