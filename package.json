@@ -14,7 +14,8 @@
     "storybook": "storybook dev -p 6006 --ci",
     "build-storybook": "storybook build",
     "test": "jest --passWithNoTests",
-    "test:dev": "jest --watch --verbose"
+    "test:dev": "jest --watch --verbose",
+    "type:check": "tsc --noEmit"
   },
   "dependencies": {
     "@radix-ui/react-slot": "^1.0.2",
