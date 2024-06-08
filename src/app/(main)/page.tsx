@@ -1,7 +1,8 @@
-import { TopRatedSection } from '@/app/sections/TopRatedSection';
-import { TrendingSection } from '@/app/sections/TrendingSection';
 import { fetchTopRatedMedias } from '@/services/medias/fetchTopRatedMedias';
 import { fetchTrendingMedias } from '@/services/medias/fetchTrendingMedias';
+
+import { TopRatedSection } from './_ui/TopRatedSection';
+import { TrendingSection } from './_ui/TrendingSection';
 
 export default async function Home() {
   const trendingMedias = await fetchTrendingMedias();
