@@ -60,7 +60,7 @@ export const Header = ({ className = '', orientation }: HeaderProps) => {
             {NAV_LINKS.map((navLink) => (
               <HeaderNavigationItem
                 key={navLink.label}
-                active={pathname === navLink.url}
+                active={navLink.url === pathname || navLink.relatedUrls?.includes(pathname)}
                 {...navLink}
               />
             ))}

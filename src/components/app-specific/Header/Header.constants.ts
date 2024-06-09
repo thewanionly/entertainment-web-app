@@ -10,6 +10,7 @@ export type NavLinkType = {
   url: string;
   label: string;
   icon: string;
+  relatedUrls?: string[];
 };
 
 export const NAV_LINKS: NavLinkType[] = [
@@ -17,6 +18,7 @@ export const NAV_LINKS: NavLinkType[] = [
     url: '/',
     label: 'home',
     icon: 'NavHome',
+    relatedUrls: ['/search'],
   },
   {
     url: '/movies',
