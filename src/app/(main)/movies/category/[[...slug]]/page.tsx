@@ -1,0 +1,67 @@
+import { MediaGridSection } from '@/app/(main)/_ui/MediaGridSection';
+import { notFound, redirect } from '@/lib/navigation';
+import { fetchNowPlayingMovies } from '@/services/medias/fetchNowPlayingMedias';
+import { fetchPopularMovies } from '@/services/medias/fetchPopularMedias';
+import { fetchTopRatedMovies } from '@/services/medias/fetchTopRatedMedias';
+import { fetchUpcomingMovies } from '@/services/medias/fetchUpcomingMedias';
+
+type MovieCategoryPageProps = {
+  params: {
+    slug: string;
+  };
+  searchParams?: {
+    q?: string;
+  };
+};
+
+// TODO: duplicate in moves/page.tsx
+const MOVIE_CATEGORY = {
+  popular: {
+    title: 'Popular',
+    name: 'popular',
+    promise: fetchPopularMovies(),
+  },
+  'now-playing': {
+    title: 'Now playing',
+    name: 'now-playing',
+    promise: fetchNowPlayingMovies(),
+  },
+  upcoming: {
+    title: 'Upcoming',
+    name: 'upcoming',
+    promise: fetchUpcomingMovies(),
+  },
+  'top-rated': {
+    title: 'Top rated',
+    name: 'top-rated',
+    promise: fetchTopRatedMovies(),
+  },
+};
+
+type MovieCategory = keyof typeof MOVIE_CATEGORY;
+
+export default async function MovieCategoryPage({ params }: MovieCategoryPageProps) {
+  const { slug } = params ?? {};
+
+  if (!slug) {
+    // if user is in /movies/category, redirect to /movies
+    redirect('/movies');
+  }
+
+  const category = slug[0];
+
+  if (slug.length > 1) {
+    // if user is more than one-level deep after category e.g. /movies/category/popular/test, redirect to /movies/category/popular
+    redirect(`/movies/category/${category}`);
+  }
+
+  // check if slug[0] is valid category
+  if (!Object.keys(MOVIE_CATEGORY).includes(category)) {
+    notFound();
+  }
+
+  const { title, promise } = MOVIE_CATEGORY[category as unknown as MovieCategory];
+  const results = await promise;
+
+  return <MediaGridSection className="my-6 sm:my-[2.4375rem]" title={title} medias={results} />;
+}
