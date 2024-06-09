@@ -16,23 +16,23 @@ export type NavLinkType = {
 export const NAV_LINKS: NavLinkType[] = [
   {
     url: '/',
-    label: 'home',
+    label: 'Home',
     icon: 'NavHome',
     relatedUrls: ['/search'],
   },
   {
     url: '/movies',
-    label: 'movies',
+    label: 'Movies',
     icon: 'NavMovies',
   },
   {
     url: '/tv',
-    label: 'tv',
+    label: 'TV',
     icon: 'NavTVSeries',
   },
   {
     url: '/bookmarks',
-    label: 'bookmarks',
+    label: 'Bookmarks',
     icon: 'NavBookmark',
   },
 ];

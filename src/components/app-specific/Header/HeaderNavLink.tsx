@@ -43,6 +43,7 @@ export const HeaderNavLink = ({
       )}
       asChild
       onClick={onClick}
+      title={label}
     >
       <Link href={url}>
         {NavIcon && (
