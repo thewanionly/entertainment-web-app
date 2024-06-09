@@ -1,8 +1,8 @@
 import { Media, MediaType } from '@/types/medias';
 
-export const TOP_RATED_SECTION_HEADING = 'Top Rated';
+export const mockedTitle = 'Top Rated';
 
-export const mockedTopRatedData: Media[] = [
+export const mockedMedias: Media[] = [
   {
     id: 1,
     imagePath: '/the-first-omen.jpg',

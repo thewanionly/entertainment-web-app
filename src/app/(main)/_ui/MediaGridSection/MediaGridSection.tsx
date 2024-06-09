@@ -5,14 +5,13 @@ import { Media } from '@/types/medias';
 import { getYear } from '@/utils/dates';
 import { cn } from '@/utils/styles';
 
-import { TOP_RATED_SECTION_HEADING } from './TopRatedSection.constants';
-
 type TopRatedSectionProps = {
   className?: string;
+  title: string;
   medias: Media[];
 };
 
-export const TopRatedSection = ({ className = '', medias }: TopRatedSectionProps) => {
+export const MediaGridSection = ({ className = '', title, medias }: TopRatedSectionProps) => {
   return (
     <section
       className={cn('mx-auto w-[91.467%] overflow-hidden lg:w-full lg:px-9 2xl:pr-0', className)}
@@ -23,7 +22,7 @@ export const TopRatedSection = ({ className = '', medias }: TopRatedSectionProps
           'mb-[1.5625rem] sm:text-heading-l'
         )}
       >
-        {TOP_RATED_SECTION_HEADING}
+        {title}
       </h2>
       <ul
         className={cn(

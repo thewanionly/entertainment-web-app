@@ -2,7 +2,7 @@ import { fetchTopRatedMedias } from '@/services/medias/fetchTopRatedMedias';
 import { fetchTrendingMedias } from '@/services/medias/fetchTrendingMedias';
 
 import { MediaCarouselSection } from './_ui/MediaCarouselSection';
-import { TopRatedSection } from './_ui/TopRatedSection';
+import { MediaGridSection } from './_ui/MediaGridSection';
 
 export default async function Home() {
   const trendingMedias = await fetchTrendingMedias();
@@ -15,7 +15,11 @@ export default async function Home() {
         title="Trending"
         medias={trendingMedias}
       />
-      <TopRatedSection className="my-6 sm:my-[2.4375rem]" medias={topRatedMedias} />
+      <MediaGridSection
+        className="my-6 sm:my-[2.4375rem]"
+        title="Top Rated"
+        medias={topRatedMedias}
+      />
     </>
   );
 }
