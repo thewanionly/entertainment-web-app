@@ -1,9 +1,17 @@
 import { fetchNowPlayingMovies } from '@/services/medias/fetchNowPlayingMedias';
 import { fetchPopularMovies } from '@/services/medias/fetchPopularMedias';
+import { fetchSearchMovieResults } from '@/services/medias/fetchSearchResults';
 import { fetchTopRatedMovies } from '@/services/medias/fetchTopRatedMedias';
 import { fetchUpcomingMovies } from '@/services/medias/fetchUpcomingMedias';
 
 import { MediaCarouselSection } from '../_ui/MediaCarouselSection';
+import { MediaGridSection } from '../_ui/MediaGridSection';
+
+type MoviesPageProps = {
+  searchParams?: {
+    q?: string;
+  };
+};
 
 const moviesPromises = {
   popular: {
@@ -29,7 +37,22 @@ const allKeys = Object.keys(moviesPromises);
 
 const findPromiseIndex = (target: string) => allKeys.findIndex((key) => key === target);
 
-export default async function MoviesPage() {
+export default async function MoviesPage({
+  searchParams: { q: searchTerm = '' } = {},
+}: MoviesPageProps) {
+  if (searchTerm) {
+    const { results, totalResults } = await fetchSearchMovieResults(searchTerm);
+
+    return (
+      <MediaGridSection
+        className="my-6 sm:my-[2.4375rem]"
+        title={`Found ${totalResults} results for ‘${searchTerm}’`}
+        titleTag="p"
+        medias={results}
+      />
+    );
+  }
+
   const results = await Promise.all(allPromises);
 
   const popularMovies = results[findPromiseIndex(moviesPromises.popular.name)] ?? [];
