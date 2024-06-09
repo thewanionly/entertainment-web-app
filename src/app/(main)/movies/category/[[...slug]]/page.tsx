@@ -1,9 +1,6 @@
 import { MediaGridSection } from '@/app/(main)/_ui/MediaGridSection';
+import { MOVIE_CATEGORY, MovieCategory } from '@/app/(main)/movies/_utils/movies.constants';
 import { notFound, redirect } from '@/lib/navigation';
-import { fetchNowPlayingMovies } from '@/services/medias/fetchNowPlayingMedias';
-import { fetchPopularMovies } from '@/services/medias/fetchPopularMedias';
-import { fetchTopRatedMovies } from '@/services/medias/fetchTopRatedMedias';
-import { fetchUpcomingMovies } from '@/services/medias/fetchUpcomingMedias';
 
 type MovieCategoryPageProps = {
   params: {
@@ -13,32 +10,6 @@ type MovieCategoryPageProps = {
     q?: string;
   };
 };
-
-// TODO: duplicate in moves/page.tsx
-const MOVIE_CATEGORY = {
-  popular: {
-    title: 'Popular',
-    name: 'popular',
-    promise: fetchPopularMovies(),
-  },
-  'now-playing': {
-    title: 'Now playing',
-    name: 'now-playing',
-    promise: fetchNowPlayingMovies(),
-  },
-  upcoming: {
-    title: 'Upcoming',
-    name: 'upcoming',
-    promise: fetchUpcomingMovies(),
-  },
-  'top-rated': {
-    title: 'Top rated',
-    name: 'top-rated',
-    promise: fetchTopRatedMovies(),
-  },
-};
-
-type MovieCategory = keyof typeof MOVIE_CATEGORY;
 
 export default async function MovieCategoryPage({ params }: MovieCategoryPageProps) {
   const { slug } = params ?? {};
