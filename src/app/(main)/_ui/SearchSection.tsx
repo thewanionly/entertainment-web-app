@@ -1,6 +1,6 @@
 'use client';
 
-import { FormEvent } from 'react';
+import { ElementRef, FormEvent, useEffect, useRef } from 'react';
 
 import { SearchBar } from '@/components/app-specific/SearchBar';
 import { usePathname, useRouter, useSearchParams } from '@/lib/navigation';
@@ -16,6 +16,7 @@ const SEARCH_PLACEHOLDER: Record<string, string> = {
 };
 
 export const SearchSection = () => {
+  const searchInputRef = useRef<ElementRef<'input'>>(null);
   const { pathname, topLevelPath } = usePathname();
   const searchParams = useSearchParams();
   const { replace } = useRouter();
@@ -47,10 +48,18 @@ export const SearchSection = () => {
     handleSearch(inputValue);
   };
 
+  useEffect(() => {
+    if (!searchTerm && searchInputRef.current) {
+      // clear search input value when there's no searchTerm
+      searchInputRef.current.value = '';
+    }
+  }, [searchTerm]);
+
   return (
     <section className={cn('mx-auto mt-6 w-[91.467%]', 'lg:mt-16 lg:w-full lg:px-9')}>
       <form onSubmit={handleSubmit}>
         <SearchBar
+          ref={searchInputRef}
           name={SEARCH_INPUT_NAME}
           placeholder={searchPlaceholder}
           defaultValue={searchTerm}
