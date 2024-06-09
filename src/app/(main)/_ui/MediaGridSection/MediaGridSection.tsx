@@ -8,22 +8,28 @@ import { cn } from '@/utils/styles';
 type TopRatedSectionProps = {
   className?: string;
   title: string;
+  titleTag?: keyof JSX.IntrinsicElements;
   medias: Media[];
 };
 
-export const MediaGridSection = ({ className = '', title, medias }: TopRatedSectionProps) => {
+export const MediaGridSection = ({
+  className = '',
+  title,
+  titleTag: TitleTag = 'h2',
+  medias,
+}: TopRatedSectionProps) => {
   return (
     <section
       className={cn('mx-auto w-[91.467%] overflow-hidden lg:w-full lg:px-9 2xl:pr-0', className)}
     >
-      <h2
+      <TitleTag
         className={cn(
           'mb-4 text-[1.25rem] font-light leading-[normal] tracking-[-0.019375rem]',
           'mb-[1.5625rem] sm:text-heading-l'
         )}
       >
         {title}
-      </h2>
+      </TitleTag>
       <ul
         className={cn(
           'w-full',
