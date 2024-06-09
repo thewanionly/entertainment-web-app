@@ -43,8 +43,6 @@ export const SearchSection = () => {
     const formData = new FormData(event.target as HTMLFormElement);
     const inputValue = formData.get(SEARCH_INPUT_NAME) as string;
 
-    if (!inputValue) return;
-
     handleSearch(inputValue);
   };
 
