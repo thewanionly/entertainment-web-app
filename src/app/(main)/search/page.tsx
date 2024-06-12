@@ -20,7 +20,7 @@ export default async function SearchPage({
 
   return (
     <MediaGridSection
-      className="my-6 sm:my-[2.4375rem]"
+      className="my-6 sm:my-[2.125rem]"
       title={`Found ${totalResults} results for ‘${searchTerm}’`}
       titleTag="p"
       medias={results}
