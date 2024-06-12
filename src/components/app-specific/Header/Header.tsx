@@ -17,7 +17,8 @@ type HeaderProps = {
 };
 
 export const Header = ({ className = '', orientation }: HeaderProps) => {
-  const { pathname } = usePathname();
+  const { topLevelPath = '' } = usePathname();
+  const topLevelPathUrl = `/${topLevelPath}`;
 
   return (
     <header
@@ -60,7 +61,9 @@ export const Header = ({ className = '', orientation }: HeaderProps) => {
             {NAV_LINKS.map((navLink) => (
               <HeaderNavigationItem
                 key={navLink.label}
-                active={navLink.url === pathname || navLink.relatedUrls?.includes(pathname)}
+                active={
+                  navLink.url === topLevelPathUrl || navLink.relatedUrls?.includes(topLevelPathUrl)
+                }
                 {...navLink}
               />
             ))}
