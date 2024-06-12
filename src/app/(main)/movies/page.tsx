@@ -2,7 +2,7 @@ import { fetchSearchMovieResults } from '@/services/medias/fetchSearchResults';
 
 import { MediaCarouselSection } from '../_ui/MediaCarouselSection';
 import { MediaGridSection } from '../_ui/MediaGridSection';
-import { MOVIE_CATEGORY, MovieCategory } from './_utils/movies.constants';
+import { MOVIE_CATEGORY } from './_utils/movies.constants';
 
 type MoviesPageProps = {
   searchParams?: {
@@ -20,6 +20,7 @@ export default async function MoviesPage({
   searchParams: { q: searchTerm = '' } = {},
 }: MoviesPageProps) {
   if (searchTerm) {
+    // movies search page
     const { results, totalResults } = await fetchSearchMovieResults(searchTerm);
 
     return (
@@ -32,38 +33,16 @@ export default async function MoviesPage({
     );
   }
 
+  // movies page (categories presented as carousel sections)
   const results = await Promise.all(allPromises);
 
-  const popularMovies = results[findPromiseIndex(MOVIE_CATEGORY[MovieCategory.POPULAR].name)] ?? [];
-  const nowPlayingMovies =
-    results[findPromiseIndex(MOVIE_CATEGORY[MovieCategory.NOW_PLAYING].name)] ?? [];
-  const upcomingMovies =
-    results[findPromiseIndex(MOVIE_CATEGORY[MovieCategory.UPCOMING].name)] ?? [];
-  const topRatedMovies =
-    results[findPromiseIndex(MOVIE_CATEGORY[MovieCategory.TOP_RATED].name)] ?? [];
-
-  return (
-    <>
-      <MediaCarouselSection
-        className="mt-6 sm:mt-[2.125rem]"
-        title="Popular Movies"
-        medias={popularMovies}
-      />
-      <MediaCarouselSection
-        className="mt-6 sm:mt-[2.125rem]"
-        title="Now Playing Movies"
-        medias={nowPlayingMovies}
-      />
-      <MediaCarouselSection
-        className="mt-6 sm:mt-[2.125rem]"
-        title="Upcoming Movies"
-        medias={upcomingMovies}
-      />
-      <MediaCarouselSection
-        className="mt-6 sm:mt-[2.125rem]"
-        title="Top Rated Movies"
-        medias={topRatedMovies}
-      />
-    </>
-  );
+  return Object.values(MOVIE_CATEGORY).map(({ name, title, link }) => (
+    <MediaCarouselSection
+      key={name}
+      className="mt-6 sm:mt-[2.125rem]"
+      title={title}
+      titleLink={link}
+      medias={results[findPromiseIndex(name)] ?? []}
+    />
+  ));
 }
