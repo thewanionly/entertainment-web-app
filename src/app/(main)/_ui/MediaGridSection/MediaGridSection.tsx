@@ -1,5 +1,3 @@
-'use client';
-
 import { MediaGridCard } from '@/components/app-specific/MediaCard/MediaGridCard';
 import { Media } from '@/types/medias';
 import { getYear } from '@/utils/dates';
