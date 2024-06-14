@@ -26,7 +26,7 @@ export default async function MoviesPage({
     return (
       <MediaGridSection
         className="my-6 sm:my-[2.125rem]"
-        title={`Found ${totalResults} results for ‘${searchTerm}’`}
+        title={`Found ${totalResults} movie results for ‘${searchTerm}’`}
         titleTag="p"
         medias={results}
       />
