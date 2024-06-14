@@ -17,7 +17,7 @@ const SEARCH_PLACEHOLDER: Record<string, string> = {
 
 export const SearchSection = () => {
   const searchInputRef = useRef<ElementRef<'input'>>(null);
-  const { pathname, topLevelPath } = usePathname();
+  const { topLevelPath } = usePathname();
   const searchParams = useSearchParams();
   const { replace } = useRouter();
 
@@ -25,7 +25,7 @@ export const SearchSection = () => {
   const searchPlaceholder = SEARCH_PLACEHOLDER[topLevelPath] ?? SEARCH_PLACEHOLDER.default;
 
   const handleSearch = (searchValue: string) => {
-    const path = pathname == '/' ? '/search' : pathname;
+    const path = topLevelPath || 'search';
     const params = new URLSearchParams(searchParams);
 
     if (searchValue) {
@@ -34,7 +34,7 @@ export const SearchSection = () => {
       params.delete('q');
     }
 
-    replace(`${path}?${params.toString()}`);
+    replace(`/${path}?${params.toString()}`);
   };
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
