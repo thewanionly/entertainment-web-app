@@ -6,6 +6,7 @@ import { cn } from '@/utils/styles';
 type TopRatedSectionProps = {
   className?: string;
   title: string;
+  titleClassName?: string;
   titleTag?: keyof JSX.IntrinsicElements;
   medias: Media[];
 };
@@ -13,6 +14,7 @@ type TopRatedSectionProps = {
 export const MediaGridSection = ({
   className = '',
   title,
+  titleClassName = '',
   titleTag: TitleTag = 'h2',
   medias,
 }: TopRatedSectionProps) => {
@@ -24,7 +26,8 @@ export const MediaGridSection = ({
         className={cn(
           'inline-block capitalize',
           'mb-4 text-[1.25rem] font-light leading-[normal] tracking-[-0.019375rem]',
-          'sm:mb-[1.5625rem] sm:text-heading-l'
+          'sm:mb-[1.5625rem] sm:text-heading-l',
+          titleClassName
         )}
       >
         {title}

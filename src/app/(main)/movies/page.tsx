@@ -29,6 +29,7 @@ export default async function MoviesPage({
         className="my-6 sm:my-[2.125rem]"
         title={`Found ${totalResults} movie results for ‘${searchTerm}’`}
         titleTag="p"
+        titleClassName="normal-case"
         medias={results}
       />
     );
