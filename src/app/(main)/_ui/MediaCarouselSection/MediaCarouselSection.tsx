@@ -12,6 +12,7 @@ import { cn } from '@/utils/styles';
 type MediaCarouselSectionProps = {
   className?: string;
   title: string;
+  titleClassName?: string;
   titleLink?: string;
   medias: Media[];
 };
@@ -34,6 +35,7 @@ const TitleWrapper = ({ href, children }: { href?: string; children: ReactNode }
 export const MediaCarouselSection = ({
   className = '',
   title,
+  titleClassName = '',
   titleLink,
   medias,
 }: MediaCarouselSectionProps) => {
@@ -46,7 +48,8 @@ export const MediaCarouselSection = ({
           className={cn(
             'inline-block capitalize',
             'mb-4 text-[1.25rem] font-light leading-[normal] tracking-[-0.019375rem]',
-            'mb-[1.5625rem] sm:text-heading-l'
+            'sm:mb-[1.5625rem] sm:text-heading-l',
+            titleClassName
           )}
         >
           {title}

@@ -24,7 +24,7 @@ export const MediaGridSection = ({
         className={cn(
           'inline-block capitalize',
           'mb-4 text-[1.25rem] font-light leading-[normal] tracking-[-0.019375rem]',
-          'mb-[1.5625rem] sm:text-heading-l'
+          'sm:mb-[1.5625rem] sm:text-heading-l'
         )}
       >
         {title}

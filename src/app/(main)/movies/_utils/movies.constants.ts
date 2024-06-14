@@ -13,6 +13,7 @@ export enum MovieCategory {
 
 interface MovieCategoryValue {
   title: string;
+  pageTitle: string;
   name: string;
   link?: string;
   promise: Promise<Media[]>;
@@ -20,25 +21,29 @@ interface MovieCategoryValue {
 
 export const MOVIE_CATEGORY: Record<MovieCategory, MovieCategoryValue> = {
   popular: {
-    title: 'Popular movies',
+    title: 'Popular',
+    pageTitle: 'Popular movies',
     name: 'popular',
     link: '/movies/category/popular',
     promise: fetchPopularMovies(),
   },
   'now-playing': {
-    title: 'Now playing movies',
+    title: 'Now playing',
+    pageTitle: 'Now playing movies',
     name: 'now-playing',
     link: '/movies/category/now-playing',
     promise: fetchNowPlayingMovies(),
   },
   upcoming: {
-    title: 'Upcoming movies',
+    title: 'Upcoming',
+    pageTitle: 'Upcoming movies',
     name: 'upcoming',
     link: '/movies/category/upcoming',
     promise: fetchUpcomingMovies(),
   },
   'top-rated': {
-    title: 'Top rated movies',
+    title: 'Top rated',
+    pageTitle: 'Top rated movies',
     name: 'top-rated',
     link: '/movies/category/top-rated',
     promise: fetchTopRatedMovies(),

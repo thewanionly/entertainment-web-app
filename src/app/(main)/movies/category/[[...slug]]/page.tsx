@@ -31,8 +31,8 @@ export default async function MovieCategoryPage({ params }: MovieCategoryPagePro
     notFound();
   }
 
-  const { title, promise } = MOVIE_CATEGORY[category as unknown as MovieCategory];
+  const { pageTitle, promise } = MOVIE_CATEGORY[category as unknown as MovieCategory];
   const results = await promise;
 
-  return <MediaGridSection className="my-6 sm:my-[2.125rem]" title={title} medias={results} />;
+  return <MediaGridSection className="my-6 sm:my-[2.125rem]" title={pageTitle} medias={results} />;
 }
