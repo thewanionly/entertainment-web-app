@@ -54,7 +54,7 @@ export const SearchSection = () => {
   }, [searchTerm]);
 
   return (
-    <section className={cn('mx-auto mt-6 w-[91.467%]', 'lg:mt-16 lg:w-full lg:px-9')}>
+    <section className={cn('mx-auto mt-6 w-[91.467%] lg:mt-16 lg:w-full lg:px-9 2xl:pr-0')}>
       <form onSubmit={handleSubmit}>
         <SearchBar
           ref={searchInputRef}
