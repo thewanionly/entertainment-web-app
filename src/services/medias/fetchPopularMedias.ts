@@ -17,24 +17,6 @@ const options: RequestInit = {
   cache: 'no-store',
 };
 
-const getPopularMovies = async (): Promise<MediasApiMovie[]> => {
-  const response = await fetch(
-    `${process.env.NEXT_PUBLIC_MEDIAS_BASE_ENDPOINT}/movie/popular`,
-    options
-  );
-
-  if (!response.ok) {
-    throw new Error('Failed to fetch popular movies data');
-  }
-
-  const data = (await response.json()) as MediasApiResponse<MediasApiMovie>;
-
-  return data.results.map((item) => ({
-    ...item,
-    media_type: MediasApiMediaType.MOVIE,
-  }));
-};
-
 const getPopularTv = async (): Promise<MediasApiTV[]> => {
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_MEDIAS_BASE_ENDPOINT}/tv/popular`,
@@ -62,6 +44,24 @@ export const fetchPopularTv = async (): Promise<Media[]> => {
     console.error(error);
     throw error;
   }
+};
+
+const getPopularMovies = async (): Promise<MediasApiMovie[]> => {
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_MEDIAS_BASE_ENDPOINT}/movie/popular`,
+    options
+  );
+
+  if (!response.ok) {
+    throw new Error('Failed to fetch popular movies data');
+  }
+
+  const data = (await response.json()) as MediasApiResponse<MediasApiMovie>;
+
+  return data.results.map((item) => ({
+    ...item,
+    media_type: MediasApiMediaType.MOVIE,
+  }));
 };
 
 export const fetchPopularMovies = async (): Promise<Media[]> => {

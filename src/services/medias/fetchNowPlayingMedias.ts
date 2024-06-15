@@ -17,24 +17,6 @@ const options: RequestInit = {
   cache: 'no-store',
 };
 
-const getNowPlayingMovies = async (): Promise<MediasApiMovie[]> => {
-  const response = await fetch(
-    `${process.env.NEXT_PUBLIC_MEDIAS_BASE_ENDPOINT}/movie/now_playing`,
-    options
-  );
-
-  if (!response.ok) {
-    throw new Error('Failed to fetch now playing movies data');
-  }
-
-  const data = (await response.json()) as MediasApiResponse<MediasApiMovie>;
-
-  return data.results.map((item) => ({
-    ...item,
-    media_type: MediasApiMediaType.MOVIE,
-  }));
-};
-
 const getNowPlayingTv = async (): Promise<MediasApiTV[]> => {
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_MEDIAS_BASE_ENDPOINT}/tv/airing_today`,
@@ -62,6 +44,24 @@ export const fetchNowPlayingTv = async (): Promise<Media[]> => {
     console.error(error);
     throw error;
   }
+};
+
+const getNowPlayingMovies = async (): Promise<MediasApiMovie[]> => {
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_MEDIAS_BASE_ENDPOINT}/movie/now_playing`,
+    options
+  );
+
+  if (!response.ok) {
+    throw new Error('Failed to fetch now playing movies data');
+  }
+
+  const data = (await response.json()) as MediasApiResponse<MediasApiMovie>;
+
+  return data.results.map((item) => ({
+    ...item,
+    media_type: MediasApiMediaType.MOVIE,
+  }));
 };
 
 export const fetchNowPlayingMovies = async (): Promise<Media[]> => {
