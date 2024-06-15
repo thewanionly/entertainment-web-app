@@ -1,6 +1,12 @@
 import { Media } from '@/types/medias';
 
-import { MediasApiMedia, MediasApiMediaType, MediasApiResponse } from './mediasApi.types';
+import {
+  MediasApiMedia,
+  MediasApiMediaType,
+  MediasApiMovie,
+  MediasApiResponse,
+  MediasApiTV,
+} from './mediasApi.types';
 import { transformMediaResults } from './mediasApi.utils';
 
 const options: RequestInit = {
@@ -9,6 +15,57 @@ const options: RequestInit = {
     accept: 'application/json',
     Authorization: `Bearer ${process.env.NEXT_PUBLIC_MEDIAS_ACCESS_TOKEN}`,
   },
+  cache: 'no-store',
+};
+
+export const fetchTrendingMovies = async (): Promise<Media[]> => {
+  try {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_MEDIAS_BASE_ENDPOINT}/trending/movie/day`,
+      options
+    );
+
+    if (!response.ok) {
+      throw new Error('Failed to fetch trending movies data');
+    }
+
+    const data = (await response.json()) as MediasApiResponse<MediasApiMovie>;
+
+    return transformMediaResults(
+      data.results.map((item) => ({
+        ...item,
+        media_type: MediasApiMediaType.MOVIE,
+      }))
+    );
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+};
+
+export const fetchTrendingTv = async (): Promise<Media[]> => {
+  try {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_MEDIAS_BASE_ENDPOINT}/trending/tv/day`,
+      options
+    );
+
+    if (!response.ok) {
+      throw new Error('Failed to fetch trending TV data');
+    }
+
+    const data = (await response.json()) as MediasApiResponse<MediasApiTV>;
+
+    return transformMediaResults(
+      data.results.map((item) => ({
+        ...item,
+        media_type: MediasApiMediaType.TV,
+      }))
+    );
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
 };
 
 export const fetchTrendingMedias = async (): Promise<Media[]> => {
