@@ -29,7 +29,7 @@ describe('Header', () => {
       render(<Horizontal />);
 
       NAV_LINKS.forEach(({ label, url }) => {
-        const navItem = screen.getByRole('link', { name: label });
+        const navItem = screen.getByRole('link', { name: new RegExp(label, 'i') });
 
         expect(navItem).toHaveAttribute('href', url);
       });

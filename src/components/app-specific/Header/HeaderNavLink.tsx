@@ -55,7 +55,7 @@ export const HeaderNavLink = ({
             )}
           />
         )}
-        <IconButtonSrLabel label={active ? `${label} is the active link` : label} />
+        <IconButtonSrLabel label={active ? `Active link: ${label}` : label} />
       </Link>
     </IconButton>
   );
