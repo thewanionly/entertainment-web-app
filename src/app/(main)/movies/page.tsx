@@ -1,4 +1,4 @@
-import { fetchPopularMovies } from '@/services/medias/fetchPopularMedias';
+import { fetchMovies } from '@/services/medias/fetchMovies';
 import { fetchSearchMovieResults } from '@/services/medias/fetchSearchResults';
 
 import { MediaGridSection } from '../_ui/MediaGridSection';
@@ -27,7 +27,7 @@ export default async function MoviesPage({
     );
   }
 
-  const movies = await fetchPopularMovies();
+  const movies = await fetchMovies();
 
   return <MediaGridSection className="my-6 sm:my-[2.125rem]" title="Movies" medias={movies} />;
 }
