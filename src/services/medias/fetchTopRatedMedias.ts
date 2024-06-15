@@ -15,6 +15,7 @@ const options: RequestInit = {
     accept: 'application/json',
     Authorization: `Bearer ${process.env.NEXT_PUBLIC_MEDIAS_ACCESS_TOKEN}`,
   },
+  cache: 'no-store',
 };
 
 const getTopRatedMovies = async (): Promise<MediasApiMovie[]> => {
