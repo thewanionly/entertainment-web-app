@@ -5,6 +5,7 @@ import {
   MediasApiMediaType,
   MediasApiMovie,
   MediasApiResponse,
+  MediasApiTV,
 } from './mediasApi.types';
 import { transformMediaResults } from './mediasApi.utils';
 
@@ -14,6 +15,45 @@ const options: RequestInit = {
     accept: 'application/json',
     Authorization: `Bearer ${process.env.NEXT_PUBLIC_MEDIAS_ACCESS_TOKEN}`,
   },
+};
+
+export const fetchSearchTvSeriesResults = async (searchTerm: string): Promise<MediaResultsInfo> => {
+  try {
+    const queryParams = new URLSearchParams({
+      query: searchTerm,
+    });
+
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_MEDIAS_BASE_ENDPOINT}/search/tv?${queryParams.toString()}`,
+      options
+    );
+
+    if (!response.ok) {
+      throw new Error(`Failed to fetch search TV series results for "${searchTerm}"`);
+    }
+
+    const {
+      page,
+      results,
+      total_pages: totalPages,
+      total_results: totalResults,
+    } = (await response.json()) as MediasApiResponse<MediasApiTV>;
+
+    return {
+      page,
+      results: transformMediaResults(
+        results.map((result) => ({
+          ...result,
+          media_type: MediasApiMediaType.TV,
+        }))
+      ),
+      totalPages,
+      totalResults,
+    };
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
 };
 
 export const fetchSearchMovieResults = async (searchTerm: string): Promise<MediaResultsInfo> => {
