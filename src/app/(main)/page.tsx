@@ -1,3 +1,5 @@
+import { cn } from '@/utils/styles';
+
 import { MediaCarouselSection } from './_ui/MediaCarouselSection';
 import { MediaCategoryValue } from './_utils/media.types';
 import { MOVIE_CATEGORY, MovieCategory } from './_utils/movies.constants';
@@ -41,10 +43,10 @@ const findPromiseIndex = (targetName: string) =>
 export default async function HomePage() {
   const results = await Promise.all(homePagePromises);
 
-  return Object.entries(HOME_PAGE_SECTIONS).map(([sectionName, { title, link }]) => (
+  return Object.entries(HOME_PAGE_SECTIONS).map(([sectionName, { title, link }], index) => (
     <MediaCarouselSection
       key={sectionName}
-      className="mt-6 sm:mt-[2.125rem]"
+      className={cn('mt-6', index === 0 ? 'sm:mt-[2.125rem]' : 'sm:mt-10')}
       title={title}
       titleLink={link}
       medias={results[findPromiseIndex(sectionName)] ?? []}
