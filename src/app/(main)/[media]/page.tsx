@@ -42,5 +42,12 @@ export default async function MediaPage({
 
   const medias = await promise;
 
-  return <MediaGridSection className="my-6 sm:my-[2.125rem]" title={title} medias={medias} />;
+  return (
+    <MediaGridSection
+      className="my-6 sm:my-[2.125rem]"
+      title={title}
+      titleClassName="lg:mb-[2.375rem]"
+      medias={medias}
+    />
+  );
 }
