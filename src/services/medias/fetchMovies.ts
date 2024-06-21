@@ -16,16 +16,20 @@ enum MoviesSortBy {
   POPULARITY_DESC = 'popularity.desc',
 }
 
-interface FetchMoviesParams {
+const DEFAULT_PAGE_NUM = 1;
+
+export interface FetchMoviesParams {
   sortBy?: MoviesSortBy;
+  page?: string;
 }
 
 export const fetchMovies = async (params?: FetchMoviesParams): Promise<Media[]> => {
   try {
-    const { sortBy = MoviesSortBy.POPULARITY_DESC } = params ?? {};
+    const { sortBy = MoviesSortBy.POPULARITY_DESC, page = String(DEFAULT_PAGE_NUM) } = params ?? {};
 
     const queryParams = new URLSearchParams({
       sort_by: sortBy,
+      page,
     });
 
     const response = await fetch(

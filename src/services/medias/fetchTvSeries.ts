@@ -16,16 +16,21 @@ enum TvSeriesSortBy {
   POPULARITY_DESC = 'popularity.desc',
 }
 
-interface FetchTvSeriesParams {
+const DEFAULT_PAGE_NUM = 1;
+
+export interface FetchTvSeriesParams {
   sortBy?: TvSeriesSortBy;
+  page?: string;
 }
 
 export const fetchTvSeries = async (params?: FetchTvSeriesParams): Promise<Media[]> => {
   try {
-    const { sortBy = TvSeriesSortBy.POPULARITY_DESC } = params ?? {};
+    const { sortBy = TvSeriesSortBy.POPULARITY_DESC, page = String(DEFAULT_PAGE_NUM) } =
+      params ?? {};
 
     const queryParams = new URLSearchParams({
       sort_by: sortBy,
+      page,
     });
 
     const response = await fetch(

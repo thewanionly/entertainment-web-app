@@ -9,12 +9,13 @@ type MediaPageProps = {
   };
   searchParams?: {
     q?: string;
+    page?: string;
   };
 };
 
 export default async function MediaPage({
   params: { media = '' },
-  searchParams: { q: searchTerm = '' } = {},
+  searchParams: { q: searchTerm = '', page } = {},
 }: MediaPageProps) {
   // validate `media`
   if (!Object.keys(MEDIA_DATA).includes(media)) {
@@ -22,7 +23,7 @@ export default async function MediaPage({
   }
 
   // media page
-  const { title, promise, searchLabel, searchPromise } =
+  const { title, mediaPromise, searchLabel, searchPromise } =
     MEDIA_DATA[media as unknown as MediaPageType] ?? {};
 
   if (searchTerm) {
@@ -40,7 +41,7 @@ export default async function MediaPage({
     );
   }
 
-  const medias = await promise;
+  const medias = await mediaPromise({ page });
 
   return (
     <MediaGridSection
