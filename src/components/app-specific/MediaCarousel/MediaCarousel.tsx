@@ -1,7 +1,7 @@
 'use client';
 
 import { MediaCarouselCard } from '@/components/app-specific/MediaCard/MediaCarouselCard';
-import { Carousel } from '@/components/generic/Carousel';
+import { Carousel, CarouselOptions } from '@/components/generic/Carousel';
 import { CarouselContent } from '@/components/generic/Carousel/CarouselContent';
 import { CarouselItem } from '@/components/generic/Carousel/CarouselItem';
 import { Media } from '@/types/medias';
@@ -10,14 +10,14 @@ import { cn } from '@/utils/styles';
 
 type MediaCarouselProps = {
   items: Media[];
-  slidesToScroll?: number;
+  options?: CarouselOptions;
 };
 
-export const MediaCarousel = ({ items, slidesToScroll }: MediaCarouselProps) => (
+export const MediaCarousel = ({ items, options }: MediaCarouselProps) => (
   <Carousel
     opts={{
       align: 'start',
-      slidesToScroll,
+      ...options,
     }}
     className="w-full"
   >

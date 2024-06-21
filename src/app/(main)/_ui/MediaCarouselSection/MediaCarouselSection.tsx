@@ -5,6 +5,7 @@ import { Fragment, ReactNode } from 'react';
 import Link from 'next/link';
 
 import { MediaCarousel } from '@/components/app-specific/MediaCarousel';
+import { CarouselOptions } from '@/components/generic/Carousel';
 import { useMediaQuery } from '@/hooks/useMediaQuery';
 import { Media } from '@/types/medias';
 import { cn } from '@/utils/styles';
@@ -15,6 +16,7 @@ type MediaCarouselSectionProps = {
   titleClassName?: string;
   titleLink?: string;
   medias: Media[];
+  carouselOptions?: CarouselOptions;
 };
 
 const SLIDES_TO_SCROLL_LG = 2;
@@ -38,8 +40,14 @@ export const MediaCarouselSection = ({
   titleClassName = '',
   titleLink,
   medias,
+  carouselOptions,
 }: MediaCarouselSectionProps) => {
   const lg = useMediaQuery('(min-width: 1024px)');
+
+  const defaultCarouselOptions: CarouselOptions = {
+    slidesToScroll: lg ? SLIDES_TO_SCROLL_LG : SLIDES_TO_SCROLL_DEFAULT,
+    skipSnaps: true,
+  };
 
   return (
     <section className={cn('ml-auto w-[95.735%] overflow-hidden lg:w-full lg:pl-9', className)}>
@@ -57,7 +65,10 @@ export const MediaCarouselSection = ({
       </TitleWrapper>
       <MediaCarousel
         items={medias}
-        slidesToScroll={lg ? SLIDES_TO_SCROLL_LG : SLIDES_TO_SCROLL_DEFAULT}
+        options={{
+          ...defaultCarouselOptions,
+          ...carouselOptions,
+        }}
       />
     </section>
   );

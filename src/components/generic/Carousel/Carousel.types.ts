@@ -1,7 +1,7 @@
 import useEmblaCarousel, { UseEmblaCarouselType } from 'embla-carousel-react';
 
 type UseCarouselParameters = Parameters<typeof useEmblaCarousel>;
-type CarouselOptions = UseCarouselParameters[0];
+export type CarouselOptions = UseCarouselParameters[0];
 type CarouselPlugin = UseCarouselParameters[1];
 
 export type CarouselApi = UseEmblaCarouselType[1];
