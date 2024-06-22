@@ -23,12 +23,12 @@ export default async function MediaPage({
   }
 
   // media page
-  const { title, mediaPromise, searchLabel, searchPromise } =
+  const { title, mediaFetcher, searchLabel, searchFetcher } =
     MEDIA_DATA[media as unknown as MediaPageType] ?? {};
 
   if (searchTerm) {
     // movies search page
-    const { results, totalResults } = await searchPromise(searchTerm);
+    const { results, totalResults } = await searchFetcher(searchTerm);
 
     return (
       <MediaGridSection
@@ -41,7 +41,7 @@ export default async function MediaPage({
     );
   }
 
-  const medias = await mediaPromise({ page });
+  const medias = await mediaFetcher({ page });
 
   return (
     <MediaGridSection

@@ -16,9 +16,9 @@ export enum MediaPageType {
 interface MediaPageValue {
   title: string;
   name: string;
-  mediaPromise: typeof fetchMovies | typeof fetchTvSeries;
+  mediaFetcher: typeof fetchMovies | typeof fetchTvSeries;
   searchLabel: string;
-  searchPromise: typeof fetchSearchMovieResults | typeof fetchSearchTvSeriesResults;
+  searchFetcher: typeof fetchSearchMovieResults | typeof fetchSearchTvSeriesResults;
   categories: typeof MOVIE_CATEGORY | typeof TV_CATEGORY;
 }
 
@@ -26,17 +26,17 @@ const MEDIA_DATA_ARRAY: MediaPageValue[] = [
   {
     title: 'Movies',
     name: 'movies',
-    mediaPromise: fetchMovies,
+    mediaFetcher: fetchMovies,
     searchLabel: 'movies',
-    searchPromise: fetchSearchMovieResults,
+    searchFetcher: fetchSearchMovieResults,
     categories: MOVIE_CATEGORY,
   },
   {
     title: 'TV Series',
     name: 'tv',
-    mediaPromise: fetchTvSeries,
+    mediaFetcher: fetchTvSeries,
     searchLabel: 'TV series',
-    searchPromise: fetchSearchTvSeriesResults,
+    searchFetcher: fetchSearchTvSeriesResults,
     categories: TV_CATEGORY,
   },
 ];
