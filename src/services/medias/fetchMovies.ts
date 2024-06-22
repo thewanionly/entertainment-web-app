@@ -1,4 +1,4 @@
-import { Media } from '@/types/medias';
+import { MediaResultsInfo } from '@/types/medias';
 
 import { MediasApiMediaType, MediasApiMovie, MediasApiResponse } from './mediasApi.types';
 import { transformMediaResults } from './mediasApi.utils';
@@ -23,13 +23,14 @@ export interface FetchMoviesParams {
   page?: string;
 }
 
-export const fetchMovies = async (params?: FetchMoviesParams): Promise<Media[]> => {
+export const fetchMovies = async (params?: FetchMoviesParams): Promise<MediaResultsInfo> => {
   try {
-    const { sortBy = MoviesSortBy.POPULARITY_DESC, page = String(DEFAULT_PAGE_NUM) } = params ?? {};
+    const { sortBy = MoviesSortBy.POPULARITY_DESC, page: pageParam = String(DEFAULT_PAGE_NUM) } =
+      params ?? {};
 
     const queryParams = new URLSearchParams({
       sort_by: sortBy,
-      page,
+      page: pageParam,
     });
 
     const response = await fetch(
@@ -41,14 +42,24 @@ export const fetchMovies = async (params?: FetchMoviesParams): Promise<Media[]> 
       throw new Error('Failed to fetch movies data');
     }
 
-    const data = (await response.json()) as MediasApiResponse<MediasApiMovie>;
+    const {
+      page,
+      results,
+      total_pages: totalPages,
+      total_results: totalResults,
+    } = (await response.json()) as MediasApiResponse<MediasApiMovie>;
 
-    return transformMediaResults(
-      data.results.map((item) => ({
-        ...item,
-        media_type: MediasApiMediaType.MOVIE,
-      }))
-    );
+    return {
+      page,
+      results: transformMediaResults(
+        results.map((result) => ({
+          ...result,
+          media_type: MediasApiMediaType.MOVIE,
+        }))
+      ),
+      totalPages,
+      totalResults,
+    };
   } catch (error) {
     console.error(error);
     throw error;

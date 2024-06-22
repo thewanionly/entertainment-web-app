@@ -44,10 +44,10 @@ export default async function MediaPage({
     const loadMoreMedias = async (page: string) => {
       'use server';
 
-      return await getMedias(mediaPageType, page);
+      return (await getMedias(mediaPageType, page)).results;
     };
 
-    const medias = await getMedias(mediaPageType, page);
+    const { results: medias } = await getMedias(mediaPageType, page);
 
     return (
       <MediaSection className="my-6 sm:my-[2.125rem]">

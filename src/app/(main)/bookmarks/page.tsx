@@ -1,6 +1,4 @@
-import { fetchMovies } from '@/services/medias/fetchMovies';
 import { fetchSearchResults } from '@/services/medias/fetchSearchResults';
-import { fetchTvSeries } from '@/services/medias/fetchTvSeries';
 
 import { MediaGridSection } from '../_ui/MediaGridSection';
 
@@ -30,10 +28,7 @@ export default async function BookmarksPage({
   }
 
   // TODO: Replace with actual bookmarks data
-  const [bookmarkedMovies, bookmarkedTvSeries] = await Promise.all([
-    fetchMovies(),
-    fetchTvSeries(),
-  ]);
+  const [bookmarkedMovies, bookmarkedTvSeries] = [[], []];
 
   return (
     <>
