@@ -1,3 +1,4 @@
+import { MIN_PAGE, MAX_PAGE } from '@/constants/medias';
 import { MediaResultsInfo } from '@/types/medias';
 
 import {
@@ -17,10 +18,25 @@ const options: RequestInit = {
   },
 };
 
-export const fetchSearchTvSeriesResults = async (searchTerm: string): Promise<MediaResultsInfo> => {
+export const fetchSearchTvSeriesResults = async (
+  searchTerm: string,
+  pageParam = MIN_PAGE
+): Promise<MediaResultsInfo> => {
   try {
+    // validate pageParam
+    if (pageParam < MIN_PAGE || pageParam > MAX_PAGE) {
+      console.warn(
+        'Invalid page: Pages start at 1 and max at 500. They are expected to be an integer.'
+      );
+      return {
+        page: pageParam,
+        results: [],
+      };
+    }
+
     const queryParams = new URLSearchParams({
       query: searchTerm,
+      page: String(pageParam),
     });
 
     const response = await fetch(
@@ -56,10 +72,25 @@ export const fetchSearchTvSeriesResults = async (searchTerm: string): Promise<Me
   }
 };
 
-export const fetchSearchMovieResults = async (searchTerm: string): Promise<MediaResultsInfo> => {
+export const fetchSearchMovieResults = async (
+  searchTerm: string,
+  pageParam = MIN_PAGE
+): Promise<MediaResultsInfo> => {
   try {
+    // validate pageParam
+    if (pageParam < MIN_PAGE || pageParam > MAX_PAGE) {
+      console.warn(
+        'Invalid page: Pages start at 1 and max at 500. They are expected to be an integer.'
+      );
+      return {
+        page: pageParam,
+        results: [],
+      };
+    }
+
     const queryParams = new URLSearchParams({
       query: searchTerm,
+      page: String(pageParam),
     });
 
     const response = await fetch(
@@ -95,11 +126,26 @@ export const fetchSearchMovieResults = async (searchTerm: string): Promise<Media
   }
 };
 
-export const fetchSearchResults = async (searchTerm: string): Promise<MediaResultsInfo> => {
+export const fetchSearchResults = async (
+  searchTerm: string,
+  pageParam = MIN_PAGE
+): Promise<MediaResultsInfo> => {
   try {
+    // validate pageParam
+    if (pageParam < MIN_PAGE || pageParam > MAX_PAGE) {
+      console.warn(
+        'Invalid page: Pages start at 1 and max at 500. They are expected to be an integer.'
+      );
+      return {
+        page: pageParam,
+        results: [],
+      };
+    }
+
     // TODO: find better way to assign searchparam to API in GET request: https://stackoverflow.com/questions/35038857/setting-query-string-using-fetch-get-request
     const queryParams = new URLSearchParams({
       query: searchTerm,
+      page: String(pageParam),
     });
 
     const response = await fetch(

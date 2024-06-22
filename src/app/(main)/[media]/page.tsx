@@ -2,8 +2,8 @@ import { MediaSection } from '@/components/app-specific/MediaSection/MediaSectio
 import { MediaSectionTitle } from '@/components/app-specific/MediaSection/MediaSectionTitle';
 import { notFound } from '@/lib/navigation';
 
-import { MediaGridSection } from '../_ui/MediaGridSection';
 import { MediaPageMediaSectionGrid } from './_ui/MediaPageMediaSectionGrid';
+import { MediaSearchPageMediaSectionGrid } from './_ui/MediaSearchPageMediaSectionGrid';
 import { MEDIA_DATA, MediaPageType } from './_utils/media.constants';
 
 export const getMedias = async (media: MediaPageType, page?: number) => {
@@ -14,6 +14,20 @@ export const getMedias = async (media: MediaPageType, page?: number) => {
   const movies = await mediaFetcher({ page });
 
   return movies;
+};
+
+export const getMediaSearchResults = async (
+  media: MediaPageType,
+  searchTerm: string,
+  page?: number
+) => {
+  'use server';
+
+  const { searchFetcher } = MEDIA_DATA[media] ?? {};
+
+  const searchResults = await searchFetcher(searchTerm, page);
+
+  return searchResults;
 };
 
 type MediaPageProps = {
@@ -61,16 +75,30 @@ export default async function MediaPage({
   }
 
   // media search page
-  const { searchLabel, searchFetcher } = MEDIA_DATA[mediaPageType] ?? {};
-  const { results, totalResults } = await searchFetcher(searchTerm);
+  const { searchLabel } = MEDIA_DATA[mediaPageType] ?? {};
+
+  const loadMoreMediaSearchResults = async (searchTerm: string, page?: number) => {
+    'use server';
+
+    return (await getMediaSearchResults(mediaPageType, searchTerm, page)).results;
+  };
+
+  const { results, totalResults, totalPages } = await getMediaSearchResults(
+    mediaPageType,
+    searchTerm
+  );
 
   return (
-    <MediaGridSection
-      className="my-6 sm:my-[2.125rem]"
-      title={`Found ${totalResults} ${searchLabel} results for ‘${searchTerm}’`}
-      titleTag="p"
-      titleClassName="normal-case"
-      medias={results}
-    />
+    <MediaSection className="my-6 sm:my-[2.125rem]">
+      <MediaSectionTitle titleTag="p" className="normal-case">
+        {`Found ${totalResults} ${searchLabel} results for ‘${searchTerm}’`}
+      </MediaSectionTitle>
+      <MediaSearchPageMediaSectionGrid
+        key={searchTerm}
+        initialMedias={results}
+        totalPages={totalPages}
+        loadMoreMediaSearchResults={loadMoreMediaSearchResults}
+      />
+    </MediaSection>
   );
 }
