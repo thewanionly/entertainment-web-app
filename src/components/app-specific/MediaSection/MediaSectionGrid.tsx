@@ -21,7 +21,7 @@ export const MediaSectionGrid = ({ medias, className }: MediaSectionGridProps) =
       )}
     >
       {medias.map(({ id, imagePath, title, releaseDate, mediaType }, index) => (
-        <li key={id} data-testid="grid-item">
+        <li key={`${id}-${index}`} data-testid="grid-item">
           <MediaGridCard
             className="w-full sm:w-full lg:w-full"
             imgSrc={imagePath}

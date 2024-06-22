@@ -25,7 +25,7 @@ export const MediaCarousel = ({ items, options, className }: MediaCarouselProps)
     <CarouselContent className="-ml-4 sm:-ml-10">
       {items.map(({ id, imagePath, title, releaseDate, mediaType }, index) => (
         <CarouselItem
-          key={id}
+          key={`${id}-${index}`}
           className={cn(
             'pl-4 sm:pl-10',
             'xs:basis-[96%]',
