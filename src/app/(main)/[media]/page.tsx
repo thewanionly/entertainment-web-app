@@ -22,13 +22,12 @@ type MediaPageProps = {
   };
   searchParams?: {
     q?: string;
-    page?: string;
   };
 };
 
 export default async function MediaPage({
   params: { media = '' },
-  searchParams: { q: searchTerm = '', page } = {},
+  searchParams: { q: searchTerm = '' } = {},
 }: MediaPageProps) {
   // validate `media`
   if (!Object.keys(MEDIA_DATA).includes(media)) {
@@ -47,7 +46,7 @@ export default async function MediaPage({
       return (await getMedias(mediaPageType, page)).results;
     };
 
-    const { results: medias } = await getMedias(mediaPageType, Number(page));
+    const { results: medias } = await getMedias(mediaPageType);
 
     return (
       <MediaSection className="my-6 sm:my-[2.125rem]">
