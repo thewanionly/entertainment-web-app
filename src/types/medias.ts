@@ -19,6 +19,6 @@ export interface Media {
 export interface MediaResultsInfo {
   page: number;
   results: Media[];
-  totalPages: number;
-  totalResults: number;
+  totalPages?: number;
+  totalResults?: number;
 }

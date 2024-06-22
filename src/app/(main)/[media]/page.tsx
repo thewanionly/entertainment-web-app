@@ -46,12 +46,16 @@ export default async function MediaPage({
       return (await getMedias(mediaPageType, page)).results;
     };
 
-    const { results: medias } = await getMedias(mediaPageType);
+    const { results: medias, totalPages } = await getMedias(mediaPageType);
 
     return (
       <MediaSection className="my-6 sm:my-[2.125rem]">
         <MediaSectionTitle className="lg:mb-[2.375rem]">{title}</MediaSectionTitle>
-        <MediaPageMediaSectionGrid initialMedias={medias} loadMoreMedias={loadMoreMedias} />
+        <MediaPageMediaSectionGrid
+          initialMedias={medias}
+          totalPages={totalPages}
+          loadMoreMedias={loadMoreMedias}
+        />
       </MediaSection>
     );
   }

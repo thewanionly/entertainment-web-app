@@ -1,4 +1,4 @@
-import { DEFAULT_PAGE } from '@/constants/medias';
+import { MIN_PAGE, MAX_PAGE } from '@/constants/medias';
 import { MediaResultsInfo } from '@/types/medias';
 
 import { MediasApiMediaType, MediasApiResponse, MediasApiTV } from './mediasApi.types';
@@ -24,8 +24,18 @@ export interface FetchTvSeriesParams {
 
 export const fetchTvSeries = async (params?: FetchTvSeriesParams): Promise<MediaResultsInfo> => {
   try {
-    const { sortBy = TvSeriesSortBy.POPULARITY_DESC, page: pageParam = DEFAULT_PAGE } =
-      params ?? {};
+    const { sortBy = TvSeriesSortBy.POPULARITY_DESC, page: pageParam = MIN_PAGE } = params ?? {};
+
+    // validate pageParam
+    if (pageParam < MIN_PAGE || pageParam > MAX_PAGE) {
+      console.warn(
+        'Invalid page: Pages start at 1 and max at 500. They are expected to be an integer.'
+      );
+      return {
+        page: pageParam,
+        results: [],
+      };
+    }
 
     const queryParams = new URLSearchParams({
       sort_by: sortBy,
