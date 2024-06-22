@@ -1,3 +1,4 @@
+import { DEFAULT_PAGE } from '@/constants/medias';
 import { MediaResultsInfo } from '@/types/medias';
 
 import { MediasApiMediaType, MediasApiMovie, MediasApiResponse } from './mediasApi.types';
@@ -16,21 +17,18 @@ enum MoviesSortBy {
   POPULARITY_DESC = 'popularity.desc',
 }
 
-const DEFAULT_PAGE_NUM = 1;
-
 export interface FetchMoviesParams {
   sortBy?: MoviesSortBy;
-  page?: string;
+  page?: number;
 }
 
 export const fetchMovies = async (params?: FetchMoviesParams): Promise<MediaResultsInfo> => {
   try {
-    const { sortBy = MoviesSortBy.POPULARITY_DESC, page: pageParam = String(DEFAULT_PAGE_NUM) } =
-      params ?? {};
+    const { sortBy = MoviesSortBy.POPULARITY_DESC, page: pageParam = DEFAULT_PAGE } = params ?? {};
 
     const queryParams = new URLSearchParams({
       sort_by: sortBy,
-      page: pageParam,
+      page: String(pageParam),
     });
 
     const response = await fetch(

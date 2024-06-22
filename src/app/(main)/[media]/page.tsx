@@ -6,7 +6,7 @@ import { MediaGridSection } from '../_ui/MediaGridSection';
 import { MediaPageMediaSectionGrid } from './_ui/MediaPageMediaSectionGrid';
 import { MEDIA_DATA, MediaPageType } from './_utils/media.constants';
 
-export const getMedias = async (media: MediaPageType, page = '1') => {
+export const getMedias = async (media: MediaPageType, page?: number) => {
   'use server';
 
   const { mediaFetcher } = MEDIA_DATA[media] ?? {};
@@ -41,13 +41,13 @@ export default async function MediaPage({
     // media page
     const { title } = MEDIA_DATA[mediaPageType] ?? {};
 
-    const loadMoreMedias = async (page: string) => {
+    const loadMoreMedias = async (page?: number) => {
       'use server';
 
       return (await getMedias(mediaPageType, page)).results;
     };
 
-    const { results: medias } = await getMedias(mediaPageType, page);
+    const { results: medias } = await getMedias(mediaPageType, Number(page));
 
     return (
       <MediaSection className="my-6 sm:my-[2.125rem]">

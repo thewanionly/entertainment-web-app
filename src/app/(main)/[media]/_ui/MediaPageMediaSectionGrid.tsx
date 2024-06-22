@@ -4,23 +4,24 @@ import { useState } from 'react';
 
 import { MediaSectionGrid } from '@/components/app-specific/MediaSection/MediaSectionGrid';
 import { Button } from '@/components/generic/Button';
+import { DEFAULT_PAGE } from '@/constants/medias';
 import { Media } from '@/types/medias';
 
 type MediaPageMediaSectionGridProps = {
   initialMedias: Media[];
-  loadMoreMedias: (page: string) => Promise<Media[]>;
+  loadMoreMedias: (page: number) => Promise<Media[]>;
 };
 export const MediaPageMediaSectionGrid = ({
   initialMedias,
   loadMoreMedias,
 }: MediaPageMediaSectionGridProps) => {
   const [medias, setMedias] = useState(initialMedias);
-  const [page, setPage] = useState(1);
+  const [page, setPage] = useState(DEFAULT_PAGE);
 
   const handleLoadMore = async () => {
     const newPage = page + 1;
 
-    const newMedias = await loadMoreMedias(String(newPage));
+    const newMedias = await loadMoreMedias(newPage);
 
     setPage(newPage);
     setMedias((currentMedias) => [...currentMedias, ...newMedias]);
