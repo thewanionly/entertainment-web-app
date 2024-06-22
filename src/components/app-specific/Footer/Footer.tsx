@@ -2,7 +2,7 @@ import { Attribution } from '../Attribution';
 
 export const Footer = () => {
   return (
-    <footer className="my-12 w-full lg:mb-16 lg:pl-[96px]">
+    <footer className="sticky bottom-0 z-30 w-full bg-dark-blue pb-8 pt-6 lg:pl-[96px]">
       <Attribution />
     </footer>
   );
