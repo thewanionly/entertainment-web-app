@@ -11,7 +11,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
     return (
       <div
         className={cn(
-          'peer flex items-center gap-4 border-b-[1px] border-greyish-blue p-4 text-body-m',
+          'peer flex items-center gap-4 border-b-[1px] border-greyish-blue p-4 text-[1rem]',
           'focus-within:border-white',
           error && 'border-red focus-within:border-red',
           disabled && 'cursor-not-allowed opacity-50',

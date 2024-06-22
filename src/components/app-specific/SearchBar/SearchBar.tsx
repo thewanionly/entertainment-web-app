@@ -18,7 +18,7 @@ const SearchBar = React.forwardRef<HTMLInputElement, SearchBarProps>(
           {...rest}
           ref={ref}
           className={cn(
-            'flex-1 border-none p-0 pt-0.5 text-[1rem] font-light sm:pt-0 sm:text-heading-m',
+            'flex-1 border-none p-0 pt-0.5 font-light sm:pt-0 sm:text-heading-m',
             'relative after:absolute after:-bottom-2.5 after:h-px after:w-full after:bg-greyish-blue after:opacity-0 sm:after:-bottom-3.5',
             'focus-within:after:opacity-100 motion-safe:after:transition-opacity'
           )}
