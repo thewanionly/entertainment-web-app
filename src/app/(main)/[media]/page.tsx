@@ -1,7 +1,20 @@
+import { MediaSection } from '@/components/app-specific/MediaSection/MediaSection';
+import { MediaSectionTitle } from '@/components/app-specific/MediaSection/MediaSectionTitle';
 import { notFound } from '@/lib/navigation';
 
 import { MediaGridSection } from '../_ui/MediaGridSection';
+import { MediaPageMediaSectionGrid } from './_ui/MediaPageMediaSectionGrid';
 import { MEDIA_DATA, MediaPageType } from './_utils/media.constants';
+
+export const getMedias = async (media: MediaPageType, page = '1') => {
+  'use server';
+
+  const { mediaFetcher } = MEDIA_DATA[media] ?? {};
+
+  const movies = await mediaFetcher({ page });
+
+  return movies;
+};
 
 type MediaPageProps = {
   params: {
@@ -22,33 +35,39 @@ export default async function MediaPage({
     notFound();
   }
 
-  // media page
-  const { title, mediaFetcher, searchLabel, searchFetcher } =
-    MEDIA_DATA[media as unknown as MediaPageType] ?? {};
+  const mediaPageType = media as MediaPageType;
 
-  if (searchTerm) {
-    // movies search page
-    const { results, totalResults } = await searchFetcher(searchTerm);
+  if (!searchTerm) {
+    // media page
+    const { title } = MEDIA_DATA[mediaPageType] ?? {};
+
+    const loadMoreMedias = async (page: string) => {
+      'use server';
+
+      return await getMedias(mediaPageType, page);
+    };
+
+    const medias = await getMedias(mediaPageType, page);
 
     return (
-      <MediaGridSection
-        className="my-6 sm:my-[2.125rem]"
-        title={`Found ${totalResults} ${searchLabel} results for ‘${searchTerm}’`}
-        titleTag="p"
-        titleClassName="normal-case"
-        medias={results}
-      />
+      <MediaSection className="my-6 sm:my-[2.125rem]">
+        <MediaSectionTitle className="lg:mb-[2.375rem]">{title}</MediaSectionTitle>
+        <MediaPageMediaSectionGrid initialMedias={medias} loadMoreMedias={loadMoreMedias} />
+      </MediaSection>
     );
   }
 
-  const medias = await mediaFetcher({ page });
+  // media search page
+  const { searchLabel, searchFetcher } = MEDIA_DATA[mediaPageType] ?? {};
+  const { results, totalResults } = await searchFetcher(searchTerm);
 
   return (
     <MediaGridSection
       className="my-6 sm:my-[2.125rem]"
-      title={title}
-      titleClassName="lg:mb-[2.375rem]"
-      medias={medias}
+      title={`Found ${totalResults} ${searchLabel} results for ‘${searchTerm}’`}
+      titleTag="p"
+      titleClassName="normal-case"
+      medias={results}
     />
   );
 }
