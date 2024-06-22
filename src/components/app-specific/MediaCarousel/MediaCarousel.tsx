@@ -11,15 +11,16 @@ import { cn } from '@/utils/styles';
 type MediaCarouselProps = {
   items: Media[];
   options?: CarouselOptions;
+  className?: string;
 };
 
-export const MediaCarousel = ({ items, options }: MediaCarouselProps) => (
+export const MediaCarousel = ({ items, options, className }: MediaCarouselProps) => (
   <Carousel
     opts={{
       align: 'start',
       ...options,
     }}
-    className="w-full"
+    className={cn('w-full', className)}
   >
     <CarouselContent className="-ml-4 sm:-ml-10">
       {items.map(({ id, imagePath, title, releaseDate, mediaType }, index) => (
