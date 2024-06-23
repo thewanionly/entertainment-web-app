@@ -1,14 +1,20 @@
+import { ReactNode } from 'react';
+
 import { MediaGridCard } from '@/components/app-specific/MediaCard/MediaGridCard';
 import { Media } from '@/types/medias';
 import { getYear } from '@/utils/dates';
 import { cn } from '@/utils/styles';
 
 type MediaSectionGridProps = {
-  medias: Media[];
+  children: ReactNode;
   className?: string;
 };
 
-export const MediaSectionGrid = ({ medias, className }: MediaSectionGridProps) => {
+type MediaSectionGridItemsProps = {
+  medias: Media[];
+};
+
+export const MediaSectionGrid = ({ children, className }: MediaSectionGridProps) => {
   return (
     <ul
       className={cn(
@@ -20,21 +26,24 @@ export const MediaSectionGrid = ({ medias, className }: MediaSectionGridProps) =
         className
       )}
     >
-      {medias.map(({ id, imagePath, title, releaseDate, mediaType }, index) => (
-        <li key={`${id}-${index}`} data-testid="grid-item">
-          <MediaGridCard
-            className="w-full sm:w-full lg:w-full"
-            imgSrc={imagePath}
-            imgAlt={title}
-            prioritizeImg={index === 0}
-            title={title}
-            year={getYear(releaseDate)}
-            mediaType={mediaType}
-            // rating={adult ? 'PG' : 'G'} TODO:
-            isBookmarked={false}
-          />
-        </li>
-      ))}
+      {children}
     </ul>
   );
 };
+
+export const MediaSectionGridItems = ({ medias }: MediaSectionGridItemsProps) =>
+  medias.map(({ id, imagePath, title, releaseDate, mediaType }, index) => (
+    <li key={`${id}-${index}`} data-testid="grid-item">
+      <MediaGridCard
+        className="w-full sm:w-full lg:w-full"
+        imgSrc={imagePath}
+        imgAlt={title}
+        prioritizeImg={index === 0}
+        title={title}
+        year={getYear(releaseDate)}
+        mediaType={mediaType}
+        // rating={adult ? 'PG' : 'G'} TODO:
+        isBookmarked={false}
+      />
+    </li>
+  ));

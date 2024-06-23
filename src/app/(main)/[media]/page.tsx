@@ -1,9 +1,13 @@
 import { MediaSection } from '@/components/app-specific/MediaSection/MediaSection';
+import {
+  MediaSectionGrid,
+  MediaSectionGridItems,
+} from '@/components/app-specific/MediaSection/MediaSectionGrid';
 import { MediaSectionTitle } from '@/components/app-specific/MediaSection/MediaSectionTitle';
 import { notFound } from '@/lib/navigation';
 
-import { MediaPageMediaSectionGrid } from './_ui/MediaPageMediaSectionGrid';
-import { MediaSearchPageMediaSectionGrid } from './_ui/MediaSearchPageMediaSectionGrid';
+import { MediaPageMoreItems } from './_ui/MediaPageMoreItems';
+import { MediaSearchPageMoreItems } from './_ui/MediaSearchPageMoreItems';
 import { MEDIA_DATA, MediaPageType } from './_utils/media.constants';
 
 export const getMedias = async (media: MediaPageType, page?: number) => {
@@ -65,11 +69,10 @@ export default async function MediaPage({
     return (
       <MediaSection className="my-6 sm:my-[2.125rem]">
         <MediaSectionTitle className="lg:mb-[2.375rem]">{title}</MediaSectionTitle>
-        <MediaPageMediaSectionGrid
-          initialMedias={medias}
-          totalPages={totalPages}
-          loadMoreMedias={loadMoreMedias}
-        />
+        <MediaSectionGrid>
+          <MediaSectionGridItems medias={medias} />
+          <MediaPageMoreItems totalPages={totalPages} loadMoreMedias={loadMoreMedias} />
+        </MediaSectionGrid>
       </MediaSection>
     );
   }
@@ -93,12 +96,14 @@ export default async function MediaPage({
       <MediaSectionTitle titleTag="p" className="normal-case">
         {`Found ${totalResults} ${searchLabel} results for ‘${searchTerm}’`}
       </MediaSectionTitle>
-      <MediaSearchPageMediaSectionGrid
-        key={searchTerm}
-        initialMedias={results}
-        totalPages={totalPages}
-        loadMoreMediaSearchResults={loadMoreMediaSearchResults}
-      />
+      <MediaSectionGrid>
+        <MediaSectionGridItems medias={results} />
+        <MediaSearchPageMoreItems
+          key={searchTerm}
+          totalPages={totalPages}
+          loadMoreMediaSearchResults={loadMoreMediaSearchResults}
+        />
+      </MediaSectionGrid>
     </MediaSection>
   );
 }

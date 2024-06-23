@@ -4,27 +4,17 @@ import { useEffect, useRef, useState } from 'react';
 
 import { useInView } from 'framer-motion';
 
-import { MediaSectionGrid } from '@/components/app-specific/MediaSection/MediaSectionGrid';
+import { MediaSectionGridItems } from '@/components/app-specific/MediaSection/MediaSectionGrid';
 import { MAX_PAGE, MIN_PAGE } from '@/constants/medias';
-import { useSearchParams } from '@/lib/navigation';
 import { Media } from '@/types/medias';
 
-type MediaSearchPageMediaSectionGridProps = {
-  initialMedias: Media[];
+type MediaPageMoreItemsProps = {
   totalPages?: number;
-  loadMoreMediaSearchResults: (searchTerm: string, page: number) => Promise<Media[]>;
+  loadMoreMedias: (page: number) => Promise<Media[]>;
 };
-
-export const MediaSearchPageMediaSectionGrid = ({
-  initialMedias,
-  totalPages,
-  loadMoreMediaSearchResults,
-}: MediaSearchPageMediaSectionGridProps) => {
-  const [medias, setMedias] = useState(initialMedias);
+export const MediaPageMoreItems = ({ totalPages, loadMoreMedias }: MediaPageMoreItemsProps) => {
+  const [medias, setMedias] = useState<Media[]>([]);
   const [page, setPage] = useState(MIN_PAGE);
-
-  const searchParams = useSearchParams();
-  const searchTerm = searchParams.get('q')?.toString() ?? '';
 
   const infScrollElRef = useRef(null);
   const isInfScrollElInView = useInView(infScrollElRef, { margin: '40px' });
@@ -41,15 +31,15 @@ export const MediaSearchPageMediaSectionGrid = ({
     if (page <= MIN_PAGE) return;
 
     (async () => {
-      const newMedias = await loadMoreMediaSearchResults(searchTerm, page);
+      const newMedias = await loadMoreMedias(page);
 
       setMedias((currentMedias) => [...currentMedias, ...newMedias]);
     })();
-  }, [page, loadMoreMediaSearchResults, searchTerm]);
+  }, [page, loadMoreMedias]);
 
   return (
     <>
-      <MediaSectionGrid medias={medias} />
+      <MediaSectionGridItems medias={medias} />
       {/* Indicator element when to load more medias. If the user scrolls to this element which is plaed in the bottom, load more medias. */}
       {hasMoreMedias && <div ref={infScrollElRef} className="invisible" />}
     </>
