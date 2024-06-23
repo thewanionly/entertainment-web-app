@@ -1,9 +1,10 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
+
+import { useInView } from 'framer-motion';
 
 import { MediaSectionGrid } from '@/components/app-specific/MediaSection/MediaSectionGrid';
-import { Button } from '@/components/generic/Button';
 import { MAX_PAGE, MIN_PAGE } from '@/constants/medias';
 import { Media } from '@/types/medias';
 
@@ -20,25 +21,32 @@ export const MediaPageMediaSectionGrid = ({
   const [medias, setMedias] = useState(initialMedias);
   const [page, setPage] = useState(MIN_PAGE);
 
-  const hasMoreMediasToLoad = (!totalPages || page < totalPages) && page < MAX_PAGE;
+  const infScrollElRef = useRef(null);
+  const isInfScrollElInView = useInView(infScrollElRef, { margin: '40px' });
+  const hasMoreMedias = (!totalPages || page < totalPages) && page < MAX_PAGE;
+  const shouldLoadMore = isInfScrollElInView && hasMoreMedias;
 
-  const handleLoadMore = async () => {
-    const newPage = page + 1;
+  useEffect(() => {
+    if (!shouldLoadMore) return;
 
-    const newMedias = await loadMoreMedias(newPage);
+    setPage((prevPage) => prevPage + 1);
+  }, [shouldLoadMore]);
 
-    setPage(newPage);
-    setMedias((currentMedias) => [...currentMedias, ...newMedias]);
-  };
+  useEffect(() => {
+    if (page <= MIN_PAGE) return;
+
+    (async () => {
+      const newMedias = await loadMoreMedias(page);
+
+      setMedias((currentMedias) => [...currentMedias, ...newMedias]);
+    })();
+  }, [page, loadMoreMedias]);
 
   return (
     <>
       <MediaSectionGrid medias={medias} />
-      {hasMoreMediasToLoad && (
-        <div className="mt-20 flex w-full justify-center">
-          <Button onClick={handleLoadMore}>Load more</Button>
-        </div>
-      )}
+      {/* Indicator element when to load more medias. If the user scrolls to this element which is plaed in the bottom, load more medias. */}
+      {hasMoreMedias && <div ref={infScrollElRef} className="invisible" />}
     </>
   );
 };
