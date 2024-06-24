@@ -1,7 +1,11 @@
+import { MediaSection } from '@/components/app-specific/MediaSection/MediaSection';
+import {
+  MediaSectionGrid,
+  MediaSectionGridItems,
+} from '@/components/app-specific/MediaSection/MediaSectionGrid';
+import { MediaSectionTitle } from '@/components/app-specific/MediaSection/MediaSectionTitle';
 import { redirect } from '@/lib/navigation';
 import { fetchSearchResults } from '@/services/medias/fetchSearchResults';
-
-import { MediaGridSection } from '../_ui/MediaGridSection';
 
 type SearchPageProps = {
   searchParams: {
@@ -19,12 +23,13 @@ export default async function SearchPage({
   const { results, totalResults } = await fetchSearchResults(searchTerm);
 
   return (
-    <MediaGridSection
-      className="my-6 sm:my-[2.125rem]"
-      title={`Found ${totalResults} results for ‘${searchTerm}’`}
-      titleTag="p"
-      titleClassName="normal-case"
-      medias={results}
-    />
+    <MediaSection className="my-6 sm:my-[2.125rem]">
+      <MediaSectionTitle titleTag="p" className="normal-case">
+        {`Found ${totalResults} results for ‘${searchTerm}’`}
+      </MediaSectionTitle>
+      <MediaSectionGrid>
+        <MediaSectionGridItems medias={results} />
+      </MediaSectionGrid>
+    </MediaSection>
   );
 }

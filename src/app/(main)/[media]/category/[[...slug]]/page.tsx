@@ -1,7 +1,12 @@
 import { MEDIA_DATA, MediaPageType } from '@/app/(main)/[media]/_utils/media.constants';
-import { MediaGridSection } from '@/app/(main)/_ui/MediaGridSection';
 import { MOVIE_CATEGORY, MovieCategory } from '@/app/(main)/_utils/movies.constants';
 import { TV_CATEGORY, TvCategory } from '@/app/(main)/_utils/tv.constants';
+import { MediaSection } from '@/components/app-specific/MediaSection/MediaSection';
+import {
+  MediaSectionGrid,
+  MediaSectionGridItems,
+} from '@/components/app-specific/MediaSection/MediaSectionGrid';
+import { MediaSectionTitle } from '@/components/app-specific/MediaSection/MediaSectionTitle';
 import { notFound, redirect } from '@/lib/navigation';
 import { Media } from '@/types/medias';
 
@@ -56,10 +61,11 @@ export default async function MediaCategoryPage({
   const results = await promise;
 
   return (
-    <MediaGridSection
-      className="my-6 sm:my-[2.125rem]"
-      title={title as string}
-      medias={results as Media[]}
-    />
+    <MediaSection className="my-6 sm:my-[2.125rem]">
+      <MediaSectionTitle className="lg:mb-[2.375rem]">{title}</MediaSectionTitle>
+      <MediaSectionGrid>
+        <MediaSectionGridItems medias={results as Media[]} />
+      </MediaSectionGrid>
+    </MediaSection>
   );
 }
