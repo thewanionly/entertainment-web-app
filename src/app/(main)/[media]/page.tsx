@@ -3,11 +3,10 @@ import {
   MediaSectionGrid,
   MediaSectionGridItems,
 } from '@/components/app-specific/MediaSection/MediaSectionGrid';
+import { MediaSectionGridMoreItems } from '@/components/app-specific/MediaSection/MediaSectionGridMoreItems';
 import { MediaSectionTitle } from '@/components/app-specific/MediaSection/MediaSectionTitle';
 import { notFound } from '@/lib/navigation';
 
-import { MediaPageMoreItems } from './_ui/MediaPageMoreItems';
-import { MediaSearchPageMoreItems } from './_ui/MediaSearchPageMoreItems';
 import { MEDIA_DATA, MediaPageType } from './_utils/media.constants';
 
 export const getMedias = async (media: MediaPageType, page?: number) => {
@@ -58,7 +57,7 @@ export default async function MediaPage({
     // media page
     const { title } = MEDIA_DATA[mediaPageType] ?? {};
 
-    const loadMoreMedias = async (page?: number) => {
+    const loadMoreMedias = async ({ page }: { page: number; searchTerm?: string }) => {
       'use server';
 
       return (await getMedias(mediaPageType, page)).results;
@@ -71,7 +70,7 @@ export default async function MediaPage({
         <MediaSectionTitle className="lg:mb-[2.375rem]">{title}</MediaSectionTitle>
         <MediaSectionGrid>
           <MediaSectionGridItems medias={medias} />
-          <MediaPageMoreItems totalPages={totalPages} loadMoreMedias={loadMoreMedias} />
+          <MediaSectionGridMoreItems totalPages={totalPages} loadMoreFn={loadMoreMedias} />
         </MediaSectionGrid>
       </MediaSection>
     );
@@ -80,7 +79,13 @@ export default async function MediaPage({
   // media search page
   const { searchLabel } = MEDIA_DATA[mediaPageType] ?? {};
 
-  const loadMoreMediaSearchResults = async (searchTerm: string, page?: number) => {
+  const loadMoreMediaSearchResults = async ({
+    page,
+    searchTerm = '',
+  }: {
+    page: number;
+    searchTerm?: string;
+  }) => {
     'use server';
 
     return (await getMediaSearchResults(mediaPageType, searchTerm, page)).results;
@@ -98,10 +103,10 @@ export default async function MediaPage({
       </MediaSectionTitle>
       <MediaSectionGrid>
         <MediaSectionGridItems medias={results} />
-        <MediaSearchPageMoreItems
+        <MediaSectionGridMoreItems
           key={searchTerm}
           totalPages={totalPages}
-          loadMoreMediaSearchResults={loadMoreMediaSearchResults}
+          loadMoreFn={loadMoreMediaSearchResults}
         />
       </MediaSectionGrid>
     </MediaSection>

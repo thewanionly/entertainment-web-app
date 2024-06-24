@@ -6,18 +6,28 @@ import { useInView } from 'framer-motion';
 
 import { MediaSectionGridItems } from '@/components/app-specific/MediaSection/MediaSectionGrid';
 import { MAX_PAGE, MIN_PAGE } from '@/constants/medias';
+import { useSearchParams } from '@/lib/navigation';
 import { Media } from '@/types/medias';
 
-type MediaPageMoreItemsProps = {
+type MediaSectionGridMoreItemsProps = {
   totalPages?: number;
-  loadMoreMedias: (page: number) => Promise<Media[]>;
+  loadMoreFn: (params: { page: number; searchTerm?: string }) => Promise<Media[]>;
 };
-export const MediaPageMoreItems = ({ totalPages, loadMoreMedias }: MediaPageMoreItemsProps) => {
+
+const INFINITY_SCROLL_EL_TOP_MARGIN = '40px';
+
+export const MediaSectionGridMoreItems = ({
+  totalPages,
+  loadMoreFn,
+}: MediaSectionGridMoreItemsProps) => {
   const [medias, setMedias] = useState<Media[]>([]);
   const [page, setPage] = useState(MIN_PAGE);
 
+  const searchParams = useSearchParams();
+  const searchTerm = searchParams.get('q')?.toString() ?? '';
+
   const infScrollElRef = useRef(null);
-  const isInfScrollElInView = useInView(infScrollElRef, { margin: '40px' });
+  const isInfScrollElInView = useInView(infScrollElRef, { margin: INFINITY_SCROLL_EL_TOP_MARGIN });
   const hasMoreMedias = (!totalPages || page < totalPages) && page < MAX_PAGE;
   const shouldLoadMore = isInfScrollElInView && hasMoreMedias;
 
@@ -31,11 +41,11 @@ export const MediaPageMoreItems = ({ totalPages, loadMoreMedias }: MediaPageMore
     if (page <= MIN_PAGE) return;
 
     (async () => {
-      const newMedias = await loadMoreMedias(page);
+      const newMedias = await loadMoreFn({ page, searchTerm });
 
       setMedias((currentMedias) => [...currentMedias, ...newMedias]);
     })();
-  }, [page, loadMoreMedias]);
+  }, [page, loadMoreFn, searchTerm]);
 
   return (
     <>
