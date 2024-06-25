@@ -43,12 +43,12 @@ const findPromiseIndex = (targetName: string) =>
 export default async function HomePage() {
   const results = await Promise.all(homePagePromises);
 
-  return Object.entries(HOME_PAGE_SECTIONS).map(([sectionName, { title, link }], index) => (
+  return Object.entries(HOME_PAGE_SECTIONS).map(([sectionName, { title }], index) => (
     <MediaCarouselSection
       key={sectionName}
       className={cn('mt-6', index === 0 ? 'sm:mt-[2.125rem]' : 'sm:mt-10')}
       title={title}
-      titleLink={link}
+      // titleLink={link} TODO: disable link to media category pages for now
       medias={results[findPromiseIndex(sectionName)] ?? []}
     />
   ));
