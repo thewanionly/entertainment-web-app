@@ -37,9 +37,7 @@ export const MediaCarouselSection = ({
   carouselOptions,
 }: MediaCarouselSectionProps) => {
   return (
-    <MediaSection
-      className={cn('ml-auto w-[95.735%] overflow-hidden lg:w-full lg:pl-9', className)}
-    >
+    <MediaSection className={cn('ml-auto mr-0 w-[95.735%] lg:px-0 lg:pl-9', className)}>
       <TitleWrapper href={titleLink}>
         <MediaSectionTitle className="mb-4 sm:mb-[1.5625rem] sm:text-heading-l">
           {title}
