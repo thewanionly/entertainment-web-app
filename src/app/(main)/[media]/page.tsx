@@ -1,3 +1,5 @@
+import { getMediaSearchResults } from '@/app/actions/getMediaSearchResults';
+import { getMedias } from '@/app/actions/getMedias';
 import { MediaSection } from '@/components/app-specific/MediaSection/MediaSection';
 import {
   MediaSectionGrid,
@@ -8,30 +10,6 @@ import { MediaSectionTitle } from '@/components/app-specific/MediaSection/MediaS
 import { notFound } from '@/lib/navigation';
 
 import { MEDIA_DATA, MediaPageType } from './_utils/media.constants';
-
-export const getMedias = async (media: MediaPageType, page?: number) => {
-  'use server';
-
-  const { mediaFetcher } = MEDIA_DATA[media] ?? {};
-
-  const movies = await mediaFetcher({ page });
-
-  return movies;
-};
-
-export const getMediaSearchResults = async (
-  media: MediaPageType,
-  searchTerm: string,
-  page?: number
-) => {
-  'use server';
-
-  const { searchFetcher } = MEDIA_DATA[media] ?? {};
-
-  const searchResults = await searchFetcher(searchTerm, page);
-
-  return searchResults;
-};
 
 type MediaPageProps = {
   params: {
@@ -88,12 +66,12 @@ export default async function MediaPage({
   }) => {
     'use server';
 
-    return (await getMediaSearchResults(mediaPageType, searchTerm, page)).results;
+    return (await getMediaSearchResults(searchTerm, mediaPageType, page)).results;
   };
 
   const { results, totalResults, totalPages } = await getMediaSearchResults(
-    mediaPageType,
-    searchTerm
+    searchTerm,
+    mediaPageType
   );
 
   return (
