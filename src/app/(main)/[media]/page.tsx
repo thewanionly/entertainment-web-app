@@ -1,14 +1,7 @@
-import { getMediaSearchResults } from '@/app/actions/getMediaSearchResults';
-import { getMedias } from '@/app/actions/getMedias';
-import { MediaSection } from '@/components/app-specific/MediaSection/MediaSection';
-import {
-  MediaSectionGrid,
-  MediaSectionGridItems,
-} from '@/components/app-specific/MediaSection/MediaSectionGrid';
-import { MediaSectionGridMoreItems } from '@/components/app-specific/MediaSection/MediaSectionGridMoreItems';
-import { MediaSectionTitle } from '@/components/app-specific/MediaSection/MediaSectionTitle';
 import { notFound } from '@/lib/navigation';
 
+import { MediaBasePage } from './_ui/MediaBasePage';
+import { MediaSearchPage } from './_ui/MediaSearchPage';
 import { MEDIA_DATA, MediaPageType } from './_utils/media.constants';
 
 type MediaPageProps = {
@@ -31,57 +24,11 @@ export default async function MediaPage({
 
   const mediaPageType = media as MediaPageType;
 
+  // media page
   if (!q) {
-    // media page
-    const { title } = MEDIA_DATA[mediaPageType] ?? {};
-
-    const loadMoreMedias = async (page: number) => {
-      'use server';
-
-      return (await getMedias({ media: mediaPageType, page })).results;
-    };
-
-    const { results: medias, totalPages } = await getMedias({ media: mediaPageType });
-
-    return (
-      <MediaSection className="my-6 sm:my-[2.125rem]">
-        <MediaSectionTitle className="lg:mb-[2.375rem]">{title}</MediaSectionTitle>
-        <MediaSectionGrid>
-          <MediaSectionGridItems medias={medias} />
-          <MediaSectionGridMoreItems totalPages={totalPages} loadMoreFn={loadMoreMedias} />
-        </MediaSectionGrid>
-      </MediaSection>
-    );
+    return <MediaBasePage mediaPageType={mediaPageType} />;
   }
 
   // media search page
-  const searchTerm = q;
-  const { searchLabel } = MEDIA_DATA[mediaPageType] ?? {};
-
-  const loadMoreMediaSearchResults = async (page: number) => {
-    'use server';
-
-    return (await getMediaSearchResults({ searchTerm, media: mediaPageType, page })).results;
-  };
-
-  const { results, totalResults, totalPages } = await getMediaSearchResults({
-    searchTerm,
-    media: mediaPageType,
-  });
-
-  return (
-    <MediaSection className="my-6 sm:my-[2.125rem]">
-      <MediaSectionTitle titleTag="p" className="normal-case">
-        {`Found ${totalResults} ${searchLabel} results for ‘${searchTerm}’`}
-      </MediaSectionTitle>
-      <MediaSectionGrid>
-        <MediaSectionGridItems medias={results} />
-        <MediaSectionGridMoreItems
-          key={searchTerm}
-          totalPages={totalPages}
-          loadMoreFn={loadMoreMediaSearchResults}
-        />
-      </MediaSectionGrid>
-    </MediaSection>
-  );
+  return <MediaSearchPage mediaPageType={mediaPageType} searchTerm={q} />;
 }
