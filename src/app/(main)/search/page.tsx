@@ -19,7 +19,7 @@ export default async function SearchPage({ searchParams: { q = '' } }: SearchPag
 
   const searchTerm = q;
 
-  const loadMoreMediaSearchResults = async ({ page }: { page: number; searchTerm?: string }) => {
+  const loadMoreMediaSearchResults = async (page: number) => {
     'use server';
 
     return (await getMediaSearchResults({ searchTerm: searchTerm ?? '', page })).results;

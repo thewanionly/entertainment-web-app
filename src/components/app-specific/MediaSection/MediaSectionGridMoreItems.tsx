@@ -9,12 +9,11 @@ import { MediaSectionGridItems } from '@/components/app-specific/MediaSection/Me
 import { MAX_PAGE, MIN_PAGE } from '@/constants/medias';
 import { useIsInClient } from '@/hooks/useIsInClient';
 import { useMediaQuery } from '@/hooks/useMediaQuery';
-import { useSearchParams } from '@/lib/navigation';
 import { Media } from '@/types/medias';
 
 type MediaSectionGridMoreItemsProps = {
   totalPages?: number;
-  loadMoreFn: (params: { page: number; searchTerm?: string }) => Promise<Media[]>;
+  loadMoreFn: (page: number) => Promise<Media[]>;
 };
 
 const INFINITY_SCROLL_EL_TOP_MARGIN = '40px';
@@ -27,9 +26,6 @@ export const MediaSectionGridMoreItems = ({
 }: MediaSectionGridMoreItemsProps) => {
   const [medias, setMedias] = useState<Media[]>([]);
   const [page, setPage] = useState(MIN_PAGE);
-
-  const searchParams = useSearchParams();
-  const searchTerm = searchParams.get('q')?.toString() ?? '';
 
   const infScrollElRef = useRef(null);
   const isInfScrollElInView = useInView(infScrollElRef, { margin: INFINITY_SCROLL_EL_TOP_MARGIN });
@@ -50,11 +46,11 @@ export const MediaSectionGridMoreItems = ({
     if (page <= MIN_PAGE) return;
 
     (async () => {
-      const newMedias = await loadMoreFn({ page, searchTerm });
+      const newMedias = await loadMoreFn(page);
 
       setMedias((currentMedias) => [...currentMedias, ...newMedias]);
     })();
-  }, [page, loadMoreFn, searchTerm]);
+  }, [page, loadMoreFn]);
 
   return (
     <>

@@ -22,7 +22,7 @@ type MediaPageProps = {
 
 export default async function MediaPage({
   params: { media = '' },
-  searchParams: { q: searchTerm = '' } = {},
+  searchParams: { q = '' } = {},
 }: MediaPageProps) {
   // validate `media`
   if (!Object.keys(MEDIA_DATA).includes(media)) {
@@ -31,11 +31,11 @@ export default async function MediaPage({
 
   const mediaPageType = media as MediaPageType;
 
-  if (!searchTerm) {
+  if (!q) {
     // media page
     const { title } = MEDIA_DATA[mediaPageType] ?? {};
 
-    const loadMoreMedias = async ({ page }: { page: number; searchTerm?: string }) => {
+    const loadMoreMedias = async (page: number) => {
       'use server';
 
       return (await getMedias({ media: mediaPageType, page })).results;
@@ -55,15 +55,10 @@ export default async function MediaPage({
   }
 
   // media search page
+  const searchTerm = q;
   const { searchLabel } = MEDIA_DATA[mediaPageType] ?? {};
 
-  const loadMoreMediaSearchResults = async ({
-    page,
-    searchTerm = '',
-  }: {
-    page: number;
-    searchTerm?: string;
-  }) => {
+  const loadMoreMediaSearchResults = async (page: number) => {
     'use server';
 
     return (await getMediaSearchResults({ searchTerm, media: mediaPageType, page })).results;
