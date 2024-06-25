@@ -60,7 +60,6 @@ export const MediaSectionGridMoreItems = ({
     <>
       <MediaSectionGridItems medias={medias} />
 
-      {/* Indicator element when to load more medias. If the user scrolls to this element which is plaed in the bottom, load more medias. */}
       {isInClient &&
         hasMoreMedias &&
         Array.from({ length: skeletonCardsNum }, (_, index) => (
@@ -69,6 +68,7 @@ export const MediaSectionGridMoreItems = ({
           </li>
         ))}
 
+      {/* Indicator element when to load more medias. If the user scrolls to this element which is plaed in the bottom, load more medias. */}
       {hasMoreMedias && <div ref={infScrollElRef} className="invisible" />}
     </>
   );
