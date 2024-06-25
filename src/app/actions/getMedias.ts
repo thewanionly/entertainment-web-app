@@ -2,7 +2,12 @@
 
 import { MediaPageType, MEDIA_DATA } from '../(main)/[media]/_utils/media.constants';
 
-export const getMedias = async (media: MediaPageType, page?: number) => {
+type MediasActionParams = {
+  media: MediaPageType;
+  page?: number;
+};
+
+export const getMedias = async ({ media, page }: MediasActionParams) => {
   const { mediaFetcher } = MEDIA_DATA[media] ?? {};
 
   const movies = await mediaFetcher({ page });

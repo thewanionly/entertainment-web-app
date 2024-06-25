@@ -38,10 +38,10 @@ export default async function MediaPage({
     const loadMoreMedias = async ({ page }: { page: number; searchTerm?: string }) => {
       'use server';
 
-      return (await getMedias(mediaPageType, page)).results;
+      return (await getMedias({ media: mediaPageType, page })).results;
     };
 
-    const { results: medias, totalPages } = await getMedias(mediaPageType);
+    const { results: medias, totalPages } = await getMedias({ media: mediaPageType });
 
     return (
       <MediaSection className="my-6 sm:my-[2.125rem]">
@@ -66,13 +66,13 @@ export default async function MediaPage({
   }) => {
     'use server';
 
-    return (await getMediaSearchResults(searchTerm, mediaPageType, page)).results;
+    return (await getMediaSearchResults({ searchTerm, media: mediaPageType, page })).results;
   };
 
-  const { results, totalResults, totalPages } = await getMediaSearchResults(
+  const { results, totalResults, totalPages } = await getMediaSearchResults({
     searchTerm,
-    mediaPageType
-  );
+    media: mediaPageType,
+  });
 
   return (
     <MediaSection className="my-6 sm:my-[2.125rem]">
