@@ -4,8 +4,11 @@ import { useEffect, useRef, useState } from 'react';
 
 import { useInView } from 'framer-motion';
 
+import { MediaGridCardSkeleton } from '@/components/app-specific/MediaCard/MediaGridCard/MediaGridCardSkeleton';
 import { MediaSectionGridItems } from '@/components/app-specific/MediaSection/MediaSectionGrid';
 import { MAX_PAGE, MIN_PAGE } from '@/constants/medias';
+import { useIsInClient } from '@/hooks/useIsInClient';
+import { useMediaQuery } from '@/hooks/useMediaQuery';
 import { useSearchParams } from '@/lib/navigation';
 import { Media } from '@/types/medias';
 
@@ -15,6 +18,8 @@ type MediaSectionGridMoreItemsProps = {
 };
 
 const INFINITY_SCROLL_EL_TOP_MARGIN = '40px';
+const SKELETON_NUM_SM = 4;
+const SKELETON_NUM_DEFAULT = 2;
 
 export const MediaSectionGridMoreItems = ({
   totalPages,
@@ -30,6 +35,10 @@ export const MediaSectionGridMoreItems = ({
   const isInfScrollElInView = useInView(infScrollElRef, { margin: INFINITY_SCROLL_EL_TOP_MARGIN });
   const hasMoreMedias = (!totalPages || page < totalPages) && page < MAX_PAGE;
   const shouldLoadMore = isInfScrollElInView && hasMoreMedias;
+
+  const isInClient = useIsInClient();
+  const sm = useMediaQuery('(min-width: 640px)');
+  const skeletonCardsNum = sm ? SKELETON_NUM_SM : SKELETON_NUM_DEFAULT;
 
   useEffect(() => {
     if (!shouldLoadMore) return;
@@ -50,7 +59,16 @@ export const MediaSectionGridMoreItems = ({
   return (
     <>
       <MediaSectionGridItems medias={medias} />
+
       {/* Indicator element when to load more medias. If the user scrolls to this element which is plaed in the bottom, load more medias. */}
+      {isInClient &&
+        hasMoreMedias &&
+        Array.from({ length: skeletonCardsNum }, (_, index) => (
+          <li key={index}>
+            <MediaGridCardSkeleton />
+          </li>
+        ))}
+
       {hasMoreMedias && <div ref={infScrollElRef} className="invisible" />}
     </>
   );
