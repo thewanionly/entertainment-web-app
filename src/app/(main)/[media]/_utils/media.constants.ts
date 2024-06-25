@@ -15,7 +15,7 @@ export enum MediaPageType {
 
 interface MediaPageValue {
   title: string;
-  name: string;
+  name: MediaPageType;
   mediaFetcher: typeof fetchMovies | typeof fetchTvSeries;
   searchLabel: string;
   searchFetcher: typeof fetchSearchMovieResults | typeof fetchSearchTvSeriesResults;
@@ -25,7 +25,7 @@ interface MediaPageValue {
 const MEDIA_DATA_ARRAY: MediaPageValue[] = [
   {
     title: 'Movies',
-    name: 'movies',
+    name: MediaPageType.MOVIES,
     mediaFetcher: fetchMovies,
     searchLabel: 'movies',
     searchFetcher: fetchSearchMovieResults,
@@ -33,7 +33,7 @@ const MEDIA_DATA_ARRAY: MediaPageValue[] = [
   },
   {
     title: 'TV Series',
-    name: 'tv',
+    name: MediaPageType.TV,
     mediaFetcher: fetchTvSeries,
     searchLabel: 'TV series',
     searchFetcher: fetchSearchTvSeriesResults,
