@@ -48,7 +48,8 @@ describe('MediaCarouselCard', () => {
     expect(ratingEl).toBeInTheDocument();
   });
 
-  it(`displays bookmark icon button`, () => {
+  // TODO: add back when implementing bookmark functionality
+  xit(`displays bookmark icon button`, () => {
     render(<Default />);
 
     const bookmarkBtn = screen.getByRole('button', { name: /bookmark/i });
@@ -68,7 +69,8 @@ describe('MediaCarouselCard', () => {
     expect(screen.getByRole('button', { name: /play/i })).toBeInTheDocument();
   });
 
-  it(`hides play button when bookmark icon button is hovered in non-touch devices`, async () => {
+  //  TODO: add back when implementing bookmark functionality
+  xit(`hides play button when bookmark icon button is hovered in non-touch devices`, async () => {
     render(<Default isHoverable />);
 
     // hover image to display play button

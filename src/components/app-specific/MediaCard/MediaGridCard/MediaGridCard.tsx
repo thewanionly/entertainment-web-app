@@ -4,7 +4,6 @@ import { cn } from '@/utils/styles';
 
 import { MediaCard } from '../MediaCard';
 import { MediaCardProps } from '../MediaCard.types';
-import { MediaCardBookmarkButton } from '../MediaCardBookmarkButton';
 import { MediaCardDetails } from '../MediaCardDetails';
 import { MediaCardHoverableArea } from '../MediaCardHoverableArea';
 import { MediaCardImage } from '../MediaCardImage';
@@ -40,7 +39,8 @@ export const MediaGridCard = ({
           sizes="(min-width: 1280px) 20vw, (min-width: 768px) 28vw, 44vw"
           loader={customImgLoader}
         />
-        <MediaCardBookmarkButton />
+        {/* TODO: add back when implementing bookmark functionality */}
+        {/* <MediaCardBookmarkButton /> */}
         <MediaCardPlayButton />
       </MediaCardHoverableArea>
       <MediaCardDetails title={title} year={year} mediaType={mediaType} rating={rating} />

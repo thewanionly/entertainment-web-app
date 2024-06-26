@@ -48,7 +48,8 @@ describe('MediaGridCard', () => {
     expect(ratingEl).toBeInTheDocument();
   });
 
-  it(`displays bookmark icon button`, () => {
+  //  TODO: add back when implementing bookmark functionality
+  xit(`displays bookmark icon button`, () => {
     render(<Default />);
 
     const bookmarkBtn = screen.getByRole('button', { name: /bookmark/i });
@@ -68,7 +69,8 @@ describe('MediaGridCard', () => {
     expect(screen.getByRole('button', { name: /play/i })).toBeInTheDocument();
   });
 
-  it(`hides play button when bookmark icon button is hovered`, async () => {
+  //  TODO: add back when implementing bookmark functionality
+  xit(`hides play button when bookmark icon button is hovered`, async () => {
     render(<Default isHoverable />);
 
     // hover image to display play button

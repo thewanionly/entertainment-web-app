@@ -2,7 +2,6 @@ import { cn } from '@/utils/styles';
 
 import { MediaCard } from '../MediaCard';
 import { MediaCardProps } from '../MediaCard.types';
-import { MediaCardBookmarkButton } from '../MediaCardBookmarkButton';
 import { MediaCardDetails } from '../MediaCardDetails';
 import { MediaCardHoverableArea } from '../MediaCardHoverableArea';
 import { MediaCardImage } from '../MediaCardImage';
@@ -45,7 +44,8 @@ export const MediaCarouselCard = ({
           priority={prioritizeImg}
           loader={customImgLoader}
         />
-        <MediaCardBookmarkButton className="sm:mr-6" />
+        {/* TODO: add back when implementing bookmark functionality */}
+        {/* <MediaCardBookmarkButton className="sm:mr-6" /> */}
         <MediaCardPlayButton
           className={cn(
             '[&.play-button-touch]:mb-[22px]',
