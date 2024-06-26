@@ -57,7 +57,8 @@ describe('MediaGridCard', () => {
     expect(bookmarkBtn).toBeInTheDocument();
   });
 
-  it(`displays play button when image is hovered`, async () => {
+  // TODO: add back when implementing play trailer functionality
+  xit(`displays play button when image is hovered`, async () => {
     render(<Default isHoverable />);
 
     const mediaCard = screen.getByTestId('media-card-hoverable-area');
@@ -87,7 +88,8 @@ describe('MediaGridCard', () => {
     );
   });
 
-  it('shows a persistent play button on touch devices', () => {
+  // TODO: add back when implementing play trailer functionality
+  xit('shows a persistent play button on touch devices', () => {
     render(<TouchDevice />);
 
     const playBtn = screen.getByRole('button', { name: /play/i });

@@ -2,32 +2,32 @@
 
 import { ReactNode } from 'react';
 
-import { useIsInClient } from '@/hooks/useIsInClient';
 import { cn } from '@/utils/styles';
 
 import { useMediaCard } from './MediaCard.context';
 
-const MediaCardHoverableAreaOverlay = () => {
-  const { hoverCard, isHoverable } = useMediaCard();
-  const isInClient = useIsInClient();
+// TODO: add back when implementing play trailer functionality
+// const MediaCardHoverableAreaOverlay = () => {
+//   const { hoverCard, isHoverable } = useMediaCard();
+//   const isInClient = useIsInClient();
 
-  if (!isInClient) return null;
+//   if (!isInClient) return null;
 
-  return (
-    isHoverable && (
-      <div
-        className={cn(
-          'col-start-1 row-start-1',
-          'z-10',
-          'h-full w-full rounded-lg bg-black/50',
-          'opacity-0 motion-safe:transition-opacity',
-          '[@media(hover:hover)]:group-hover:opacity-100 [@media(hover:hover)]:peer-hover:opacity-0',
-          hoverCard && 'opacity-100'
-        )}
-      />
-    )
-  );
-};
+//   return (
+//     isHoverable && (
+//       <div
+//         className={cn(
+//           'col-start-1 row-start-1',
+//           'z-10',
+//           'h-full w-full rounded-lg bg-black/50',
+//           'opacity-0 motion-safe:transition-opacity',
+//           '[@media(hover:hover)]:group-hover:opacity-100 [@media(hover:hover)]:peer-hover:opacity-0',
+//           hoverCard && 'opacity-100'
+//         )}
+//       />
+//     )
+//   );
+// };
 
 type MediaCardHoverableAreaProps = {
   className?: string;
@@ -48,7 +48,9 @@ export const MediaCardHoverableArea = ({
       onMouseLeave={() => setShowPlayBtn(false)}
     >
       {children}
-      <MediaCardHoverableAreaOverlay />
+
+      {/*  TODO: add back when implementing play trailer functionality */}
+      {/* <MediaCardHoverableAreaOverlay /> */}
     </div>
   );
 };

@@ -7,7 +7,6 @@ import { MediaCardProps } from '../MediaCard.types';
 import { MediaCardDetails } from '../MediaCardDetails';
 import { MediaCardHoverableArea } from '../MediaCardHoverableArea';
 import { MediaCardImage } from '../MediaCardImage';
-import { MediaCardPlayButton } from '../MediaCardPlayButton';
 
 export const MediaGridCard = ({
   className = '',
@@ -41,7 +40,8 @@ export const MediaGridCard = ({
         />
         {/* TODO: add back when implementing bookmark functionality */}
         {/* <MediaCardBookmarkButton /> */}
-        <MediaCardPlayButton />
+        {/* TODO: add back when implementing play trailer functionality */}
+        {/* <MediaCardPlayButton /> */}
       </MediaCardHoverableArea>
       <MediaCardDetails title={title} year={year} mediaType={mediaType} rating={rating} />
     </MediaCard>

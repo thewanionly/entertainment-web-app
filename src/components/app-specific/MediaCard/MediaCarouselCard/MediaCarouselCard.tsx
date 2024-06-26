@@ -5,7 +5,6 @@ import { MediaCardProps } from '../MediaCard.types';
 import { MediaCardDetails } from '../MediaCardDetails';
 import { MediaCardHoverableArea } from '../MediaCardHoverableArea';
 import { MediaCardImage } from '../MediaCardImage';
-import { MediaCardPlayButton } from '../MediaCardPlayButton';
 
 export const MediaCarouselCard = ({
   className = '',
@@ -46,14 +45,15 @@ export const MediaCarouselCard = ({
         />
         {/* TODO: add back when implementing bookmark functionality */}
         {/* <MediaCardBookmarkButton className="sm:mr-6" /> */}
-        <MediaCardPlayButton
+        {/* TODO: add back when implementing play trailer functionality */}
+        {/* <MediaCardPlayButton
           className={cn(
             '[&.play-button-touch]:mb-[22px]',
             '[&.play-button-touch]:sm:mb-[38px] [&.play-button-touch]:sm:mr-7',
             '[&.play-button-touch]:z-30',
             '[&.play-button-hovered]:-mt-6 [&.play-button-hovered]:sm:mt-0'
           )}
-        />
+        /> */}
         <MediaCardDetails
           className={cn(
             '[&_.upper-details-container]:gap-2 [&_.upper-details-container]:text-[12px] [&_.upper-details-container]:sm:text-body-m',
