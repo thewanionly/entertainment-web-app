@@ -18,7 +18,7 @@ export const MediaSectionGrid = ({ children, className }: MediaSectionGridProps)
   return (
     <ul
       className={cn(
-        'w-full',
+        'relative w-full',
         'grid grid-cols-2 gap-4',
         'xs:grid-cols-1',
         'sm:grid-cols-3 sm:gap-x-[1.875rem] sm:gap-y-6',

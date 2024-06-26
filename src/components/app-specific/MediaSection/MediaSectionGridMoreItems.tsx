@@ -16,7 +16,7 @@ type MediaSectionGridMoreItemsProps = {
   loadMoreFn: (page: number) => Promise<Media[]>;
 };
 
-const INFINITY_SCROLL_EL_TOP_MARGIN = '40px';
+const INFINITY_SCROLL_EL_TOP_MARGIN = '240px';
 const SKELETON_NUM_SM = 4;
 const SKELETON_NUM_DEFAULT = 2;
 
@@ -56,6 +56,11 @@ export const MediaSectionGridMoreItems = ({
     <>
       <MediaSectionGridItems medias={medias} />
 
+      {/* Indicator element when to load more medias. If the user scrolls to this element which is plaed in the bottom, load more medias. */}
+      {hasMoreMedias && (
+        <div ref={infScrollElRef} className="invisible absolute bottom-0 left-0 size-10" />
+      )}
+
       {isInClient &&
         hasMoreMedias &&
         Array.from({ length: skeletonCardsNum }, (_, index) => (
@@ -63,9 +68,6 @@ export const MediaSectionGridMoreItems = ({
             <MediaGridCardSkeleton />
           </li>
         ))}
-
-      {/* Indicator element when to load more medias. If the user scrolls to this element which is plaed in the bottom, load more medias. */}
-      {hasMoreMedias && <div ref={infScrollElRef} className="invisible" />}
     </>
   );
 };
