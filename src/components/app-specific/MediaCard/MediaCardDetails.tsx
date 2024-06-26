@@ -90,6 +90,7 @@ export const MediaCardDetails = ({
           'title',
           'truncate text-[14px] font-medium leading-[normal] text-white sm:text-heading-xs'
         )}
+        title={title}
       >
         {title}
       </p>

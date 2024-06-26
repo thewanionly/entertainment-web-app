@@ -34,7 +34,7 @@ export const MediaCarouselCard = ({
       hoverCard={hoverCard}
       isHoverable={isHoverable}
     >
-      <MediaCardHoverableArea className="grid grid-cols-1">
+      <MediaCardHoverableArea className="grid grid-cols-1" title={title}>
         <MediaCardImage
           className="col-start-1 row-start-1"
           src={imgSrc}
