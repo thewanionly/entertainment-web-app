@@ -50,7 +50,9 @@ export const MediaSectionGridMoreItems = ({
 
       setMedias((currentMedias) => [...currentMedias, ...newMedias]);
     })();
-  }, [page, loadMoreFn]);
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [page]);
 
   return (
     <>
