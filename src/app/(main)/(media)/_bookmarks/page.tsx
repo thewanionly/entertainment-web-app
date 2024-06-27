@@ -1,6 +1,6 @@
 import { fetchSearchResults } from '@/services/medias/fetchSearchResults';
 
-import { MediaGridSection } from '../_ui/MediaGridSection';
+import { MediaGridSection } from '../../_ui/MediaGridSection';
 
 type BookmarksPageProps = {
   searchParams?: {

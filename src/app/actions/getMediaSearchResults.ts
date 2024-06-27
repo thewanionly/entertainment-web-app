@@ -2,7 +2,7 @@
 
 import { fetchSearchResults } from '@/services/medias/fetchSearchResults';
 
-import { MediaPageType, MEDIA_DATA } from '../(main)/[media]/_utils/media.constants';
+import { MediaPageType, MEDIA_DATA } from '../(main)/(media)/[media]/_utils/media.constants';
 
 type MediaSearchResultsParams = {
   searchTerm: string;

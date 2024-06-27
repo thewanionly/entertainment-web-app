@@ -1,6 +1,6 @@
 'use server';
 
-import { MediaPageType, MEDIA_DATA } from '../(main)/[media]/_utils/media.constants';
+import { MediaPageType, MEDIA_DATA } from '../(main)/(media)/[media]/_utils/media.constants';
 
 type MediasActionParams = {
   media: MediaPageType;

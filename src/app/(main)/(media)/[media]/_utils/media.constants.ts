@@ -5,8 +5,8 @@ import {
 } from '@/services/medias/fetchSearchResults';
 import { fetchTvSeries } from '@/services/medias/fetchTvSeries';
 
-import { MOVIE_CATEGORY } from '../../_utils/movies.constants';
-import { TV_CATEGORY } from '../../_utils/tv.constants';
+import { MOVIE_CATEGORY } from '../../../_utils/movies.constants';
+import { TV_CATEGORY } from '../../../_utils/tv.constants';
 
 export enum MediaPageType {
   MOVIES = 'movies',

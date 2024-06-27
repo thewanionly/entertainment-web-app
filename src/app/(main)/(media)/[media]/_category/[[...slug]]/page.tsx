@@ -1,4 +1,4 @@
-import { MEDIA_DATA, MediaPageType } from '@/app/(main)/[media]/_utils/media.constants';
+import { MEDIA_DATA, MediaPageType } from '@/app/(main)/(media)/[media]/_utils/media.constants';
 import { MOVIE_CATEGORY, MovieCategory } from '@/app/(main)/_utils/movies.constants';
 import { TV_CATEGORY, TvCategory } from '@/app/(main)/_utils/tv.constants';
 import { MediaSection } from '@/components/app-specific/MediaSection/MediaSection';
