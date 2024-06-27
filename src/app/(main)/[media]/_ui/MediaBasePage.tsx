@@ -26,7 +26,9 @@ export const MediaBasePage = async ({ mediaPageType }: MediaBasePageProps) => {
 
   return (
     <MediaSection className="my-6 sm:my-[2.125rem]">
-      <MediaSectionTitle className="lg:mb-[2.375rem]">{title}</MediaSectionTitle>
+      <MediaSectionTitle className="lg:mb-[2.375rem]" titleTag="h1">
+        {title}
+      </MediaSectionTitle>
       <MediaSectionGrid>
         <MediaSectionGridItems medias={medias} />
         <MediaSectionGridMoreItems totalPages={totalPages} loadMoreFn={loadMoreMedias} />
