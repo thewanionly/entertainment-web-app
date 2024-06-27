@@ -1,4 +1,3 @@
-import { Footer } from '@/components/app-specific/Footer';
 import { Header } from '@/components/app-specific/Header';
 import '@/styles/globals.css';
 
@@ -13,7 +12,6 @@ export default function MainLayout({
       <main className="min-h-[85dvh] w-full pt-[56px] sm:pt-[128px] lg:min-w-0 lg:pl-[96px] lg:pt-0">
         {children}
       </main>
-      <Footer />
     </div>
   );
 }
