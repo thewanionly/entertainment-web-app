@@ -1,5 +1,6 @@
-import { Attribution } from '@/components/app-specific/Attribution';
 import { cn } from '@/utils/styles';
+
+import { Attribution } from './_ui/Attribution';
 
 export default async function AboutPage() {
   return (
@@ -7,7 +8,7 @@ export default async function AboutPage() {
       <h1
         className={cn(
           'inline-block capitalize',
-          'mb-6 text-[1.25rem] font-light leading-[normal] tracking-[-0.019375rem]',
+          'mb-8 text-[1.25rem] font-light leading-[normal] tracking-[-0.019375rem]',
           'sm:text-heading-l lg:mb-[2.375rem]'
         )}
       >
