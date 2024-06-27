@@ -1,0 +1,19 @@
+import { Attribution } from '@/components/app-specific/Attribution';
+import { cn } from '@/utils/styles';
+
+export default async function AboutPage() {
+  return (
+    <section className="mx-auto mt-8 w-[91.467%] sm:mt-6 lg:mt-16 lg:w-full lg:px-9 2xl:pr-0">
+      <h1
+        className={cn(
+          'inline-block capitalize',
+          'mb-6 text-[1.25rem] font-light leading-[normal] tracking-[-0.019375rem]',
+          'sm:text-heading-l lg:mb-[2.375rem]'
+        )}
+      >
+        About
+      </h1>
+      <Attribution />
+    </section>
+  );
+}

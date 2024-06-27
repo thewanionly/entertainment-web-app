@@ -9,6 +9,7 @@ import { cn } from '@/utils/styles';
 import { HEADER_LOGO_ALT_TEXT, HEADER_LOGO_IMG_PATH, NAV_LINKS } from './Header.constants';
 import { HeaderOrientation } from './Header.types';
 import { getVerticalClasses } from './Header.utils';
+import { HeaderNavLink } from './HeaderNavLink';
 import { HeaderNavigation, HeaderNavigationItem } from './HeaderNavigation';
 
 type HeaderProps = {
@@ -70,10 +71,18 @@ export const Header = ({ className = '', orientation }: HeaderProps) => {
           </HeaderNavigation>
         )}
 
-        {/* TODO: Avatar */}
-        {/* <div className={cn('justify-self-end text-white', getVerticalClasses(orientation, 'avatar'))}>
-        A
-      </div> */}
+        <div
+          className={cn('justify-self-end text-white', getVerticalClasses(orientation, 'avatar'))}
+        >
+          <HeaderNavLink
+            url="/about"
+            label="About"
+            icon="About"
+            active={topLevelPathUrl === '/about'}
+            orientation={orientation}
+          />
+          {/* TODO: Avatar */}
+        </div>
       </div>
     </header>
   );
