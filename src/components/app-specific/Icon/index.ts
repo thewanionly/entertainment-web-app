@@ -1,3 +1,4 @@
+export { default as About } from 'public/icons/icon-about.svg';
 export { default as BookMarkEmpty } from 'public/icons/icon-bookmark-empty.svg';
 export { default as BookMarkFull } from 'public/icons/icon-bookmark-full.svg';
 export { default as MediaTypeMovie } from 'public/icons/icon-media-type-movie.svg';
