@@ -3,7 +3,7 @@ import Link from 'next/link';
 
 export const Attribution = () => {
   return (
-    <div className="flex min-h-[20dvh] flex-col justify-between gap-1 lg:max-w-[56%] xl:max-w-[48%]">
+    <div className="flex flex-col justify-between gap-1 lg:max-w-[56%] xl:max-w-[48%]">
       <p className="text-body-s text-white/75 sm:text-body-m">
         All media-related data used in this application is supplied by{' '}
         <Link
