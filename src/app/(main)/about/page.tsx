@@ -1,6 +1,12 @@
+import { Metadata } from 'next';
+
 import { cn } from '@/utils/styles';
 
 import { Attribution } from './_ui/Attribution';
+
+export const metadata: Metadata = {
+  title: 'About',
+};
 
 export default async function AboutPage() {
   return (

@@ -1,3 +1,5 @@
+import { Metadata } from 'next';
+
 import { getMediaSearchResults } from '@/app/actions/getMediaSearchResults';
 import { MediaSection } from '@/components/app-specific/MediaSection/MediaSection';
 import {
@@ -13,6 +15,14 @@ type SearchPageProps = {
     q?: string;
   };
 };
+
+export async function generateMetadata({
+  searchParams: { q: searchTerm = '' } = {},
+}: SearchPageProps): Promise<Metadata> {
+  return {
+    title: `${searchTerm} | Search`,
+  };
+}
 
 export default async function SearchPage({ searchParams: { q = '' } }: SearchPageProps) {
   if (!q) redirect('/');

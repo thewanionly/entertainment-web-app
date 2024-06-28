@@ -1,12 +1,15 @@
 import type { Metadata } from 'next';
 
+import { APP_DESCRIPTION, APP_NAME } from '@/constants/app';
 import { outfit } from '@/lib/fonts';
 import '@/styles/globals.css';
 
 export const metadata: Metadata = {
-  title: 'Entertainment Web App',
-  description:
-    'A web app that lets you search for your favourite movies and TV shows and bookmark them.',
+  title: {
+    template: `%s | ${APP_NAME}`,
+    default: APP_NAME,
+  },
+  description: APP_DESCRIPTION,
 };
 
 export default function RootLayout({
