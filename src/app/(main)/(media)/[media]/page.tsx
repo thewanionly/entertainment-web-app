@@ -4,7 +4,7 @@ import { notFound } from '@/lib/navigation';
 
 import { MediaBasePage } from './_ui/MediaBasePage';
 import { MediaSearchPage } from './_ui/MediaSearchPage';
-import { MEDIA_DATA, MediaPageType } from './_utils/media.constants';
+import { MEDIA_DATA, MediaPageType, isValidMedia } from './_utils/media.constants';
 
 type MediaPageProps = {
   params: {
@@ -20,15 +20,13 @@ export async function generateMetadata({
   searchParams: { q: searchTerm = '' } = {},
 }: MediaPageProps): Promise<Metadata> {
   // validate `media`
-  if (!Object.keys(MEDIA_DATA).includes(media)) {
+  if (!isValidMedia(media)) {
     return {
       title: '404 Not Found',
     };
   }
 
-  const mediaPageType = media as MediaPageType;
-
-  const { title } = MEDIA_DATA[mediaPageType];
+  const { title } = MEDIA_DATA[media as MediaPageType];
 
   if (searchTerm) {
     return {
@@ -46,7 +44,7 @@ export default async function MediaPage({
   searchParams: { q = '' } = {},
 }: MediaPageProps) {
   // validate `media`
-  if (!Object.keys(MEDIA_DATA).includes(media)) {
+  if (!isValidMedia(media)) {
     notFound();
   }
 

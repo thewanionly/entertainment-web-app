@@ -45,3 +45,5 @@ const MEDIA_DATA_ARRAY: MediaPageValue[] = [
 export const MEDIA_DATA = Object.fromEntries(
   MEDIA_DATA_ARRAY.map((media) => [media.name, media])
 ) as Record<MediaPageType, MediaPageValue>;
+
+export const isValidMedia = (media: string) => Object.keys(MEDIA_DATA).includes(media);
