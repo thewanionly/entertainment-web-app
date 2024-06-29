@@ -5,7 +5,7 @@ import { MediaCategoryValue } from '../_utils/media.types';
 import { MOVIE_CATEGORY, MovieCategory } from '../_utils/movies.constants';
 import { TV_CATEGORY, TvCategory } from '../_utils/tv.constants';
 
-export enum HomePageSection {
+enum HomePageSection {
   TRENDING_MOVIES = 'trendingMovies',
   POPULAR_MOVIES = 'popularMovies',
   NOW_PLAYING_MOVIES = 'nowPlayingMovies',
