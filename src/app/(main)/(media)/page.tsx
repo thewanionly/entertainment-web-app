@@ -1,5 +1,3 @@
-import { cn } from '@/utils/styles';
-
 import { MediaCarouselSection } from '../_ui/MediaCarouselSection';
 import { MediaCategoryValue } from '../_utils/media.types';
 import { MOVIE_CATEGORY, MovieCategory } from '../_utils/movies.constants';
@@ -36,6 +34,7 @@ const HOME_PAGE_SECTIONS: Record<
 
 const homePagePromises = Object.values(HOME_PAGE_SECTIONS).map(({ promise }) => promise);
 const homePageSectionNames = Object.keys(HOME_PAGE_SECTIONS);
+const homePageSectionValues = Object.entries(HOME_PAGE_SECTIONS);
 
 const findPromiseIndex = (targetName: string) =>
   homePageSectionNames.findIndex((name) => name === targetName);
@@ -43,13 +42,16 @@ const findPromiseIndex = (targetName: string) =>
 export default async function HomePage() {
   const results = await Promise.all(homePagePromises);
 
-  return Object.entries(HOME_PAGE_SECTIONS).map(([sectionName, { title }], index) => (
-    <MediaCarouselSection
-      key={sectionName}
-      className={cn('mt-6', index === 0 ? 'sm:mt-[2.125rem]' : 'sm:mt-10')}
-      title={title}
-      // titleLink={link} TODO: disable link to media category pages for now
-      medias={results[findPromiseIndex(sectionName)] ?? []}
-    />
-  ));
+  return (
+    <div className="flex flex-col gap-6 sm:gap-10">
+      {homePageSectionValues.map(([sectionName, { title }]) => (
+        <MediaCarouselSection
+          key={sectionName}
+          title={title}
+          // titleLink={link} TODO: disable link to media category pages for now
+          medias={results[findPromiseIndex(sectionName)] ?? []}
+        />
+      ))}
+    </div>
+  );
 }
