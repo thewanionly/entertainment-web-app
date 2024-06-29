@@ -1,6 +1,6 @@
 'use client';
 
-import { ElementRef, FormEvent, useEffect, useRef } from 'react';
+import { ElementRef, FormEvent, Suspense, useEffect, useRef } from 'react';
 
 import { SearchBar } from '@/components/app-specific/SearchBar';
 import { usePathname, useRouter, useSearchParams } from '@/lib/navigation';
@@ -15,7 +15,8 @@ const SEARCH_PLACEHOLDER: Record<string, string> = {
   bookmarks: 'Search for bookmarked shows',
 };
 
-export const SearchSection = () => {
+// Fix for https://nextjs.org/docs/messages/missing-suspense-with-csr-bailout#possible-ways-to-fix-it
+const SearchComponent = () => {
   const searchInputRef = useRef<ElementRef<'input'>>(null);
   const { topLevelPath } = usePathname();
   const searchParams = useSearchParams();
@@ -54,15 +55,21 @@ export const SearchSection = () => {
   }, [searchTerm]);
 
   return (
-    <section className={cn('mx-auto mt-6 w-[91.467%] lg:mt-16 lg:w-full lg:px-9 2xl:pr-0')}>
-      <form onSubmit={handleSubmit}>
-        <SearchBar
-          ref={searchInputRef}
-          name={SEARCH_INPUT_NAME}
-          placeholder={searchPlaceholder}
-          defaultValue={searchTerm}
-        />
-      </form>
-    </section>
+    <form onSubmit={handleSubmit}>
+      <SearchBar
+        ref={searchInputRef}
+        name={SEARCH_INPUT_NAME}
+        placeholder={searchPlaceholder}
+        defaultValue={searchTerm}
+      />
+    </form>
   );
 };
+
+export const SearchSection = () => (
+  <section className={cn('mx-auto mt-6 w-[91.467%] lg:mt-16 lg:w-full lg:px-9 2xl:pr-0')}>
+    <Suspense>
+      <SearchComponent />
+    </Suspense>
+  </section>
+);
