@@ -61,7 +61,7 @@ export default async function MediaCategoryPage({
   const results = await promise;
 
   return (
-    <MediaSection className="my-6 sm:my-[2.125rem]">
+    <MediaSection>
       <MediaSectionTitle className="lg:mb-[2.375rem]">{title}</MediaSectionTitle>
       <MediaSectionGrid>
         <MediaSectionGridItems medias={results as Media[]} />

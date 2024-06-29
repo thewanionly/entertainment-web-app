@@ -29,7 +29,7 @@ export const MediaSearchPage = async ({ mediaPageType, searchTerm }: MediaSearch
   });
 
   return (
-    <MediaSection className="my-6 sm:my-[2.125rem]">
+    <MediaSection>
       <MediaSectionTitle titleTag="p" className="normal-case">
         {`Found ${totalResults} ${searchLabel} results for ‘${searchTerm}’`}
       </MediaSectionTitle>

@@ -38,7 +38,7 @@ export default async function SearchPage({ searchParams: { q = '' } }: SearchPag
   const { results, totalResults, totalPages } = await getMediaSearchResults({ searchTerm });
 
   return (
-    <MediaSection className="my-6 sm:my-[2.125rem]">
+    <MediaSection>
       <MediaSectionTitle titleTag="p" className="normal-case">
         {`Found ${totalResults} results for ‘${searchTerm}’`}
       </MediaSectionTitle>
