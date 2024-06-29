@@ -38,7 +38,7 @@ export const Attribution = () => {
         <p className="mb-2 text-center text-greyish-blue lg:text-start">Powered by</p>
         <Link href="https://www.themoviedb.org" target="_blank">
           <div className="relative aspect-[13.8] w-[70vw] min-w-[6rem]  max-w-[15rem]">
-            <Image src="/tmdb-logo.svg" alt="TMDB logo" title="TMDB" fill />
+            <Image src="/tmdb-logo.svg" alt="TMDB logo" title="TMDB" fill priority />
           </div>
         </Link>
       </div>

@@ -53,6 +53,7 @@ export const Header = ({ className = '', orientation }: HeaderProps) => {
               alt={HEADER_LOGO_ALT_TEXT}
               title="Entertainment Web App Home"
               fill
+              priority
             />
           </div>
         </Link>

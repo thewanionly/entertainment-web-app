@@ -22,6 +22,7 @@ export default function AuthLayout({
             alt={HEADER_LOGO_ALT_TEXT}
             title="Entertainment Web App Home"
             fill
+            priority
           />
         </div>
       </Link>
