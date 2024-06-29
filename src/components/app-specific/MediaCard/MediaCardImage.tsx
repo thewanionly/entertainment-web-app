@@ -1,5 +1,6 @@
 import Image, { ImageProps } from 'next/image';
 
+import { IMAGE_PLACEHOLDER } from '@/constants/images';
 import imageLoader from '@/utils/images';
 import { cn } from '@/utils/styles';
 
@@ -25,6 +26,8 @@ export const MediaCardImage = ({
         loader={imgLoader}
         alt={alt}
         fill
+        placeholder="blur"
+        blurDataURL={IMAGE_PLACEHOLDER} // TODO: generate dynamic blurDataURL per image
         {...props}
       />
     </div>
