@@ -19,7 +19,7 @@ export default function NotFound() {
       <p className="text-body-s text-white/75 sm:text-body-m">{`Sorry, we can't find the page you are looking for.`}</p>
       <p className="text-body-s text-white/75 sm:text-body-m">
         Please re-check the URL or return to the{' '}
-        <Link href="/" className="hover:text-red/80 hover:underline">
+        <Link href="/" className="text-white hover:text-red/80 hover:underline">
           home page
         </Link>
         .
