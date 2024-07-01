@@ -16,14 +16,6 @@ type SearchPageProps = {
   };
 };
 
-export async function generateMetadata({
-  searchParams: { q: searchTerm = '' } = {},
-}: SearchPageProps): Promise<Metadata> {
-  return {
-    title: `${searchTerm} | Search`,
-  };
-}
-
 export default async function SearchPage({ searchParams: { q = '' } }: SearchPageProps) {
   if (!q) redirect('/');
 
@@ -52,4 +44,12 @@ export default async function SearchPage({ searchParams: { q = '' } }: SearchPag
       </MediaSectionGrid>
     </MediaSection>
   );
+}
+
+export async function generateMetadata({
+  searchParams: { q: searchTerm = '' } = {},
+}: SearchPageProps): Promise<Metadata> {
+  return {
+    title: `${searchTerm} | Search`,
+  };
 }

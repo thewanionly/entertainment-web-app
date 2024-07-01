@@ -15,6 +15,26 @@ type MediaPageProps = {
   };
 };
 
+export default async function MediaPage({
+  params: { media = '' },
+  searchParams: { q = '' } = {},
+}: MediaPageProps) {
+  // validate `media`
+  if (!isValidMedia(media)) {
+    notFound();
+  }
+
+  const mediaPageType = media as MediaPageType;
+
+  // media page
+  if (!q) {
+    return <MediaBasePage mediaPageType={mediaPageType} />;
+  }
+
+  // media search page
+  return <MediaSearchPage mediaPageType={mediaPageType} searchTerm={q} />;
+}
+
 export async function generateMetadata({
   params: { media = '' },
   searchParams: { q: searchTerm = '' } = {},
@@ -37,24 +57,4 @@ export async function generateMetadata({
   return {
     title,
   };
-}
-
-export default async function MediaPage({
-  params: { media = '' },
-  searchParams: { q = '' } = {},
-}: MediaPageProps) {
-  // validate `media`
-  if (!isValidMedia(media)) {
-    notFound();
-  }
-
-  const mediaPageType = media as MediaPageType;
-
-  // media page
-  if (!q) {
-    return <MediaBasePage mediaPageType={mediaPageType} />;
-  }
-
-  // media search page
-  return <MediaSearchPage mediaPageType={mediaPageType} searchTerm={q} />;
 }
