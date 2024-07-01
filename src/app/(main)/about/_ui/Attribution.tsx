@@ -9,16 +9,17 @@ export const Attribution = () => {
         <Link
           href="https://www.themoviedb.org"
           target="_blank"
-          className="font-medium text-greyish-blue hover:underline"
+          className="hover:text-red/80 hover:underline"
         >
-          The Movie Database (TMDB).
-        </Link>{' '}
+          The Movie Database (TMDB)
+        </Link>
+        {'. '}
         <em className="font-medium">
           This application uses the{' '}
           <Link
             href="https://developer.themoviedb.org/docs"
             target="_blank"
-            className="font-medium text-greyish-blue hover:underline"
+            className="hover:text-red/80 hover:underline"
           >
             TMDB API
           </Link>{' '}
@@ -26,7 +27,7 @@ export const Attribution = () => {
           <Link
             href="https://www.themoviedb.org"
             target="_blank"
-            className="font-medium text-greyish-blue hover:underline"
+            className="hover:text-red/80 hover:underline"
           >
             TMDB
           </Link>
@@ -34,8 +35,7 @@ export const Attribution = () => {
         </em>
       </p>
 
-      <div className="mt-12 self-center text-center lg:self-start">
-        <p className="mb-2 text-center text-greyish-blue lg:text-start">Powered by</p>
+      <div className="mt-6 text-center">
         <Link href="https://www.themoviedb.org" target="_blank">
           <div className="relative aspect-[13.8] w-[70vw] min-w-[6rem]  max-w-[15rem]">
             <Image src="/tmdb-logo.svg" alt="TMDB logo" title="TMDB" fill priority />
