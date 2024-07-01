@@ -4,10 +4,6 @@ import { cn } from '@/utils/styles';
 
 import { Attribution } from './_ui/Attribution';
 
-export const metadata: Metadata = {
-  title: 'About',
-};
-
 export default async function AboutPage() {
   return (
     <section className="mx-auto mt-8 w-[91.467%] sm:mt-6 lg:mt-16 lg:w-full lg:px-9 2xl:pr-0">
@@ -24,3 +20,7 @@ export default async function AboutPage() {
     </section>
   );
 }
+
+export const metadata: Metadata = {
+  title: 'About',
+};

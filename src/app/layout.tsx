@@ -4,14 +4,6 @@ import { APP_DESCRIPTION, APP_NAME } from '@/constants/app';
 import { outfit } from '@/lib/fonts';
 import '@/styles/globals.css';
 
-export const metadata: Metadata = {
-  title: {
-    template: `%s | ${APP_NAME}`,
-    default: APP_NAME,
-  },
-  description: APP_DESCRIPTION,
-};
-
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -23,3 +15,11 @@ export default function RootLayout({
     </html>
   );
 }
+
+export const metadata: Metadata = {
+  title: {
+    template: `%s | ${APP_NAME}`,
+    default: APP_NAME,
+  },
+  description: APP_DESCRIPTION,
+};
