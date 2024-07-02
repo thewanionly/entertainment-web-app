@@ -21,7 +21,7 @@ export const MediaCardImage = ({
   return (
     <div className={cn('relative h-full w-full', className)}>
       <Image
-        className={cn('image', 'rounded-lg', src ? 'object-cover' : 'bg-light-grey object-contain')}
+        className={cn('image', 'rounded-lg', src ? 'object-cover' : 'bg-grey/50 object-contain')}
         src={imgSrc}
         loader={imgLoader}
         alt={alt}
