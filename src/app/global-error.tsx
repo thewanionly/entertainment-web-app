@@ -1,5 +1,6 @@
 'use client';
 
+import { ErrorRecoveryButton } from '@/components/app-specific/ErrorSection/ErrorRecoveryButton';
 import { ErrorSection } from '@/components/app-specific/ErrorSection/ErrorSection';
 
 export default function GlobalError({
@@ -13,7 +14,9 @@ export default function GlobalError({
     <html>
       <body>
         <main>
-          <ErrorSection error={error} reset={reset} />;
+          <ErrorSection error={error}>
+            <ErrorRecoveryButton handleRecover={reset} />
+          </ErrorSection>
         </main>
       </body>
     </html>

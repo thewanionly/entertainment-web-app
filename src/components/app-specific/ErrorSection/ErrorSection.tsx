@@ -1,18 +1,15 @@
 'use client';
 
-import { useEffect } from 'react';
+import { ReactNode, useEffect } from 'react';
 
-import Link from 'next/link';
-
-import { Button } from '@/components/generic/Button';
 import { cn } from '@/utils/styles';
 
 type ErrorSectionProps = {
   error: Error & { digest?: string };
-  reset: () => void;
+  children: ReactNode;
 };
 
-export const ErrorSection = ({ error, reset }: ErrorSectionProps) => {
+export const ErrorSection = ({ error, children }: ErrorSectionProps) => {
   useEffect(() => {
     // Log the error to an error reporting service
     console.error(error);
@@ -30,21 +27,9 @@ export const ErrorSection = ({ error, reset }: ErrorSectionProps) => {
         Something went wrong!
       </h1>
       <p className="text-body-s text-white/75 sm:text-body-m">
-        Sorry, it seems like an error has occurred. Please{' '}
-        <Button variant="link" className="p-0 hover:text-red/80">
-          try again
-        </Button>
-        .
+        Sorry, it seems like an error has occurred. Please try again.
       </p>
-      <Button
-        className="mt-6"
-        onClick={
-          // Attempt to recover by trying to re-render the segment
-          () => reset()
-        }
-      >
-        <Link href="/">Try again</Link>
-      </Button>
+      {children}
     </section>
   );
 };

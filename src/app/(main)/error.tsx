@@ -1,6 +1,7 @@
 'use client';
 
 // Error components must be Client Components
+import { ErrorRecoveryButton } from '@/components/app-specific/ErrorSection/ErrorRecoveryButton';
 import { ErrorSection } from '@/components/app-specific/ErrorSection/ErrorSection';
 
 export default function Error({
@@ -10,5 +11,9 @@ export default function Error({
   error: Error & { digest?: string };
   reset: () => void;
 }) {
-  return <ErrorSection error={error} reset={reset} />;
+  return (
+    <ErrorSection error={error}>
+      <ErrorRecoveryButton handleRecover={reset} />
+    </ErrorSection>
+  );
 }
