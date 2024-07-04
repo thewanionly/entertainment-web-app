@@ -18,9 +18,11 @@ export const MediaModal = () => {
   const mediaId = useMediaModalStore((state) => state.mediaId);
   const setMediaId = useMediaModalStore((state) => state.setMediaId);
 
+  const closeModal = () => setMediaId('');
+
   return (
     <Dialog open={Boolean(mediaId)}>
-      <DialogContent>
+      <DialogContent onOverlayClick={closeModal}>
         <DialogHeader>
           <DialogClose asChild>
             <IconButton
@@ -30,7 +32,7 @@ export const MediaModal = () => {
                 'disabled:pointer-events-none',
                 'focus:ring-slate-950 focus:outline-none focus:ring-2 focus:ring-offset-2 data-[state=open]:bg-dark-blue data-[state=open]:text-white/80'
               )}
-              onClick={() => setMediaId('')}
+              onClick={closeModal}
             >
               <X className="h-4 w-4" />
               <IconButtonSrLabel label="Next slide" />
