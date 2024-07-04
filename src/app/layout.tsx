@@ -4,6 +4,8 @@ import { APP_DESCRIPTION, APP_NAME } from '@/constants/app';
 import { outfit } from '@/lib/fonts';
 import '@/styles/globals.css';
 
+import { WebVitals } from './_ui/WebVitals';
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -11,7 +13,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={outfit.variable}>
-      <body className="bg-dark-blue text-body-s text-white">{children}</body>
+      <body className="bg-dark-blue text-body-s text-white">
+        <WebVitals />
+        {children}
+      </body>
     </html>
   );
 }
