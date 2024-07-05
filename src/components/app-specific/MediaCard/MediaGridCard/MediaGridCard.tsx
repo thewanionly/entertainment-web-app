@@ -1,5 +1,6 @@
 'use client';
 
+import { useMediaModalStore } from '@/stores/mediaModal';
 import { cn } from '@/utils/styles';
 
 import { MediaCard } from '../MediaCard';
@@ -22,6 +23,8 @@ export const MediaGridCard = ({
   hoverCard = false,
   isHoverable,
 }: MediaCardProps) => {
+  const setMediaId = useMediaModalStore((state) => state.setMediaId);
+
   return (
     <MediaCard
       className={cn('inline-flex flex-col gap-2', 'w-[164px] sm:w-[220px] lg:w-[280px]', className)}
@@ -29,6 +32,7 @@ export const MediaGridCard = ({
       hoverBookmark={hoverBookmark}
       hoverCard={hoverCard}
       isHoverable={isHoverable}
+      onClick={() => setMediaId(title)}
     >
       <MediaCardHoverableArea
         className="aspect-[1.49] sm:aspect-[1.57] lg:aspect-[1.61]"
