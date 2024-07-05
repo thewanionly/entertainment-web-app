@@ -26,7 +26,7 @@ export const Header = ({ className = '', orientation }: HeaderProps) => {
       className={cn(
         'sticky left-0 right-0 top-0 z-50',
         'bg-semi-dark-blue',
-        'sm:mx-auto sm:mb-8 sm:w-[92%] sm:rounded-b-[0.625rem] sm:bg-dark-blue sm:pt-6',
+        'sm:mb-8 sm:w-full sm:bg-dark-blue sm:pt-6',
         'lg:fixed lg:left-auto lg:right-auto lg:bg-semi-dark-blue',
         getVerticalClasses(orientation, 'header'),
         className
@@ -36,7 +36,7 @@ export const Header = ({ className = '', orientation }: HeaderProps) => {
         className={cn(
           'mx-auto w-[91.467%]',
           'grid h-14 grid-cols-[1fr_auto_1fr] items-center justify-items-start gap-6',
-          'sm:h-[4.5rem] sm:w-full sm:rounded-[0.625rem] sm:bg-semi-dark-blue sm:px-6',
+          'sm:mx-auto sm:h-[4.5rem] sm:w-[92%] sm:rounded-[0.625rem] sm:bg-semi-dark-blue sm:px-6',
           'lg:rounded-none',
           getVerticalClasses(orientation, 'headerContainer')
         )}
