@@ -1,3 +1,4 @@
+import { useMediaModalStore } from '@/stores/mediaModal';
 import { cn } from '@/utils/styles';
 
 import { MediaCard } from '../MediaCard';
@@ -21,6 +22,8 @@ export const MediaCarouselCard = ({
   hoverCard = false,
   isHoverable,
 }: MediaCardProps) => {
+  const setMediaId = useMediaModalStore((state) => state.setMediaId);
+
   return (
     <MediaCard
       className={cn(
@@ -33,6 +36,7 @@ export const MediaCarouselCard = ({
       hoverBookmark={hoverBookmark}
       hoverCard={hoverCard}
       isHoverable={isHoverable}
+      onClick={() => setMediaId(title)}
     >
       <MediaCardHoverableArea className="grid grid-cols-1" title={title}>
         <MediaCardImage
