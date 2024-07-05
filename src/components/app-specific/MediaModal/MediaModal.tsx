@@ -22,7 +22,15 @@ export const MediaModal = () => {
 
   return (
     <Dialog open={Boolean(mediaId)}>
-      <DialogContent onOverlayClick={closeModal}>
+      <DialogContent
+        className={cn(
+          'bottom-0 top-[5rem] h-dvh w-[91.467%] max-w-[1312px] translate-y-0 rounded-lg lg:top-[7rem] lg:w-[83%] lg:translate-x-[-45%]'
+        )}
+        onOpenAutoFocus={(e: Event) => e.preventDefault()}
+        onEscapeKeyDown={closeModal}
+        onPointerDownOutside={closeModal}
+        onInteractOutside={closeModal}
+      >
         <DialogHeader>
           <DialogClose asChild>
             <IconButton
@@ -39,8 +47,11 @@ export const MediaModal = () => {
             </IconButton>
           </DialogClose>
           <DialogTitle>{mediaId}</DialogTitle>
-          <DialogDescription></DialogDescription>
         </DialogHeader>
+
+        <div className="overflow-auto">
+          <DialogDescription></DialogDescription>
+        </div>
       </DialogContent>
     </Dialog>
   );
