@@ -24,10 +24,10 @@ export const Header = ({ className = '', orientation }: HeaderProps) => {
   return (
     <header
       className={cn(
-        'fixed left-0 right-0 z-50',
+        'sticky left-0 right-0 top-0 z-50',
         'bg-semi-dark-blue',
         'sm:mx-auto sm:mb-8 sm:w-[92%] sm:rounded-b-[0.625rem] sm:bg-dark-blue sm:pt-6',
-        'lg:left-auto lg:right-auto lg:bg-semi-dark-blue',
+        'lg:fixed lg:left-auto lg:right-auto lg:bg-semi-dark-blue',
         getVerticalClasses(orientation, 'header'),
         className
       )}

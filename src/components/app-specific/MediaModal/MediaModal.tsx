@@ -24,7 +24,7 @@ export const MediaModal = () => {
     <Dialog open={Boolean(mediaId)}>
       <DialogContent
         className={cn(
-          'bottom-0 top-[5rem] h-dvh w-[91.467%] max-w-[1312px] translate-y-0 rounded-lg lg:top-[7rem] lg:w-[83%] lg:translate-x-[-45%]'
+          'bottom-0 top-[5rem] h-dvh w-[96%] max-w-[1312px] translate-y-0 rounded-lg lg:top-[7rem] lg:w-[83%] lg:translate-x-[-45%]'
         )}
         onOpenAutoFocus={(e: Event) => e.preventDefault()}
         onEscapeKeyDown={closeModal}
