@@ -68,7 +68,9 @@ const SearchComponent = () => {
 
 export const SearchSection = () => (
   <section
-    className={cn('mx-auto my-6 w-[91.467%] sm:my-[2.125rem] lg:mt-16 lg:w-full lg:px-9 2xl:pr-0')}
+    className={cn(
+      'mx-auto my-6 w-[91.467%] sm:my-0 sm:mb-[2.125rem] lg:mt-16 lg:w-full lg:px-9 2xl:pr-0'
+    )}
   >
     <Suspense>
       <SearchComponent />
