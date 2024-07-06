@@ -1,7 +1,7 @@
-import { MediaCarouselSection } from '../_ui/MediaCarouselSection';
-import { MediaCategoryValue } from '../_utils/media.types';
-import { MOVIE_CATEGORY, MovieCategory } from '../_utils/movies.constants';
-import { TV_CATEGORY, TvCategory } from '../_utils/tv.constants';
+import { MediaCarouselSection } from '../../_ui/MediaCarouselSection';
+import { MediaCategoryValue } from '../../_utils/media.types';
+import { MOVIE_CATEGORY, MovieCategory } from '../../_utils/movies.constants';
+import { TV_CATEGORY, TvCategory } from '../../_utils/tv.constants';
 
 enum HomePageSection {
   TRENDING_MOVIES = 'trendingMovies',
