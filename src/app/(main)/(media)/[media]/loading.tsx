@@ -1,3 +1,5 @@
+import { MediaGridSectionSkeleton } from '../_ui/MediaGridSectionSkeleton';
+
 export default function MediaPageLoading() {
-  return <div>Media Page Loading...</div>;
+  return <MediaGridSectionSkeleton titleClassName="lg:mb-[2.375rem]" />;
 }

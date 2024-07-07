@@ -1,3 +1,5 @@
+import { MediaGridSectionSkeleton } from '../_ui/MediaGridSectionSkeleton';
+
 export default function SearchPageLoading() {
-  return <div>Search Page Loading...</div>;
+  return <MediaGridSectionSkeleton titleClassName="w-[50%]" />;
 }
