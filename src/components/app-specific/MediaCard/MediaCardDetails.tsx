@@ -6,6 +6,7 @@ import { MediaType } from '@/types/medias';
 import { cn } from '@/utils/styles';
 
 import { MediaTypeMovie, MediaTypeTV } from '../Icon';
+import { MediaCardDotSeparator } from './MediaCardDotSeparator';
 
 type MediaCardDetailsProps = {
   className?: string;
@@ -60,15 +61,7 @@ const UpperDetails = ({ year, mediaType, rating }: UpperDetailsProps) => {
         .map((upperDetailEl, index, elements) => (
           <Fragment key={(upperDetailEl as JSX.Element).key}>
             {upperDetailEl}
-            {index < elements.length - 1 && (
-              <span
-                className={cn(
-                  'dot-separator',
-                  'h-0.5 w-0.5 flex-shrink-0 rounded-full bg-white/50',
-                  'sm:h-[3px] sm:w-[3px]'
-                )}
-              />
-            )}
+            {index < elements.length - 1 && <MediaCardDotSeparator />}
           </Fragment>
         ))}
     </div>
@@ -83,12 +76,12 @@ export const MediaCardDetails = ({
   rating,
 }: MediaCardDetailsProps) => {
   return (
-    <div className={cn('flex flex-col gap-1 sm:gap-[5px]', className)}>
+    <div className={cn('flex flex-col gap-1 sm:gap-[0.3125rem]', className)}>
       <UpperDetails year={year} mediaType={mediaType} rating={rating} />
       <p
         className={cn(
           'title',
-          'truncate text-[14px] font-medium leading-[normal] text-white sm:text-heading-xs'
+          'truncate text-[0.875rem] font-medium leading-[normal] text-white sm:text-heading-xs'
         )}
         title={title}
       >
