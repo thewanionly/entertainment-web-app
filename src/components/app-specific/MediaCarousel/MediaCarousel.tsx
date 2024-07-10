@@ -5,7 +5,6 @@ import { Carousel, CarouselOptions } from '@/components/generic/Carousel';
 import { CarouselContent } from '@/components/generic/Carousel/CarouselContent';
 import { CarouselItem } from '@/components/generic/Carousel/CarouselItem';
 import { Media } from '@/types/medias';
-import { getYear } from '@/utils/dates';
 import { cn } from '@/utils/styles';
 
 type MediaCarouselProps = {
@@ -42,7 +41,6 @@ export const MediaCarousel = ({ items, options, className }: MediaCarouselProps)
             imgAlt={title}
             prioritizeImg={index === 0}
             title={title}
-            year={getYear(releaseDate)}
             releaseDate={releaseDate}
             mediaType={mediaType}
             // rating={adult ? 'PG' : 'G'} TODO:

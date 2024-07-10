@@ -1,4 +1,5 @@
 import { useMediaModalStore } from '@/stores/mediaModal';
+import { getYear } from '@/utils/dates';
 import { cn } from '@/utils/styles';
 
 import { MediaCard } from '../MediaCard';
@@ -15,7 +16,6 @@ export const MediaCarouselCard = ({
   customImgLoader,
   prioritizeImg = false,
   title,
-  year,
   releaseDate,
   mediaType,
   rating,
@@ -86,7 +86,7 @@ export const MediaCarouselCard = ({
             'bg-gradient-to-b from-black/0 to-black/75'
           )}
           title={title}
-          year={year}
+          year={getYear(releaseDate)}
           mediaType={mediaType}
           rating={rating}
         />

@@ -1,6 +1,5 @@
 import { MediaGridCard } from '@/components/app-specific/MediaCard/MediaGridCard';
 import { Media } from '@/types/medias';
-import { getYear } from '@/utils/dates';
 import { cn } from '@/utils/styles';
 
 type TopRatedSectionProps = {
@@ -50,7 +49,6 @@ export const MediaGridSection = ({
               imgAlt={title}
               prioritizeImg={index === 0}
               title={title}
-              year={getYear(releaseDate)}
               releaseDate={releaseDate}
               mediaType={mediaType}
               // rating={adult ? 'PG' : 'G'} TODO:

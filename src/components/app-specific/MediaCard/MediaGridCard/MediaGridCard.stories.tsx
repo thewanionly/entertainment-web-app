@@ -45,7 +45,7 @@ const mockMediaData: MediaCardProps = {
   imgSrc: '/images/earths-untouched/large.jpg',
   imgAlt: '4 people with their backs turned having fun in a sunset seemingly on a mountain',
   title: `Earth's Untouched`,
-  year: '2017',
+  releaseDate: '2024-06-11',
   mediaType: MediaType.MOVIE,
   rating: '18+',
   isBookmarked: false,

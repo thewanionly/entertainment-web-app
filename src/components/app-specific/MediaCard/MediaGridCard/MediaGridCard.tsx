@@ -1,6 +1,7 @@
 'use client';
 
 import { useMediaModalStore } from '@/stores/mediaModal';
+import { getYear } from '@/utils/dates';
 import { cn } from '@/utils/styles';
 
 import { MediaCard } from '../MediaCard';
@@ -17,7 +18,6 @@ export const MediaGridCard = ({
   customImgLoader,
   title,
   releaseDate,
-  year,
   mediaType,
   rating,
   isBookmarked,
@@ -65,7 +65,12 @@ export const MediaGridCard = ({
         {/* TODO: add back when implementing play trailer functionality */}
         {/* <MediaCardPlayButton /> */}
       </MediaCardHoverableArea>
-      <MediaCardDetails title={title} year={year} mediaType={mediaType} rating={rating} />
+      <MediaCardDetails
+        title={title}
+        year={getYear(releaseDate)}
+        mediaType={mediaType}
+        rating={rating}
+      />
     </MediaCard>
   );
 };

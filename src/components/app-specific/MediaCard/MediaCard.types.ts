@@ -9,7 +9,6 @@ export interface MediaCardProps {
   customImgLoader?: ImageLoader;
   title: string;
   releaseDate?: string;
-  year?: string; // TODO: remove year in favour of releaseDate
   mediaType: MediaType;
   rating?: string;
   isBookmarked: boolean;

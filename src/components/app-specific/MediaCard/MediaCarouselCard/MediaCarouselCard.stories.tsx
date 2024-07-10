@@ -45,7 +45,7 @@ const mockMediaData: MediaCardProps = {
   imgSrc: '/images/beyond-earth/trending/large.jpg',
   imgAlt: 'A man wearing cold jacket standing in a rock with waters and cliff around',
   title: `Beyond Earth`,
-  year: '2019',
+  releaseDate: '2024-06-11',
   mediaType: MediaType.MOVIE,
   rating: 'PG',
   isBookmarked: false,
