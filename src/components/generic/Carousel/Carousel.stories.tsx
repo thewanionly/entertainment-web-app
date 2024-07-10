@@ -58,6 +58,7 @@ export const Default: Story = {
 };
 
 const mockMediaData = {
+  mediaId: 1,
   imgSrc: '/images/beyond-earth/trending/large.jpg',
   imgAlt: 'A man wearing cold jacket standing in a rock with waters and cliff around',
   title: `Beyond Earth`,

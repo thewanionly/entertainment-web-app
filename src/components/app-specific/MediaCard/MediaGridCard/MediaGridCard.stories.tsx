@@ -41,6 +41,7 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 const mockMediaData: MediaCardProps = {
+  mediaId: 1,
   imgSrc: '/images/earths-untouched/large.jpg',
   imgAlt: '4 people with their backs turned having fun in a sunset seemingly on a mountain',
   title: `Earth's Untouched`,

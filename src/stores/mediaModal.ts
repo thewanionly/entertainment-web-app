@@ -1,17 +1,21 @@
 import { create } from 'zustand';
 import { devtools, persist } from 'zustand/middleware';
 
+import { Media } from '@/types/medias';
+
 interface MediaModalState {
   mediaId?: string;
-  setMediaId: (id: string) => void;
+  media?: Media;
+  setMediaId: (id?: string) => void;
+  setMedia: (media?: Media) => void;
 }
 
 export const useMediaModalStore = create<MediaModalState>()(
   devtools(
     persist(
       (set) => ({
-        mediaId: '',
         setMediaId: (mediaId) => set(() => ({ mediaId })),
+        setMedia: (media) => set(() => ({ media })),
       }),
       {
         name: 'media-modal-storage',

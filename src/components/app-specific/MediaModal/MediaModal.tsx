@@ -17,8 +17,12 @@ import { cn } from '@/utils/styles';
 export const MediaModal = () => {
   const mediaId = useMediaModalStore((state) => state.mediaId);
   const setMediaId = useMediaModalStore((state) => state.setMediaId);
+  const setMedia = useMediaModalStore((state) => state.setMedia);
 
-  const closeModal = () => setMediaId('');
+  const closeModal = () => {
+    setMediaId(undefined);
+    setMedia(undefined);
+  };
 
   return (
     <Dialog open={Boolean(mediaId)}>

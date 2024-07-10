@@ -9,12 +9,14 @@ import { MediaCardImage } from '../MediaCardImage';
 
 export const MediaCarouselCard = ({
   className = '',
+  mediaId,
   imgSrc,
   imgAlt,
   customImgLoader,
   prioritizeImg = false,
   title,
   year,
+  releaseDate,
   mediaType,
   rating,
   isBookmarked,
@@ -23,8 +25,19 @@ export const MediaCarouselCard = ({
   isHoverable,
 }: MediaCardProps) => {
   const setMediaId = useMediaModalStore((state) => state.setMediaId);
+  const setMedia = useMediaModalStore((state) => state.setMedia);
 
-  const openModal = () => setMediaId(title);
+  const openModal = () => {
+    setMediaId(title);
+    setMedia({
+      id: mediaId,
+      imagePath: imgSrc,
+      title,
+      mediaType,
+      releaseDate,
+      certification: '',
+    });
+  };
 
   return (
     <MediaCard

@@ -41,6 +41,7 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 const mockMediaData: MediaCardProps = {
+  mediaId: 1,
   imgSrc: '/images/beyond-earth/trending/large.jpg',
   imgAlt: 'A man wearing cold jacket standing in a rock with waters and cliff around',
   title: `Beyond Earth`,

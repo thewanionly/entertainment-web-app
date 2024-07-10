@@ -3,11 +3,13 @@ import { ImageLoader } from 'next/image';
 import { MediaType } from '@/types/medias';
 
 export interface MediaCardProps {
+  mediaId: number;
   imgSrc: string;
   imgAlt: string;
   customImgLoader?: ImageLoader;
   title: string;
-  year?: string;
+  releaseDate?: string;
+  year?: string; // TODO: remove year in favour of releaseDate
   mediaType: MediaType;
   rating?: string;
   isBookmarked: boolean;

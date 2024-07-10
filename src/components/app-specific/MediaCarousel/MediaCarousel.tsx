@@ -37,11 +37,13 @@ export const MediaCarousel = ({ items, options, className }: MediaCarouselProps)
         >
           <MediaCarouselCard
             className="w-full sm:w-full lg:w-full"
+            mediaId={id}
             imgSrc={imagePath}
             imgAlt={title}
             prioritizeImg={index === 0}
             title={title}
             year={getYear(releaseDate)}
+            releaseDate={releaseDate}
             mediaType={mediaType}
             // rating={adult ? 'PG' : 'G'} TODO:
             isBookmarked={false}

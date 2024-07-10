@@ -12,7 +12,7 @@ export interface Media {
   imagePath: string;
   title: string;
   mediaType: MediaType;
-  releaseDate: string;
+  releaseDate?: string;
   certification: string;
 }
 
