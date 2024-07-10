@@ -17,20 +17,17 @@ import { cn } from '@/utils/styles';
 import { MediaCardImage } from '../MediaCard/MediaCardImage';
 
 export const MediaModal = () => {
-  const mediaId = useMediaModalStore((state) => state.mediaId);
-  const setMediaId = useMediaModalStore((state) => state.setMediaId);
   const media = useMediaModalStore((state) => state.media);
   const setMedia = useMediaModalStore((state) => state.setMedia);
 
   const { title = '', imagePath = '' } = media ?? {};
 
   const closeModal = () => {
-    setMediaId(undefined);
     setMedia(undefined);
   };
 
   return (
-    <Dialog open={Boolean(mediaId)}>
+    <Dialog open={Boolean(media?.id)}>
       <DialogContent
         className={cn(
           'bottom-0 top-[5rem] h-dvh w-[96%] max-w-[1312px] translate-y-0 rounded-lg p-0 lg:top-[7rem] lg:w-[83%] lg:translate-x-[-45%]'

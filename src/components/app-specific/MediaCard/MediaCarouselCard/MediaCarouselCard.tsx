@@ -24,11 +24,9 @@ export const MediaCarouselCard = ({
   hoverCard = false,
   isHoverable,
 }: MediaCardProps) => {
-  const setMediaId = useMediaModalStore((state) => state.setMediaId);
   const setMedia = useMediaModalStore((state) => state.setMedia);
 
   const openModal = () => {
-    setMediaId(title);
     setMedia({
       id: mediaId,
       imagePath: imgSrc,
