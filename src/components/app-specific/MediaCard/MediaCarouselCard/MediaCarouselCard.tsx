@@ -24,6 +24,8 @@ export const MediaCarouselCard = ({
 }: MediaCardProps) => {
   const setMediaId = useMediaModalStore((state) => state.setMediaId);
 
+  const openModal = () => setMediaId(title);
+
   return (
     <MediaCard
       className={cn(
@@ -36,9 +38,8 @@ export const MediaCarouselCard = ({
       hoverBookmark={hoverBookmark}
       hoverCard={hoverCard}
       isHoverable={isHoverable}
-      onClick={() => setMediaId(title)}
     >
-      <MediaCardHoverableArea className="grid grid-cols-1" title={title}>
+      <MediaCardHoverableArea className="grid grid-cols-1" title={title} onClick={openModal}>
         <MediaCardImage
           className="col-start-1 row-start-1"
           src={imgSrc}

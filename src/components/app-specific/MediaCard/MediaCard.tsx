@@ -13,7 +13,6 @@ type MediaCardProps = {
   hoverBookmark?: boolean; // only for storybook
   hoverCard?: boolean; // only for storybook
   isHoverable?: boolean; // only for storybook and testing purposes
-  onClick?: () => void;
 };
 
 export const MediaCard = ({
@@ -23,14 +22,9 @@ export const MediaCard = ({
   hoverBookmark = false,
   hoverCard = false,
   isHoverable,
-  onClick,
 }: MediaCardProps) => {
   return (
-    <div
-      data-testid="media-card"
-      className={cn('relative h-full w-full', className)}
-      onClick={onClick}
-    >
+    <div data-testid="media-card" className={cn('relative h-full w-full', className)}>
       <MediaCardContextProvider value={{ hoverCard, isBookmarked, hoverBookmark, isHoverable }}>
         {children}
       </MediaCardContextProvider>

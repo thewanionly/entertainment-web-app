@@ -33,12 +33,14 @@ type MediaCardHoverableAreaProps = {
   className?: string;
   children: ReactNode;
   title?: string;
+  onClick?: () => void;
 };
 
 export const MediaCardHoverableArea = ({
   className = '',
   children,
   title,
+  onClick,
 }: MediaCardHoverableAreaProps) => {
   const { setShowPlayBtn } = useMediaCard();
 
@@ -46,9 +48,10 @@ export const MediaCardHoverableArea = ({
     <div
       title={title}
       data-testid="media-card-hoverable-area"
-      className={cn('rounded-lg', 'group relative grid h-full w-full', className)}
+      className={cn('group relative grid h-full w-full cursor-pointer rounded-lg', className)}
       onMouseEnter={() => setShowPlayBtn(true)}
       onMouseLeave={() => setShowPlayBtn(false)}
+      onClick={onClick}
     >
       {children}
 
