@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
+import { MediaCardProps } from '@/components/app-specific/MediaCard/MediaCard.types';
 import { MediaCarouselCard } from '@/components/app-specific/MediaCard/MediaCarouselCard';
 import { MediaType } from '@/types/medias';
 
@@ -57,12 +58,12 @@ export const Default: Story = {
   ),
 };
 
-const mockMediaData = {
+const mockMediaData: MediaCardProps = {
   mediaId: 1,
   imgSrc: '/images/beyond-earth/trending/large.jpg',
   imgAlt: 'A man wearing cold jacket standing in a rock with waters and cliff around',
   title: `Beyond Earth`,
-  year: '2019',
+  releaseDate: '2024-06-11',
   mediaType: MediaType.MOVIE,
   rating: 'PG',
   isBookmarked: false,
