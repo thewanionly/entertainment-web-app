@@ -14,10 +14,15 @@ import {
 import { useMediaModalStore } from '@/stores/mediaModal';
 import { cn } from '@/utils/styles';
 
+import { MediaCardImage } from '../MediaCard/MediaCardImage';
+
 export const MediaModal = () => {
   const mediaId = useMediaModalStore((state) => state.mediaId);
   const setMediaId = useMediaModalStore((state) => state.setMediaId);
+  const media = useMediaModalStore((state) => state.media);
   const setMedia = useMediaModalStore((state) => state.setMedia);
+
+  const { title = '', imagePath = '' } = media ?? {};
 
   const closeModal = () => {
     setMediaId(undefined);
@@ -28,7 +33,7 @@ export const MediaModal = () => {
     <Dialog open={Boolean(mediaId)}>
       <DialogContent
         className={cn(
-          'bottom-0 top-[5rem] h-dvh w-[96%] max-w-[1312px] translate-y-0 rounded-lg lg:top-[7rem] lg:w-[83%] lg:translate-x-[-45%]'
+          'bottom-0 top-[5rem] h-dvh w-[96%] max-w-[1312px] translate-y-0 rounded-lg p-0 lg:top-[7rem] lg:w-[83%] lg:translate-x-[-45%]'
         )}
         onOpenAutoFocus={(e: Event) => e.preventDefault()}
         onEscapeKeyDown={closeModal}
@@ -39,6 +44,7 @@ export const MediaModal = () => {
           <DialogClose asChild>
             <IconButton
               className={cn(
+                'z-50',
                 'absolute right-4 top-4',
                 'h-8 w-8 rounded-sm p-1 opacity-70 ring-offset-white transition-opacity hover:bg-transparent',
                 'disabled:pointer-events-none',
@@ -50,7 +56,8 @@ export const MediaModal = () => {
               <IconButtonSrLabel label="Next slide" />
             </IconButton>
           </DialogClose>
-          <DialogTitle>{mediaId}</DialogTitle>
+          <MediaCardImage src={imagePath} alt={title} />
+          <DialogTitle className="text-heading-m">{title}</DialogTitle>
         </DialogHeader>
 
         <div className="overflow-auto">
