@@ -37,26 +37,32 @@ export const MediaModal = () => {
         onPointerDownOutside={closeModal}
         onInteractOutside={closeModal}
       >
-        <DialogHeader>
+        <DialogHeader className="space-y-0">
           <DialogClose asChild>
             <IconButton
               className={cn(
-                'z-50',
-                'absolute right-4 top-4',
-                'h-8 w-8 rounded-sm p-1 opacity-70 ring-offset-white transition-opacity hover:bg-transparent',
+                'absolute right-2 top-2 z-50 sm:right-4 sm:top-4',
+                'h-8 w-8 rounded-full bg-dark-blue/70 p-1 text-white ring-offset-white hover:bg-dark-blue/70 hover:text-red motion-safe:transition-all sm:h-10 sm:w-10',
                 'disabled:pointer-events-none',
                 'focus:ring-slate-950 focus:outline-none focus:ring-2 focus:ring-offset-2 data-[state=open]:bg-dark-blue data-[state=open]:text-white/80'
               )}
               onClick={closeModal}
             >
-              <X className="h-4 w-4" />
+              <X className="h-5 w-5 sm:h-6 sm:w-6" />
               <IconButtonSrLabel label="Next slide" />
             </IconButton>
           </DialogClose>
-          <MediaCardImage src={imagePath} alt={title} />
-          <DialogTitle className="text-heading-m">{title}</DialogTitle>
+          <MediaCardImage
+            className={cn(
+              'aspect-[2] h-[unset] w-full',
+              'rounded-b-none rounded-t-lg ',
+              'after:absolute after:bottom-0 after:left-0 after:h-[25%] after:w-full after:bg-gradient-to-b after:from-dark-blue/0 after:to-dark-blue/100'
+            )}
+            src={imagePath}
+            alt={title}
+          />
         </DialogHeader>
-
+        <DialogTitle className="text-heading-m">{title}</DialogTitle>
         <div className="overflow-auto">
           <DialogDescription></DialogDescription>
         </div>
