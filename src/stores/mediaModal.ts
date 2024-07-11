@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { devtools, persist } from 'zustand/middleware';
+import { devtools } from 'zustand/middleware';
 
 import { Media } from '@/types/medias';
 
@@ -10,14 +10,7 @@ interface MediaModalState {
 }
 
 export const useMediaModalStore = create<MediaModalState>()(
-  devtools(
-    persist(
-      (set) => ({
-        setMedia: (media) => set(() => ({ media })),
-      }),
-      {
-        name: 'media-modal-storage',
-      }
-    )
-  )
+  devtools((set) => ({
+    setMedia: (media) => set(() => ({ media })),
+  }))
 );
