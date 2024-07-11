@@ -51,7 +51,7 @@ const MediaKeyDetails = ({ releaseDate, mediaType, certification }: MediaKeyDeta
     <div
       className={cn(
         'flex items-center gap-[7.5px] font-light leading-[normal] text-white/75 xs:text-body-s',
-        'gap-2 text-body-m sm:text-heading-xs sm:font-light'
+        'gap-2 text-body-m sm:gap-3 sm:text-heading-xs sm:font-light'
       )}
     >
       {keyDetailsElements
@@ -112,7 +112,7 @@ export const MediaModal = () => {
           alt={title}
         />
 
-        <div className="p-4 sm:p-6 xs:p-2">
+        <div className="p-4 sm:p-6 lg:p-8 xs:p-2">
           <div>
             <DialogTitle className="mb-1 text-heading-s sm:text-heading-l sm:font-medium xs:text-heading-xs">
               {title}
