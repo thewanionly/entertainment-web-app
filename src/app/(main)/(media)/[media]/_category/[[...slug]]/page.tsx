@@ -62,7 +62,7 @@ export default async function MediaCategoryPage({
 
   return (
     <MediaSection>
-      <MediaSectionTitle className="lg:mb-[2.375rem]">{title}</MediaSectionTitle>
+      <MediaSectionTitle>{title}</MediaSectionTitle>
       <MediaSectionGrid>
         <MediaSectionGridItems medias={results as Media[]} />
       </MediaSectionGrid>
