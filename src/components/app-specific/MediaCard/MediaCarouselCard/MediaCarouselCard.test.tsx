@@ -1,4 +1,5 @@
 import { composeStories, render, screen, userEvent, waitFor, within } from '@/tests/utils';
+import { getYear } from '@/utils/dates';
 
 import * as MediaCarouselCard from './MediaCarouselCard.stories';
 
@@ -24,7 +25,7 @@ describe('MediaCarouselCard', () => {
   it(`displays media's release year`, () => {
     render(<Default />);
 
-    const yearEl = screen.getByText(Default.args.year as string);
+    const yearEl = screen.getByText(getYear(Default.args.releaseDate) as string);
 
     expect(yearEl).toBeInTheDocument();
   });
