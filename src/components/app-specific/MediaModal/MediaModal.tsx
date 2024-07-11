@@ -29,7 +29,10 @@ const renderMediaType = (mediaType: MediaType) => {
   return (
     <span key={1} className={cn('flex items-center gap-1 capitalize sm:gap-1.5')}>
       <MediaTypeIcon
-        className={cn('h-3.5 w-3.5 sm:h-[1.125rem] sm:w-[1.125rem] xs:w-3')}
+        className={cn(
+          'h-3.5 w-3.5 sm:h-[1.125rem] sm:w-[1.125rem] xs:w-3',
+          mediaType === MediaType.TV && '-mt-1'
+        )}
         title={mediaTypeLabel}
       />
       {mediaTypeLabel}

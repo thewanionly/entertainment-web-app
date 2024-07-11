@@ -25,7 +25,10 @@ const UpperDetails = ({ year, mediaType, rating }: UpperDetailsProps) => {
       key={1}
       className={cn('mediaType-container', 'flex items-center gap-1 capitalize sm:gap-1.5')}
     >
-      <MediaTypeIcon className={cn('mediaType-icon', 'w-2.5 sm:w-3')} title={mediaTypeLabel} />
+      <MediaTypeIcon
+        className={cn('mediaType-icon', 'w-2.5 sm:w-3', mediaType === MediaType.TV && '-mt-0.5')}
+        title={mediaTypeLabel}
+      />
       {mediaTypeLabel}
     </span>,
     rating && (
