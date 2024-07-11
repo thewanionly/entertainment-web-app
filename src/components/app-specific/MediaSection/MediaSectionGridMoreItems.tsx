@@ -6,7 +6,7 @@ import { useInView } from 'framer-motion';
 
 import { MediaGridCardSkeleton } from '@/components/app-specific/MediaCard/MediaGridCard/MediaGridCardSkeleton';
 import { MediaSectionGridItems } from '@/components/app-specific/MediaSection/MediaSectionGrid';
-import { MAX_PAGE, MIN_PAGE } from '@/constants/medias';
+import { MAX_PAGE, MIN_PAGE } from '@/constants/medias/pagination';
 import { useIsInClient } from '@/hooks/useIsInClient';
 import { useMediaQuery } from '@/hooks/useMediaQuery';
 import { Media } from '@/types/medias';

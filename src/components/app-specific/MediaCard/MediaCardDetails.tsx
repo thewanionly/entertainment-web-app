@@ -1,11 +1,9 @@
 import { Fragment } from 'react';
 
-import { SVGRElement } from 'svgr';
-
+import { MEDIA_TYPE_MAP } from '@/constants/medias/mediaType';
 import { MediaType } from '@/types/medias';
 import { cn } from '@/utils/styles';
 
-import { MediaTypeMovie, MediaTypeTV } from '../Icon';
 import { MediaCardDotSeparator } from './MediaCardDotSeparator';
 
 type MediaCardDetailsProps = {
@@ -17,17 +15,6 @@ type MediaCardDetailsProps = {
 };
 
 type UpperDetailsProps = Pick<MediaCardDetailsProps, 'year' | 'mediaType' | 'rating'>;
-
-const MEDIA_TYPE_MAP: Record<MediaType, { icon: SVGRElement; label: string }> = {
-  movie: {
-    icon: MediaTypeMovie,
-    label: 'Movie',
-  },
-  tv: {
-    icon: MediaTypeTV,
-    label: 'TV Series',
-  },
-};
 
 const UpperDetails = ({ year, mediaType, rating }: UpperDetailsProps) => {
   const { icon: MediaTypeIcon, label: mediaTypeLabel } = MEDIA_TYPE_MAP[mediaType];

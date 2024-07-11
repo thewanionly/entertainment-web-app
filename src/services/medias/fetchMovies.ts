@@ -1,4 +1,4 @@
-import { MIN_PAGE, MAX_PAGE } from '@/constants/medias';
+import { MIN_PAGE, MAX_PAGE } from '@/constants/medias/pagination';
 import { MediaResultsInfo } from '@/types/medias';
 
 import { MediasApiMediaType, MediasApiMovie, MediasApiResponse } from './mediasApi.types';
