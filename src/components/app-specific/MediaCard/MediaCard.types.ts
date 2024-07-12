@@ -11,6 +11,7 @@ export interface MediaCardProps {
   releaseDate?: string;
   mediaType: MediaType;
   rating?: string;
+  overview?: string;
   isBookmarked: boolean;
   className?: string;
   prioritizeImg?: boolean;

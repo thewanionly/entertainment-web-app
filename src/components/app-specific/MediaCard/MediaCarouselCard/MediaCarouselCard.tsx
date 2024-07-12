@@ -19,6 +19,7 @@ export const MediaCarouselCard = ({
   releaseDate,
   mediaType,
   rating,
+  overview,
   isBookmarked,
   hoverBookmark = false,
   hoverCard = false,
@@ -34,6 +35,7 @@ export const MediaCarouselCard = ({
       mediaType,
       releaseDate,
       certification: '',
+      overview,
     });
   };
 

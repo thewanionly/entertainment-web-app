@@ -31,7 +31,7 @@ export const MediaSectionGrid = ({ children, className }: MediaSectionGridProps)
 };
 
 export const MediaSectionGridItems = ({ medias }: MediaSectionGridItemsProps) =>
-  medias.map(({ id, imagePath, title, releaseDate, mediaType }, index) => (
+  medias.map(({ id, imagePath, title, releaseDate, mediaType, overview }, index) => (
     <li key={`${id}-${index}`} data-testid="grid-item">
       <MediaGridCard
         className="w-full sm:w-full lg:w-full"
@@ -44,6 +44,7 @@ export const MediaSectionGridItems = ({ medias }: MediaSectionGridItemsProps) =>
         mediaType={mediaType}
         // rating={adult ? 'PG' : 'G'} TODO:
         isBookmarked={false}
+        overview={overview}
       />
     </li>
   ));

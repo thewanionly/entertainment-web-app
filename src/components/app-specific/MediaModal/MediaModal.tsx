@@ -73,7 +73,14 @@ export const MediaModal = () => {
   const media = useMediaModalStore((state) => state.media);
   const setMedia = useMediaModalStore((state) => state.setMedia);
 
-  const { title = '', imagePath = '', releaseDate, mediaType, certification } = media ?? {};
+  const {
+    title = '',
+    imagePath = '',
+    releaseDate,
+    mediaType,
+    certification,
+    overview,
+  } = media ?? {};
 
   const closeModal = () => {
     setMedia(undefined);
@@ -125,10 +132,9 @@ export const MediaModal = () => {
               mediaType={mediaType}
               certification={certification}
             />
-          </div>
-
-          <div className="overflow-auto">
-            <DialogDescription></DialogDescription>
+            <DialogDescription className="mt-8 max-w-[43.75rem] overflow-auto text-body-s sm:mt-10 sm:text-body-m">
+              {overview}
+            </DialogDescription>
           </div>
         </div>
       </DialogContent>

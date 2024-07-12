@@ -16,6 +16,7 @@ export const transformMediaResults = (results: MediasApiMedia[]): MediaCardType[
       releaseDate: '',
       imagePath: media.backdrop_path || media.poster_path || '',
       mediaType: media.media_type as unknown as MediaType,
+      overview: media.overview,
       certification: '', // TODO: determine certification (extra API calls, check with the docs)
     };
 

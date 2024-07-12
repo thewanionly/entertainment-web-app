@@ -20,6 +20,7 @@ export const MediaGridCard = ({
   releaseDate,
   mediaType,
   rating,
+  overview,
   isBookmarked,
   hoverBookmark = false,
   hoverCard = false,
@@ -35,6 +36,7 @@ export const MediaGridCard = ({
       mediaType,
       releaseDate,
       certification: '',
+      overview,
     });
   };
 

@@ -22,7 +22,7 @@ export const MediaCarousel = ({ items, options, className }: MediaCarouselProps)
     className={cn('w-full', className)}
   >
     <CarouselContent className="-ml-4 sm:-ml-10">
-      {items.map(({ id, imagePath, title, releaseDate, mediaType }, index) => (
+      {items.map(({ id, imagePath, title, releaseDate, mediaType, overview }, index) => (
         <CarouselItem
           key={`${id}-${index}`}
           className={cn(
@@ -45,6 +45,7 @@ export const MediaCarousel = ({ items, options, className }: MediaCarouselProps)
             mediaType={mediaType}
             // rating={adult ? 'PG' : 'G'} TODO:
             isBookmarked={false}
+            overview={overview}
           />
         </CarouselItem>
       ))}
