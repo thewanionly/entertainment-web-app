@@ -3,13 +3,13 @@
 import { MediaCarousel } from '@/components/app-specific/MediaCarousel';
 import { CarouselOptions } from '@/components/generic/Carousel';
 import { useMediaQuery } from '@/hooks/useMediaQuery';
-import { Media } from '@/types/medias';
+import { MediaCardType } from '@/types/medias';
 
 const SLIDES_TO_SCROLL_LG = 2;
 const SLIDES_TO_SCROLL_DEFAULT = 1;
 
 type MediaSectionCarouselProps = {
-  medias: Media[];
+  medias: MediaCardType[];
   options?: CarouselOptions;
   className?: string;
 };

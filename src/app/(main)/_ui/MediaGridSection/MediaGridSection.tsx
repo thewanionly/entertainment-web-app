@@ -1,5 +1,5 @@
 import { MediaGridCard } from '@/components/app-specific/MediaCard/MediaGridCard';
-import { Media } from '@/types/medias';
+import { MediaCardType } from '@/types/medias';
 import { cn } from '@/utils/styles';
 
 type TopRatedSectionProps = {
@@ -7,7 +7,7 @@ type TopRatedSectionProps = {
   title: string;
   titleClassName?: string;
   titleTag?: keyof JSX.IntrinsicElements;
-  medias: Media[];
+  medias: MediaCardType[];
 };
 
 export const MediaGridSection = ({

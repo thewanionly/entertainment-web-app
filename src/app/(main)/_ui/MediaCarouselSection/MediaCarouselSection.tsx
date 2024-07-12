@@ -6,14 +6,14 @@ import { MediaSection } from '@/components/app-specific/MediaSection/MediaSectio
 import { MediaSectionCarousel } from '@/components/app-specific/MediaSection/MediaSectionCarousel';
 import { MediaSectionTitle } from '@/components/app-specific/MediaSection/MediaSectionTitle';
 import { CarouselOptions } from '@/components/generic/Carousel';
-import { Media } from '@/types/medias';
+import { MediaCardType } from '@/types/medias';
 import { cn } from '@/utils/styles';
 
 type MediaCarouselSectionProps = {
   className?: string;
   title: string;
   titleLink?: string;
-  medias: Media[];
+  medias: MediaCardType[];
   carouselOptions?: CarouselOptions;
 };
 

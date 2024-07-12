@@ -1,8 +1,8 @@
-import { Media } from '@/types/medias';
+import { MediaCardType } from '@/types/medias';
 
 export interface MediaCategoryValue<T> {
   title: string;
   name: T;
-  promise: Promise<Media[]>;
+  promise: Promise<MediaCardType[]>;
   link?: string;
 }

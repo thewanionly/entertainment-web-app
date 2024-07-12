@@ -1,4 +1,4 @@
-import { Media, MediaType } from '@/types/medias';
+import { MediaCardType, MediaType } from '@/types/medias';
 
 import { MediasApiMedia, MediasApiMovie, MediasApiTV } from '../medias/mediasApi.types';
 
@@ -8,9 +8,9 @@ export const isMovieMedia = (media: any): media is MediasApiMovie => 'title' in 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const isTvMedia = (media: any): media is MediasApiTV => 'name' in media;
 
-export const transformMediaResults = (results: MediasApiMedia[]): Media[] => {
+export const transformMediaResults = (results: MediasApiMedia[]): MediaCardType[] => {
   return results.map((media) => {
-    const transformedResult: Media = {
+    const transformedResult: MediaCardType = {
       id: media.id,
       title: '',
       releaseDate: '',

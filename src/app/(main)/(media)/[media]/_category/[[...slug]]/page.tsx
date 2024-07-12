@@ -8,7 +8,7 @@ import {
 } from '@/components/app-specific/MediaSection/MediaSectionGrid';
 import { MediaSectionTitle } from '@/components/app-specific/MediaSection/MediaSectionTitle';
 import { notFound, redirect } from '@/lib/navigation';
-import { Media } from '@/types/medias';
+import { MediaCardType } from '@/types/medias';
 
 type MediaCategoryPageProps = {
   params: {
@@ -64,7 +64,7 @@ export default async function MediaCategoryPage({
     <MediaSection>
       <MediaSectionTitle>{title}</MediaSectionTitle>
       <MediaSectionGrid>
-        <MediaSectionGridItems medias={results as Media[]} />
+        <MediaSectionGridItems medias={results as MediaCardType[]} />
       </MediaSectionGrid>
     </MediaSection>
   );

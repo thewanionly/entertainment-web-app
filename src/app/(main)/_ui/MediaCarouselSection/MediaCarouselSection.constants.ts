@@ -1,8 +1,8 @@
-import { Media, MediaType } from '@/types/medias';
+import { MediaCardType, MediaType } from '@/types/medias';
 
 export const mockedTitle = 'Trending';
 
-export const mockedMedias: Media[] = [
+export const mockedMedias: MediaCardType[] = [
   {
     id: 1,
     imagePath: '/the-first-omen.jpg',

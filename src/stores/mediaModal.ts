@@ -1,12 +1,11 @@
 import { create } from 'zustand';
 import { devtools } from 'zustand/middleware';
 
-import { Media } from '@/types/medias';
+import { MediaCardType } from '@/types/medias';
 
 interface MediaModalState {
-  media?: Media;
-
-  setMedia: (media?: Media) => void;
+  media?: MediaCardType;
+  setMedia: (media?: MediaCardType) => void;
 }
 
 export const useMediaModalStore = create<MediaModalState>()(

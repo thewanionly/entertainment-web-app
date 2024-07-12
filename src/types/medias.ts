@@ -7,18 +7,19 @@ export enum MediaType {
   TV = 'tv',
 }
 
-export interface Media {
+export interface MediaCardType {
   id: number;
   imagePath: string;
   title: string;
   mediaType: MediaType;
   releaseDate?: string;
   certification: string;
+  overview?: string;
 }
 
 export interface MediaResultsInfo {
   page: number;
-  results: Media[];
+  results: MediaCardType[];
   totalPages?: number;
   totalResults?: number;
 }

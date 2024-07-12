@@ -4,11 +4,11 @@ import { MediaCarouselCard } from '@/components/app-specific/MediaCard/MediaCaro
 import { Carousel, CarouselOptions } from '@/components/generic/Carousel';
 import { CarouselContent } from '@/components/generic/Carousel/CarouselContent';
 import { CarouselItem } from '@/components/generic/Carousel/CarouselItem';
-import { Media } from '@/types/medias';
+import { MediaCardType } from '@/types/medias';
 import { cn } from '@/utils/styles';
 
 type MediaCarouselProps = {
-  items: Media[];
+  items: MediaCardType[];
   options?: CarouselOptions;
   className?: string;
 };

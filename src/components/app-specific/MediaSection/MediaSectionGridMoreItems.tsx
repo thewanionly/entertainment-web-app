@@ -9,11 +9,11 @@ import { MediaSectionGridItems } from '@/components/app-specific/MediaSection/Me
 import { MAX_PAGE, MIN_PAGE } from '@/constants/medias/pagination';
 import { useIsInClient } from '@/hooks/useIsInClient';
 import { useMediaQuery } from '@/hooks/useMediaQuery';
-import { Media } from '@/types/medias';
+import { MediaCardType } from '@/types/medias';
 
 type MediaSectionGridMoreItemsProps = {
   totalPages?: number;
-  loadMoreFn: (page: number) => Promise<Media[]>;
+  loadMoreFn: (page: number) => Promise<MediaCardType[]>;
 };
 
 const INFINITY_SCROLL_EL_TOP_MARGIN = '240px';
@@ -24,7 +24,7 @@ export const MediaSectionGridMoreItems = ({
   totalPages,
   loadMoreFn,
 }: MediaSectionGridMoreItemsProps) => {
-  const [medias, setMedias] = useState<Media[]>([]);
+  const [medias, setMedias] = useState<MediaCardType[]>([]);
   const [page, setPage] = useState(MIN_PAGE);
 
   const infScrollElRef = useRef(null);

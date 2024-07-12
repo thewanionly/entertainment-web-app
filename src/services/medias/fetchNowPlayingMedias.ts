@@ -1,4 +1,4 @@
-import { Media } from '@/types/medias';
+import { MediaCardType } from '@/types/medias';
 
 import {
   MediasApiMediaType,
@@ -35,7 +35,7 @@ const getNowPlayingTv = async (): Promise<MediasApiTV[]> => {
   }));
 };
 
-export const fetchNowPlayingTv = async (): Promise<Media[]> => {
+export const fetchNowPlayingTv = async (): Promise<MediaCardType[]> => {
   try {
     const tv = await getNowPlayingTv();
 
@@ -64,7 +64,7 @@ const getNowPlayingMovies = async (): Promise<MediasApiMovie[]> => {
   }));
 };
 
-export const fetchNowPlayingMovies = async (): Promise<Media[]> => {
+export const fetchNowPlayingMovies = async (): Promise<MediaCardType[]> => {
   try {
     const movies = await getNowPlayingMovies();
 

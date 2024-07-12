@@ -1,7 +1,7 @@
 import { ReactNode } from 'react';
 
 import { MediaGridCard } from '@/components/app-specific/MediaCard/MediaGridCard';
-import { Media } from '@/types/medias';
+import { MediaCardType } from '@/types/medias';
 import { cn } from '@/utils/styles';
 
 type MediaSectionGridProps = {
@@ -10,7 +10,7 @@ type MediaSectionGridProps = {
 };
 
 type MediaSectionGridItemsProps = {
-  medias: Media[];
+  medias: MediaCardType[];
 };
 
 export const MediaSectionGrid = ({ children, className }: MediaSectionGridProps) => {

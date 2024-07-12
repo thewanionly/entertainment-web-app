@@ -14,14 +14,17 @@ import {
 } from '@/components/generic/Dialog';
 import { MEDIA_TYPE_MAP } from '@/constants/medias/mediaType';
 import { useMediaModalStore } from '@/stores/mediaModal';
-import { Media, MediaType } from '@/types/medias';
+import { MediaCardType, MediaType } from '@/types/medias';
 import { formatDate } from '@/utils/dates';
 import { cn } from '@/utils/styles';
 
 import { MediaCardDotSeparator } from '../MediaCard/MediaCardDotSeparator';
 import { MediaCardImage } from '../MediaCard/MediaCardImage';
 
-type MediaKeyDetailsProps = Pick<Partial<Media>, 'releaseDate' | 'mediaType' | 'certification'>;
+type MediaKeyDetailsProps = Pick<
+  Partial<MediaCardType>,
+  'releaseDate' | 'mediaType' | 'certification'
+>;
 
 const renderMediaType = (mediaType: MediaType) => {
   const { icon: MediaTypeIcon, label: mediaTypeLabel } = MEDIA_TYPE_MAP[mediaType];
