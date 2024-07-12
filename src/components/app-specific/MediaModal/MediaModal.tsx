@@ -90,7 +90,7 @@ export const MediaModal = () => {
     <Dialog open={Boolean(media?.id)}>
       <DialogContent
         className={cn(
-          'bottom-0 top-4 flex h-dvh w-[96%] max-w-[1240px] translate-y-0 flex-col gap-0 rounded-lg p-0 sm:top-6 lg:top-8 lg:w-[83%]'
+          'bottom-0 top-[unset] mt-5 flex aspect-[0.9] h-[min-content] max-h-dvh max-w-[unset] translate-y-0 flex-col gap-0 rounded-t-md p-0 sm:top-[50%] sm:w-[90%] sm:max-w-[50rem] sm:translate-y-[-50%] sm:rounded-md'
         )}
         onOpenAutoFocus={(e: Event) => e.preventDefault()}
         onEscapeKeyDown={closeModal}
@@ -115,27 +115,25 @@ export const MediaModal = () => {
         <MediaCardImage
           className={cn(
             'aspect-[2] h-[unset] w-full',
-            'rounded-b-none rounded-t-lg ',
+            'rounded-b-none rounded-t-md ',
             'after:absolute after:bottom-0 after:left-0 after:h-[25%] after:w-full after:bg-gradient-to-b after:from-dark-blue/0 after:to-dark-blue/100'
           )}
           src={imagePath}
           alt={title}
         />
 
-        <div className="p-4 sm:p-6 lg:p-8 xs:p-2">
-          <div>
-            <DialogTitle className="mb-1 text-heading-s sm:text-heading-l sm:font-medium xs:text-heading-xs">
-              {title}
-            </DialogTitle>
-            <MediaKeyDetails
-              releaseDate={releaseDate}
-              mediaType={mediaType}
-              certification={certification}
-            />
-            <DialogDescription className="mt-8 max-w-[43.75rem] overflow-auto text-body-s sm:mt-10 sm:text-body-m">
-              {overview}
-            </DialogDescription>
-          </div>
+        <div className="max-h-[80%] overflow-auto p-6 pb-8 sm:p-6 lg:p-8 xs:p-4 xs:pb-6">
+          <DialogTitle className="mb-1 text-heading-s sm:text-heading-l sm:font-medium xs:text-heading-xs">
+            {title}
+          </DialogTitle>
+          <MediaKeyDetails
+            releaseDate={releaseDate}
+            mediaType={mediaType}
+            certification={certification}
+          />
+          <DialogDescription className="mt-8 text-body-s sm:mt-10 sm:text-[1rem] sm:text-body-m">
+            {overview}
+          </DialogDescription>
         </div>
       </DialogContent>
     </Dialog>
