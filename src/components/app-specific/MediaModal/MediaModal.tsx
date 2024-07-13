@@ -12,7 +12,15 @@ import {
   DialogTitle,
   DialogClose,
 } from '@/components/generic/Dialog';
+import {
+  Drawer,
+  DrawerContent,
+  DrawerTitle,
+  DrawerDescription,
+  DrawerClose,
+} from '@/components/generic/Drawer';
 import { MEDIA_TYPE_MAP } from '@/constants/medias/mediaType';
+import { useMediaQuery } from '@/hooks/useMediaQuery';
 import { useMediaModalStore } from '@/stores/mediaModal';
 import { MediaCardType, MediaType } from '@/types/medias';
 import { formatDate } from '@/utils/dates';
@@ -69,23 +77,89 @@ const MediaKeyDetails = ({ releaseDate, mediaType, certification }: MediaKeyDeta
   );
 };
 
+const MediaModalCloseButton = ({ closeModal }: { closeModal: () => void }) => (
+  <IconButton
+    className={cn(
+      'absolute right-2 top-2 z-50 sm:right-4 sm:top-4',
+      'h-8 w-8 rounded-full bg-dark-blue/70 p-1 text-white ring-offset-white hover:bg-dark-blue/70 hover:text-red motion-safe:transition-all sm:h-10 sm:w-10',
+      'disabled:pointer-events-none',
+      'focus-visible:ring-white-950 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 data-[state=open]:bg-dark-blue data-[state=open]:text-white/80'
+    )}
+    onClick={closeModal}
+  >
+    <X className="h-5 w-5 sm:h-6 sm:w-6" />
+    <IconButtonSrLabel label="Next slide" />
+  </IconButton>
+);
+
+const MediaModalImage = ({ imagePath, title }: { imagePath: string; title: string }) => (
+  <MediaCardImage
+    className={cn(
+      'aspect-[2] h-[unset] w-full',
+      'rounded-b-none rounded-t-md',
+      'after:absolute after:-bottom-0.5 after:left-0 after:h-[25%] after:w-full after:bg-gradient-to-b after:from-dark-blue/0 after:to-dark-blue/100'
+    )}
+    src={imagePath}
+    alt={title}
+  />
+);
+
+const MediaModalDetails = ({
+  data,
+  isMobile,
+}: {
+  data: Partial<MediaCardType>;
+  isMobile: boolean;
+}) => {
+  const { title, releaseDate, mediaType, certification, overview } = data ?? {};
+
+  const MediaModalTitleTag = isMobile ? DrawerTitle : DialogTitle;
+  const MediaMoodalDescriptionTag = isMobile ? DrawerDescription : DialogDescription;
+
+  return (
+    <div className="max-h-[80%] overflow-auto p-6 pb-8 sm:p-6 lg:p-8 xs:p-4 xs:pb-6">
+      <MediaModalTitleTag className="mb-1 text-heading-s sm:text-heading-l sm:font-medium xs:text-heading-xs">
+        {title}
+      </MediaModalTitleTag>
+      <MediaKeyDetails
+        releaseDate={releaseDate}
+        mediaType={mediaType}
+        certification={certification}
+      />
+      <MediaMoodalDescriptionTag className="mt-8 text-body-m sm:mt-10 sm:text-[1rem] sm:text-body-m">
+        {overview}
+      </MediaMoodalDescriptionTag>
+    </div>
+  );
+};
+
 export const MediaModal = () => {
+  const sm = useMediaQuery('(min-width: 640px)');
   const media = useMediaModalStore((state) => state.media);
   const setMedia = useMediaModalStore((state) => state.setMedia);
 
-  const {
-    title = '',
-    imagePath = '',
-    releaseDate,
-    mediaType,
-    certification,
-    overview,
-  } = media ?? {};
+  const { title = '', imagePath = '' } = media ?? {};
 
   const closeModal = () => {
     setMedia(undefined);
   };
 
+  if (!sm) {
+    // show drower in mobile
+    return (
+      <Drawer open={Boolean(media?.id)} onOpenChange={(open: boolean) => !open && closeModal()}>
+        <DrawerContent>
+          <DrawerClose asChild>
+            <MediaModalCloseButton closeModal={closeModal} />
+          </DrawerClose>
+          <MediaModalImage imagePath={imagePath} title={title} />
+          <MediaModalDetails data={media as MediaCardType} isMobile={Boolean(sm)} />
+        </DrawerContent>
+      </Drawer>
+    );
+  }
+
+  // show dialog in desktop
   return (
     <Dialog open={Boolean(media?.id)}>
       <DialogContent
@@ -98,43 +172,10 @@ export const MediaModal = () => {
         onInteractOutside={closeModal}
       >
         <DialogClose asChild>
-          <IconButton
-            className={cn(
-              'absolute right-2 top-2 z-50 sm:right-4 sm:top-4',
-              'h-8 w-8 rounded-full bg-dark-blue/70 p-1 text-white ring-offset-white hover:bg-dark-blue/70 hover:text-red motion-safe:transition-all sm:h-10 sm:w-10',
-              'disabled:pointer-events-none',
-              'focus-visible:ring-white-950 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 data-[state=open]:bg-dark-blue data-[state=open]:text-white/80'
-            )}
-            onClick={closeModal}
-          >
-            <X className="h-5 w-5 sm:h-6 sm:w-6" />
-            <IconButtonSrLabel label="Next slide" />
-          </IconButton>
+          <MediaModalCloseButton closeModal={closeModal} />
         </DialogClose>
-
-        <MediaCardImage
-          className={cn(
-            'aspect-[2] h-[unset] w-full',
-            'rounded-b-none rounded-t-md',
-            'after:absolute after:-bottom-0.5 after:left-0 after:h-[25%] after:w-full after:bg-gradient-to-b after:from-dark-blue/0 after:to-dark-blue/100'
-          )}
-          src={imagePath}
-          alt={title}
-        />
-
-        <div className="max-h-[80%] overflow-auto p-6 pb-8 sm:p-6 lg:p-8 xs:p-4 xs:pb-6">
-          <DialogTitle className="mb-1 text-heading-s sm:text-heading-l sm:font-medium xs:text-heading-xs">
-            {title}
-          </DialogTitle>
-          <MediaKeyDetails
-            releaseDate={releaseDate}
-            mediaType={mediaType}
-            certification={certification}
-          />
-          <DialogDescription className="mt-8 text-body-s sm:mt-10 sm:text-[1rem] sm:text-body-m">
-            {overview}
-          </DialogDescription>
-        </div>
+        <MediaModalImage imagePath={imagePath} title={title} />
+        <MediaModalDetails data={media as MediaCardType} isMobile={Boolean(sm)} />
       </DialogContent>
     </Dialog>
   );
