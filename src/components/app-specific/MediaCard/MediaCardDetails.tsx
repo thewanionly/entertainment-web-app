@@ -75,7 +75,16 @@ export const MediaCardDetails = ({
         )}
         title={title}
       >
-        {title}
+        <button
+          className={cn(
+            'primary-action',
+            'w-full truncate text-start focus-visible:outline-none',
+            'before:absolute before:inset-0 before:z-10 before:cursor-pointer before:rounded-sm',
+            'focus-visible:before:outline focus-visible:before:outline-1 focus-visible:before:outline-offset-4 focus-visible:before:outline-white'
+          )}
+        >
+          {title}
+        </button>
       </p>
     </div>
   );

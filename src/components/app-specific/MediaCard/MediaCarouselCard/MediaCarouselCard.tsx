@@ -81,6 +81,7 @@ export const MediaCarouselCard = ({
             '[&_.mediaType-icon]:w-3',
             '[&_.title]:text-body-m [&_.title]:font-medium [&_.title]:sm:text-heading-s',
             '[&_.title]:w-[calc(100%_-_1.75rem)] [&_.title]:sm:w-[calc(100%_-_2rem)]',
+            '[&_.title_.primary-action:focus-visible]:before:-outline-offset-1',
             'z-20 col-start-1 row-start-1 self-end justify-self-start sm:gap-[3px]',
             'm-0 w-full rounded-b-lg p-4 sm:p-6',
             'bg-gradient-to-b from-black/0 to-black/75'

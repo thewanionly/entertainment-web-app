@@ -42,19 +42,15 @@ export const MediaGridCard = ({
 
   return (
     <MediaCard
-      className={cn('inline-flex flex-col gap-2', 'w-[164px] sm:w-[220px] lg:w-[280px]', className)}
+      className={cn('w-[164px] sm:w-[220px] lg:w-[280px]', className)}
       isBookmarked={isBookmarked}
       hoverBookmark={hoverBookmark}
       hoverCard={hoverCard}
       isHoverable={isHoverable}
     >
-      <MediaCardHoverableArea
-        className="aspect-[1.49] sm:aspect-[1.57] lg:aspect-[1.61]"
-        title={title}
-        onClick={openModal}
-      >
+      <MediaCardHoverableArea className="grid grid-cols-1 gap-2" title={title} onClick={openModal}>
         <MediaCardImage
-          className="col-start-1 row-start-1"
+          className=" col-start-1 row-start-1 aspect-[1.49] sm:aspect-[1.57] lg:aspect-[1.61]"
           src={imgSrc}
           alt={imgAlt}
           sizes="(min-width: 1280px) 20vw, (min-width: 768px) 28vw, 44vw"
@@ -64,13 +60,15 @@ export const MediaGridCard = ({
         {/* <MediaCardBookmarkButton /> */}
         {/* TODO: add back when implementing play trailer functionality */}
         {/* <MediaCardPlayButton /> */}
+
+        <MediaCardDetails
+          className=" col-start-1 row-start-2"
+          title={title}
+          year={getYear(releaseDate)}
+          mediaType={mediaType}
+          rating={rating}
+        />
       </MediaCardHoverableArea>
-      <MediaCardDetails
-        title={title}
-        year={getYear(releaseDate)}
-        mediaType={mediaType}
-        rating={rating}
-      />
     </MediaCard>
   );
 };

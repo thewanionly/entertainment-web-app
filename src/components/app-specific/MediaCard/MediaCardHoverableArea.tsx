@@ -48,7 +48,7 @@ export const MediaCardHoverableArea = ({
     <div
       title={title}
       data-testid="media-card-hoverable-area"
-      className={cn('group relative grid h-full w-full cursor-pointer rounded-lg', className)}
+      className={cn('group relative grid h-full w-full rounded-lg', className)}
       onMouseEnter={() => setShowPlayBtn(true)}
       onMouseLeave={() => setShowPlayBtn(false)}
       onClick={onClick}
