@@ -1,6 +1,6 @@
+import { MediaSection } from '@/components/app-specific/MediaSection/MediaSection';
+import { MediaSectionTitle } from '@/components/app-specific/MediaSection/MediaSectionTitle';
 import { fetchSearchResults } from '@/services/medias/fetchSearchResults';
-
-import { MediaGridSection } from '../../_ui/MediaGridSection';
 
 type BookmarksPageProps = {
   searchParams?: {
@@ -14,34 +14,25 @@ export default async function BookmarksPage({
   if (searchTerm) {
     // bookmarks search page
     // TODO: Replace with actual bookmarks search results
-    const { results, totalResults } = await fetchSearchResults(searchTerm);
+    const { totalResults } = await fetchSearchResults(searchTerm);
 
     return (
-      <MediaGridSection
-        className="my-6 sm:my-[2.125rem]"
-        title={`Found ${totalResults} bookmarked medias results for ‘${searchTerm}’`}
-        titleTag="p"
-        titleClassName="normal-case"
-        medias={results}
-      />
+      <MediaSection>
+        <MediaSectionTitle>
+          `Found ${totalResults} bookmarked medias results for ‘${searchTerm}’`
+        </MediaSectionTitle>
+      </MediaSection>
     );
   }
 
-  // TODO: Replace with actual bookmarks data
-  const [bookmarkedMovies, bookmarkedTvSeries] = [[], []];
-
   return (
     <>
-      <MediaGridSection
-        className="my-6 sm:my-[2.125rem]"
-        title="Bookmarked Movies"
-        medias={bookmarkedMovies}
-      />
-      <MediaGridSection
-        className="my-6 sm:my-[2.125rem]"
-        title="Bookmarked TV Series"
-        medias={bookmarkedTvSeries}
-      />
+      <MediaSection>
+        <MediaSectionTitle>Bookmarked Movies</MediaSectionTitle>
+      </MediaSection>
+      <MediaSection>
+        <MediaSectionTitle>Bookmarked TV Series</MediaSectionTitle>
+      </MediaSection>
     </>
   );
 }
