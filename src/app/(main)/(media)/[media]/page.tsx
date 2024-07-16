@@ -1,7 +1,10 @@
+import { Suspense } from 'react';
+
 import { Metadata } from 'next';
 
 import { notFound } from '@/lib/navigation';
 
+import { MediaGridSectionSkeleton } from '../_ui/MediaGridSectionSkeleton';
 import { MediaBasePage } from './_ui/MediaBasePage';
 import { MediaSearchPage } from './_ui/MediaSearchPage';
 import { MEDIA_DATA, MediaPageType, isValidMedia } from './_utils/media.constants';
@@ -32,7 +35,11 @@ export default async function MediaPage({
   }
 
   // media search page
-  return <MediaSearchPage mediaPageType={mediaPageType} searchTerm={q} />;
+  return (
+    <Suspense fallback={<MediaGridSectionSkeleton titleClassName="w-[50%] xs:w-[80%]" />} key={q}>
+      <MediaSearchPage mediaPageType={mediaPageType} searchTerm={q} />
+    </Suspense>
+  );
 }
 
 export async function generateMetadata({
