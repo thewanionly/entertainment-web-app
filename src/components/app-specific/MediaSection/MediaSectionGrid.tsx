@@ -30,6 +30,8 @@ export const MediaSectionGrid = ({ children, className }: MediaSectionGridProps)
   );
 };
 
+const NUM_OF_PRIORITY_IMAGES = 4;
+
 export const MediaSectionGridItems = ({ medias }: MediaSectionGridItemsProps) =>
   medias.map(({ id, imagePath, title, releaseDate, mediaType, overview }, index) => (
     <li key={`${id}-${index}`} data-testid="grid-item">
@@ -38,7 +40,7 @@ export const MediaSectionGridItems = ({ medias }: MediaSectionGridItemsProps) =>
         mediaId={id}
         imgSrc={imagePath}
         imgAlt={title}
-        prioritizeImg={index === 0}
+        prioritizeImg={index < NUM_OF_PRIORITY_IMAGES}
         title={title}
         releaseDate={releaseDate}
         mediaType={mediaType}

@@ -16,6 +16,7 @@ export const MediaGridCard = ({
   imgSrc,
   imgAlt,
   customImgLoader,
+  prioritizeImg = false,
   title,
   releaseDate,
   mediaType,
@@ -54,6 +55,7 @@ export const MediaGridCard = ({
           src={imgSrc}
           alt={imgAlt}
           sizes="(min-width: 1280px) 20vw, (min-width: 768px) 28vw, 44vw"
+          priority={prioritizeImg}
           loader={customImgLoader}
         />
         {/* TODO: add back when implementing bookmark functionality */}
