@@ -2,6 +2,7 @@ import { MediaGridCardSkeleton } from '@/components/app-specific/MediaCard/Media
 import { MediaSection } from '@/components/app-specific/MediaSection/MediaSection';
 import { MediaSectionGrid } from '@/components/app-specific/MediaSection/MediaSectionGrid';
 import { MediaSectionTitleSkeleton } from '@/components/app-specific/MediaSection/MediaSectionTitleSkeleton';
+import { RESULTS_PER_PAGE } from '@/constants/medias/pagination';
 import { cn } from '@/utils/styles';
 
 type MediaGridSectionSkeletonProps = {
@@ -9,8 +10,7 @@ type MediaGridSectionSkeletonProps = {
 };
 
 export const MediaGridSectionSkeleton = ({ titleClassName }: MediaGridSectionSkeletonProps) => {
-  const skeletonCardsLength = 20;
-  const skeletonCards = Array.from({ length: skeletonCardsLength }, (_, index) => index);
+  const skeletonCards = Array.from({ length: RESULTS_PER_PAGE }, (_, index) => index);
 
   return (
     <MediaSection>
