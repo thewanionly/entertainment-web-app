@@ -9,9 +9,7 @@ type MediaSectionProps = {
 
 export const MediaSection = ({ children, className }: MediaSectionProps) => {
   return (
-    <section
-      className={cn('mx-auto w-[91.467%] overflow-hidden lg:w-full lg:px-9 2xl:pr-0', className)}
-    >
+    <section className={cn('mx-auto w-[91.467%] lg:w-full lg:px-9 2xl:pr-0', className)}>
       {children}
     </section>
   );
