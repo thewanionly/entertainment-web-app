@@ -1,5 +1,7 @@
 'use client';
 
+import { useEffect, useRef } from 'react';
+
 import { useMediaModalStore } from '@/stores/mediaModal';
 import { getYear } from '@/utils/dates';
 import { cn } from '@/utils/styles';
@@ -27,9 +29,14 @@ export const MediaGridCard = ({
   hoverCard = false,
   isHoverable,
 }: MediaCardProps) => {
+  const openModal = useMediaModalStore((state) => state.openModal);
+  const setOpenModal = useMediaModalStore((state) => state.setOpenModal);
+  const media = useMediaModalStore((state) => state.media);
   const setMedia = useMediaModalStore((state) => state.setMedia);
 
-  const openModal = () => {
+  const triggerRef = useRef<HTMLButtonElement>(null);
+
+  const handleOpenModal = () => {
     setMedia({
       id: mediaId,
       imagePath: imgSrc,
@@ -39,7 +46,14 @@ export const MediaGridCard = ({
       certification: '',
       overview,
     });
+    setOpenModal(true);
   };
+
+  useEffect(() => {
+    if (!openModal && media?.id && mediaId && media?.id === mediaId && triggerRef.current) {
+      triggerRef.current.focus();
+    }
+  }, [media, mediaId, openModal]);
 
   return (
     <MediaCard
@@ -49,7 +63,11 @@ export const MediaGridCard = ({
       hoverCard={hoverCard}
       isHoverable={isHoverable}
     >
-      <MediaCardHoverableArea className="grid grid-cols-1 gap-2" title={title} onClick={openModal}>
+      <MediaCardHoverableArea
+        className="grid grid-cols-1 gap-2"
+        title={title}
+        onClick={handleOpenModal}
+      >
         <MediaCardImage
           className=" col-start-1 row-start-1 aspect-[1.49] sm:aspect-[1.57] lg:aspect-[1.61]"
           src={imgSrc}
@@ -64,6 +82,7 @@ export const MediaGridCard = ({
         {/* <MediaCardPlayButton /> */}
 
         <MediaCardDetails
+          ref={triggerRef}
           className=" col-start-1 row-start-2"
           title={title}
           year={getYear(releaseDate)}

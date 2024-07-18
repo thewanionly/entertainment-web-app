@@ -1,4 +1,4 @@
-import { Fragment } from 'react';
+import { Fragment, forwardRef } from 'react';
 
 import { MEDIA_TYPE_MAP } from '@/constants/medias/mediaType';
 import { MediaType } from '@/types/medias';
@@ -58,34 +58,33 @@ const UpperDetails = ({ year, mediaType, rating }: UpperDetailsProps) => {
   );
 };
 
-export const MediaCardDetails = ({
-  className = '',
-  title,
-  year,
-  mediaType,
-  rating,
-}: MediaCardDetailsProps) => {
-  return (
-    <div className={cn('flex flex-col gap-1 sm:gap-[0.3125rem]', className)}>
-      <UpperDetails year={year} mediaType={mediaType} rating={rating} />
-      <p
-        className={cn(
-          'title',
-          'truncate text-[0.875rem] font-medium leading-[normal] text-white sm:text-heading-xs'
-        )}
-        title={title}
-      >
-        <button
+export const MediaCardDetails = forwardRef<HTMLButtonElement, MediaCardDetailsProps>(
+  ({ className = '', title, year, mediaType, rating }, ref) => {
+    return (
+      <div className={cn('flex flex-col gap-1 sm:gap-[0.3125rem]', className)}>
+        <UpperDetails year={year} mediaType={mediaType} rating={rating} />
+        <p
           className={cn(
-            'primary-action',
-            'w-full truncate text-start focus-visible:outline-none',
-            'before:absolute before:inset-0 before:z-10 before:cursor-pointer before:rounded-sm',
-            'focus-visible:before:outline focus-visible:before:outline-1 focus-visible:before:outline-offset-4 focus-visible:before:outline-white'
+            'title',
+            'truncate text-[0.875rem] font-medium leading-[normal] text-white sm:text-heading-xs'
           )}
+          title={title}
         >
-          {title}
-        </button>
-      </p>
-    </div>
-  );
-};
+          <button
+            ref={ref}
+            className={cn(
+              'primary-action',
+              'w-full truncate text-start focus-visible:outline-none',
+              'before:absolute before:inset-0 before:z-10 before:cursor-pointer before:rounded-sm',
+              'focus-visible:before:outline focus-visible:before:outline-1 focus-visible:before:outline-offset-4 focus-visible:before:outline-white'
+            )}
+          >
+            {title}
+          </button>
+        </p>
+      </div>
+    );
+  }
+);
+
+MediaCardDetails.displayName = 'MediaCardDetails';

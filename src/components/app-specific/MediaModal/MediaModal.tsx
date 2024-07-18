@@ -136,18 +136,19 @@ const MediaModalDetails = ({
 export const MediaModal = () => {
   const sm = useMediaQuery('(min-width: 640px)');
   const media = useMediaModalStore((state) => state.media);
-  const setMedia = useMediaModalStore((state) => state.setMedia);
+  const openModal = useMediaModalStore((state) => state.openModal);
+  const setOpenModal = useMediaModalStore((state) => state.setOpenModal);
 
   const { title = '', imagePath = '' } = media ?? {};
 
   const closeModal = () => {
-    setMedia(undefined);
+    setOpenModal(false);
   };
 
   if (!sm) {
     // show drower in mobile
     return (
-      <Drawer open={Boolean(media?.id)} onOpenChange={(open: boolean) => !open && closeModal()}>
+      <Drawer open={openModal} onOpenChange={(open: boolean) => !open && closeModal()}>
         <DrawerContent>
           <DrawerClose asChild>
             <MediaModalCloseButton closeModal={closeModal} />
@@ -161,15 +162,11 @@ export const MediaModal = () => {
 
   // show dialog in desktop
   return (
-    <Dialog open={Boolean(media?.id)}>
+    <Dialog open={openModal} onOpenChange={(open: boolean) => !open && closeModal()}>
       <DialogContent
         className={cn(
           'bottom-0 top-[unset] mt-5 flex aspect-[0.9] h-[min-content] max-h-dvh max-w-[unset] translate-y-0 flex-col gap-0 rounded-t-md p-0 sm:top-[50%] sm:w-[90%] sm:max-w-[50rem] sm:translate-y-[-50%] sm:rounded-md'
         )}
-        onOpenAutoFocus={(e: Event) => e.preventDefault()}
-        onEscapeKeyDown={closeModal}
-        onPointerDownOutside={closeModal}
-        onInteractOutside={closeModal}
       >
         <DialogClose asChild>
           <MediaModalCloseButton closeModal={closeModal} />
