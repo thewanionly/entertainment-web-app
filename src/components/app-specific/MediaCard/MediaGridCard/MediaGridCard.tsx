@@ -1,12 +1,13 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useId } from 'react';
 
 import { useMediaModalStore } from '@/stores/mediaModal';
 import { getYear } from '@/utils/dates';
 import { cn } from '@/utils/styles';
 
 import { MediaCard } from '../MediaCard';
+import { useFocusCardAfterModalClose } from '../MediaCard.hooks';
 import { MediaCardProps } from '../MediaCard.types';
 import { MediaCardDetails } from '../MediaCardDetails';
 import { MediaCardHoverableArea } from '../MediaCardHoverableArea';
@@ -29,12 +30,12 @@ export const MediaGridCard = ({
   hoverCard = false,
   isHoverable,
 }: MediaCardProps) => {
-  const openModal = useMediaModalStore((state) => state.openModal);
   const setOpenModal = useMediaModalStore((state) => state.setOpenModal);
-  const media = useMediaModalStore((state) => state.media);
   const setMedia = useMediaModalStore((state) => state.setMedia);
+  const setModalTriggerId = useMediaModalStore((state) => state.setModalTriggerId);
 
-  const triggerRef = useRef<HTMLButtonElement>(null);
+  const cardId = useId();
+  const { modalTriggerRef } = useFocusCardAfterModalClose(cardId);
 
   const handleOpenModal = () => {
     setMedia({
@@ -47,13 +48,8 @@ export const MediaGridCard = ({
       overview,
     });
     setOpenModal(true);
+    setModalTriggerId(cardId);
   };
-
-  useEffect(() => {
-    if (!openModal && media?.id && mediaId && media?.id === mediaId && triggerRef.current) {
-      triggerRef.current.focus();
-    }
-  }, [media, mediaId, openModal]);
 
   return (
     <MediaCard
@@ -82,7 +78,7 @@ export const MediaGridCard = ({
         {/* <MediaCardPlayButton /> */}
 
         <MediaCardDetails
-          ref={triggerRef}
+          ref={modalTriggerRef}
           className=" col-start-1 row-start-2"
           title={title}
           year={getYear(releaseDate)}

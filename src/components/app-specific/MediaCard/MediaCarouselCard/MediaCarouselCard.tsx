@@ -1,8 +1,11 @@
+import { useId } from 'react';
+
 import { useMediaModalStore } from '@/stores/mediaModal';
 import { getYear } from '@/utils/dates';
 import { cn } from '@/utils/styles';
 
 import { MediaCard } from '../MediaCard';
+import { useFocusCardAfterModalClose } from '../MediaCard.hooks';
 import { MediaCardProps } from '../MediaCard.types';
 import { MediaCardDetails } from '../MediaCardDetails';
 import { MediaCardHoverableArea } from '../MediaCardHoverableArea';
@@ -25,9 +28,14 @@ export const MediaCarouselCard = ({
   hoverCard = false,
   isHoverable,
 }: MediaCardProps) => {
+  const setOpenModal = useMediaModalStore((state) => state.setOpenModal);
   const setMedia = useMediaModalStore((state) => state.setMedia);
+  const setModalTriggerId = useMediaModalStore((state) => state.setModalTriggerId);
 
-  const openModal = () => {
+  const cardId = useId();
+  const { modalTriggerRef } = useFocusCardAfterModalClose(cardId);
+
+  const handleOpenModal = () => {
     setMedia({
       id: mediaId,
       imagePath: imgSrc,
@@ -37,6 +45,8 @@ export const MediaCarouselCard = ({
       certification: '',
       overview,
     });
+    setOpenModal(true);
+    setModalTriggerId(cardId);
   };
 
   return (
@@ -52,7 +62,7 @@ export const MediaCarouselCard = ({
       hoverCard={hoverCard}
       isHoverable={isHoverable}
     >
-      <MediaCardHoverableArea className="grid grid-cols-1" title={title} onClick={openModal}>
+      <MediaCardHoverableArea className="grid grid-cols-1" title={title} onClick={handleOpenModal}>
         <MediaCardImage
           className="col-start-1 row-start-1"
           src={imgSrc}
@@ -73,6 +83,7 @@ export const MediaCarouselCard = ({
           )}
         /> */}
         <MediaCardDetails
+          ref={modalTriggerRef}
           className={cn(
             '[&_.upper-details-container]:gap-2 [&_.upper-details-container]:text-[12px] [&_.upper-details-container]:sm:text-body-m',
             '[&_.upper-details-container]:w-[calc(100%_-_1.75rem)] [&_.upper-details-container]:sm:w-[calc(100%_-_2rem)]',

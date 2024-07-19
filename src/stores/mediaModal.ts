@@ -8,6 +8,8 @@ interface MediaModalState {
   setOpenModal: (openModal?: boolean) => void;
   media?: MediaCardType;
   setMedia: (media?: MediaCardType) => void;
+  modalTriggerId?: string;
+  setModalTriggerId: (modalTriggerId: string) => void;
 }
 
 export const useMediaModalStore = create<MediaModalState>()(
@@ -15,5 +17,6 @@ export const useMediaModalStore = create<MediaModalState>()(
     openModal: false,
     setOpenModal: (openModal) => set(() => ({ openModal })),
     setMedia: (media) => set(() => ({ media })),
+    setModalTriggerId: (modalTriggerId) => set(() => ({ modalTriggerId })),
   }))
 );
