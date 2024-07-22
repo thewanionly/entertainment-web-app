@@ -15,9 +15,11 @@
     "build-storybook": "storybook build",
     "test": "jest --passWithNoTests",
     "test:dev": "jest --watch --verbose",
-    "type:check": "tsc --noEmit"
+    "type:check": "tsc --noEmit",
+    "analyze": "ANALYZE=true next build"
   },
   "dependencies": {
+    "@next/bundle-analyzer": "^14.2.5",
     "@radix-ui/react-dialog": "^1.1.1",
     "@radix-ui/react-slot": "^1.0.2",
     "class-variance-authority": "^0.7.0",
