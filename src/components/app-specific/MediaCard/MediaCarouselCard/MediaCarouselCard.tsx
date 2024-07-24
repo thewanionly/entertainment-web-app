@@ -7,6 +7,7 @@ import { cn } from '@/utils/styles';
 import { MediaCard } from '../MediaCard';
 import { useFocusCardAfterModalClose } from '../MediaCard.hooks';
 import { MediaCardProps } from '../MediaCard.types';
+import { MediaCardBookmarkButton } from '../MediaCardBookmarkButton';
 import { MediaCardDetails } from '../MediaCardDetails';
 import { MediaCardHoverableArea } from '../MediaCardHoverableArea';
 import { MediaCardImage } from '../MediaCardImage';
@@ -71,8 +72,7 @@ export const MediaCarouselCard = ({
           priority={prioritizeImg}
           loader={customImgLoader}
         />
-        {/* TODO: add back when implementing bookmark functionality */}
-        {/* <MediaCardBookmarkButton className="sm:mr-6" /> */}
+        <MediaCardBookmarkButton className="sm:mr-6" />
         {/* TODO: add back when implementing play trailer functionality */}
         {/* <MediaCardPlayButton
           className={cn(
