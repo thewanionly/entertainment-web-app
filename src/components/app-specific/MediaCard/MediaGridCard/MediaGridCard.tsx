@@ -9,6 +9,7 @@ import { cn } from '@/utils/styles';
 import { MediaCard } from '../MediaCard';
 import { useFocusCardAfterModalClose } from '../MediaCard.hooks';
 import { MediaCardProps } from '../MediaCard.types';
+import { MediaCardBookmarkButton } from '../MediaCardBookmarkButton';
 import { MediaCardDetails } from '../MediaCardDetails';
 import { MediaCardHoverableArea } from '../MediaCardHoverableArea';
 import { MediaCardImage } from '../MediaCardImage';
@@ -72,14 +73,13 @@ export const MediaGridCard = ({
           priority={prioritizeImg}
           loader={customImgLoader}
         />
-        {/* TODO: add back when implementing bookmark functionality */}
-        {/* <MediaCardBookmarkButton /> */}
+        <MediaCardBookmarkButton />
         {/* TODO: add back when implementing play trailer functionality */}
         {/* <MediaCardPlayButton /> */}
 
         <MediaCardDetails
           ref={modalTriggerRef}
-          className=" col-start-1 row-start-2"
+          className="col-start-1 row-start-2"
           title={title}
           year={getYear(releaseDate)}
           mediaType={mediaType}
