@@ -27,7 +27,7 @@ export const MediaCardBookmarkButton = ({
       id="bookmark-icon-btn"
       className={cn(
         'bookmark-button',
-        'peer z-20 col-start-1 row-start-1 mr-2 mt-2 justify-self-end sm:mr-4 sm:mt-4',
+        'peer z-30 col-start-1 row-start-1 mr-2 mt-2 justify-self-end sm:mr-4 sm:mt-4',
         'h-8 w-8 rounded-full bg-dark-blue/50 p-0 text-white hover:bg-dark-blue/50',
         hoverBookmark && bookmarkHoverClassName.default,
         bookmarkHoverClassName.hover,
