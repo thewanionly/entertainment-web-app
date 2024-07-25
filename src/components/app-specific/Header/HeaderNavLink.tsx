@@ -46,15 +46,9 @@ export const HeaderNavLink = ({
       title={label}
     >
       <Link href={url}>
-        {NavIcon && (
-          <NavIcon
-            className={cn(
-              'aspect-sqaure w-4',
-              'sm:w-5',
-              getVerticalClasses(orientation, 'navIcon')
-            )}
-          />
-        )}
+        <NavIcon
+          className={cn('aspect-sqaure w-4', 'sm:w-5', getVerticalClasses(orientation, 'navIcon'))}
+        />
         <IconButtonSrLabel label={active ? `Active link: ${label}` : label} />
       </Link>
     </IconButton>
