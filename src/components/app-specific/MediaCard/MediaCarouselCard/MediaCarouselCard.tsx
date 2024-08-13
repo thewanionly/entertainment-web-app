@@ -1,4 +1,4 @@
-import { useId } from 'react';
+import { useId, MouseEvent } from 'react';
 
 import { useMediaModalStore } from '@/stores/mediaModal';
 import { getYear } from '@/utils/dates';
@@ -50,6 +50,10 @@ export const MediaCarouselCard = ({
     setModalTriggerId(cardId);
   };
 
+  const handleBookmarkBtnClick = (event: MouseEvent<HTMLButtonElement>) => {
+    event.stopPropagation();
+  };
+
   return (
     <MediaCard
       className={cn(
@@ -72,7 +76,6 @@ export const MediaCarouselCard = ({
           priority={prioritizeImg}
           loader={customImgLoader}
         />
-        <MediaCardBookmarkButton className="sm:mr-6" />
         {/* TODO: add back when implementing play trailer functionality */}
         {/* <MediaCardPlayButton
           className={cn(
@@ -102,6 +105,7 @@ export const MediaCarouselCard = ({
           mediaType={mediaType}
           rating={rating}
         />
+        <MediaCardBookmarkButton className="sm:mr-6" onClick={handleBookmarkBtnClick} />
       </MediaCardHoverableArea>
     </MediaCard>
   );

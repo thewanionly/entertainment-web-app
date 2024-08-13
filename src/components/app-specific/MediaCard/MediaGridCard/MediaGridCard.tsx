@@ -1,6 +1,6 @@
 'use client';
 
-import { useId } from 'react';
+import { useId, MouseEvent } from 'react';
 
 import { useMediaModalStore } from '@/stores/mediaModal';
 import { getYear } from '@/utils/dates';
@@ -52,6 +52,10 @@ export const MediaGridCard = ({
     setModalTriggerId(cardId);
   };
 
+  const handleBookmarkBtnClick = (event: MouseEvent<HTMLButtonElement>) => {
+    event.stopPropagation();
+  };
+
   return (
     <MediaCard
       className={cn('w-[164px] sm:w-[220px] lg:w-[280px]', className)}
@@ -73,7 +77,6 @@ export const MediaGridCard = ({
           priority={prioritizeImg}
           loader={customImgLoader}
         />
-        <MediaCardBookmarkButton />
         {/* TODO: add back when implementing play trailer functionality */}
         {/* <MediaCardPlayButton /> */}
 
@@ -85,6 +88,7 @@ export const MediaGridCard = ({
           mediaType={mediaType}
           rating={rating}
         />
+        <MediaCardBookmarkButton onClick={handleBookmarkBtnClick} />
       </MediaCardHoverableArea>
     </MediaCard>
   );
