@@ -30,12 +30,11 @@ export const NAV_LINKS: NavLinkType[] = [
     label: 'TV',
     icon: 'NavTVSeries',
   },
-  //  TODO: add back when implementing bookmark functionality
-  // {
-  //   url: '/bookmarks',
-  //   label: 'Bookmarks',
-  //   icon: 'NavBookmark',
-  // },
+  {
+    url: '/bookmarks',
+    label: 'Bookmarks',
+    icon: 'NavBookmark',
+  },
 ];
 
 // store the "with md" and "without md" versions of the classes
