@@ -1,5 +1,6 @@
 import { useId, MouseEvent } from 'react';
 
+import { useBookmarkedMediasStore } from '@/stores/bookmarkedMedias';
 import { useMediaModalStore } from '@/stores/mediaModal';
 import { getYear } from '@/utils/dates';
 import { cn } from '@/utils/styles';
@@ -33,25 +34,38 @@ export const MediaCarouselCard = ({
   const setMedia = useMediaModalStore((state) => state.setMedia);
   const setModalTriggerId = useMediaModalStore((state) => state.setModalTriggerId);
 
+  const bookmarkedMedias = useBookmarkedMediasStore((state) => state.bookmarkedMedias);
+  const addBookmarkedMedia = useBookmarkedMediasStore((state) => state.addBookmarkedMedia);
+  const removeBookmarkedMedia = useBookmarkedMediasStore((state) => state.removeBookmarkedMedia);
+
   const cardId = useId();
   const { modalTriggerRef } = useFocusCardAfterModalClose(cardId);
 
+  const mediaObj = {
+    id: mediaId,
+    imagePath: imgSrc,
+    title,
+    mediaType,
+    releaseDate,
+    certification: '',
+    overview,
+  };
+
   const handleOpenModal = () => {
-    setMedia({
-      id: mediaId,
-      imagePath: imgSrc,
-      title,
-      mediaType,
-      releaseDate,
-      certification: '',
-      overview,
-    });
+    setMedia(mediaObj);
     setOpenModal(true);
     setModalTriggerId(cardId);
   };
 
   const handleBookmarkBtnClick = (event: MouseEvent<HTMLButtonElement>) => {
     event.stopPropagation();
+
+    if (bookmarkedMedias.find((bookmarkedMedia) => bookmarkedMedia.id === mediaObj.id)) {
+      removeBookmarkedMedia(mediaObj.id);
+      return;
+    }
+
+    addBookmarkedMedia(mediaObj);
   };
 
   return (
