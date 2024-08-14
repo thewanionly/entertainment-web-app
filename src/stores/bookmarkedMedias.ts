@@ -23,7 +23,7 @@ export const useBookmarkedMediasStore = create<BookmarkedMediasState>()(
             ),
           })),
       }),
-      { name: 'boookmarkedMediasStore', partialize: (state) => state.bookmarkedMedias }
+      { name: 'boookmarkedMediasStore' }
     )
   )
 );
