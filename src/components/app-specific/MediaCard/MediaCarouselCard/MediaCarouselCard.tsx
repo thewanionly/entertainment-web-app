@@ -68,6 +68,9 @@ export const MediaCarouselCard = ({
     addBookmarkedMedia(mediaObj);
   };
 
+  const isMediaBookmarked =
+    bookmarkedMedias.some((bookmarkedMedia) => bookmarkedMedia.id === mediaId) ?? isBookmarked;
+
   return (
     <MediaCard
       className={cn(
@@ -76,7 +79,7 @@ export const MediaCarouselCard = ({
         'lg:aspect-[2.043] lg:w-[470px]',
         className
       )}
-      isBookmarked={isBookmarked}
+      isBookmarked={isMediaBookmarked}
       hoverBookmark={hoverBookmark}
       hoverCard={hoverCard}
       isHoverable={isHoverable}

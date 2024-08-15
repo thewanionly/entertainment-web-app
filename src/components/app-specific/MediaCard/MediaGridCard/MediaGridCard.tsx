@@ -70,10 +70,13 @@ export const MediaGridCard = ({
     addBookmarkedMedia(mediaObj);
   };
 
+  const isMediaBookmarked =
+    bookmarkedMedias.some((bookmarkedMedia) => bookmarkedMedia.id === mediaId) ?? isBookmarked;
+
   return (
     <MediaCard
       className={cn('w-[164px] sm:w-[220px] lg:w-[280px]', className)}
-      isBookmarked={isBookmarked}
+      isBookmarked={isMediaBookmarked}
       hoverBookmark={hoverBookmark}
       hoverCard={hoverCard}
       isHoverable={isHoverable}
