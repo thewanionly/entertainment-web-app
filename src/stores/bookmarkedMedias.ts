@@ -15,7 +15,14 @@ export const useBookmarkedMediasStore = create<BookmarkedMediasState>()(
       (set) => ({
         bookmarkedMedias: [],
         addBookmarkedMedia: (media) =>
-          set((state) => ({ bookmarkedMedias: [...state.bookmarkedMedias, media] })),
+          set((state) => {
+            // ensure not to add duplicates
+            if (state.bookmarkedMedias.some((bookmarkedMedia) => bookmarkedMedia.id === media.id)) {
+              return { bookmarkedMedias: state.bookmarkedMedias };
+            }
+
+            return { bookmarkedMedias: [...state.bookmarkedMedias, media] };
+          }),
         removeBookmarkedMedia: (id) =>
           set((state) => ({
             bookmarkedMedias: state.bookmarkedMedias?.filter(
