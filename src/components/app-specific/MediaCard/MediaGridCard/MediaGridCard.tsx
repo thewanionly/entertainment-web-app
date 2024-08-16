@@ -2,7 +2,6 @@
 
 import { useId, MouseEvent } from 'react';
 
-import { useBookmarkedMediasStore } from '@/stores/bookmarkedMedias';
 import { useMediaModalStore } from '@/stores/mediaModal';
 import { getYear } from '@/utils/dates';
 import { cn } from '@/utils/styles';
@@ -13,6 +12,7 @@ import { MediaCardBookmarkButton } from '../MediaCardBookmarkButton';
 import { MediaCardDetails } from '../MediaCardDetails';
 import { MediaCardHoverableArea } from '../MediaCardHoverableArea';
 import { MediaCardImage } from '../MediaCardImage';
+import { useBookmarkMedia } from '../hooks/useBookmarkMedia';
 import { useFocusCardAfterModalClose } from '../hooks/useFocusCardAfterModalClose';
 
 export const MediaGridCard = ({
@@ -27,7 +27,7 @@ export const MediaGridCard = ({
   mediaType,
   rating,
   overview,
-  isBookmarked,
+  isBookmarked: isBookmarkedProp,
   hoverBookmark = false,
   hoverCard = false,
   isHoverable,
@@ -36,9 +36,7 @@ export const MediaGridCard = ({
   const setMedia = useMediaModalStore((state) => state.setMedia);
   const setModalTriggerId = useMediaModalStore((state) => state.setModalTriggerId);
 
-  const bookmarkedMedias = useBookmarkedMediasStore((state) => state.bookmarkedMedias);
-  const addBookmarkedMedia = useBookmarkedMediasStore((state) => state.addBookmarkedMedia);
-  const removeBookmarkedMedia = useBookmarkedMediasStore((state) => state.removeBookmarkedMedia);
+  const { isBookmarked, toggleBookmark } = useBookmarkMedia();
 
   const cardId = useId();
   const { modalTriggerRef } = useFocusCardAfterModalClose(cardId);
@@ -62,21 +60,13 @@ export const MediaGridCard = ({
   const handleBookmarkBtnClick = (event: MouseEvent<HTMLButtonElement>) => {
     event.stopPropagation();
 
-    if (bookmarkedMedias.find((bookmarkedMedia) => bookmarkedMedia.id === mediaObj.id)) {
-      removeBookmarkedMedia(mediaObj.id);
-      return;
-    }
-
-    addBookmarkedMedia(mediaObj);
+    toggleBookmark(mediaObj);
   };
-
-  const isMediaBookmarked =
-    bookmarkedMedias.some((bookmarkedMedia) => bookmarkedMedia.id === mediaId) ?? isBookmarked;
 
   return (
     <MediaCard
       className={cn('w-[164px] sm:w-[220px] lg:w-[280px]', className)}
-      isBookmarked={isMediaBookmarked}
+      isBookmarked={isBookmarked(mediaId) ?? isBookmarkedProp}
       hoverBookmark={hoverBookmark}
       hoverCard={hoverCard}
       isHoverable={isHoverable}
