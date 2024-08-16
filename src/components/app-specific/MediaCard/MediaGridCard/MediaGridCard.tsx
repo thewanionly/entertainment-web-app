@@ -8,12 +8,12 @@ import { getYear } from '@/utils/dates';
 import { cn } from '@/utils/styles';
 
 import { MediaCard } from '../MediaCard';
-import { useFocusCardAfterModalClose } from '../MediaCard.hooks';
 import { MediaCardProps } from '../MediaCard.types';
 import { MediaCardBookmarkButton } from '../MediaCardBookmarkButton';
 import { MediaCardDetails } from '../MediaCardDetails';
 import { MediaCardHoverableArea } from '../MediaCardHoverableArea';
 import { MediaCardImage } from '../MediaCardImage';
+import { useFocusCardAfterModalClose } from '../hooks/useFocusCardAfterModalClose';
 
 export const MediaGridCard = ({
   className = '',
