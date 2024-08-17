@@ -1,6 +1,3 @@
-import { Suspense } from 'react';
-
-import { MediaGridSectionSkeleton } from '../_ui/MediaGridSectionSkeleton';
 import { BookmarksBasePage } from './_ui/BookmarksBasePage/BookmarksBasePage';
 import { BookmarksSearchPage } from './_ui/BookmarksSearchPage/BookmarksSearchPage';
 
@@ -19,12 +16,5 @@ export default async function BookmarksPage({
   }
 
   // bookmarks search page
-  return (
-    <Suspense
-      fallback={<MediaGridSectionSkeleton titleClassName="w-[50%] xs:w-[80%]" />}
-      key={searchTerm}
-    >
-      <BookmarksSearchPage searchTerm={searchTerm} />
-    </Suspense>
-  );
+  return <BookmarksSearchPage searchTerm={searchTerm} />;
 }
