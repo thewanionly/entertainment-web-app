@@ -2,10 +2,8 @@ import { MEDIA_DATA, MediaPageType } from '@/app/(main)/(media)/[media]/_utils/m
 import { MOVIE_CATEGORY, MovieCategory } from '@/app/(main)/_utils/movies.constants';
 import { TV_CATEGORY, TvCategory } from '@/app/(main)/_utils/tv.constants';
 import { MediaSection } from '@/components/app-specific/MediaSection/MediaSection';
-import {
-  MediaSectionGrid,
-  MediaSectionGridItems,
-} from '@/components/app-specific/MediaSection/MediaSectionGrid';
+import { MediaSectionGrid } from '@/components/app-specific/MediaSection/MediaSectionGrid';
+import { MediaSectionGridItems } from '@/components/app-specific/MediaSection/MediaSectionGridItems';
 import { MediaSectionTitle } from '@/components/app-specific/MediaSection/MediaSectionTitle';
 import { notFound, redirect } from '@/lib/navigation';
 import { MediaCardType } from '@/types/medias';

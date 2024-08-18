@@ -5,7 +5,7 @@ import { useEffect, useRef, useState } from 'react';
 import { useInView } from 'framer-motion';
 
 import { MediaGridCardSkeleton } from '@/components/app-specific/MediaCard/MediaGridCard/MediaGridCardSkeleton';
-import { MediaSectionGridItems } from '@/components/app-specific/MediaSection/MediaSectionGrid';
+import { MediaSectionGridItems } from '@/components/app-specific/MediaSection/MediaSectionGridItems';
 import { MAX_PAGE, MIN_PAGE } from '@/constants/medias/pagination';
 import { useIsInClient } from '@/hooks/useIsInClient';
 import { useMediaQuery } from '@/hooks/useMediaQuery';

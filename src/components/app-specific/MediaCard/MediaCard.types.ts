@@ -1,6 +1,6 @@
 import { ImageLoader } from 'next/image';
 
-import { MediaType } from '@/types/medias';
+import { MediaCardType, MediaType } from '@/types/medias';
 
 export interface MediaCardProps {
   mediaId: number;
@@ -13,6 +13,7 @@ export interface MediaCardProps {
   rating?: string;
   overview?: string;
   isBookmarked: boolean;
+  toggleBookmark: (media: MediaCardType) => void;
   className?: string;
   prioritizeImg?: boolean;
   hoverBookmark?: boolean; // only for storybook

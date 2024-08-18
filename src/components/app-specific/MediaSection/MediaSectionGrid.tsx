@@ -1,16 +1,10 @@
 import { ReactNode } from 'react';
 
-import { MediaGridCard } from '@/components/app-specific/MediaCard/MediaGridCard';
-import { MediaCardType } from '@/types/medias';
 import { cn } from '@/utils/styles';
 
 type MediaSectionGridProps = {
   children: ReactNode;
   className?: string;
-};
-
-type MediaSectionGridItemsProps = {
-  medias: MediaCardType[];
 };
 
 export const MediaSectionGrid = ({ children, className }: MediaSectionGridProps) => {
@@ -29,24 +23,3 @@ export const MediaSectionGrid = ({ children, className }: MediaSectionGridProps)
     </ul>
   );
 };
-
-const NUM_OF_PRIORITY_IMAGES = 4;
-
-export const MediaSectionGridItems = ({ medias }: MediaSectionGridItemsProps) =>
-  medias.map(({ id, imagePath, title, releaseDate, mediaType, overview }, index) => (
-    <li key={`${id}-${index}`} data-testid="grid-item">
-      <MediaGridCard
-        className="w-full sm:w-full lg:w-full"
-        mediaId={id}
-        imgSrc={imagePath}
-        imgAlt={title}
-        prioritizeImg={index < NUM_OF_PRIORITY_IMAGES}
-        title={title}
-        releaseDate={releaseDate}
-        mediaType={mediaType}
-        // rating={adult ? 'PG' : 'G'} TODO:
-        isBookmarked={false}
-        overview={overview}
-      />
-    </li>
-  ));

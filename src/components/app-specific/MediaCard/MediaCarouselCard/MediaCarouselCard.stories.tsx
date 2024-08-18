@@ -49,6 +49,7 @@ const mockMediaData: MediaCardProps = {
   mediaType: MediaType.MOVIE,
   rating: 'PG',
   isBookmarked: false,
+  toggleBookmark: () => {},
   customImgLoader: ({ src }: ImageLoaderProps) => src,
 };
 
