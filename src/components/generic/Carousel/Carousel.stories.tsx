@@ -67,6 +67,7 @@ const mockMediaData: MediaCardProps = {
   mediaType: MediaType.MOVIE,
   rating: 'PG',
   isBookmarked: false,
+  toggleBookmark: () => {},
 };
 
 export const MediaCarousel: Story = {

@@ -1,9 +1,7 @@
 import { getMedias } from '@/app/actions/getMedias';
 import { MediaSection } from '@/components/app-specific/MediaSection/MediaSection';
-import {
-  MediaSectionGrid,
-  MediaSectionGridItems,
-} from '@/components/app-specific/MediaSection/MediaSectionGrid';
+import { MediaSectionGrid } from '@/components/app-specific/MediaSection/MediaSectionGrid';
+import { MediaSectionGridItems } from '@/components/app-specific/MediaSection/MediaSectionGridItems';
 import { MediaSectionGridMoreItems } from '@/components/app-specific/MediaSection/MediaSectionGridMoreItems';
 import { MediaSectionTitle } from '@/components/app-specific/MediaSection/MediaSectionTitle';
 

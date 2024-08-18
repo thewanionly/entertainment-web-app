@@ -1,10 +1,8 @@
 'use client';
 
 import { MediaSection } from '@/components/app-specific/MediaSection/MediaSection';
-import {
-  MediaSectionGrid,
-  MediaSectionGridItems,
-} from '@/components/app-specific/MediaSection/MediaSectionGrid';
+import { MediaSectionGrid } from '@/components/app-specific/MediaSection/MediaSectionGrid';
+import { MediaSectionGridItems } from '@/components/app-specific/MediaSection/MediaSectionGridItems';
 import { MediaSectionTitle } from '@/components/app-specific/MediaSection/MediaSectionTitle';
 import { useIsInClient } from '@/hooks/useIsInClient';
 import { useBookmarkedMediasStore } from '@/stores/bookmarkedMedias';

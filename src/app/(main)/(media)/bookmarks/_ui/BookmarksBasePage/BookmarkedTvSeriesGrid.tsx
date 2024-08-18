@@ -1,10 +1,8 @@
 'use client';
 
 import { MediaGridCardSkeleton } from '@/components/app-specific/MediaCard/MediaGridCard/MediaGridCardSkeleton';
-import {
-  MediaSectionGrid,
-  MediaSectionGridItems,
-} from '@/components/app-specific/MediaSection/MediaSectionGrid';
+import { MediaSectionGrid } from '@/components/app-specific/MediaSection/MediaSectionGrid';
+import { MediaSectionGridItems } from '@/components/app-specific/MediaSection/MediaSectionGridItems';
 import { useIsInClient } from '@/hooks/useIsInClient';
 import { useBookmarkedMediasStore } from '@/stores/bookmarkedMedias';
 import { MediaType } from '@/types/medias';

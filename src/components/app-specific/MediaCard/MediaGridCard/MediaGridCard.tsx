@@ -12,7 +12,6 @@ import { MediaCardBookmarkButton } from '../MediaCardBookmarkButton';
 import { MediaCardDetails } from '../MediaCardDetails';
 import { MediaCardHoverableArea } from '../MediaCardHoverableArea';
 import { MediaCardImage } from '../MediaCardImage';
-import { useBookmarkMedia } from '../hooks/useBookmarkMedia';
 import { useFocusCardAfterModalClose } from '../hooks/useFocusCardAfterModalClose';
 
 export const MediaGridCard = ({
@@ -27,7 +26,8 @@ export const MediaGridCard = ({
   mediaType,
   rating,
   overview,
-  isBookmarked: isBookmarkedProp,
+  isBookmarked,
+  toggleBookmark,
   hoverBookmark = false,
   hoverCard = false,
   isHoverable,
@@ -35,8 +35,6 @@ export const MediaGridCard = ({
   const setOpenModal = useMediaModalStore((state) => state.setOpenModal);
   const setMedia = useMediaModalStore((state) => state.setMedia);
   const setModalTriggerId = useMediaModalStore((state) => state.setModalTriggerId);
-
-  const { isBookmarked, toggleBookmark } = useBookmarkMedia();
 
   const cardId = useId();
   const { modalTriggerRef } = useFocusCardAfterModalClose(cardId);
@@ -66,7 +64,7 @@ export const MediaGridCard = ({
   return (
     <MediaCard
       className={cn('w-[164px] sm:w-[220px] lg:w-[280px]', className)}
-      isBookmarked={isBookmarked(mediaId) ?? isBookmarkedProp}
+      isBookmarked={isBookmarked}
       hoverBookmark={hoverBookmark}
       hoverCard={hoverCard}
       isHoverable={isHoverable}
