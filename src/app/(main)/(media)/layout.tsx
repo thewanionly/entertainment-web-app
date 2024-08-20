@@ -1,3 +1,4 @@
+import { BookmarkRemovalAlertDialog } from '@/components/app-specific/BookmarkRemovalAlertDialog';
 import { MediaModal } from '@/components/app-specific/MediaModal';
 
 export default function MediaLayout({
@@ -8,6 +9,7 @@ export default function MediaLayout({
   return (
     <>
       <MediaModal />
+      <BookmarkRemovalAlertDialog />
       {children}
     </>
   );
