@@ -2,6 +2,7 @@
 
 import { useId, MouseEvent } from 'react';
 
+import { useAlertDialogStore } from '@/stores/alertDialog';
 import { useMediaModalStore } from '@/stores/mediaModal';
 import { getYear } from '@/utils/dates';
 import { cn } from '@/utils/styles';
@@ -36,6 +37,9 @@ export const MediaGridCard = ({
   const setMedia = useMediaModalStore((state) => state.setMedia);
   const setModalTriggerId = useMediaModalStore((state) => state.setModalTriggerId);
 
+  const setShowAlertDialog = useAlertDialogStore((state) => state.setShowAlertDialog);
+  const setAction = useAlertDialogStore((state) => state.setAction);
+
   const cardId = useId();
   const { modalTriggerRef } = useFocusCardAfterModalClose(cardId);
 
@@ -57,6 +61,13 @@ export const MediaGridCard = ({
 
   const handleBookmarkBtnClick = (event: MouseEvent<HTMLButtonElement>) => {
     event.stopPropagation();
+
+    // TODO: only show the alert dialog when in bookmarks page
+    if (isBookmarked) {
+      setShowAlertDialog(true);
+      setAction(() => toggleBookmark(mediaObj));
+      return;
+    }
 
     toggleBookmark(mediaObj);
   };
