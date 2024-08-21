@@ -1,15 +1,15 @@
 'use client';
 
 import {
+  AlertDialogHeader,
+  AlertDialogFooter,
   AlertDialog,
-  AlertDialogContent,
-  AlertDialogTitle,
-  AlertDialogDescription,
-  AlertDialogCancel,
   AlertDialogAction,
-} from '@radix-ui/react-alert-dialog';
-
-import { AlertDialogHeader, AlertDialogFooter } from '@/components/generic/AlertDialog';
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogTitle,
+} from '@/components/generic/AlertDialog';
 import { useAlertDialogStore } from '@/stores/alertDialog';
 
 export const BookmarkRemovalAlertDialog = () => {
