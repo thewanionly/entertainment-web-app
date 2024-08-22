@@ -1,5 +1,7 @@
 'use client';
 
+import { usePathname } from '@/lib/navigation';
+import { useAlertDialogStore } from '@/stores/alertDialog';
 import { MediaCardType } from '@/types/medias';
 
 import { MediaGridCard } from '../MediaCard/MediaGridCard';
@@ -12,7 +14,23 @@ type MediaSectionGridItemsProps = {
 };
 
 export const MediaSectionGridItems = ({ medias }: MediaSectionGridItemsProps) => {
+  const { topLevelPath } = usePathname();
   const { isBookmarked, toggleBookmark } = useBookmarkMedia();
+
+  const setShowAlertDialog = useAlertDialogStore((state) => state.setShowAlertDialog);
+  const setAction = useAlertDialogStore((state) => state.setAction);
+
+  const handleToggleBookmark = (media: MediaCardType) => {
+    const isItemBookmarked = isBookmarked(media.id);
+
+    if (isItemBookmarked && topLevelPath === 'bookmarks') {
+      setShowAlertDialog(true);
+      setAction(() => toggleBookmark(media));
+      return;
+    }
+
+    toggleBookmark(media);
+  };
 
   return (
     <>
@@ -27,10 +45,10 @@ export const MediaSectionGridItems = ({ medias }: MediaSectionGridItemsProps) =>
             title={title}
             releaseDate={releaseDate}
             mediaType={mediaType}
-            toggleBookmark={toggleBookmark}
             // rating={adult ? 'PG' : 'G'} TODO:
-            isBookmarked={isBookmarked(id)}
             overview={overview}
+            isBookmarked={isBookmarked(id)}
+            toggleBookmark={handleToggleBookmark}
           />
         </li>
       ))}
