@@ -18,6 +18,7 @@ export const MediaSectionGridItems = ({ medias }: MediaSectionGridItemsProps) =>
   const { isBookmarked, toggleBookmark } = useBookmarkMedia();
 
   const setShowAlertDialog = useAlertDialogStore((state) => state.setShowAlertDialog);
+  const setDetails = useAlertDialogStore((state) => state.setDetails);
   const setAction = useAlertDialogStore((state) => state.setAction);
 
   const handleToggleBookmark = (media: MediaCardType) => {
@@ -25,6 +26,10 @@ export const MediaSectionGridItems = ({ medias }: MediaSectionGridItemsProps) =>
 
     if (isItemBookmarked && topLevelPath === 'bookmarks') {
       setShowAlertDialog(true);
+      setDetails({
+        title: 'Remove this item from your bookmark list?',
+        description: `This will remove "${media.title}" from your bookmark list. To add it back, you would have to find it in the media pages and bookmark it again.`,
+      });
       setAction(() => toggleBookmark(media));
       return;
     }

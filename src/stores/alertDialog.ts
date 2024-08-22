@@ -1,11 +1,16 @@
 import { create } from 'zustand';
 import { devtools } from 'zustand/middleware';
 
+interface AlertDialogDetails {
+  title: string;
+  description?: string;
+}
+
 interface AlertDialogState {
   showAlertDialog: boolean;
   setShowAlertDialog: (showAlertDialog?: boolean) => void;
-  title: string;
-  message?: string;
+  details: AlertDialogDetails;
+  setDetails: (details: AlertDialogDetails) => void;
   triggerId?: string;
   setTriggerId: (triggerId: string) => void;
   action?: () => void;
@@ -16,8 +21,8 @@ export const useAlertDialogStore = create<AlertDialogState>()(
   devtools((set) => ({
     showAlertDialog: false,
     setShowAlertDialog: (showAlertDialog) => set(() => ({ showAlertDialog })),
-    title: '',
-    message: '',
+    details: { title: '' },
+    setDetails: (details: AlertDialogDetails) => set(() => ({ details })),
     setTriggerId: (triggerId) => set(() => ({ triggerId })),
     setAction: (action) => set(() => ({ action })),
   }))

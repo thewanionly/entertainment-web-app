@@ -13,6 +13,7 @@ import {
 import { useAlertDialogStore } from '@/stores/alertDialog';
 
 export const BookmarkRemovalAlertDialog = () => {
+  const { title, description } = useAlertDialogStore((state) => state.details);
   const showAlertDialog = useAlertDialogStore((state) => state.showAlertDialog);
   const setShowAlertDialog = useAlertDialogStore((state) => state.setShowAlertDialog);
   const action = useAlertDialogStore((state) => state.action);
@@ -28,11 +29,8 @@ export const BookmarkRemovalAlertDialog = () => {
     >
       <AlertDialogContent>
         <AlertDialogHeader>
-          <AlertDialogTitle>Remove this item from your bookmark list?</AlertDialogTitle>
-          <AlertDialogDescription>
-            This will remove the current media from the bookmark list. To add this back, you would
-            have to find it in the home or media pages and bookmark it again.
-          </AlertDialogDescription>
+          <AlertDialogTitle>{title}</AlertDialogTitle>
+          <AlertDialogDescription>{description}</AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
           <AlertDialogCancel>Cancel</AlertDialogCancel>
