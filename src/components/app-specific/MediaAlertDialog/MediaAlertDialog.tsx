@@ -12,7 +12,7 @@ import {
 } from '@/components/generic/AlertDialog';
 import { useAlertDialogStore } from '@/stores/alertDialog';
 
-export const BookmarkRemovalAlertDialog = () => {
+export const MediaAlertDialog = () => {
   const { title, description } = useAlertDialogStore((state) => state.details);
   const showAlertDialog = useAlertDialogStore((state) => state.showAlertDialog);
   const setShowAlertDialog = useAlertDialogStore((state) => state.setShowAlertDialog);
