@@ -13,7 +13,7 @@ export interface MediaCardProps {
   rating?: string;
   overview?: string;
   isBookmarked: boolean;
-  toggleBookmark: (media: MediaCardType) => void;
+  toggleBookmark: (media: MediaCardType, mediaCardId?: string) => void;
   className?: string;
   prioritizeImg?: boolean;
   hoverBookmark?: boolean; // only for storybook

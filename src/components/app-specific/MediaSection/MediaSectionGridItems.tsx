@@ -20,11 +20,14 @@ export const MediaSectionGridItems = ({ medias }: MediaSectionGridItemsProps) =>
   const setShowAlertDialog = useAlertDialogStore((state) => state.setShowAlertDialog);
   const setDetails = useAlertDialogStore((state) => state.setDetails);
   const setAction = useAlertDialogStore((state) => state.setAction);
+  const setAlertDialogTriggerId = useAlertDialogStore((state) => state.setTriggerId);
 
-  const handleToggleBookmark = (media: MediaCardType) => {
+  const handleToggleBookmark = (media: MediaCardType, mediaCardId?: string) => {
     const isItemBookmarked = isBookmarked(media.id);
 
     if (isItemBookmarked && topLevelPath === 'bookmarks') {
+      if (mediaCardId) setAlertDialogTriggerId(mediaCardId);
+
       setShowAlertDialog(true);
       setDetails({
         title: 'Remove this item from your bookmark list?',

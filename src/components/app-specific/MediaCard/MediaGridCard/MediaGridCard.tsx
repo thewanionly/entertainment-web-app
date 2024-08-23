@@ -12,6 +12,7 @@ import { MediaCardBookmarkButton } from '../MediaCardBookmarkButton';
 import { MediaCardDetails } from '../MediaCardDetails';
 import { MediaCardHoverableArea } from '../MediaCardHoverableArea';
 import { MediaCardImage } from '../MediaCardImage';
+import { useFocusBookmarkBtnAfterAlertDialogClose } from '../hooks/useFocusBookmarkBtnAfterAlertDialogClose';
 import { useFocusCardAfterModalClose } from '../hooks/useFocusCardAfterModalClose';
 
 export const MediaGridCard = ({
@@ -38,6 +39,7 @@ export const MediaGridCard = ({
 
   const cardId = useId();
   const { modalTriggerRef } = useFocusCardAfterModalClose(cardId);
+  const { bookmarkBtnRef } = useFocusBookmarkBtnAfterAlertDialogClose(cardId);
 
   const mediaObj = {
     id: mediaId,
@@ -58,7 +60,7 @@ export const MediaGridCard = ({
   const handleBookmarkBtnClick = (event: MouseEvent<HTMLButtonElement>) => {
     event.stopPropagation();
 
-    toggleBookmark(mediaObj);
+    toggleBookmark(mediaObj, cardId);
   };
 
   return (
@@ -93,7 +95,7 @@ export const MediaGridCard = ({
           mediaType={mediaType}
           rating={rating}
         />
-        <MediaCardBookmarkButton onClick={handleBookmarkBtnClick} />
+        <MediaCardBookmarkButton ref={bookmarkBtnRef} onClick={handleBookmarkBtnClick} />
       </MediaCardHoverableArea>
     </MediaCard>
   );
