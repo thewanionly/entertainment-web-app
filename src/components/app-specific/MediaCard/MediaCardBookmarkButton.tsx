@@ -1,3 +1,5 @@
+import { forwardRef } from 'react';
+
 import { ButtonProps, IconButton, IconButtonSrLabel } from '@/components/generic/Button';
 import { cn } from '@/utils/styles';
 
@@ -13,10 +15,10 @@ const bookmarkHoverClassName = {
   hover: 'hover:bg-white hover:text-dark-blue',
 };
 
-export const MediaCardBookmarkButton = ({
-  className = '',
-  ...props
-}: MediaCardBookmarkButtonProps & ButtonProps) => {
+export const MediaCardBookmarkButton = forwardRef<
+  HTMLButtonElement,
+  MediaCardBookmarkButtonProps & ButtonProps
+>(({ className = '', ...props }, ref) => {
   const { hoverBookmark, isBookmarked, setShowPlayBtn } = useMediaCard();
 
   const label = isBookmarked ? 'Remove from bookmarks' : 'Add to bookmarks';
@@ -24,6 +26,7 @@ export const MediaCardBookmarkButton = ({
 
   return (
     <IconButton
+      ref={ref}
       id="bookmark-icon-btn"
       className={cn(
         'bookmark-button',
@@ -43,4 +46,6 @@ export const MediaCardBookmarkButton = ({
       <IconButtonSrLabel label={label} />
     </IconButton>
   );
-};
+});
+
+MediaCardBookmarkButton.displayName = 'MediaCardBookmarkButton';
