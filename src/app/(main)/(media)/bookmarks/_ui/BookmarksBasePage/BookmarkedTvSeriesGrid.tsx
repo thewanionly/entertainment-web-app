@@ -25,6 +25,15 @@ export const BookmarkedTvSeriesGrid = () => {
       </MediaSectionGrid>
     );
 
+  if (bookmarkedTvSeries.length <= 0) {
+    return (
+      <p className="text-body-s text-white/75 sm:text-body-m">
+        You have no bookmarked TV series yet. Click on the bookmark icon on the media cards to
+        bookmark a TV series.
+      </p>
+    );
+  }
+
   return (
     <MediaSectionGrid>
       <MediaSectionGridItems medias={bookmarkedTvSeries} />

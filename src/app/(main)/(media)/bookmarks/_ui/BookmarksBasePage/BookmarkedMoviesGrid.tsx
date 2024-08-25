@@ -25,6 +25,15 @@ export const BookmarkedMoviesGrid = () => {
       </MediaSectionGrid>
     );
 
+  if (bookmarkedMovies.length <= 0) {
+    return (
+      <p className="text-body-s text-white/75 sm:text-body-m">
+        You have no bookmarked movies yet. Click on the bookmark icon on the media cards to bookmark
+        a movie.
+      </p>
+    );
+  }
+
   return (
     <MediaSectionGrid>
       <MediaSectionGridItems medias={bookmarkedMovies} />
