@@ -4,7 +4,6 @@ import { Dialog, DialogContent, DialogClose } from '@/components/generic/Dialog'
 import { Drawer, DrawerContent, DrawerClose } from '@/components/generic/Drawer';
 import { useMediaQuery } from '@/hooks/useMediaQuery';
 import { useMediaModalStore } from '@/stores/mediaModal';
-import { MediaCardType } from '@/types/medias';
 import { cn } from '@/utils/styles';
 
 import { MediaModalCloseButton } from './MediaModalCloseButton';
@@ -17,7 +16,9 @@ export const MediaModal = () => {
   const openModal = useMediaModalStore((state) => state.openModal);
   const setOpenModal = useMediaModalStore((state) => state.setOpenModal);
 
-  const { title = '', imagePath = '' } = media ?? {};
+  if (!media) return null;
+
+  const { title = '', imagePath = '' } = media;
 
   const closeModal = () => {
     setOpenModal(false);
@@ -32,7 +33,7 @@ export const MediaModal = () => {
             <MediaModalCloseButton closeModal={closeModal} />
           </DrawerClose>
           <MediaModalImage imagePath={imagePath} title={title} />
-          <MediaModalDetails data={media as MediaCardType} isMobile={Boolean(sm)} />
+          <MediaModalDetails data={media} isMobile={Boolean(sm)} />
         </DrawerContent>
       </Drawer>
     );
@@ -50,7 +51,7 @@ export const MediaModal = () => {
           <MediaModalCloseButton closeModal={closeModal} />
         </DialogClose>
         <MediaModalImage imagePath={imagePath} title={title} />
-        <MediaModalDetails data={media as MediaCardType} isMobile={Boolean(sm)} />
+        <MediaModalDetails data={media} isMobile={Boolean(sm)} />
       </DialogContent>
     </Dialog>
   );
