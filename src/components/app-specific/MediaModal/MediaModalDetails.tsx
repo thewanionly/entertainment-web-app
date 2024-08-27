@@ -9,7 +9,9 @@ import { MediaCardType, MediaType } from '@/types/medias';
 import { formatDate } from '@/utils/dates';
 import { cn } from '@/utils/styles';
 
+import { BookmarkButton } from '../BookmarkButton';
 import { MediaCardDotSeparator } from '../MediaCard/MediaCardDotSeparator';
+import { useBookmarkMedia } from '../MediaCard/hooks/useBookmarkMedia';
 
 const renderMediaType = (mediaType: MediaType) => {
   const { icon: MediaTypeIcon, label: mediaTypeLabel } = MEDIA_TYPE_MAP[mediaType];
@@ -59,28 +61,45 @@ const MediaKeyDetails = ({ releaseDate, mediaType, certification }: MediaKeyDeta
   );
 };
 
-export const MediaModalDetails = ({
-  data,
-  isMobile,
-}: {
-  data: Partial<MediaCardType>;
+type MediaModalDetails = {
+  data: MediaCardType;
   isMobile: boolean;
-}) => {
-  const { title, releaseDate, mediaType, certification, overview } = data ?? {};
+};
+
+export const MediaModalDetails = ({ data, isMobile }: MediaModalDetails) => {
+  const { id, title, releaseDate, mediaType, certification, overview } = data;
 
   const MediaModalTitleTag = isMobile ? DrawerTitle : DialogTitle;
   const MediaMoodalDescriptionTag = isMobile ? DrawerDescription : DialogDescription;
 
+  const { isBookmarked, toggleBookmark } = useBookmarkMedia();
+
+  const handleToggleBookmark = () => {
+    toggleBookmark(data);
+  };
+
   return (
     <div className="max-h-[80%] overflow-auto p-6 pb-8 sm:p-6 lg:p-8 xs:p-4 xs:pb-6">
-      <MediaModalTitleTag className="mb-1 text-heading-s sm:text-heading-l sm:font-medium xs:text-heading-xs">
-        {title}
-      </MediaModalTitleTag>
-      <MediaKeyDetails
-        releaseDate={releaseDate}
-        mediaType={mediaType}
-        certification={certification}
-      />
+      <div className="flex justify-between">
+        <div>
+          <MediaModalTitleTag className="mb-1 text-heading-s sm:text-heading-l sm:font-medium xs:text-heading-xs">
+            {title}
+          </MediaModalTitleTag>
+          <MediaKeyDetails
+            releaseDate={releaseDate}
+            mediaType={mediaType}
+            certification={certification}
+          />
+        </div>
+        <BookmarkButton
+          className={cn(
+            '[&_.bookmark-icon]:sm:h-[18px] [&_.bookmark-icon]:sm:w-[18px]',
+            'mt-2 sm:mt-3'
+          )}
+          onClick={handleToggleBookmark}
+          isBookmarked={isBookmarked(id)}
+        />
+      </div>
       <MediaMoodalDescriptionTag className="mt-8 text-body-m sm:mt-10 sm:text-[1rem] sm:text-body-m">
         {overview}
       </MediaMoodalDescriptionTag>

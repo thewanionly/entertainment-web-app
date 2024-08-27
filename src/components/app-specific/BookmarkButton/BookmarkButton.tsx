@@ -27,7 +27,7 @@ export const BookmarkButton = forwardRef<HTMLButtonElement, BookmarkButtonProps 
         id="bookmark-icon-btn"
         className={cn(
           'bookmark-button',
-          'peer z-30 col-start-1 row-start-1 mr-2 mt-2 justify-self-end sm:mr-4 sm:mt-4',
+          'peer z-30 col-start-1 row-start-1 justify-self-end',
           'h-8 w-8 rounded-full bg-dark-blue/50 p-0 text-white hover:bg-dark-blue/50',
           hoverBookmark && bookmarkHoverClassName.default,
           bookmarkHoverClassName.hover,
@@ -37,7 +37,7 @@ export const BookmarkButton = forwardRef<HTMLButtonElement, BookmarkButtonProps 
         title={label}
         {...props}
       >
-        <BookMarkIcon className="h-[14px] w-[12px]" />
+        <BookMarkIcon className={cn('bookmark-icon', 'h-[14px] w-[12px]')} />
         <IconButtonSrLabel label={label} />
       </IconButton>
     );
