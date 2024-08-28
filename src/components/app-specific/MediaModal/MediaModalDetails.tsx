@@ -5,6 +5,8 @@ import { Fragment } from 'react';
 import { DialogDescription, DialogTitle } from '@/components/generic/Dialog';
 import { DrawerDescription, DrawerTitle } from '@/components/generic/Drawer';
 import { MEDIA_TYPE_MAP } from '@/constants/medias/mediaType';
+import { usePathname } from '@/lib/navigation';
+import { useAlertDialogStore } from '@/stores/alertDialog';
 import { MediaCardType, MediaType } from '@/types/medias';
 import { formatDate } from '@/utils/dates';
 import { cn } from '@/utils/styles';
@@ -12,6 +14,7 @@ import { cn } from '@/utils/styles';
 import { BookmarkButton } from '../BookmarkButton';
 import { MediaCardDotSeparator } from '../MediaCard/MediaCardDotSeparator';
 import { useBookmarkMedia } from '../MediaCard/hooks/useBookmarkMedia';
+import { useFocusBookmarkBtnAfterAlertDialogClose } from '../MediaCard/hooks/useFocusBookmarkBtnAfterAlertDialogClose';
 
 const renderMediaType = (mediaType: MediaType) => {
   const { icon: MediaTypeIcon, label: mediaTypeLabel } = MEDIA_TYPE_MAP[mediaType];
@@ -72,9 +75,29 @@ export const MediaModalDetails = ({ data, isMobile }: MediaModalDetails) => {
   const MediaModalTitleTag = isMobile ? DrawerTitle : DialogTitle;
   const MediaMoodalDescriptionTag = isMobile ? DrawerDescription : DialogDescription;
 
+  const { topLevelPath } = usePathname();
   const { isBookmarked, toggleBookmark } = useBookmarkMedia();
+  const setShowAlertDialog = useAlertDialogStore((state) => state.setShowAlertDialog);
+  const setDetails = useAlertDialogStore((state) => state.setDetails);
+  const setAction = useAlertDialogStore((state) => state.setAction);
+  const setAlertDialogTriggerId = useAlertDialogStore((state) => state.setTriggerId);
+  const { bookmarkBtnRef } = useFocusBookmarkBtnAfterAlertDialogClose(String(id));
 
   const handleToggleBookmark = () => {
+    const isItemBookmarked = isBookmarked(id);
+
+    if (isItemBookmarked && topLevelPath === 'bookmarks') {
+      if (id) setAlertDialogTriggerId(String(id));
+
+      setShowAlertDialog(true);
+      setDetails({
+        title: 'Remove this item from your bookmark list?',
+        description: `This will remove "${title}" from your bookmark list. To add it back, you would have to find it in the media pages and bookmark it again.`,
+      });
+      setAction(() => toggleBookmark(data));
+      return;
+    }
+
     toggleBookmark(data);
   };
 
@@ -92,6 +115,7 @@ export const MediaModalDetails = ({ data, isMobile }: MediaModalDetails) => {
           />
         </div>
         <BookmarkButton
+          ref={bookmarkBtnRef}
           className={cn(
             '[&_.bookmark-icon]:sm:h-[18px] [&_.bookmark-icon]:sm:w-[18px]',
             'mt-2 sm:mt-3'
