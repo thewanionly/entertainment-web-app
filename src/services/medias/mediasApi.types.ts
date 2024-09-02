@@ -14,6 +14,24 @@ export enum MediasApiMediaType {
   PERSON = 'person',
 }
 
+export interface MediasApiVideo {
+  iso_639_1: string;
+  iso_3166_1: string;
+  name: string;
+  key: string;
+  site: string;
+  size: number;
+  type: string;
+  official: boolean;
+  published_at: string;
+  id: string;
+}
+
+interface MediasApiVideos {
+  id?: number;
+  results: MediasApiVideo[];
+}
+
 export interface MediasApiMovie {
   adult: boolean;
   backdrop_path: string;
@@ -39,6 +57,7 @@ export interface MediasApiMovie {
   tagline: string;
   title: string;
   video: boolean;
+  videos: MediasApiVideos;
   vote_average: number;
   vote_count: number;
 }

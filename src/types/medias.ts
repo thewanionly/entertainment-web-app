@@ -23,3 +23,10 @@ export interface MediaResultsInfo {
   totalPages?: number;
   totalResults?: number;
 }
+
+export interface MediaVideo {
+  key: string;
+  site: string;
+  type: string;
+  name: string;
+}
