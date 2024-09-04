@@ -25,8 +25,6 @@ export interface MediaResultsInfo {
 }
 
 export interface MediaVideo {
-  key: string;
-  site: string;
-  type: string;
+  src: string;
   name: string;
 }
