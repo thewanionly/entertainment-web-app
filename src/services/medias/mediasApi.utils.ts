@@ -1,3 +1,4 @@
+import { VideoSite, VideoType, YOUTUBE_VIDEO_URL } from '@/constants/videos';
 import { MediaCardType, MediaType, MediaVideo } from '@/types/medias';
 
 import {
@@ -42,17 +43,14 @@ export const transformMediaResults = (results: MediasApiMedia[]): MediaCardType[
 
 export const transformVideo = (videos: MediasApiVideo[]): MediaVideo | null => {
   const officialYoutubeVideos = videos.filter(
-    ({ official, site }) => official && site === 'YouTube'
+    ({ official, site }) => official && site === VideoSite.YOUTUBE
   );
-  const trailerVideo = officialYoutubeVideos.find(({ type }) => type === 'Trailer');
+  const trailerVideo = officialYoutubeVideos.find(({ type }) => type === VideoType.TRAILER);
   const finalVideo = trailerVideo ?? officialYoutubeVideos[0];
 
   if (!finalVideo) return null;
 
-  return {
-    key: finalVideo.key,
-    site: finalVideo.site,
-    type: finalVideo.type,
-    name: finalVideo.name,
-  };
+  const { key, name } = finalVideo;
+
+  return { src: `${YOUTUBE_VIDEO_URL}${key}`, name };
 };

@@ -2,6 +2,8 @@
 
 import { Fragment } from 'react';
 
+import Link from 'next/link';
+
 import useSWR from 'swr';
 
 import { DialogDescription, DialogTitle } from '@/components/generic/Dialog';
@@ -75,10 +77,11 @@ type MediaModalDetails = {
 export const MediaModalDetails = ({ data, isMobile }: MediaModalDetails) => {
   const { id, title, releaseDate, mediaType, certification, overview } = data;
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { data: mediaDetails } = useSWR(id.toString(), (id: string) =>
     fetchMovieDetails(Number(id))
   );
+
+  const { src: videoSrc } = mediaDetails?.video ?? {};
 
   const MediaModalTitleTag = isMobile ? DrawerTitle : DialogTitle;
   const MediaMoodalDescriptionTag = isMobile ? DrawerDescription : DialogDescription;
@@ -135,6 +138,11 @@ export const MediaModalDetails = ({ data, isMobile }: MediaModalDetails) => {
       <MediaMoodalDescriptionTag className="mt-8 text-body-m sm:mt-10 sm:text-[1rem] sm:text-body-m">
         {overview}
       </MediaMoodalDescriptionTag>
+      {videoSrc && (
+        <Link target="_blank" className="hover:text-red hover:underline" href={videoSrc}>
+          Watch trailer
+        </Link>
+      )}
     </div>
   );
 };
