@@ -2,10 +2,13 @@
 
 import { Fragment } from 'react';
 
+import useSWR from 'swr';
+
 import { DialogDescription, DialogTitle } from '@/components/generic/Dialog';
 import { DrawerDescription, DrawerTitle } from '@/components/generic/Drawer';
 import { MEDIA_TYPE_MAP } from '@/constants/medias/mediaType';
 import { usePathname } from '@/lib/navigation';
+import { fetchMovieDetails } from '@/services/medias/fetchMovieDetails';
 import { useAlertDialogStore } from '@/stores/alertDialog';
 import { MediaCardType, MediaType } from '@/types/medias';
 import { formatDate } from '@/utils/dates';
@@ -71,6 +74,11 @@ type MediaModalDetails = {
 
 export const MediaModalDetails = ({ data, isMobile }: MediaModalDetails) => {
   const { id, title, releaseDate, mediaType, certification, overview } = data;
+
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const { data: mediaDetails } = useSWR(id.toString(), (id: string) =>
+    fetchMovieDetails(Number(id))
+  );
 
   const MediaModalTitleTag = isMobile ? DrawerTitle : DialogTitle;
   const MediaMoodalDescriptionTag = isMobile ? DrawerDescription : DialogDescription;
