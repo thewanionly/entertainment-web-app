@@ -20,6 +20,7 @@ import { BookmarkButton } from '../BookmarkButton';
 import { MediaCardDotSeparator } from '../MediaCard/MediaCardDotSeparator';
 import { useBookmarkMedia } from '../MediaCard/hooks/useBookmarkMedia';
 import { useFocusBookmarkBtnAfterAlertDialogClose } from '../MediaCard/hooks/useFocusBookmarkBtnAfterAlertDialogClose';
+import { PlayButton } from '../PlayButton';
 
 const renderMediaType = (mediaType: MediaType) => {
   const { icon: MediaTypeIcon, label: mediaTypeLabel } = MEDIA_TYPE_MAP[mediaType];
@@ -114,7 +115,7 @@ export const MediaModalDetails = ({ data, isMobile }: MediaModalDetails) => {
 
   return (
     <div className="max-h-[80%] overflow-auto p-6 pb-8 sm:p-6 lg:p-8 xs:p-4 xs:pb-6">
-      <div className="flex justify-between">
+      <div className="flex justify-between gap-6">
         <div>
           <MediaModalTitleTag className="mb-1 text-heading-s sm:text-heading-l sm:font-medium xs:text-heading-xs">
             {title}
@@ -125,24 +126,23 @@ export const MediaModalDetails = ({ data, isMobile }: MediaModalDetails) => {
             certification={certification}
           />
         </div>
-        <BookmarkButton
-          ref={bookmarkBtnRef}
-          className={cn(
-            '[&_.bookmark-icon]:sm:h-[18px] [&_.bookmark-icon]:sm:w-[18px]',
-            'mt-2 sm:mt-3'
+        <div className="mt-2 flex h-full items-center gap-1 sm:mt-3 sm:gap-3">
+          {videoSrc && (
+            <Link target="_blank" className="h-6 w-6" href={videoSrc}>
+              <PlayButton />
+            </Link>
           )}
-          onClick={handleToggleBookmark}
-          isBookmarked={isBookmarked(id)}
-        />
+          <BookmarkButton
+            ref={bookmarkBtnRef}
+            className={cn('[&_.bookmark-icon]:sm:h-[18px] [&_.bookmark-icon]:sm:w-[18px]')}
+            onClick={handleToggleBookmark}
+            isBookmarked={isBookmarked(id)}
+          />
+        </div>
       </div>
       <MediaMoodalDescriptionTag className="mt-8 text-body-m sm:mt-10 sm:text-[1rem] sm:text-body-m">
         {overview}
       </MediaMoodalDescriptionTag>
-      {videoSrc && (
-        <Link target="_blank" className="hover:text-red hover:underline" href={videoSrc}>
-          Watch trailer
-        </Link>
-      )}
     </div>
   );
 };
