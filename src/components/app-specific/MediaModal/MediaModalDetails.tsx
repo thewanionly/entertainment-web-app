@@ -8,6 +8,7 @@ import useSWR from 'swr';
 
 import { DialogDescription, DialogTitle } from '@/components/generic/Dialog';
 import { DrawerDescription, DrawerTitle } from '@/components/generic/Drawer';
+import { Skeleton } from '@/components/generic/Skeleton';
 import { MEDIA_TYPE_MAP } from '@/constants/medias/mediaType';
 import { usePathname } from '@/lib/navigation';
 import { fetchMovieDetails } from '@/services/medias/fetchMovieDetails';
@@ -78,7 +79,7 @@ type MediaModalDetails = {
 export const MediaModalDetails = ({ data, isMobile }: MediaModalDetails) => {
   const { id, title, releaseDate, mediaType, certification, overview } = data;
 
-  const { data: mediaDetails } = useSWR(id.toString(), (id: string) =>
+  const { data: mediaDetails, isLoading } = useSWR(id.toString(), (id: string) =>
     fetchMovieDetails(Number(id))
   );
 
@@ -127,9 +128,15 @@ export const MediaModalDetails = ({ data, isMobile }: MediaModalDetails) => {
           />
         </div>
         <div className="mt-2 flex h-full items-center gap-1 sm:mt-3 sm:gap-3">
-          {videoSrc && (
-            <Link target="_blank" className="h-6 w-6" href={videoSrc}>
-              <PlayButton />
+          {isLoading && (
+            <Skeleton
+              className="size-6 rounded-full bg-white/80"
+              title="Fetching video trailer src"
+            />
+          )}
+          {!isLoading && videoSrc && (
+            <Link target="_blank" className="size-6" href={videoSrc}>
+              <PlayButton label="Play video trailer" />
             </Link>
           )}
           <BookmarkButton
