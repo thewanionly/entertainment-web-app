@@ -4,14 +4,11 @@ import { Fragment } from 'react';
 
 import Link from 'next/link';
 
-import useSWR from 'swr';
-
 import { DialogDescription, DialogTitle } from '@/components/generic/Dialog';
 import { DrawerDescription, DrawerTitle } from '@/components/generic/Drawer';
 import { Skeleton } from '@/components/generic/Skeleton';
 import { MEDIA_TYPE_MAP } from '@/constants/medias/mediaType';
 import { usePathname } from '@/lib/navigation';
-import { fetchMovieDetails } from '@/services/medias/fetchMovieDetails';
 import { useAlertDialogStore } from '@/stores/alertDialog';
 import { MediaCardType, MediaType } from '@/types/medias';
 import { formatDate } from '@/utils/dates';
@@ -73,17 +70,18 @@ const MediaKeyDetails = ({ releaseDate, mediaType, certification }: MediaKeyDeta
 
 type MediaModalDetails = {
   data: MediaCardType;
-  isMobile: boolean;
+  isMobile?: boolean;
+  videoSrc?: string;
+  isMediaLoading?: boolean;
 };
 
-export const MediaModalDetails = ({ data, isMobile }: MediaModalDetails) => {
+export const MediaModalDetails = ({
+  data,
+  isMobile,
+  videoSrc,
+  isMediaLoading = false,
+}: MediaModalDetails) => {
   const { id, title, releaseDate, mediaType, certification, overview } = data;
-
-  const { data: mediaDetails, isLoading } = useSWR(id.toString(), (id: string) =>
-    fetchMovieDetails(Number(id))
-  );
-
-  const { src: videoSrc } = mediaDetails?.video ?? {};
 
   const MediaModalTitleTag = isMobile ? DrawerTitle : DialogTitle;
   const MediaMoodalDescriptionTag = isMobile ? DrawerDescription : DialogDescription;
@@ -128,13 +126,13 @@ export const MediaModalDetails = ({ data, isMobile }: MediaModalDetails) => {
           />
         </div>
         <div className="mt-2 flex h-full items-center gap-1 sm:mt-3 sm:gap-3">
-          {isLoading && (
+          {isMediaLoading && (
             <Skeleton
               className="size-6 rounded-full bg-white/80"
               title="Fetching video trailer src"
             />
           )}
-          {!isLoading && videoSrc && (
+          {!isMediaLoading && videoSrc && (
             <Link target="_blank" className="size-6" href={videoSrc}>
               <PlayButton label="Play video trailer" />
             </Link>
