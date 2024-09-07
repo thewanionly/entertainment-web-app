@@ -7,8 +7,7 @@ import { useMediaModalStore } from '@/stores/mediaModal';
 import { cn } from '@/utils/styles';
 
 import { MediaModalCloseButton } from './MediaModalCloseButton';
-import { MediaModalDetails } from './MediaModalDetails';
-import { MediaModalImage } from './MediaModalImage';
+import { MediaModalContent } from './MediaModalContent';
 
 export const MediaModal = () => {
   const sm = useMediaQuery('(min-width: 640px)');
@@ -17,8 +16,6 @@ export const MediaModal = () => {
   const setOpenModal = useMediaModalStore((state) => state.setOpenModal);
 
   if (!media) return null;
-
-  const { title = '', imagePath = '' } = media;
 
   const closeModal = () => {
     setOpenModal(false);
@@ -32,8 +29,7 @@ export const MediaModal = () => {
           <DrawerClose asChild>
             <MediaModalCloseButton closeModal={closeModal} />
           </DrawerClose>
-          <MediaModalImage imagePath={imagePath} title={title} />
-          <MediaModalDetails data={media} isMobile={Boolean(sm)} />
+          <MediaModalContent data={media} />
         </DrawerContent>
       </Drawer>
     );
@@ -50,8 +46,7 @@ export const MediaModal = () => {
         <DialogClose asChild>
           <MediaModalCloseButton closeModal={closeModal} />
         </DialogClose>
-        <MediaModalImage imagePath={imagePath} title={title} />
-        <MediaModalDetails data={media} isMobile={Boolean(sm)} />
+        <MediaModalContent data={media} isMobile />
       </DialogContent>
     </Dialog>
   );
