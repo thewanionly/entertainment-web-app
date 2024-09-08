@@ -2,8 +2,6 @@
 
 import { Fragment } from 'react';
 
-import Link from 'next/link';
-
 import { DialogDescription, DialogTitle } from '@/components/generic/Dialog';
 import { DrawerDescription, DrawerTitle } from '@/components/generic/Drawer';
 import { Skeleton } from '@/components/generic/Skeleton';
@@ -71,15 +69,17 @@ const MediaKeyDetails = ({ releaseDate, mediaType, certification }: MediaKeyDeta
 type MediaModalDetails = {
   data: MediaCardType;
   isMobile?: boolean;
-  videoSrc?: string;
+  hasVideo?: boolean;
   isMediaLoading?: boolean;
+  handleShowVideo?: () => void;
 };
 
 export const MediaModalDetails = ({
   data,
   isMobile,
-  videoSrc,
+  hasVideo,
   isMediaLoading = false,
+  handleShowVideo,
 }: MediaModalDetails) => {
   const { id, title, releaseDate, mediaType, certification, overview } = data;
 
@@ -132,11 +132,7 @@ export const MediaModalDetails = ({
               title="Fetching video trailer src"
             />
           )}
-          {!isMediaLoading && videoSrc && (
-            <Link target="_blank" className="size-6" href={videoSrc}>
-              <PlayButton label="Play video trailer" />
-            </Link>
-          )}
+          {hasVideo && <PlayButton label="Play video trailer" onClick={handleShowVideo} />}
           <BookmarkButton
             ref={bookmarkBtnRef}
             className={cn('[&_.bookmark-icon]:sm:h-[18px] [&_.bookmark-icon]:sm:w-[18px]')}
