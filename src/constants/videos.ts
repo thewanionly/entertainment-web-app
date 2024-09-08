@@ -7,3 +7,4 @@ export enum VideoType {
 }
 
 export const YOUTUBE_VIDEO_URL = 'https://www.youtube.com/watch?v=';
+export const YOUTUBE_EMBED_URL = 'https://www.youtube.com/embed/';

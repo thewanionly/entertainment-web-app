@@ -1,4 +1,4 @@
-import { VideoSite, VideoType, YOUTUBE_VIDEO_URL } from '@/constants/videos';
+import { VideoSite, VideoType, YOUTUBE_EMBED_URL } from '@/constants/videos';
 import { MediaCardType, MediaType, MediaVideo } from '@/types/medias';
 
 import {
@@ -52,5 +52,5 @@ export const transformVideo = (videos: MediasApiVideo[]): MediaVideo | null => {
 
   const { key, name } = finalVideo;
 
-  return { src: `${YOUTUBE_VIDEO_URL}${key}`, name };
+  return { src: `${YOUTUBE_EMBED_URL}${key}`, name };
 };
