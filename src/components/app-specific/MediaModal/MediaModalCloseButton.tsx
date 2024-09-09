@@ -3,6 +3,8 @@ import { X } from 'lucide-react';
 import { IconButton, IconButtonSrLabel } from '@/components/generic/Button';
 import { cn } from '@/utils/styles';
 
+const CLOSE_BUTTON_LABEL = 'Close modal';
+
 export const MediaModalCloseButton = ({ closeModal }: { closeModal: () => void }) => (
   <IconButton
     className={cn(
@@ -12,8 +14,9 @@ export const MediaModalCloseButton = ({ closeModal }: { closeModal: () => void }
       'focus-visible:ring-white-950 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 data-[state=open]:bg-dark-blue data-[state=open]:text-white/80'
     )}
     onClick={closeModal}
+    title={CLOSE_BUTTON_LABEL}
   >
     <X className="h-5 w-5 sm:h-6 sm:w-6" />
-    <IconButtonSrLabel label="Next slide" />
+    <IconButtonSrLabel label={CLOSE_BUTTON_LABEL} />
   </IconButton>
 );
