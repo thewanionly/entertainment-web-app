@@ -26,6 +26,7 @@ export const MediaModalContent = ({ data, isMobile = false }: MediaModalContentP
   const hasVideo = Boolean(!isLoading && videoSrc);
 
   const handleShowVideo = () => setShowVideo(true);
+  const handleHideVideo = () => setShowVideo(false);
 
   return (
     <>
@@ -39,7 +40,9 @@ export const MediaModalContent = ({ data, isMobile = false }: MediaModalContentP
         isMobile={isMobile}
         hasVideo={hasVideo}
         isMediaLoading={isLoading}
+        showVideo={showVideo}
         handleShowVideo={handleShowVideo}
+        handleHideVideo={handleHideVideo}
       />
     </>
   );

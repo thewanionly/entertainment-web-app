@@ -71,15 +71,19 @@ type MediaModalDetails = {
   isMobile?: boolean;
   hasVideo?: boolean;
   isMediaLoading?: boolean;
+  showVideo?: boolean;
   handleShowVideo?: () => void;
+  handleHideVideo?: () => void;
 };
 
 export const MediaModalDetails = ({
   data,
   isMobile,
   hasVideo,
+  showVideo = false,
   isMediaLoading = false,
   handleShowVideo,
+  handleHideVideo,
 }: MediaModalDetails) => {
   const { id, title, releaseDate, mediaType, certification, overview } = data;
 
@@ -132,7 +136,14 @@ export const MediaModalDetails = ({
               title="Fetching video trailer src"
             />
           )}
-          {hasVideo && <PlayButton label="Play video trailer" onClick={handleShowVideo} />}
+          {hasVideo && (
+            <PlayButton
+              isPlaying={showVideo}
+              playLabel="Play video trailer"
+              stopLabel="Stop video trailer"
+              onClick={!showVideo ? handleShowVideo : handleHideVideo}
+            />
+          )}
           <BookmarkButton
             ref={bookmarkBtnRef}
             className={cn('[&_.bookmark-icon]:sm:h-[18px] [&_.bookmark-icon]:sm:w-[18px]')}
