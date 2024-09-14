@@ -93,6 +93,7 @@ export interface MediasApiTV {
   status: string;
   tagline: string;
   type: string;
+  videos: MediasApiVideos;
   vote_average: number;
   vote_count: number;
 }

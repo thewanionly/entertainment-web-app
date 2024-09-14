@@ -1,6 +1,6 @@
 import { MediaDetails } from '@/types/mediaDetails';
 
-import { MediasApiMediaType, MediasApiMovie } from './mediasApi.types';
+import { MediasApiMediaType, MediasApiTV } from './mediasApi.types';
 import { transformMedia, transformVideo } from './mediasApi.utils';
 
 const options: RequestInit = {
@@ -14,28 +14,28 @@ const options: RequestInit = {
 
 const appendToResponse = ['videos'];
 
-export const fetchMovieDetails = async (movieId: number): Promise<MediaDetails> => {
+export const fetchTvDetails = async (tvId: number): Promise<MediaDetails> => {
   try {
     const queryParams = new URLSearchParams({
       append_to_response: appendToResponse.join(','),
     });
 
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_MEDIAS_BASE_ENDPOINT}/movie/${movieId}?${queryParams.toString()}`,
+      `${process.env.NEXT_PUBLIC_MEDIAS_BASE_ENDPOINT}/tv/${tvId}?${queryParams.toString()}`,
       options
     );
 
     if (!response.ok) {
-      throw new Error(`Failed to fetch movie details of movie id: ${movieId}`);
+      throw new Error(`Failed to fetch TV details of id: ${tvId}`);
     }
 
-    const movieDetails = (await response.json()) as MediasApiMovie;
+    const tvDetails = (await response.json()) as MediasApiTV;
     const transformedMedia = transformMedia({
-      ...movieDetails,
-      media_type: MediasApiMediaType.MOVIE,
+      ...tvDetails,
+      media_type: MediasApiMediaType.TV,
     });
 
-    return { ...transformedMedia, video: transformVideo(movieDetails.videos.results) ?? undefined };
+    return { ...transformedMedia, video: transformVideo(tvDetails.videos.results) ?? undefined };
   } catch (error) {
     console.error(error);
     throw error;

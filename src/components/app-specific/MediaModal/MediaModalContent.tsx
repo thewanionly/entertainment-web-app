@@ -3,7 +3,8 @@ import { useState } from 'react';
 import useSWR from 'swr';
 
 import { fetchMovieDetails } from '@/services/medias/fetchMovieDetails';
-import { MediaCardType } from '@/types/medias';
+import { fetchTvDetails } from '@/services/medias/fetchTvDetails';
+import { MediaCardType, MediaType } from '@/types/medias';
 
 import { MediaModalDetails } from './MediaModalDetails';
 import { MediaModalImage } from './MediaModalImage';
@@ -14,12 +15,25 @@ type MediaModalContentProps = {
   isMobile?: boolean;
 };
 
+const mediaDetailsFetcher = (mediaType: MediaType) => (id: string) => {
+  if (mediaType === MediaType.MOVIE) {
+    return fetchMovieDetails(Number(id));
+  }
+
+  if (mediaType === MediaType.TV) {
+    return fetchTvDetails(Number(id));
+  }
+
+  throw new Error(`Invalid ${mediaType}`);
+};
+
 export const MediaModalContent = ({ data, isMobile = false }: MediaModalContentProps) => {
   const [showVideo, setShowVideo] = useState(false);
   const { id, title, imagePath } = data;
 
-  const { data: mediaDetails, isLoading } = useSWR(id.toString(), (id: string) =>
-    fetchMovieDetails(Number(id))
+  const { data: mediaDetails, isLoading } = useSWR(
+    id.toString(),
+    mediaDetailsFetcher(data.mediaType)
   );
 
   const { src: videoSrc } = mediaDetails?.video ?? {};
