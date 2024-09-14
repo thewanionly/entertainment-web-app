@@ -1,5 +1,5 @@
 import { MediaCardType, MediaVideo } from './medias';
 
-export interface MovieDetails extends MediaCardType {
+export interface MediaDetails extends MediaCardType {
   video?: MediaVideo;
 }
