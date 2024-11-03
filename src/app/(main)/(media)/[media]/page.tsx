@@ -31,7 +31,11 @@ export default async function MediaPage({
 
   // media page
   if (!q) {
-    return <MediaBasePage mediaPageType={mediaPageType} />;
+    return (
+      <Suspense fallback={<MediaGridSectionSkeleton titleClassName="min-w-[5rem] max-w-[10rem]" />}>
+        <MediaBasePage mediaPageType={mediaPageType} />
+      </Suspense>
+    );
   }
 
   // media search page
