@@ -23,21 +23,34 @@ A web app that lets you search for your favourite movies and TV shows and bookma
 npm install
 ```
 
-3. Start the development server:
+3. Create your local environment file:
+
+```bash
+cp .env.example .env.local
+```
+
+Then update `.env.local` with your TMDB access token:
+
+```bash
+NEXT_PUBLIC_MEDIAS_BASE_ENDPOINT=https://api.themoviedb.org/3
+NEXT_PUBLIC_MEDIAS_ACCESS_TOKEN=your_tmdb_v4_read_access_token
+```
+
+4. Start the development server:
 
 ```bash
 npm run dev
 ```
 
-4. Open the local server URL ([http://localhost:3000](http://localhost:3000)) in your web browser.
+5. Open the local server URL ([http://localhost:3000](http://localhost:3000)) in your web browser.
 
-5. To run the test files:
+6. To run the test files:
 
 ```bash
 npm run test:dev
 ```
 
-6. To run storybook:
+7. To run storybook:
 
 ```bash
 npm run storybook
