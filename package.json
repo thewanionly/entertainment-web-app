@@ -2,6 +2,7 @@
   "name": "entertainment-web-app",
   "version": "0.1.0",
   "private": true,
+  "packageManager": "pnpm@11.0.3",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -85,7 +86,7 @@
     "**/*.{js,jsx,ts,tsx}": [
       "eslint --fix",
       "prettier --write",
-      "npm run test"
+      "pnpm test"
     ],
     "**/*.{css,md,html,json}": [
       "prettier --write"

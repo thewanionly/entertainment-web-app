@@ -20,7 +20,7 @@ A web app that lets you search for your favourite movies and TV shows and bookma
 2. Install the dependencies:
 
 ```bash
-npm install
+pnpm install
 ```
 
 3. Create your local environment file:
@@ -39,7 +39,7 @@ NEXT_PUBLIC_MEDIAS_ACCESS_TOKEN=your_tmdb_v4_read_access_token
 4. Start the development server:
 
 ```bash
-npm run dev
+pnpm dev
 ```
 
 5. Open the local server URL ([http://localhost:3000](http://localhost:3000)) in your web browser.
@@ -47,11 +47,11 @@ npm run dev
 6. To run the test files:
 
 ```bash
-npm run test:dev
+pnpm test:dev
 ```
 
 7. To run storybook:
 
 ```bash
-npm run storybook
+pnpm storybook
 ```
