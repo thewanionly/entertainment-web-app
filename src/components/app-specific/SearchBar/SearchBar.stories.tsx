@@ -22,6 +22,7 @@ type Story = StoryObj<typeof SearchBar>;
 export const Empty: Story = {
   args: {
     placeholder: 'Search for movies or TV series',
+    autoCompleteEnabled: false,
   },
 };
 
@@ -29,6 +30,7 @@ export const Filled: Story = {
   args: {
     placeholder: 'Search for movies or TV series',
     defaultValue: 'Beyond Earth',
+    autoCompleteEnabled: false,
   },
 };
 
@@ -37,6 +39,7 @@ export const Active: Story = {
     placeholder: 'Search for movies or TV series',
     defaultValue: 'Beyond Earth',
     autoFocus: true,
+    autoCompleteEnabled: false,
   },
 };
 
@@ -45,5 +48,6 @@ export const Disabled: Story = {
     placeholder: 'Search for movies or TV series',
     defaultValue: 'Beyond Earth',
     disabled: true,
+    autoCompleteEnabled: false,
   },
 };
