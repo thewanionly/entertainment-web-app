@@ -8,7 +8,7 @@
     "plugin:testing-library/react",
     "plugin:jest-dom/recommended"
   ],
-  "plugins": ["react-hooks", "prettier"],
+  "plugins": ["prettier"],
   "rules": {
     "no-console": ["error", { "allow": ["warn", "error"] }],
     "react-hooks/rules-of-hooks": "error",

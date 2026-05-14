@@ -1,9 +1,10 @@
 'use client';
 
-import { ElementRef, FormEvent, Suspense, useEffect, useRef } from 'react';
+import { FormEvent, Suspense, useEffect, useState } from 'react';
 
 import { SearchBar } from '@/components/app-specific/SearchBar';
 import { usePathname, useRouter, useSearchParams } from '@/lib/navigation';
+import { MediaCardType, MediaType } from '@/types/medias';
 import { cn } from '@/utils/styles';
 
 const SEARCH_INPUT_NAME = 'search';
@@ -17,50 +18,64 @@ const SEARCH_PLACEHOLDER: Record<string, string> = {
 
 // Fix for https://nextjs.org/docs/messages/missing-suspense-with-csr-bailout#possible-ways-to-fix-it
 const SearchComponent = () => {
-  const searchInputRef = useRef<ElementRef<'input'>>(null);
   const { topLevelPath } = usePathname();
   const searchParams = useSearchParams();
   const { replace } = useRouter();
 
   const searchTerm = searchParams.get('q')?.toString();
+  const [searchValue, setSearchValue] = useState(searchTerm ?? '');
   const searchPlaceholder = SEARCH_PLACEHOLDER[topLevelPath] ?? SEARCH_PLACEHOLDER.default;
+  const autoCompleteMediaType =
+    topLevelPath === 'movies' ? MediaType.MOVIE : topLevelPath === 'tv' ? MediaType.TV : undefined;
+  const autoCompleteEnabled = topLevelPath !== 'bookmarks';
 
   const handleSearch = (searchValue: string) => {
+    const trimmedSearchValue = searchValue.trim();
     const path = topLevelPath || 'search';
-    const params = new URLSearchParams(searchParams);
+    const params = new URLSearchParams(searchParams.toString());
 
-    if (searchValue) {
-      params.set('q', searchValue);
+    if (trimmedSearchValue) {
+      params.set('q', trimmedSearchValue);
     } else {
       params.delete('q');
     }
 
-    replace(`/${path}?${params.toString()}`);
+    const search = params.toString();
+
+    replace(search ? `/${path}?${search}` : `/${path}`);
   };
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    const formData = new FormData(event.target as HTMLFormElement);
-    const inputValue = formData.get(SEARCH_INPUT_NAME) as string;
+    handleSearch(searchValue);
+  };
 
-    handleSearch(inputValue);
+  const handleSuggestionSelect = (suggestion: MediaCardType) => {
+    setSearchValue(suggestion.title);
+    handleSearch(suggestion.title);
+  };
+
+  const handleClearSearch = () => {
+    setSearchValue('');
+    handleSearch('');
   };
 
   useEffect(() => {
-    if (!searchTerm && searchInputRef.current) {
-      // clear search input value when there's no searchTerm
-      searchInputRef.current.value = '';
-    }
+    setSearchValue(searchTerm ?? '');
   }, [searchTerm]);
 
   return (
     <form onSubmit={handleSubmit}>
       <SearchBar
-        ref={searchInputRef}
         name={SEARCH_INPUT_NAME}
         placeholder={searchPlaceholder}
-        defaultValue={searchTerm}
+        value={searchValue}
+        autoCompleteEnabled={autoCompleteEnabled}
+        autoCompleteMediaType={autoCompleteMediaType}
+        onChange={(event) => setSearchValue(event.target.value)}
+        onClear={handleClearSearch}
+        onSuggestionSelect={handleSuggestionSelect}
       />
     </form>
   );
