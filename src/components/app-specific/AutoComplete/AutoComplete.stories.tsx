@@ -52,8 +52,8 @@ const meta = {
     isValidating: false,
     searchValue: 'beyond',
     suggestions,
-    onClose: fn(),
     onHighlightSuggestion: fn(),
+    onSearch: fn(),
     onSelectSuggestion: fn(),
   },
 } satisfies Meta<typeof AutoComplete>;

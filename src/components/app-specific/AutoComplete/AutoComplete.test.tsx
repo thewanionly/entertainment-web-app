@@ -44,8 +44,8 @@ const renderAutoComplete = (props?: Partial<AutoCompleteProps>) =>
       isFetchingSuggestions={false}
       searchValue="beyond"
       suggestions={suggestions}
-      onClose={jest.fn()}
       onHighlightSuggestion={jest.fn()}
+      onSearch={jest.fn()}
       onSelectSuggestion={jest.fn()}
       {...props}
     />
@@ -58,6 +58,7 @@ describe('AutoComplete', () => {
     expect(screen.getByRole('listbox', { name: /search suggestions/i })).toBeInTheDocument();
     expect(screen.getByText('2 suggestions available.')).toHaveAttribute('aria-live', 'polite');
     expect(screen.getByText('Beyond Earth')).toBeInTheDocument();
+    expect(screen.getByText('A crew searches for a new home among the stars.')).toBeInTheDocument();
     expect(screen.getByText('Movie')).toBeInTheDocument();
     expect(screen.getByText('2019')).toBeInTheDocument();
     expect(screen.getByText('The Expanse')).toBeInTheDocument();
@@ -80,6 +81,36 @@ describe('AutoComplete', () => {
     await userEvent.hover(screen.getByRole('button', { name: /the expanse/i }));
 
     expect(onHighlightSuggestion).toHaveBeenCalledWith(1);
+  });
+
+  it('renders the search action as a selectable option', () => {
+    renderAutoComplete({ highlightedIndex: suggestions.length });
+
+    const searchOption = screen.getByRole('option', { name: /search "beyond"/i });
+
+    expect(searchOption).toHaveAttribute('aria-selected', 'true');
+  });
+
+  it('scrolls the highlighted suggestion into view', () => {
+    const scrollIntoView = jest.fn();
+    window.HTMLElement.prototype.scrollIntoView = scrollIntoView;
+
+    const { rerender } = renderAutoComplete();
+
+    rerender(
+      <AutoComplete
+        id="autocomplete-test"
+        highlightedIndex={1}
+        isFetchingSuggestions={false}
+        searchValue="beyond"
+        suggestions={suggestions}
+        onHighlightSuggestion={jest.fn()}
+        onSearch={jest.fn()}
+        onSelectSuggestion={jest.fn()}
+      />
+    );
+
+    expect(scrollIntoView).toHaveBeenCalledWith({ block: 'nearest' });
   });
 
   it('displays a loading state', () => {
@@ -109,12 +140,12 @@ describe('AutoComplete', () => {
     );
   });
 
-  it('calls close handler from the search action', async () => {
-    const onClose = jest.fn();
-    renderAutoComplete({ onClose });
+  it('calls search handler from the search action', async () => {
+    const onSearch = jest.fn();
+    renderAutoComplete({ onSearch });
 
     await userEvent.click(screen.getByRole('button', { name: /search "beyond"/i }));
 
-    expect(onClose).toHaveBeenCalledTimes(1);
+    expect(onSearch).toHaveBeenCalledTimes(1);
   });
 });

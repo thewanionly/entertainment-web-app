@@ -1,6 +1,8 @@
+import { useEffect } from 'react';
+
 import Image from 'next/image';
 
-import { Loader2 } from 'lucide-react';
+import { CornerDownLeft, Loader2 } from 'lucide-react';
 
 import { Search } from '@/components/app-specific/Icon';
 import { IMAGE_PLACEHOLDER } from '@/constants/images';
@@ -51,8 +53,8 @@ export type AutoCompleteProps = {
   isValidating?: boolean;
   searchValue: string;
   suggestions: MediaCardType[];
-  onClose: () => void;
   onHighlightSuggestion: (index: number) => void;
+  onSearch: () => void;
   onSelectSuggestion: (suggestion: MediaCardType) => void;
 };
 
@@ -149,7 +151,7 @@ const AutoCompleteItem = ({
       <button
         type="button"
         className={cn(
-          'grid min-h-20 w-full grid-cols-[4.5rem_1fr] items-center gap-3 px-3 py-2 text-left',
+          'group grid min-h-20 w-full grid-cols-[4.5rem_minmax(0,1fr)] items-center gap-3 px-3 py-2 text-left sm:grid-cols-[4.5rem_minmax(0,1fr)_auto]',
           'focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-white',
           'hover:bg-white/10',
           isHighlighted && 'bg-white/10'
@@ -158,7 +160,7 @@ const AutoCompleteItem = ({
         onMouseEnter={onMouseEnter}
         onClick={onSelect}
       >
-        <span className="relative block h-14 w-[4.5rem] overflow-hidden rounded bg-greyish-blue/20">
+        <span className="relative row-span-2 block h-14 w-[4.5rem] overflow-hidden rounded bg-greyish-blue/20 sm:row-span-1">
           <Image
             src={imageSrc}
             loader={suggestion.imagePath ? imageLoader : undefined}
@@ -173,24 +175,38 @@ const AutoCompleteItem = ({
             blurDataURL={IMAGE_PLACEHOLDER}
           />
         </span>
-        <span className="min-w-0">
+        <span className="min-w-0 self-end sm:self-center">
           <span
             className="block truncate text-body-m font-medium text-white"
             title={suggestion.title}
           >
             {suggestion.title}
           </span>
-          <span className="mt-1 flex min-w-0 items-center gap-2 text-body-s text-white/70">
-            <span className="flex min-w-0 items-center gap-1.5">
-              <MediaTypeIcon className="w-3 shrink-0 text-white/70" title={mediaTypeLabel} />
-              <span className="truncate">{mediaTypeLabel}</span>
+          {suggestion.overview && (
+            <span
+              className="mt-1 block truncate text-body-s text-white/45"
+              title={suggestion.overview}
+            >
+              {suggestion.overview}
             </span>
+          )}
+        </span>
+        <span className="col-start-2 flex min-w-0 items-center justify-between gap-2 self-start text-body-s text-white/70 sm:col-start-auto sm:min-w-24 sm:flex-col sm:items-end sm:justify-center sm:self-center">
+          <span className="inline-flex max-w-full items-center gap-1.5 rounded-full bg-white/10 px-2 py-1">
+            <MediaTypeIcon className="w-3 shrink-0 text-white/70" aria-hidden="true" />
+            <span className="truncate">{mediaTypeLabel}</span>
+          </span>
+          <span className="inline-flex shrink-0 items-center gap-2 text-white/50">
             {year && (
-              <>
-                <span className="size-1 shrink-0 rounded-full bg-white/50" />
-                <span>{year}</span>
-              </>
+              <span className="rounded-full border border-white/10 px-2 py-0.5">{year}</span>
             )}
+            <CornerDownLeft
+              className={cn(
+                'size-4 text-white/40 opacity-0 transition-opacity group-hover:opacity-100',
+                isHighlighted && 'opacity-100'
+              )}
+              aria-hidden="true"
+            />
           </span>
         </span>
       </button>
@@ -221,12 +237,15 @@ export const AutoComplete = ({
   isValidating = false,
   searchValue,
   suggestions,
-  onClose,
   onHighlightSuggestion,
+  onSearch,
   onSelectSuggestion,
 }: AutoCompleteProps) => {
   const showSuggestions = !isFetchingSuggestions && suggestions.length > 0;
   const showEmptyState = !isFetchingSuggestions && !error && suggestions.length === 0;
+  const showSearchAction = !isFetchingSuggestions && !error;
+  const searchActionIndex = suggestions.length;
+  const isSearchActionHighlighted = highlightedIndex === searchActionIndex;
   const liveMessage = (() => {
     if (isFetchingSuggestions) return 'Searching suggestions.';
     if (error) return 'Autocomplete suggestions failed to load.';
@@ -234,6 +253,14 @@ export const AutoComplete = ({
 
     return `${suggestions.length} ${suggestions.length === 1 ? 'suggestion' : 'suggestions'} available.`;
   })();
+
+  useEffect(() => {
+    if (highlightedIndex < 0) return;
+
+    const highlightedOption = document.getElementById(`${id}-option-${highlightedIndex}`);
+
+    highlightedOption?.scrollIntoView?.({ block: 'nearest' });
+  }, [highlightedIndex, id]);
 
   return (
     <div
@@ -252,18 +279,44 @@ export const AutoComplete = ({
           <p className="px-4 py-5 text-body-m text-red">Unable to load suggestions.</p>
         )}
 
-        {showSuggestions && (
+        {showSearchAction && (
           <ul id={id} role="listbox" aria-label="Search suggestions">
-            {suggestions.map((suggestion, index) => (
-              <AutoCompleteItem
-                key={`${suggestion.mediaType}-${suggestion.id}`}
-                id={`${id}-option-${index}`}
-                suggestion={suggestion}
-                isHighlighted={highlightedIndex === index}
-                onMouseEnter={() => onHighlightSuggestion(index)}
-                onSelect={() => onSelectSuggestion(suggestion)}
-              />
-            ))}
+            {showSuggestions &&
+              suggestions.map((suggestion, index) => (
+                <AutoCompleteItem
+                  key={`${suggestion.mediaType}-${suggestion.id}`}
+                  id={`${id}-option-${index}`}
+                  suggestion={suggestion}
+                  isHighlighted={highlightedIndex === index}
+                  onMouseEnter={() => onHighlightSuggestion(index)}
+                  onSelect={() => onSelectSuggestion(suggestion)}
+                />
+              ))}
+            <li
+              id={`${id}-option-${searchActionIndex}`}
+              role="option"
+              aria-selected={isSearchActionHighlighted}
+            >
+              <button
+                type="button"
+                className={cn(
+                  'flex w-full items-center gap-2 border-t border-greyish-blue/30 px-4 py-3',
+                  'text-left text-body-s text-white/80 hover:bg-white/10 hover:text-white',
+                  'focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-white',
+                  isSearchActionHighlighted && 'bg-white/10 text-white'
+                )}
+                onMouseDown={(event) => event.preventDefault()}
+                onMouseEnter={() => onHighlightSuggestion(searchActionIndex)}
+                onClick={onSearch}
+              >
+                {isValidating ? (
+                  <Loader2 className="size-4 shrink-0 animate-spin" aria-hidden="true" />
+                ) : (
+                  <Search className="size-4 shrink-0" title="search" />
+                )}
+                <span className="truncate">Search &quot;{searchValue}&quot;</span>
+              </button>
+            </li>
           </ul>
         )}
 
@@ -271,26 +324,6 @@ export const AutoComplete = ({
           <p className="px-4 py-5 text-body-m text-white/70">
             No matches for &quot;{searchValue}&quot;.
           </p>
-        )}
-
-        {!isFetchingSuggestions && !error && (
-          <button
-            type="submit"
-            className={cn(
-              'flex w-full items-center gap-2 border-t border-greyish-blue/30 px-4 py-3',
-              'text-left text-body-s text-white/80 hover:bg-white/10 hover:text-white',
-              'focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-white'
-            )}
-            onMouseDown={(event) => event.preventDefault()}
-            onClick={onClose}
-          >
-            {isValidating ? (
-              <Loader2 className="size-4 shrink-0 animate-spin" aria-hidden="true" />
-            ) : (
-              <Search className="size-4 shrink-0" title="search" />
-            )}
-            <span className="truncate">Search &quot;{searchValue}&quot;</span>
-          </button>
         )}
       </div>
     </div>

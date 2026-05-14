@@ -48,7 +48,10 @@ const SearchComponent = () => {
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    handleSearch(searchValue);
+    const formData = new FormData(event.currentTarget);
+    const submittedSearchValue = formData.get(SEARCH_INPUT_NAME)?.toString() ?? '';
+
+    handleSearch(submittedSearchValue);
   };
 
   const handleSuggestionSelect = (suggestion: MediaCardType) => {

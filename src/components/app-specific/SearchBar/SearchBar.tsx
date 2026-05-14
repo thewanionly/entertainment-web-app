@@ -22,6 +22,8 @@ import {
 
 type InputValue = React.InputHTMLAttributes<HTMLInputElement>['value'];
 
+const editableTargetTags = new Set(['INPUT', 'SELECT', 'TEXTAREA']);
+
 export interface SearchBarProps extends React.InputHTMLAttributes<HTMLInputElement> {
   autoCompleteEnabled?: boolean;
   autoCompleteMediaType?: MediaType;
@@ -34,6 +36,14 @@ const getInputValue = (value: InputValue): string => {
   if (Array.isArray(value)) return value.join(', ');
 
   return String(value);
+};
+
+const isEditableTarget = (target: EventTarget | null): boolean => {
+  if (!(target instanceof Element)) return false;
+  if (target.closest('[contenteditable="true"]')) return true;
+  if (!(target instanceof HTMLElement)) return false;
+
+  return target.isContentEditable || editableTargetTags.has(target.tagName);
 };
 
 const useDebounce = <T,>(value: T, delay = 500) => {
@@ -112,6 +122,12 @@ const SearchBar = React.forwardRef<HTMLInputElement, SearchBarProps>(
     const isFetchingSuggestions =
       showAutoComplete &&
       (isWaitingForDebounce || isLoading || (isValidating && suggestions.length === 0));
+    const showSearchAction = showAutoComplete && !isFetchingSuggestions && !error;
+    const autoCompleteItemCount = suggestions.length + (showSearchAction ? 1 : 0);
+    const activeDescendantId =
+      highlightedIndex >= 0 && highlightedIndex < autoCompleteItemCount
+        ? `${listboxId}-option-${highlightedIndex}`
+        : undefined;
 
     useEffect(() => {
       if (!isControlled) {
@@ -122,6 +138,33 @@ const SearchBar = React.forwardRef<HTMLInputElement, SearchBarProps>(
     useEffect(() => {
       setHighlightedIndex(-1);
     }, [debouncedSearchValue, suggestions.length]);
+
+    useEffect(() => {
+      if (disabled) return undefined;
+
+      const handleDocumentKeyDown = (event: KeyboardEvent) => {
+        if (
+          event.defaultPrevented ||
+          event.key !== '/' ||
+          event.altKey ||
+          event.ctrlKey ||
+          event.metaKey ||
+          isEditableTarget(event.target)
+        ) {
+          return;
+        }
+
+        event.preventDefault();
+        setIsFocused(true);
+        inputRef.current?.focus();
+      };
+
+      document.addEventListener('keydown', handleDocumentKeyDown);
+
+      return () => {
+        document.removeEventListener('keydown', handleDocumentKeyDown);
+      };
+    }, [disabled]);
 
     const setInputRef = useCallback(
       (node: HTMLInputElement | null) => {
@@ -177,6 +220,18 @@ const SearchBar = React.forwardRef<HTMLInputElement, SearchBarProps>(
       onSuggestionSelect?.(suggestion);
     };
 
+    const submitSearchForm = () => {
+      const form = inputRef.current?.form;
+
+      if (!form) return false;
+
+      form.requestSubmit();
+      setIsFocused(false);
+      setHighlightedIndex(-1);
+
+      return true;
+    };
+
     const handleInputKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
       onKeyDown?.(event);
       if (event.defaultPrevented) return;
@@ -187,25 +242,41 @@ const SearchBar = React.forwardRef<HTMLInputElement, SearchBarProps>(
         return;
       }
 
-      if (!showAutoComplete || suggestions.length === 0) return;
+      if (event.key === 'Enter' && !event.nativeEvent.isComposing && highlightedIndex < 0) {
+        const didSubmit = submitSearchForm();
+
+        if (didSubmit) {
+          event.preventDefault();
+        }
+
+        return;
+      }
+
+      if (!showAutoComplete || autoCompleteItemCount === 0) return;
 
       if (event.key === 'ArrowDown') {
         event.preventDefault();
         setHighlightedIndex((currentIndex) =>
-          currentIndex >= suggestions.length - 1 ? 0 : currentIndex + 1
+          currentIndex >= autoCompleteItemCount - 1 ? 0 : currentIndex + 1
         );
       }
 
       if (event.key === 'ArrowUp') {
         event.preventDefault();
         setHighlightedIndex((currentIndex) =>
-          currentIndex <= 0 ? suggestions.length - 1 : currentIndex - 1
+          currentIndex <= 0 ? autoCompleteItemCount - 1 : currentIndex - 1
         );
       }
 
-      if (event.key === 'Enter' && highlightedIndex >= 0) {
+      if (event.key === 'Enter' && highlightedIndex >= 0 && highlightedIndex < suggestions.length) {
         event.preventDefault();
         handleSelectSuggestion(suggestions[highlightedIndex]);
+        return;
+      }
+
+      if (event.key === 'Enter' && showSearchAction && highlightedIndex === suggestions.length) {
+        event.preventDefault();
+        submitSearchForm();
       }
     };
 
@@ -226,9 +297,8 @@ const SearchBar = React.forwardRef<HTMLInputElement, SearchBarProps>(
               aria-controls={showAutoComplete ? listboxId : undefined}
               aria-expanded={showAutoComplete}
               aria-haspopup="listbox"
-              aria-activedescendant={
-                highlightedIndex >= 0 ? `${listboxId}-option-${highlightedIndex}` : undefined
-              }
+              aria-activedescendant={activeDescendantId}
+              aria-keyshortcuts="/"
               className={cn(
                 'flex-1 border-none p-0 pt-0.5 font-light sm:pt-0 sm:text-heading-m',
                 searchValue && 'pr-9',
@@ -272,8 +342,8 @@ const SearchBar = React.forwardRef<HTMLInputElement, SearchBarProps>(
             isValidating={isValidating}
             searchValue={normalizedSearchValue}
             suggestions={suggestions}
-            onClose={() => setIsFocused(false)}
             onHighlightSuggestion={setHighlightedIndex}
+            onSearch={submitSearchForm}
             onSelectSuggestion={handleSelectSuggestion}
           />
         )}

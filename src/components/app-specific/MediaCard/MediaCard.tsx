@@ -24,7 +24,7 @@ export const MediaCard = ({
   isHoverable,
 }: MediaCardProps) => {
   return (
-    <div data-testid="media-card" className={cn('relative h-full w-full', className)}>
+    <div data-testid="media-card" className={cn('relative isolate h-full w-full', className)}>
       <MediaCardContextProvider value={{ hoverCard, isBookmarked, hoverBookmark, isHoverable }}>
         {children}
       </MediaCardContextProvider>
