@@ -1,3 +1,7 @@
 {
-  "typescript.preferences.autoImportFileExcludePatterns": ["**/src/components/_shadcn-ui/**"]
+  "typescript.preferences.autoImportFileExcludePatterns": ["**/src/components/_shadcn-ui/**"],
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnSave": true,
+  "cursor.tab.enabled": false,
+  "cursor.tabCompletions.enabled": false
 }
