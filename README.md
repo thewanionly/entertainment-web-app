@@ -4,6 +4,8 @@ A media discovery web app for browsing, searching, and bookmarking movies and TV
 
 ![Entertainment Web App Preview](public/readme/preview.png)
 
+View the live project [here](https://entertainment-web-app-wani.vercel.app/).
+
 ## Overview
 
 This repository contains a media discovery application using [TMDB API](https://developer.themoviedb.org/docs/getting-started). It is designed as a production-minded frontend showcase: responsive, accessible, data-driven, componentized, tested, and structured around the kinds of workflows users expect from streaming-style entertainment interfaces.
